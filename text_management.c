@@ -18,6 +18,25 @@ unsigned char ASCII_to_byte(char *ASCII) {
   return byte;
 }
  
+extern void destroy_array(char *array) {if (array) free(array);}
+ 
+char **create_strings(char *array, int size) {
+  char **strings = NULL;
+ 
+  assert(strings = (char **)malloc(sizeof(char *) * size));
+ 
+  strings = string_separate(strings, &array[1], "\r\n:");
+ 
+  return strings;
+}
+ 
+void destroy_strings(char **strings, int size) {
+  if (strings) {
+    while (size--) free(strings[size]);
+    free(strings);
+  }
+}
+ 
 char **string_separate(char **strings, char *string, char *delimiters) {
   int i = 1;
   char *token = NULL;
@@ -53,39 +72,43 @@ extern void destroy_record(record *record) {
   }
 }
  
-record *build_record_from_string(record *fields, char *string) {
+record *build_record_from_string(record *record, char *string) {
   unsigned char i, size = strlen(string) / 2, *bytevector = NULL;
  
   assert(bytevector = (unsigned char *)calloc(size, sizeof(unsigned char)));
  
   for (i = 0; i < size; i++) bytevector[i] = ASCII_to_byte(&string[i * 2]);
  
-  fields = create_record(fields, bytevector[0], ((unsigned short int) bytevector[1] << 8) + (unsigned short int) bytevector[2], bytevector[3], &bytevector[4], bytevector[bytevector[0] + 4]);
+  record = create_record(record, bytevector[0], ((unsigned short int) bytevector[1] << 8) + (unsigned short int) bytevector[2], bytevector[3], &bytevector[4], bytevector[bytevector[0] + 4]);
  
   free(bytevector);
  
-  return fields;
+  return record;
 }
  
 record **reconstruct_records(char *array, int size) {
   char **strings = NULL;
   record **records = NULL;
  
-  assert(strings = (char **)malloc(sizeof(char *) * size));
+  strings = create_strings(array, size);
+ 
+  //assert(strings = (char **)malloc(sizeof(char *) * size));
  
   //assert(records = (record **)malloc(sizeof(record *)));
  
   assert(records = (record **)malloc(sizeof(record *) + sizeof(record) * size));
  
-  strings = string_separate(strings, &array[1], "\r\n:");
+  //strings = string_separate(strings, &array[1], "\r\n:");
  
   for (int i = 0; i < size; i++) {
     assert(records[i] = (record *)malloc(sizeof(record)));
     records[i] = build_record_from_string(records[i], strings[i]);
-    free(strings[i]);
+    //free(strings[i]);
   }
  
-  free(strings);
+  //free(strings);
+ 
+  destroy_strings(strings, size);
  
   return records;
 }
