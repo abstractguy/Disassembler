@@ -14,10 +14,12 @@
     unsigned short int address;
     mode mode;
   } record;
-
+ 
   extern int char_count(char *, char);
   unsigned char ASCII_to_byte(char *);
   char **string_separate(char **, char *, char *);
+  record *create_record(record *, unsigned char, unsigned short int, mode, unsigned char *, unsigned char);
+  extern void destroy_record(record *);
   record *build_record_from_string(record *, char *);
   record **reconstruct_records(char *, int);
 #endif
