@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
  
   printf("\n\n");
  
-  free(array);
+  destroy_array(array);
   free(records);
  
   return 0;
