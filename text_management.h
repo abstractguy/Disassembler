@@ -18,6 +18,9 @@
   extern int char_count(char *, char);
   unsigned char ASCII_to_byte(char *);
   char **string_separate(char **, char *, char *);
+  extern void destroy_array(char *);
+  char **create_strings(char *, int);
+  void destroy_strings(char **, int);
   record *create_record(record *, unsigned char, unsigned short int, mode, unsigned char *, unsigned char);
   extern void destroy_record(record *);
   record *build_record_from_string(record *, char *);
