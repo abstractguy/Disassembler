@@ -13,17 +13,14 @@ record *build_record_from_string(char *string, record *next) {
   record = create_record(bytevector[0], ((unsigned short int) bytevector[1] << 8) + (unsigned short int) bytevector[2], bytevector[3], &bytevector[4], bytevector[bytevector[0] + 4], next);
 
   free(bytevector);
-
   return record;
 }
 
 record *create_record(unsigned char size, unsigned short int address, mode mode, unsigned char *bytecode, unsigned char checksum, record *old_record) {
   record *new_record = NULL;
- 
   assert(new_record = (record *)malloc(sizeof(record)));
- 
-  new_record->bytecode = NULL;
 
+  new_record->bytecode = NULL;
   assert(new_record->bytecode = (unsigned char *)calloc(size, sizeof(unsigned char)));
  
   new_record->size = size;
