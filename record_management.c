@@ -42,6 +42,29 @@ extern record *destroy_record(record *old_record) {
   } return new_record;
 }
 
+record *get_last_record(record *records) {
+  record *previous = NULL, *next = records;
+
+  while (next) {
+    previous = next;
+    next = previous->record;
+  }
+
+  return previous;
+}
+
+record *replace_record_with_record_block(record *start, record *record_block) {
+  record *end = get_last_record(record_block);
+
+  if (end != record_block) {
+    start = destroy_record(start);
+    end->record = start;
+    start->record = record_block;
+  }
+
+  return record_block;
+}
+
 extern record *hex_file_to_records(char *file) {
   record *records = NULL;
   char *array = NULL, **strings = NULL;
