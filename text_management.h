@@ -1,5 +1,5 @@
 // text_management.h
- 
+
 #ifndef TEXT_MANAGEMENT_H
   #define TEXT_MANAGEMENT_H
   #include "file_management.h"
@@ -9,5 +9,6 @@
   unsigned char ASCII_to_byte(char *);
   char **string_separate(char **, char *, char *);
   void destroy_array(char *), destroy_strings(char **, int);
+  unsigned char *copy_bytecode(unsigned char *, int);
   char **create_strings(char *, int);
 #endif
