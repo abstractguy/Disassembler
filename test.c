@@ -7,9 +7,11 @@ int main(int argc, char *argv[]) {
 
   assert(argc == 2);
   record = hex_file_to_records(argv[1]);
-  //record = unroll_subrecord_addresses(record);
 
-  do {print_record(record);} while ((record = destroy_record(record)));
+  do {
+    record = extract_instruction(record);
+    print_record(record);
+  } while ((record = destroy_record(record)));
 
   return 0;
 }
