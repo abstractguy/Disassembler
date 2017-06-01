@@ -138,7 +138,7 @@
     MOV_R5_A, MOV_R6_A,
     MOV_R7_A
   } bytecode;
-
+ 
   typedef struct {
     bytecode bytecode;
     unsigned short int address;
@@ -147,7 +147,7 @@
   } instruction;
   */
 
-  extern record *unroll_subrecord_addresses(record *);
-  extern record *unroll_all_subrecord_addresses(record *);
+  record *extract_instruction(record *);
+  //extern record *extract_instructions(record *);
   unsigned char operands(unsigned char);
 #endif
