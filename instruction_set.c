@@ -60,30 +60,20 @@ unsigned char operands(unsigned char opcode) {
   }
 }
 
-record *extract_instruction(record *records) {
-  unsigned char size = records->size, instruction_size = operands(records->bytecode[0]) + 1, *bytecode = NULL, checksum;
-  unsigned short int address;
-  mode mode = records->mode;
+record *extract_instruction(record *forward) {
+  record *temporary = NULL;
+  //record *backward = NULL;
+  unsigned char instruction_size;
 
-  if ((size != instruction_size) && (mode != END)) {
-    address = records->address;
-    bytecode = copy_bytecode(records->bytecode, size);
-    checksum = records->checksum;
-    records = destroy_record(records);
-    records = create_record(size - instruction_size, address + instruction_size, mode, &bytecode[instruction_size], checksum, records);
-    records = create_record(instruction_size, address, mode, bytecode, checksum, records);
-    free(bytecode);
+  instruction_size = operands(forward->bytecode[0]) + 1;
+
+  if ((forward->size != instruction_size) && (forward->mode != END)) {
+    temporary = copy_record(forward);
+    forward = destroy_record(forward);
+    temporary->record = forward;
+    forward = create_record(temporary->size - instruction_size, temporary->address + instruction_size, temporary->mode, &(temporary->bytecode[instruction_size]), temporary->checksum, forward);
+    forward = create_record(instruction_size, temporary->address, temporary->mode, temporary->bytecode, temporary->checksum, forward);
   }
 
-  return records;
+  return forward;
 }
-
-/*
-extern record *extract_instructions(record *records) {
-  record *new_record = extract_instruction(records);
-
-  if (new_record) new_record->record = extract_instructions(new_record->record);
-
-  return new_record;
-}
-*/
