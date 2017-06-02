@@ -138,16 +138,8 @@
     MOV_R5_A, MOV_R6_A,
     MOV_R7_A
   } bytecode;
- 
-  typedef struct {
-    bytecode bytecode;
-    unsigned short int address;
-    unsigned char bytes, *arguments;
-    char *mnemonic;
-  } instruction;
   */
 
-  record *extract_instruction(record *);
-  //extern record *extract_instructions(record *);
   unsigned char operands(unsigned char);
+  record *extract_instruction(record *);
 #endif
