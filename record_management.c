@@ -24,7 +24,12 @@ extern record *destroy_record(record *old_record) {
     free(old_record);
   } return new_record;
 }
- 
+
+record *copy_record(record *old_record) {
+  record *new_record = create_record(old_record->size, old_record->address, old_record->mode, old_record->bytecode, old_record->checksum, old_record->record);
+  return new_record;
+}
+
 record *build_record_from_string(char *string, record *next) {
   record *record = NULL;
   unsigned char i, size = strlen(string) / 2, *bytevector = NULL;
