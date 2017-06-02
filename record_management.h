@@ -15,6 +15,7 @@
  
   record *create_record(unsigned char, unsigned short int, mode, unsigned char *, unsigned char, record *);
   extern record *destroy_record(record *);
+  record *copy_record(record *);
   record *build_record_from_string(char *, record *);
   record *get_last_record(record *);
   record *replace_record_with_record_block(record *, record *);
