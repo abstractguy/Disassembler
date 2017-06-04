@@ -1,10 +1,10 @@
 // instruction_set.h
-
+ 
 #ifndef INSTRUCTION_SET_H
   #define INSTRUCTION_SET_H
-
+ 
   #include "record_management.h"
-
+ 
   /*
   typedef enum {
     NOP, AJMP_addr11, LJMP_addr16,
@@ -139,7 +139,7 @@
     MOV_R7_A
   } bytecode;
   */
-
+ 
   unsigned char operands(unsigned char);
-  record *extract_instruction(record *);
+  extern record *extract_instruction(record *);
 #endif
