@@ -1,7 +1,7 @@
 // instruction_set.c
-
+ 
 #include "instruction_set.h"
-
+ 
 unsigned char operands(unsigned char opcode) {
   //assert(opcode != 0xA5);
   switch (opcode) {
@@ -62,7 +62,6 @@ unsigned char operands(unsigned char opcode) {
 
 record *extract_instruction(record *forward) {
   record *temporary = NULL;
-  //record *backward = NULL;
   unsigned char instruction_size;
 
   instruction_size = operands(forward->bytecode[0]) + 1;
