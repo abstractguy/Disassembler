@@ -58,52 +58,54 @@ record *build_record_from_string(char *string, record *next) {
   destroy_bytevector(bytevector);
   return record;
 }
- 
+
 extern record *hex_file_to_records(char *file) {
   record *records = NULL;
   char *array = NULL, **strings = NULL;
   int size, i;
- 
+
   array = file_to_array(array, file);
   size = i = char_count(array, ':');
- 
+
   assert(size);
   strings = create_strings(array, size);
   size = i;
- 
+
   do {records = build_record_from_string(strings[--i], records);} while (i);
- 
+
   destroy_array(array);
   destroy_strings(strings, size);
- 
+
   return records;
 }
- 
+
 record *align_records(record *forward) {
   record *temporary = NULL, *backward = NULL;
   unsigned char *bytecode = NULL;
- 
+
   while (forward != NULL) {
     if ((forward->record != NULL) && ((forward->address + forward->size) == forward->record->address)) {
       bytecode = concatenate_bytevectors(forward->bytecode, forward->size, forward->record->bytecode, forward->record->size);
- 
+
       temporary = create_record(forward->size + forward->record->size, forward->address, forward->mode, bytecode, (unsigned char)(forward->checksum + forward->record->checksum), forward->record->record);
- 
+
+      destroy_bytevector(bytecode);
+
       forward = destroy_record(forward);
- 
+
       forward = destroy_record(forward);
- 
+
       forward = temporary;
     } else {
-      backward = create_record(forward->size, forward->address, forward->mode, forward->bytecode, forward->checksum, backward);
- 
+      if (forward->size) backward = create_record(forward->size, forward->address, forward->mode, forward->bytecode, forward->checksum, backward);
+
       forward = destroy_record(forward);
     }
   }
- 
+
   return reverse_records(backward);
 }
- 
+
 extern void print_record(record *record) {
   printf("size: %u, address: 0x%4.4X, ", record->size, record->address);
  
