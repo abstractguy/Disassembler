@@ -11,11 +11,10 @@ int main(int argc, char *argv[]) {
 
   record = align_records(record);
 
-  while (record) {
+  do {
     record = extract_instruction(record);
     print_record(record);
-    record = destroy_record(record);
-  }
+  } while ((record = destroy_record(record)));
 
   return 0;
 }
