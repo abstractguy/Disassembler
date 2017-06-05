@@ -66,12 +66,13 @@ record *extract_instruction(record *forward) {
 
   instruction_size = operands(forward->bytecode[0]) + 1;
 
-  if ((forward->size != instruction_size) && (forward->mode != END)) {
+  if (forward->size != instruction_size && forward->mode != END) {
     temporary = copy_record(forward);
     forward = destroy_record(forward);
     temporary->record = forward;
-    forward = create_record(temporary->size - instruction_size, temporary->address + instruction_size, temporary->mode, &(temporary->bytecode[instruction_size]), temporary->checksum, forward);
+    forward = create_record(temporary->size - instruction_size, temporary->address + instruction_size, temporary->mode, &temporary->bytecode[instruction_size], temporary->checksum, forward);
     forward = create_record(instruction_size, temporary->address, temporary->mode, temporary->bytecode, temporary->checksum, forward);
+    temporary = destroy_record(temporary);
   }
 
   return forward;
