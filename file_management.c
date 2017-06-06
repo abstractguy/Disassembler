@@ -1,17 +1,18 @@
 // file_management.c
 #include "file_management.h"
- 
-int file_size(FILE * fp) {
-  int end;
+
+unsigned short int file_size(FILE * fp) {
+  unsigned short int end;
   fseek(fp, 0, SEEK_END);
   end = ftell(fp);
   rewind(fp);
   return end + 1;
 }
  
-extern char *file_to_array(char *array, char *file) {
+char *file_to_array(char *file) {
+  char *array = NULL;
   FILE *fp = NULL;
-  int i = 0;
+  unsigned short int i = 0;
   assert(fp = fopen(file, "r"));
   assert(array = calloc(file_size(fp) + 1, sizeof(char)));
   do {array[i] = fgetc(fp);} while (array[i++] != EOF);
