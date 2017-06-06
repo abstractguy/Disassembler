@@ -32,31 +32,27 @@ char **create_strings(unsigned short int size) {
   return strings;
 }
 
-void destroy_strings(char **strings, int size) {
-  int i = size;
+void destroy_strings(char **strings, unsigned short int size) {
+  unsigned short int i = size;
   if (strings) {
     while (i--) if (strings[i]) free(strings[i]);
     free(strings);
   }
 }
 
-char **string_separate(char **strings, char *string, char *delimiters) {
-  int i = 1;
-  char *token = NULL;
+char **string_separate(char *string, char *delimiters) {
+  char *token = NULL, **strings = create_strings(char_count(string, ':'));
 
-  if ((token = strtok(string, delimiters))) strings[0] = strdup(token);
-  while ((token = strtok(NULL, delimiters))) strings[i++] = strdup(token);
+  if ((token = strtok(string, delimiters)))
+    for (unsigned short int i = 0; token; i++, token = strtok(NULL, delimiters))
+      strings[i] = strdup(token);
 
   return strings;
 }
 
-char **separate_record_strings(char *array, int size) {
-  return string_separate(create_strings(size), &array[1], "\r\n:");
-}
-
-int char_count(char *string, char character) {
-  int size = 0;
-  for (int i = 0; string[i]; i++) if (string[i] == character) size++;
+unsigned short int char_count(char *string, char character) {
+  unsigned short int size = 0;
+  for (unsigned short int i = 0; string[i]; i++) if (string[i] == character) size++;
   return size;
 }
 
