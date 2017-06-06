@@ -11,10 +11,9 @@
   unsigned char *concatenate_bytevectors(unsigned char *, unsigned short int, unsigned char *, unsigned short int);
 
   char **create_strings(unsigned short int);
-  void destroy_strings(char **, int);
-  char **string_separate(char **, char *, char *);
-  char **separate_record_strings(char *, int);
+  void destroy_strings(char **, unsigned short int);
+  char **string_separate(char *, char *);
 
   unsigned char ASCII_to_byte(char *);
-  int char_count(char *, char);
+  unsigned short int char_count(char *, char);
 #endif
