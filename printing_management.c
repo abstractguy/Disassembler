@@ -3,8 +3,8 @@
 
   static char **mnemonics[256] = {
     {"NOP\n"},
-    {"AJMP 0x",    "0000\n"},
-    {"LJMP 0x",    "0000\n"},
+    {"AJMP 0x00",  "00\n"},
+    {"LJMP 0x00",  "00\n"},
     {"RR A\n"},
     {"INC A\n"},
     {"INC 0x",     "00\n"},
@@ -19,8 +19,8 @@
     {"INC R6\n"},
     {"INC R7\n"},
     {"JBC 0x",     "00, 0x", "00\n"},
-    {"ACALL 0x",   "0000\n"},
-    {"LCALL 0x",   "0000\n"},
+    {"ACALL 0x00", "00\n"},
+    {"LCALL 0x00", "00\n"},
     {"RRC A\n"},
     {"DEC A\n"},
     {"DEC 0x",     "00\n"},
@@ -35,7 +35,7 @@
     {"DEC R6\n"},
     {"DEC R7\n"},
     {"JB 0x",      "00, 0x", "00\n"},
-    {"AJMP 0x",    "2000\n"},
+    {"AJMP 0x02",  "00\n"},
     {"RET\n"},
     {"RL A\n"},
     {"ADD A, 0x",  "00\n"},
@@ -51,7 +51,7 @@
     {"ADD A, R6\n"},
     {"ADD A, R7\n"},
     {"JNB 0x",     "00, 0x", "00\n"},
-    {"ACALL 0x",   "3000\n"},
+    {"ACALL 0x03", "00\n"},
     {"RETI\n"},
     {"RLC A\n"},
     {"ADDC A, 0x", "00\n"},
@@ -67,7 +67,7 @@
     {"ADDC A, R6\n"},
     {"ADDC A, R7\n"},
     {"JC 0x",      "00\n"},
-    {"AJMP 0x",    "4000\n"},
+    {"AJMP 0x04",  "00\n"},
     {"ORL 0x",     "00, A\n"},
     {"ORL 0x",     "00, 0x", "00\n"},
     {"ORL A, 0x",  "00\n"},
@@ -83,7 +83,7 @@
     {"ORL A, R6\n"},
     {"ORL A, R7\n"},
     {"JNC 0x",     "00\n"},
-    {"ACALL 0x",   "5000\n"},
+    {"ACALL 0x05", "00\n"},
     {"ANL 0x",     "00, A\n"},
     {"ANL 0x",     "00, 0x", "00\n"},
     {"ANL A, 0x",  "00\n"},
@@ -98,8 +98,8 @@
     {"ANL A, R5\n"},
     {"ANL A, R6\n"},
     {"ANL A, R7\n"},
-    {"JZ 0x", "00\n"},
-    {"AJMP 0x", "6000\n"},
+    {"JZ 0x",      "00\n"},
+    {"AJMP 0x06",  "00\n"},
     {"XRL 0x",     "00, A\n"},
     {"XRL 0x",     "00, 0x", "00\n"},
     {"XRL A, 0x",  "00\n"},
@@ -114,9 +114,9 @@
     {"XRL A, R5\n"},
     {"XRL A, R6\n"},
     {"XRL A, R7\n"},
-    {"JNZ 0x", "00\n"},
-    {"ACALL 0x", "7000\n"},
-    {"ORL C, 0x", "00\n"},
+    {"JNZ 0x",     "00\n"},
+    {"ACALL 0x07", "00\n"},
+    {"ORL C, 0x",  "00\n"},
     {"JMP @A+DPTR\n"},
 
     // Rendu ici...
@@ -259,3 +259,53 @@
  {"MOV " , " R6 " , ""} , '0x',','\0' ,
     {"MOV " , " R7 " , ""};'0x',','\0' ,
  }
+
+
+
+
+
+
+
+
+
+unsigned char **extract_arguments(record *record) {
+  unsigned char **argument_strings = NULL;
+
+  if (record->size > 0) {
+    // Detruire apres utilisation -->
+    argument_strings = create_strings(record->size - 1);
+    // ...
+  }
+
+  return argument_strings;
+}
+
+unsigned char *bytevector_to_string(unsigned char *bytevector, unsigned char size) {
+  // Detruire apres utilisation -->
+  unsigned char *string = create_bytevector(size * 2 + 1);
+
+  string[size - 1] = '\0';
+
+  // ...
+
+  return string;
+}
+
+unsigned char *record_to_string(record *record) {
+  // Detruire apres utilisation -->
+  unsigned char **strings = extract_arguments(record);
+  unsigned char *string = NULL, string_size, i = 0;
+
+  string_size = // ...
+
+  // Detruire apres utilisation -->
+  string = create_bytevector(string_size);
+
+  // ...
+
+  return string;
+}
+
+void print_instruction(record *record) {
+  
+}
