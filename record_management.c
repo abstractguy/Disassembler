@@ -59,14 +59,13 @@ record *build_record_from_string(char *string, record *next) {
 
 extern record *hex_file_to_records(char *file) {
   record *records = NULL;
-  int size, i;
-  char *array = NULL, **strings = NULL;
+  unsigned short int size, i;
+  char *array = file_to_array(file), **strings = NULL;
 
-  array = file_to_array(array, file);
   size = i = char_count(array, ':');
 
   assert(size);
-  strings = separate_record_strings(array, size);
+  strings = string_separate(array, "\r\n:");
 
   do {records = build_record_from_string(strings[--i], records);} while (i);
 
@@ -111,7 +110,7 @@ extern void print_record(record *record) {
  
   if (record->size) {
     printf("\nbytecode: ");
-    for (int j = 0; j < record->size; j++)
+    for (unsigned short int j = 0; j < record->size; j++)
       printf("%.2X", record->bytecode[j]);
   }
  
