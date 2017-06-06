@@ -6,8 +6,8 @@
  
   static char **mnemonics[256];
 
-  // Prototypes de fonctions ici -->
   char **extract_arguments(record *);
-  
-  // <-- Fin prototypes de fonctions.
+  unsigned char *bytevector_to_string(unsigned char *, unsigned char);
+  unsigned char *record_to_string(record *);
+  void print_instruction(record *);
 #endif
