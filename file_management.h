@@ -6,6 +6,6 @@
   #include <stdlib.h>
   #include <assert.h>
  
-  int file_size(FILE *);
-  extern char *file_to_array(char *, char *);
+  unsigned short int file_size(FILE *);
+  char *file_to_array(char *);
 #endif
