@@ -7,9 +7,7 @@ int main(int argc, char *argv[]) {
 
   assert(argc == 2);
 
-  record = hex_file_to_records(argv[1]);
-
-  record = align_records(record);
+  record = align_records(hex_file_to_records(argv[1]));
 
   do {
     record = extract_instruction(record);
