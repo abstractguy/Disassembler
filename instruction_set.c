@@ -3,7 +3,7 @@
 #include "instruction_set.h"
  
 unsigned char operands(unsigned char opcode) {
-  //assert(opcode != 0xA5);
+  assert(opcode != 0xA5);
   switch (opcode) {
     case 0x02:
     case 0x10:
