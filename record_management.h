@@ -2,6 +2,7 @@
  
 #ifndef RECORD_MANAGEMENT_H
   #define RECORD_MANAGEMENT_H
+  #include "file_management.h"
   #include "text_management.h"
  
   typedef enum {DATA, END} mode;
@@ -19,6 +20,6 @@
   record *reverse_records(record *);
   record *build_record_from_string(char *, record *);
   extern record *hex_file_to_records(char *);
-  record *align_records(record *);
+  record *align_instructions(record *);
   extern void print_record(record *);
 #endif
