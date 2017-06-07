@@ -75,7 +75,7 @@ extern record *hex_file_to_records(char *file) {
   return records;
 }
 
-record *align_records(record *forward) {
+record *align_instructions(record *forward) {
   record *temporary = NULL, *backward = NULL;
   unsigned char *bytecode = NULL;
 
