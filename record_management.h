@@ -16,7 +16,7 @@
  
   record *create_record(unsigned short int, unsigned short int, mode, unsigned char *, unsigned char, record *);
   extern record *destroy_record(record *);
-  record *fork_record(record *, unsigned short int, unsigned short int, unsigned char *, record *);
+  record *copy_record_from_offset(record *, unsigned short int, unsigned short int, record *);
   record *reverse_records(record *);
   record *build_record_from_string(char *, record *);
   extern record *hex_file_to_records(char *);
