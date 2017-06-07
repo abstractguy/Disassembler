@@ -8,7 +8,7 @@ unsigned short int file_size(FILE * fp) {
   rewind(fp);
   return end + 1;
 }
- 
+
 char *file_to_array(char *file) {
   char *array = NULL;
   FILE *fp = NULL;
