@@ -61,18 +61,18 @@ unsigned char operands(unsigned char opcode) {
 }
 
 record *extract_instruction(record *forward) {
-  record *temporary = NULL;
+  record *temporary_record = NULL, *temporary_records = NULL;
   unsigned char instruction_size;
 
   instruction_size = operands(forward->bytecode[0]) + 1;
 
   if (forward->size != instruction_size && forward->mode != END) {
-    temporary = copy_record(forward);
+    temporary_records = create_record(forward->size - instruction_size, forward->address + instruction_size, forward->mode, &forward->bytecode[instruction_size], forward->checksum, forward->record);
+
+    temporary_record = create_record(instruction_size, forward->address, forward->mode, forward->bytecode, forward->checksum, temporary_records);
+
     forward = destroy_record(forward);
-    temporary->record = forward;
-    forward = create_record(temporary->size - instruction_size, temporary->address + instruction_size, temporary->mode, &temporary->bytecode[instruction_size], temporary->checksum, forward);
-    forward = create_record(instruction_size, temporary->address, temporary->mode, temporary->bytecode, temporary->checksum, forward);
-    temporary = destroy_record(temporary);
+    forward = temporary_record;
   }
 
   return forward;
