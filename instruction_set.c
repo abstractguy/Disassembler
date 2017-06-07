@@ -77,3 +77,18 @@ record *extract_instruction(record *forward) {
 
   return forward;
 }
+
+record *extract_instructions(char *file) {
+  record *forward  = align_instructions(hex_file_to_records(file));
+  record *backward = NULL, *next = NULL;
+
+  while (forward) {
+    forward         = extract_instruction(forward);
+    next            = forward->record;
+    forward->record = backward;
+    backward        = forward;
+    forward         = next;
+  }
+
+  return reverse_records(backward);
+}
