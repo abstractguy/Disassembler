@@ -2,8 +2,9 @@
 
 #ifndef TEXT_MANAGEMENT_H
   #define TEXT_MANAGEMENT_H
-  #include "file_management.h"
   #include <string.h>
+  #include <stdlib.h>
+  #include <assert.h>
 
   unsigned char *create_bytevector(unsigned short int);
   void destroy_bytevector(unsigned char *);
