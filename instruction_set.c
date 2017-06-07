@@ -60,34 +60,26 @@ unsigned char operands(unsigned char opcode) {
   }
 }
 
-record *extract_instruction(record *forward) {
-  record *temporary_record = NULL, *temporary_records = NULL;
-  unsigned char instruction_size;
-
-  instruction_size = operands(forward->bytecode[0]) + 1;
-
-  if (forward->size != instruction_size && forward->mode != END) {
-    temporary_records = create_record(forward->size - instruction_size, forward->address + instruction_size, forward->mode, &forward->bytecode[instruction_size], forward->checksum, forward->record);
-
-    temporary_record = create_record(instruction_size, forward->address, forward->mode, forward->bytecode, forward->checksum, temporary_records);
-
-    forward = destroy_record(forward);
-    forward = temporary_record;
-  }
-
-  return forward;
-}
-
 record *extract_instructions(char *file) {
   record *forward  = align_instructions(hex_file_to_records(file));
   record *backward = NULL, *next = NULL;
+  unsigned char instruction_size;
 
   while (forward) {
-    forward         = extract_instruction(forward);
-    next            = forward->record;
-    forward->record = backward;
-    backward        = forward;
-    forward         = next;
+    instruction_size = operands(forward->bytecode[0]) + 1;
+    if (forward->size != instruction_size && forward->mode != END) {
+      next = create_record(forward->size - instruction_size, forward->address + instruction_size, forward->mode, &forward->bytecode[instruction_size], forward->checksum, forward->record);
+
+      backward = create_record(instruction_size, forward->address, forward->mode, forward->bytecode, forward->checksum, backward);
+
+      forward = destroy_record(forward);
+    } else {
+      next            = forward->record;
+      forward->record = backward;
+      backward        = forward;
+    }
+
+    forward = next;
   }
 
   return reverse_records(backward);
