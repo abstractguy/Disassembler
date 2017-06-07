@@ -15,11 +15,12 @@
   } record;
  
   record *create_record(unsigned short int, unsigned short int, mode, unsigned char *, unsigned char, record *);
-  extern record *destroy_record(record *);
+  record *destroy_record(record *);
+  extern record *destroy_all_records(record *);
   record *copy_record_from_offset(record *, unsigned short int, unsigned short int, record *);
   record *reverse_records(record *);
   record *build_record_from_string(char *, record *);
-  extern record *hex_file_to_records(char *);
   record *align_instructions(record *);
-  extern void print_record(record *);
+  extern record *hex_file_to_records(char *);
+  extern record *print_record(record *);
 #endif
