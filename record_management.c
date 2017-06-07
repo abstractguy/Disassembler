@@ -16,7 +16,7 @@ record *create_record(unsigned short int size, unsigned short int address, mode 
   return new_record;
 }
  
-extern record *destroy_record(record *old_record) {
+record *destroy_record(record *old_record) {
   record *new_record = NULL;
   if (old_record) {
     new_record = old_record->record;
@@ -25,6 +25,11 @@ extern record *destroy_record(record *old_record) {
     free(old_record);
     old_record = NULL;
   } return new_record;
+}
+
+extern record *destroy_all_records(record *record) {
+  while ((record = destroy_record(record)));
+  return record;
 }
 
 record *copy_record_from_offset(record *records, unsigned short int size, unsigned short int offset, record *next) {
@@ -57,24 +62,6 @@ record *build_record_from_string(char *string, record *next) {
   return record;
 }
 
-extern record *hex_file_to_records(char *file) {
-  record *records = NULL;
-  unsigned short int size, i;
-  char *array = file_to_array(file), **strings = NULL;
-
-  size = i = char_count(array, ':');
-
-  assert(size);
-  strings = string_separate(array, "\r\n:");
-
-  do {records = build_record_from_string(strings[--i], records);} while (i);
-
-  destroy_bytevector((unsigned char *)array);
-  destroy_strings(strings, size);
-
-  return records;
-}
-
 record *align_instructions(record *forward) {
   record *temporary = NULL, *backward = NULL;
   unsigned char *bytecode = NULL;
@@ -100,19 +87,44 @@ record *align_instructions(record *forward) {
   return reverse_records(backward);
 }
 
-extern void print_record(record *record) {
-  printf("size: %u, address: 0x%4.4X, ", record->size, record->address);
+extern record *hex_file_to_records(char *file) {
+  record *records = NULL;
+  unsigned short int size, i;
+  char *array = file_to_array(file), **strings = NULL;
+
+  size = i = char_count(array, ':');
+
+  assert(size);
+  strings = string_separate(array, "\r\n:");
+
+  do {records = build_record_from_string(strings[--i], records);} while (i);
+
+  destroy_bytevector((unsigned char *)array);
+  destroy_strings(strings, size);
+
+  return align_instructions(records);
+}
+
+extern record *print_record(record *records) {
+  static record *temporary = NULL;
+  static record *reference = NULL;
+
+  if (reference != records) reference = temporary = records;
+
+  printf("size: %u, address: 0x%4.4X, ", temporary->size, temporary->address);
  
-  switch (record->mode) {
+  switch (temporary->mode) {
     case DATA: printf("record mode: DATA"); break;
     case END: printf("record mode: END");
   }
  
-  if (record->size) {
+  if (temporary->size) {
     printf("\nbytecode: ");
-    for (unsigned short int j = 0; j < record->size; j++)
-      printf("%.2X", record->bytecode[j]);
+    for (unsigned short int j = 0; j < temporary->size; j++)
+      printf("%.2X", temporary->bytecode[j]);
   }
  
-  printf("\nchecksum: 0x%X\n\n", record->checksum);
+  printf("\nchecksum: 0x%X\n\n", temporary->checksum);
+
+  return (temporary = temporary->record);
 }
