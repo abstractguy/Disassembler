@@ -68,9 +68,9 @@ record *extract_instructions(char *file) {
   while (forward) {
     instruction_size = operands(forward->bytecode[0]) + 1;
     if (forward->size != instruction_size && forward->mode != END) {
-      next = create_record(forward->size - instruction_size, forward->address + instruction_size, forward->mode, &forward->bytecode[instruction_size], forward->checksum, forward->record);
+      next = fork_record(forward, forward->size - instruction_size, forward->address + instruction_size, &forward->bytecode[instruction_size], forward->record);
 
-      backward = create_record(instruction_size, forward->address, forward->mode, forward->bytecode, forward->checksum, backward);
+      backward = fork_record(forward, instruction_size, forward->address, forward->bytecode, backward);
 
       forward = destroy_record(forward);
     } else {
