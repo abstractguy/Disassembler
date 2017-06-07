@@ -27,8 +27,8 @@ extern record *destroy_record(record *old_record) {
   } return new_record;
 }
 
-record *copy_record(record *old_record) {
-  return create_record(old_record->size, old_record->address, old_record->mode, old_record->bytecode, old_record->checksum, old_record->record);
+record *fork_record(record *records, unsigned short int size, unsigned short int address, unsigned char *bytecode, record *next) {
+  return create_record(size, address, records->mode, bytecode, records->checksum, next);
 }
 
 record *reverse_records(record *forward) {
