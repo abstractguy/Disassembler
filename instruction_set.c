@@ -68,9 +68,10 @@ record *extract_instructions(char *file) {
   while (forward) {
     instruction_size = operands(forward->bytecode[0]) + 1;
     if (forward->size != instruction_size && forward->mode != END) {
-      next = fork_record(forward, forward->size - instruction_size, forward->address + instruction_size, &forward->bytecode[instruction_size], forward->record);
 
-      backward = fork_record(forward, instruction_size, forward->address, forward->bytecode, backward);
+      next = copy_record_from_offset(forward, forward->size - instruction_size, instruction_size, forward->record);
+
+      backward = copy_record_from_offset(forward, instruction_size, 0, backward);
 
       forward = destroy_record(forward);
     } else {
