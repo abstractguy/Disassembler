@@ -78,9 +78,9 @@ extern record *hex_file_to_records(char *file) {
   unsigned char *bytevector = NULL;
   char *array = NULL, **strings = NULL;
 
-  array          = file_to_array(file);
-  assert(size    = i = char_count(array, ':'));
-  strings        = string_separate(array, "\r\n:");
+  array            = file_to_array(file);
+  assert( size     = i = char_count(array, ':'));
+  strings          = string_separate(array, "\r\n:");
 
   destroy_bytevector((unsigned char *)array);
 

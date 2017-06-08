@@ -143,3 +143,4 @@
   unsigned char operands(unsigned char);
   extern record *extract_instructions(char *);
 #endif
+

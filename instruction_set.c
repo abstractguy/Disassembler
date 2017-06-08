@@ -61,7 +61,7 @@ unsigned char operands(unsigned char opcode) {
 }
 
 record *extract_instructions(char *file) {
-  record *forward  = align_instructions(hex_file_to_records(file));
+  record *forward  = hex_file_to_records(file);
   record *backward = NULL, *next = NULL;
   unsigned char instruction_size;
 
