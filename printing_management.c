@@ -135,8 +135,6 @@
     "ANL C, %u\n",
     "MOVC A, @A+PC\n",
     "DIV A, B\n",
-
-    // Rendu ici...
     "MOV 0x%2.2X, 0x%2.2X\n",
     "MOV 0x%2.2X, @R0\n",
     "MOV 0x%2.2X, @R1\n",
@@ -261,14 +259,6 @@
     "MOV R6, A\n",
     "MOV R7, A\n";
  };
-
-
-
-
-
-
-
-
 
 unsigned char **extract_arguments(record *record) {
   unsigned char **argument_strings = NULL;
