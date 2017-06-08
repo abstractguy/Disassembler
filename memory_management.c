@@ -2,6 +2,12 @@
 
 #include "memory_management.h"
 
+void copy_bytes(unsigned char *destination, unsigned char *source, unsigned short int size) {
+  for (unsigned short int i = 0; i < size; i++) {
+    destination[i] = source[i];
+  }
+}
+
 unsigned char *create_bytevector(unsigned short int size) {
   unsigned char *bytevector = NULL;
   assert(bytevector = calloc(size, sizeof(unsigned char)));
@@ -36,7 +42,8 @@ record *create_record(unsigned short int size, unsigned short int address, mode 
   new_record->mode = mode;
 
   new_record->bytecode = create_bytevector(size);
-  memcpy(new_record->bytecode, bytecode, sizeof(unsigned char) * size);
+  //memcpy(new_record->bytecode, bytecode, sizeof(unsigned char) * size);
+  copy_bytes(new_record->bytecode, bytecode, size);
 
   new_record->checksum = checksum;
   new_record->record = old_record;
