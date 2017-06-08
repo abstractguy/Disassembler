@@ -2,6 +2,7 @@
 
 #ifndef RECORD_MANAGEMENT_H
   #define RECORD_MANAGEMENT_H
+  #include <string.h>
   #include "memory_management.h"
   #include "file_management.h"
 
