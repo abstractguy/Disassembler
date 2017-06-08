@@ -271,6 +271,7 @@ unsigned short int addr11_to_addr16(record *record) {
 extern void print_instruction(record *record) {
   unsigned char *bytecode = record->bytecode, instruction;
   instruction = bytecode[0];
+  printf("0x%4.4X\t", record->address);
   switch (instruction) {
     case 0x00:
     case 0x03:
@@ -517,7 +518,7 @@ extern void print_instruction(record *record) {
     case 0xC2:
     case 0xC5:
     case 0xD0:
-    case 0xD2:
+    case 0xD2: printf(instructions[instruction], bytecode[1]); break;
     case 0xD8:
     case 0xD9:
     case 0xDA:
@@ -525,7 +526,7 @@ extern void print_instruction(record *record) {
     case 0xDC:
     case 0xDD:
     case 0xDE:
-    case 0xDF:
+    case 0xDF: printf("Bytecode size: %u...\t", record->size); printf(instructions[instruction], bytecode[1]); break;
     case 0xE5:
     case 0xF5: printf(instructions[instruction], bytecode[1]); break;
     default: printf("Failed instruction: %2.2X\n", instruction); assert(0);
