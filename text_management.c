@@ -1,35 +1,10 @@
 // text_management.c
- 
-#include "text_management.h"
- 
-unsigned char *create_bytevector(unsigned short int size) {
-  unsigned char *bytevector = NULL;
-  assert(bytevector = calloc(size, sizeof(unsigned char)));
-  return bytevector;
-}
- 
-void destroy_bytevector(unsigned char *bytevector) {
-  if (bytevector) free(bytevector);
-  bytevector = NULL;
-}
 
-char **create_strings(unsigned short int size) {
-  char **strings = NULL;
-  assert(strings = calloc(size, sizeof(unsigned char *)));
-  return strings;
-}
- 
-void destroy_strings(char **strings, unsigned short int size) {
-  unsigned short int i = size;
-  if (strings) {
-    while (i--) if (strings[i]) free(strings[i]);
-    free(strings);
-  }
-}
- 
+#include "text_management.h"
+
 char **string_separate(char *string, char *delimiters) {
   char *token = NULL, **strings = create_strings(char_count(string, ':'));
- 
+
   if ((token = strtok(string, delimiters)))
     for (unsigned short int i = 0; token; i++, token = strtok(NULL, delimiters))
       strings[i] = strdup(token);
