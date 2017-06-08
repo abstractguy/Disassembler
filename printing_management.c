@@ -480,6 +480,7 @@ extern void print_instruction(record *record) {
     case 0x79:
     case 0x7A:
     case 0x7B:
+    case 0x7C:
     case 0x7D:
     case 0x7E:
     case 0x7F:
@@ -527,6 +528,6 @@ extern void print_instruction(record *record) {
     case 0xDF:
     case 0xE5:
     case 0xF5: printf(instructions[instruction], bytecode[1]); break;
-    default: assert(0);
+    default: printf("Failed instruction: %2.2X\n", instruction); assert(0);
   }
 }
