@@ -42,7 +42,6 @@ record *create_record(unsigned short int size, unsigned short int address, mode 
   new_record->mode = mode;
 
   new_record->bytecode = create_bytevector(size);
-  //memcpy(new_record->bytecode, bytecode, sizeof(unsigned char) * size);
   copy_bytes(new_record->bytecode, bytecode, size);
 
   new_record->checksum = checksum;

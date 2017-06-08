@@ -50,18 +50,24 @@ record *align_instructions(record *forward) {
  
   while (forward != NULL) {
     if (forward->record != NULL && (forward->address + forward->size) == forward->record->address) {
-      bytecode = create_bytevector(forward->size + forward->record->size);
-      //memcpy(bytecode, forward->bytecode, forward->size);
-      //memcpy(&bytecode[forward->size], forward->record->bytecode, forward->record->size);
 
-      copy_bytes(bytecode, forward-bytecode, forward->size);
+      bytecode = create_bytevector(forward->size + forward->record->size);
+
+      copy_bytes(bytecode, forward->bytecode, forward->size);
       copy_bytes(&bytecode[forward->size], forward->record->bytecode, forward->record->size);
+
       temporary = create_record(forward->size + forward->record->size, forward->address, forward->mode, bytecode, (unsigned char)(forward->checksum + forward->record->checksum), forward->record->record);
+
       destroy_bytevector(bytecode);
+
       forward = destroy_record(destroy_record(forward));
       forward = temporary;
+
     } else {
-      if (forward->size) backward = create_record(forward->size, forward->address, forward->mode, forward->bytecode, forward->checksum, backward);
+
+      if (forward->size) {
+        backward = create_record(forward->size, forward->address, forward->mode, forward->bytecode, forward->checksum, backward);
+      }
       forward = destroy_record(forward);
     }
   } return reverse_records(backward);

@@ -14,7 +14,7 @@ char *file_to_array(char *file) {
   FILE *fp = NULL;
   unsigned short int i = 0;
   assert(fp = fopen(file, "r"));
-  assert(array = calloc(file_size(fp) + 1, sizeof(char)));
+  array = (char *)create_bytevector(file_size(fp) + 1);
   do {array[i] = fgetc(fp);} while (array[i++] != EOF);
   array[i - 1] = '\0';
   assert(fclose(fp) != EOF);
