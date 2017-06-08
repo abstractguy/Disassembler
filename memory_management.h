@@ -4,7 +4,7 @@
   #define MEMORY_MANAGEMENT_H
   #include <stdlib.h>
   #include <assert.h>
-  #include <string.h>
+  //#include <string.h>
 
   typedef enum {DATA, END} mode;
 
@@ -14,6 +14,10 @@
     mode mode;
     struct Record *record;
   } record;
+
+  #include "memory_management.h"
+
+  void copy_bytes(unsigned char *, unsigned char *, unsigned short int);
 
   unsigned char *create_bytevector(unsigned short int);
   void destroy_bytevector(unsigned char *);
