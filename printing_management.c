@@ -260,18 +260,6 @@
     "MOV R7, A\n";
  };
 
-unsigned char **extract_arguments(record *record) {
-  unsigned char **argument_strings = NULL;
-
-  if (record->size > 0) {
-    // Detruire apres utilisation -->
-    argument_strings = create_strings(record->size - 1);
-    // ...
-  }
-
-  return argument_strings;
-}
-
 unsigned short int bytes_to_word(unsigned char byte1, unsigned char byte0) {
   return ((unsigned short int)byte1 << 8) + (unsigned short int)byte0;
 }
@@ -280,24 +268,9 @@ unsigned short int addr11_to_addr16(record *record) {
   return ((record->address + 2) & 0xF800) + ((record->bytecode[0] & 0x00E0) << 3) + record->bytecode[1];
 }
 
-void print_no_operands(record *record) {
-  printf(instructions[record->bytecode[0]]);
-}
-
-void print_word(record *record, unsigned short int word) {
-  printf(instructions[record->bytecode[0]], word);
-}
-
-void print_byte(record *record, unsigned char byte) {
-  printf(instructions[record->bytecode[0]], byte);
-}
-
-void print_bytes(record *record, unsigned char byte1, unsigned char byte2) {
-  printf(instructions[record->bytecode[0]], byte1, byte2);
-}
-
-void print_instruction(record *record) {
-  unsigned char instruction = record->bytecode[0];
+extern void print_instruction(record *record) {
+  unsigned char *bytecode = record->bytecode, instruction;
+  instruction = bytecode[0];
   switch (instruction) {
     case 0x00:
     case 0x03:
@@ -457,7 +430,103 @@ void print_instruction(record *record) {
     case 0xE1:
     case 0xF1: printf(instructions[instruction], addr11_to_addr16(record)); break;
     case 0x02:
-    case 0x12: printf(instructions[instruction], bytes_to_word(record->bytecode[1], record->bytecode[2])); break;
-    
+    case 0x12:
+    case 0x90: printf(instructions[instruction], bytes_to_word(bytecode[1], bytecode[2])); break;
+    case 0x10:
+    case 0x20:
+    case 0x30:
+    case 0x43:
+    case 0x53:
+    case 0x63:
+    case 0x75:
+    case 0x85:
+    case 0xB4:
+    case 0xB5:
+    case 0xB6:
+    case 0xB7:
+    case 0xB8:
+    case 0xB9:
+    case 0xBA:
+    case 0xBB:
+    case 0xBC:
+    case 0xBD:
+    case 0xBE:
+    case 0xBF:
+    case 0xD5: printf(instructions[instruction], bytecode[1], bytecode[2]); break;
+    case 0x05:
+    case 0x15:
+    case 0x24:
+    case 0x25:
+    case 0x34:
+    case 0x35:
+    case 0x40:
+    case 0x42:
+    case 0x44:
+    case 0x45:
+    case 0x50:
+    case 0x52:
+    case 0x54:
+    case 0x55:
+    case 0x60:
+    case 0x62:
+    case 0x64:
+    case 0x65:
+    case 0x70:
+    case 0x72:
+    case 0x74:
+    case 0x76:
+    case 0x77:
+    case 0x78:
+    case 0x79:
+    case 0x7A:
+    case 0x7B:
+    case 0x7D:
+    case 0x7E:
+    case 0x7F:
+    case 0x80:
+    case 0x82:
+    case 0x86:
+    case 0x87:
+    case 0x88:
+    case 0x89:
+    case 0x8A:
+    case 0x8B:
+    case 0x8C:
+    case 0x8D:
+    case 0x8E:
+    case 0x8F:
+    case 0x92:
+    case 0x94:
+    case 0x95:
+    case 0xA0:
+    case 0xA2:
+    case 0xA6:
+    case 0xA7:
+    case 0xA8:
+    case 0xA9:
+    case 0xAA:
+    case 0xAB:
+    case 0xAC:
+    case 0xAD:
+    case 0xAE:
+    case 0xAF:
+    case 0xB0:
+    case 0xB2:
+    case 0xC0:
+    case 0xC2:
+    case 0xC5:
+    case 0xD0:
+    case 0xD2:
+    case 0xD8:
+    case 0xD9:
+    case 0xDA:
+    case 0xDB:
+    case 0xDC:
+    case 0xDD:
+    case 0xDE:
+    case 0xDF:
+    case 0xE5:
+    case 0xF5: printf(instructions[instruction], bytecode[1]); break;
+    default: assert(0);
   }
 }
