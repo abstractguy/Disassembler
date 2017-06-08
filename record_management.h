@@ -2,8 +2,12 @@
 
 #ifndef RECORD_MANAGEMENT_H
   #define RECORD_MANAGEMENT_H
+  #include "memory_management.h"
   #include "file_management.h"
-  #include "text_management.h"
+
+  char **string_separate(char *, char *);
+  unsigned char ASCII_to_byte(char *);
+  unsigned short int char_count(char *, char);
 
   record *copy_record_from_offset(record *, unsigned short int, unsigned short int, record *);
   record *reverse_records(record *);
