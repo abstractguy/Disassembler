@@ -297,7 +297,8 @@ void print_bytes(record *record, unsigned char byte1, unsigned char byte2) {
 }
 
 void print_instruction(record *record) {
-  switch (record->bytecode[0]) {
+  unsigned char instruction = record->bytecode[0];
+  switch (instruction) {
     case 0x00:
     case 0x03:
     case 0x04:
@@ -438,7 +439,25 @@ void print_instruction(record *record) {
     case 0xFC:
     case 0xFD:
     case 0xFE:
-    case 0xFF: printf(instructions[record->bytecode[0]]); break;
-    case 0x
+    case 0xFF: printf(instructions[instruction]); break;
+    case 0x01:
+    case 0x11:
+    case 0x21:
+    case 0x31:
+    case 0x41:
+    case 0x51:
+    case 0x61:
+    case 0x71:
+    case 0x81:
+    case 0x91:
+    case 0xA1:
+    case 0xB1:
+    case 0xC1:
+    case 0xD1:
+    case 0xE1:
+    case 0xF1: printf(instructions[instruction], addr11_to_addr16(record)); break;
+    case 0x02:
+    case 0x12: printf(instructions[instruction], bytes_to_word(record->bytecode[1], record->bytecode[2])); break;
+    
   }
 }
