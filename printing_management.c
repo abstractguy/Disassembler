@@ -257,7 +257,7 @@
     "MOV R4, A\n",
     "MOV R5, A\n",
     "MOV R6, A\n",
-    "MOV R7, A\n";
+    "MOV R7, A\n"
  };
 
 unsigned short int bytes_to_word(unsigned char byte1, unsigned char byte0) {

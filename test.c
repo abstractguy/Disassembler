@@ -1,6 +1,6 @@
 // test.c
  
-#include "instruction_set.h"
+#include "printing_management.h"
  
 int main(int argc, char *argv[]) {
   record *record = NULL;
