@@ -230,6 +230,7 @@
     "AJMP 0x%4.4X\n",
     "MOVX A, @R0\n",
     "MOVX A, @R1\n",
+    "CLR A\n",
     "MOV A, 0x%2.2X\n",
     "MOV A, @R0\n",
     "MOV A, @R1\n",
