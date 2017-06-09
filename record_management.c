@@ -49,8 +49,8 @@ record *align_instructions(record *forward) {
   record *temporary = NULL, *backward = NULL;
   unsigned char *bytecode = NULL;
  
-  while (forward != NULL) {
-    if (forward->record != NULL && (forward->address + forward->size) == forward->record->address) {
+  while (forward) {
+    if (forward->record && (forward->address + forward->size) == forward->record->address) {
 
       bytecode = create_bytevector(forward->size + forward->record->size);
 
