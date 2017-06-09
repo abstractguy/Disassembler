@@ -200,7 +200,6 @@
     "CLR C\n",
     "SWAP A\n",
     "XCH A, 0x%2.2X\n",
-    "XCH A, 0x%2.2X\n",
     "XCH A, @R0\n",
     "XCH A, @R1\n",
     "XCH A, R0\n",
