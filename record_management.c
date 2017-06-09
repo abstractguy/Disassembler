@@ -21,6 +21,7 @@ unsigned short int char_count(char *string, char character) {
 unsigned char ASCII_to_byte(char *ASCII) {
   char *string = (char *)create_bytevector(3);
   unsigned char byte;
+  //copy_string((unsigned char *)string, (unsigned char *)ASCII);
   strncpy(string, ASCII, 2);
   byte = (unsigned char)strtoul(string, NULL, 16);
   destroy_bytevector((unsigned char *)string);

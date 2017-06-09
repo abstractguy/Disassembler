@@ -16,6 +16,7 @@
   } record;
 
   void copy_bytes(unsigned char *, unsigned char *, unsigned short int);
+  void copy_string(unsigned char *, unsigned char *);
 
   unsigned char *create_bytevector(unsigned short int);
   void destroy_bytevector(unsigned char *);

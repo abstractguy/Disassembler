@@ -272,6 +272,12 @@ extern void print_instruction(record *record) {
   unsigned char *bytecode = record->bytecode, instruction;
   instruction = bytecode[0];
   printf("0x%4.4X\t", record->address);
+
+  for (unsigned short int i = 0; i < 4; i++) {
+    if (i < record->size) printf("%2.2X ", record->bytecode[i]);
+    else printf("   ");
+  }
+
   switch (instruction) {
     case 0x00:
     case 0x03:

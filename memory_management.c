@@ -8,6 +8,12 @@ void copy_bytes(unsigned char *destination, unsigned char *source, unsigned shor
   }
 }
 
+void copy_string(unsigned char *destination, unsigned char *source) {
+  for (unsigned short int i = 0; source[i]; i++) {
+    destination[i] = source[i];
+  }
+}
+
 unsigned char *create_bytevector(unsigned short int size) {
   unsigned char *bytevector = NULL;
   assert(bytevector = calloc(size, sizeof(unsigned char)));
