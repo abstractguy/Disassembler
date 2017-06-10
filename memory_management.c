@@ -8,7 +8,7 @@ void copy_bytes(unsigned char *destination, unsigned char *source, unsigned shor
   }
 }
 
-void copy_string(unsigned char *destination, unsigned char *source) {
+void copy_string(char *destination, char *source) {
   for (unsigned short int i = 0; source[i]; i++) {
     destination[i] = source[i];
   }

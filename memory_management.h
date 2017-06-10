@@ -9,14 +9,14 @@
   typedef enum {DATA, END} mode;
 
   typedef struct Record {
+    struct Record *record;
     unsigned short int size, address;
     unsigned char *bytecode, checksum;
     mode mode;
-    struct Record *record;
   } record;
 
   void copy_bytes(unsigned char *, unsigned char *, unsigned short int);
-  void copy_string(unsigned char *, unsigned char *);
+  void copy_string(char *, char *);
 
   unsigned char *create_bytevector(unsigned short int);
   void destroy_bytevector(unsigned char *);
