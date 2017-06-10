@@ -1,7 +1,7 @@
 // instruction_set.c
- 
+
 #include "instruction_set.h"
- 
+
 unsigned char instruction_size(unsigned char opcode) {
   assert(opcode != 0xA5);
   switch (opcode) {

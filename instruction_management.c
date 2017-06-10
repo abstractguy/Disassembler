@@ -1,7 +1,7 @@
 // instruction_management.c
 #include "instruction_management.h"
 
-static instruction_type instruction_types[256] = {
+instruction_type instruction_types[256] = {
   ONE_BYTE_INSTRUCTION,
   ADDR_11,
   ADDR_16,
@@ -260,12 +260,9 @@ static instruction_type instruction_types[256] = {
   ONE_BYTE_INSTRUCTION
 };
 
-instruction_type instruction_type_from_record(record *record) {
-  return instruction_types[record->bytecode[0]];
-}
 /*
-unsigned char instruction_size(record *record) {
-  instruction_type type = instruction_type_from_record(record);
+unsigned char instruction_size(unsigned char bytecode) {
+  instruction_type type = instruction_types[bytecode];
   switch (type) {
     case ONE_BYTE_INSTRUCTION: type = 1;
     case ADDR_11:

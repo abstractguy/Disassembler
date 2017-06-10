@@ -4,6 +4,7 @@
   #define INSTRUCTION_SET_H
  
   #include "record_management.h"
+  #include "instruction_management.h"
  
   /*
   typedef enum {

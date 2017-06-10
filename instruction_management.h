@@ -77,6 +77,6 @@
   } bytecode;
   */
 
-  instruction_type instruction_type_from_record(record *);
-  //unsigned char instruction_size(record *);
+  instruction_type instruction_types[256];
+  //unsigned char instruction_size(unsigned char);
 #endif
