@@ -15,8 +15,7 @@
   unsigned short int char_count(char *, char);
 
   record *copy_record_from_offset(record *, unsigned short int, unsigned short int, record *);
-  //record *reverse_records(record *);
   record *align_instructions(record *);
   extern record *hex_file_to_records(char *);
-  extern record *print_record(record *);
+  //extern record *print_record(record *);
 #endif

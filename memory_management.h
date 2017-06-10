@@ -15,6 +15,7 @@
     mode mode;
   } record;
 
+  unsigned short int bytes_to_word(unsigned char, unsigned char);
   void copy_bytes(unsigned char *, unsigned char *, unsigned short int);
   void copy_string(char *, char *);
 

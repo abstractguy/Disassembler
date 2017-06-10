@@ -55,21 +55,6 @@ record *copy_record_from_offset(record *records, unsigned short int size, unsign
   return create_record(size, records->address + offset, records->mode, &records->bytecode[offset], records->checksum, next);
 }
 
-/*
-record *reverse_records(record *forward) {
-  record *backward = NULL, *next = NULL;
- 
-  while (forward) {
-    next            = forward->record;
-    forward->record = backward;
-    backward        = forward;
-    forward         = next;
-  }
- 
-  return backward;
-}
-*/
-
 record *align_instructions(record *forward) {
   record *temporary = NULL, *backward = NULL;
   unsigned char *bytecode = NULL;
@@ -119,9 +104,9 @@ extern record *hex_file_to_records(char *file) {
     for (unsigned short int j = 0; j < substring_size; j++) {
       bytevector[j] = ASCII_to_byte(&strings[i][j * 2]);
     }
- 
-    records = create_record((unsigned short int)bytevector[0], ((unsigned short int)bytevector[1] << 8) + (unsigned short int)bytevector[2], bytevector[3], &bytevector[4], bytevector[bytevector[0] + 4], records);
- 
+
+    records = create_record((unsigned short int)bytevector[0], bytes_to_word(bytevector[1], bytevector[2]), bytevector[3], &bytevector[4], bytevector[bytevector[0] + 4], records);
+
     destroy_bytevector(bytevector);
   }
  
@@ -129,7 +114,8 @@ extern record *hex_file_to_records(char *file) {
  
   return align_instructions(records);
 }
- 
+
+/*
 extern record *print_record(record *record) {
   printf("size: %u, address: 0x%4.4X, ", record->size, record->address);
  
@@ -148,3 +134,4 @@ extern record *print_record(record *record) {
  
   return destroy_record(record);
 }
+*/

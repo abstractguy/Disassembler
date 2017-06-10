@@ -2,6 +2,10 @@
 
 #include "memory_management.h"
 
+unsigned short int bytes_to_word(unsigned char byte1, unsigned char byte0) {
+  return ((unsigned short int)byte1 << 8) + (unsigned short int)byte0;
+}
+
 void copy_bytes(unsigned char *destination, unsigned char *source, unsigned short int size) {
   for (unsigned short int i = 0; i < size; i++) {
     destination[i] = source[i];
