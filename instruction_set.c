@@ -40,8 +40,8 @@ unsigned char instruction_size(unsigned char opcode) {
     case 0xF2:
     case 0xF4: return 1;
     default:
-      if ((opcode > 0x89) && (opcode < 0x91)) return 2;
-      else if ((opcode > 0xB3) && (opcode < 0xC0)) return 3;
+      if (opcode > 0x85 && opcode < 0x91) return 2;
+      else if (opcode > 0xB3 && opcode < 0xC0) return 3;
       else switch (opcode & 0x0F) {
         case 0x00:
         case 0x01:
