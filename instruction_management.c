@@ -259,3 +259,26 @@ static instruction_type instructions[256] {
   ONE_BYTE_INSTRUCTION,
   ONE_BYTE_INSTRUCTION
 };
+
+instruction_type instruction_type_from_record(record *record) {
+  return instructions[record->bytecode[0]];
+}
+
+unsigned char instruction_size(record *record) {
+  switch (instruction_type_from_record(record)) {
+    case ONE_BYTE_INSTRUCTION: return 1;
+    case ADDR_11:
+    case DIRECT:
+    case IMMEDIATE:
+    case OFFSET:
+    case BIT:
+    case NOT_BIT: return 2;
+    case ADDR_16:
+    case IMMEDIATE_16:
+    case BIT_OFFSET:
+    case DIRECT_IMMEDIATE:
+    case DIRECT_DIRECT:
+    case IMMEDIATE_OFFSET:
+    case DIRECT_OFFSET: return 3;
+  }
+}

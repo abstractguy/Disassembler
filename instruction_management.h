@@ -5,8 +5,8 @@
   #include "record_management.h"
 
   typedef enum {
-    ONE_BYTE_INSTRUCTION, ADDR_11, ADDR_16, DIRECT, IMMEDIATE,
-    OFFSET, BIT, NOT_BIT, IMMEDIATE_16, BIT_OFFSET,
+    ONE_BYTE_INSTRUCTION, ADDR_11, DIRECT, IMMEDIATE,
+    OFFSET, BIT, NOT_BIT, ADDR_16, IMMEDIATE_16, BIT_OFFSET,
     DIRECT_IMMEDIATE, DIRECT_DIRECT, IMMEDIATE_OFFSET, DIRECT_OFFSET
   } instruction_type;
 
@@ -76,4 +76,7 @@
     MOV_R5_A, MOV_R6_A, MOV_R7_A
   } bytecode;
   */
+
+  instruction_type instruction_type_from_record(record *);
+  unsigned char instruction_size(record *);
 #endif
