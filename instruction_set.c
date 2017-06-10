@@ -2,7 +2,7 @@
  
 #include "instruction_set.h"
  
-unsigned char operands(unsigned char opcode) {
+unsigned char instruction_size(unsigned char opcode) {
   assert(opcode != 0xA5);
   switch (opcode) {
     case 0x02:
@@ -17,7 +17,7 @@ unsigned char operands(unsigned char opcode) {
     case 0x85:
     case 0x90:
     case 0xB4:
-    case 0xD5: return 2;
+    case 0xD5: return 3;
     case 0x00:
     case 0x04:
     case 0x14:
@@ -38,23 +38,23 @@ unsigned char operands(unsigned char opcode) {
     case 0xE4:
     case 0xF0:
     case 0xF2:
-    case 0xF4: return 0;
+    case 0xF4: return 1;
     default:
-      if ((opcode > 0xB3) && (opcode < 0xC0)) return 2;
+      if ((opcode > 0xB3) && (opcode < 0xC0)) return 3;
       else switch (opcode & 0x0F) {
         case 0x00:
         case 0x01:
         case 0x02:
         case 0x04:
-        case 0x05: return 1;
-        case 0x03: return 0;
+        case 0x05: return 2;
+        case 0x03: return 1;
         default:
           switch (opcode & 0xF0) {
             case 0x60:
             case 0x70:
             case 0xA0:
-            case 0xD0: return 1;
-            default: return 0;
+            case 0xD0: return 2;
+            default: return 1;
         }
     }
   }
@@ -63,15 +63,15 @@ unsigned char operands(unsigned char opcode) {
 record *extract_instructions(char *file) {
   record *forward  = hex_file_to_records(file);
   record *backward = NULL, *next = NULL;
-  unsigned char instruction_size;
+  unsigned char size;
 
   while (forward) {
-    instruction_size = operands(forward->bytecode[0]) + 1;
-    if (forward->size != instruction_size && forward->mode != END) {
+    size = instruction_size(forward->bytecode[0]);
+    if (forward->size != size && forward->mode != END) {
 
-      next = copy_record_from_offset(forward, forward->size - instruction_size, instruction_size, forward->record);
+      next = copy_record_from_offset(forward, forward->size - size, size, forward->record);
 
-      backward = copy_record_from_offset(forward, instruction_size, 0, backward);
+      backward = copy_record_from_offset(forward, size, 0, backward);
 
       forward = destroy_record(forward);
     } else {
