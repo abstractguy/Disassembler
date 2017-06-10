@@ -78,5 +78,5 @@
   */
 
   instruction_type instruction_type_from_record(record *);
-  unsigned char instruction_size(record *);
+  //unsigned char instruction_size(record *);
 #endif

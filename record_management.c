@@ -2,6 +2,29 @@
 
 #include "record_management.h"
 
+record *record_map(record *(*f)(record *), record *xs) {
+  record *(*function)(record *);
+  record *current, *forward;
+  record *backward = NULL;
+  if ((forward = xs)) {
+    function = f;
+    while ((current = forward)) {
+      forward = forward->record;
+      current = function(current);
+      current->record = backward;
+      backward = current;
+    }
+  } return backward;
+}
+ 
+record *identity(record *record) {
+  return record;
+}
+ 
+record *reverse_records(record *record) {
+  return record_map(identity, record);
+}
+
 char **string_separate(char *string, char *delimiters) {
   char *token = NULL, **strings = create_strings(char_count(string, ':'));
 
@@ -31,7 +54,8 @@ unsigned char ASCII_to_byte(char *ASCII) {
 record *copy_record_from_offset(record *records, unsigned short int size, unsigned short int offset, record *next) {
   return create_record(size, records->address + offset, records->mode, &records->bytecode[offset], records->checksum, next);
 }
- 
+
+/*
 record *reverse_records(record *forward) {
   record *backward = NULL, *next = NULL;
  
@@ -44,6 +68,7 @@ record *reverse_records(record *forward) {
  
   return backward;
 }
+*/
 
 record *align_instructions(record *forward) {
   record *temporary = NULL, *backward = NULL;
