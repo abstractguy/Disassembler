@@ -2,6 +2,7 @@
 
 #include "instruction_set.h"
 
+/*
 unsigned char instruction_size(unsigned char opcode) {
   assert(opcode != 0xA5);
   switch (opcode) {
@@ -60,6 +61,7 @@ unsigned char instruction_size(unsigned char opcode) {
     }
   }
 }
+*/
 
 record *extract_instructions(char *file) {
   record *forward  = hex_file_to_records(file);
