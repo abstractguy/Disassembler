@@ -260,6 +260,204 @@
     "MOV\t\tR7,\tA\n"
  };
 
+// BYTE Registers
+char *direct_to_string(unsigned char direct_byte) {
+  char *direct_string = NULL;
+  switch (direct_byte) {
+    case 0x80: sprintf(direct_string, "P0"); break;
+    case 0x81: sprintf(direct_string, "SP"); break;
+    case 0x82: sprintf(direct_string, "DPL"); break;
+    case 0x83: sprintf(direct_string, "DPH"); break;
+    case 0x84: sprintf(direct_string, "DPL1"); break;
+    case 0x85: sprintf(direct_string, "DPH1"); break;
+    case 0x86: sprintf(direct_string, "DPS"); break;
+    case 0x87: sprintf(direct_string, "PCON"); break;
+    case 0x88: sprintf(direct_string, "TCON"); break;
+    case 0x89: sprintf(direct_string, "TMOD"); break;
+    case 0x8A: sprintf(direct_string, "TL0"); break;
+    case 0x8B: sprintf(direct_string, "TL1"); break;
+    case 0x8C: sprintf(direct_string, "TH0"); break;
+    case 0x8D: sprintf(direct_string, "TH1"); break;
+    case 0x8E: sprintf(direct_string, "CKCON"); break;
+    case 0x90: sprintf(direct_string, "P1"); break;
+    case 0x91: sprintf(direct_string, "EXIF"); break;
+    case 0x96: sprintf(direct_string, "CKMOD"); break;
+    case 0x98: sprintf(direct_string, "SCON0"); break;
+    case 0x99: sprintf(direct_string, "SBUF0"); break;
+    case 0x9D: sprintf(direct_string, "ACON"); break;
+    case 0xA0: sprintf(direct_string, "P2"); break;
+    case 0xA8: sprintf(direct_string, "IE"); break;
+    case 0xA9: sprintf(direct_string, "SADDR0"); break;
+    case 0xAA: sprintf(direct_string, "SADDR1"); break;
+    case 0xB0: sprintf(direct_string, "P3"); break;
+    case 0xB1: sprintf(direct_string, "IP1"); break;
+    case 0xB8: sprintf(direct_string, "IP0"); break;
+    case 0xB9: sprintf(direct_string, "SADEN0"); break;
+    case 0xBA: sprintf(direct_string, "SADEN1"); break;
+    case 0xC0: sprintf(direct_string, "SCON1"); break;
+    case 0xC1: sprintf(direct_string, "SBUF1"); break;
+    case 0xC2: sprintf(direct_string, "ROMSIZE"); break;
+    case 0xC4: sprintf(direct_string, "PMR"); break;
+    case 0xC5: sprintf(direct_string, "STATUS"); break;
+    case 0xC7: sprintf(direct_string, "TA"); break;
+    case 0xC8: sprintf(direct_string, "T2CON"); break;
+    case 0xC9: sprintf(direct_string, "T2MOD"); break;
+    case 0xCA: sprintf(direct_string, "RCAP2L"); break;
+    case 0xCB: sprintf(direct_string, "RCAP2H"); break;
+    case 0xCC: sprintf(direct_string, "TL2"); break;
+    case 0xCD: sprintf(direct_string, "TH2"); break;
+    case 0xD0: sprintf(direct_string, "PSW"); break;
+    case 0xD5: sprintf(direct_string, "FCNTL"); break;
+    case 0xD6: sprintf(direct_string, "FDATA"); break;
+    case 0xD8: sprintf(direct_string, "WDCON"); break;
+    case 0xE0: sprintf(direct_string, "A"); break;
+    case 0xE8: sprintf(direct_string, "EIE"); break;
+    case 0xF0: sprintf(direct_string, "B"); break;
+    case 0xF1: sprintf(direct_string, "EIP1"); break;
+    case 0xF8: sprintf(direct_string, "EIP0"); break;
+    default:   sprintf(direct_string, "0x%2.2X", direct_byte);
+  } return direct_string;
+}
+
+/*
+// BIT Registers
+
+// P0
+sbit at 0x80 P0_0;
+sbit at 0x81 P0_1;
+sbit at 0x82 P0_2;
+sbit at 0x83 P0_3;
+sbit at 0x84 P0_4;
+sbit at 0x85 P0_5;
+sbit at 0x86 P0_6;
+sbit at 0x87 P0_7;
+
+// TCON
+sbit at 0x88 IT0;
+sbit at 0x89 IE0;
+sbit at 0x8A IT1;
+sbit at 0x8B IE1;
+sbit at 0x8C TR0;
+sbit at 0x8D TF0;
+sbit at 0x8E TR1;
+sbit at 0x8F TF1;
+
+// P1
+sbit at 0x90 P1_0;
+sbit at 0x91 P1_1;
+sbit at 0x92 P1_2;
+sbit at 0x93 P1_3;
+sbit at 0x94 P1_4;
+sbit at 0x95 P1_5;
+sbit at 0x96 P1_6;
+sbit at 0x97 P1_7;
+
+// SCON0
+sbit at 0x98 RI_0;
+sbit at 0x99 TI_0;
+sbit at 0x9A RB8_0;
+sbit at 0x9B TB8_0;
+sbit at 0x9C REN_0;
+sbit at 0x9D SM2_0;
+sbit at 0x9E SM1_0;
+sbit at 0x9F SM0_0;
+sbit at 0x9F FE_0;
+
+// P2
+sbit at 0xA0 P2_0;
+sbit at 0xA1 P2_1;
+sbit at 0xA2 P2_2;
+sbit at 0xA3 P2_3;
+sbit at 0xA4 P2_4;
+sbit at 0xA5 P2_5;
+sbit at 0xA6 P2_6;
+sbit at 0xA7 P2_7;
+
+// IE
+sbit at 0xA8 EX0;
+sbit at 0xA9 ET0;
+sbit at 0xAA EX1;
+sbit at 0xAB ET1;
+sbit at 0xAC ES0;
+sbit at 0xAD ET2;
+sbit at 0xAE ES1;
+sbit at 0xAF EA;
+
+// P3
+sbit at 0xB0 P3_0;
+sbit at 0xB1 P3_1;
+sbit at 0xB2 P3_2;
+sbit at 0xB3 P3_3;
+sbit at 0xB4 P3_4;
+sbit at 0xB5 P3_5;
+sbit at 0xB6 P3_6;
+sbit at 0xB7 P3_7;
+
+// IP0
+sbit at 0xB8 LPX0;
+sbit at 0xB9 LPT0;
+sbit at 0xBA LPX1;
+sbit at 0xBB LPT1;
+sbit at 0xBC LPS0;
+sbit at 0xBD LPT2;
+sbit at 0xBE LPS1;
+
+// SCON1
+sbit at 0xC0 RI_1;
+sbit at 0xC1 TI_1;
+sbit at 0xC2 RB8_1;
+sbit at 0xC3 TB8_1;
+sbit at 0xC4 REN_1;
+sbit at 0xC5 SM2_1;
+sbit at 0xC6 SM1_1;
+sbit at 0xC7 SM0_1;
+
+// T2CON
+sbit at 0xC8 CP_RL_2;
+sbit at 0xC9 C_T_2;
+sbit at 0xCA TR_2;
+sbit at 0xCB EXEN_2;
+sbit at 0xCC TCLK;
+sbit at 0xCD RCLK;
+sbit at 0xCE EXF_2;
+sbit at 0xCF TF_2;
+
+// PSW
+sbit at 0xD0 PARITY;
+sbit at 0xD0 P;
+sbit at 0xD1 F1;
+sbit at 0xD2 OV;
+sbit at 0xD3 RS0;
+sbit at 0xD4 RS1;
+sbit at 0xD5 F0;
+sbit at 0xD6 AC;
+sbit at 0xD7 CY;
+
+// WDCON
+sbit at 0xD8 RWT;
+sbit at 0xD9 EWT;
+sbit at 0xDA WTRF;
+sbit at 0xDB WDIF;
+sbit at 0xDC PFI;
+sbit at 0xDD EPFI;
+sbit at 0xDE POR;
+sbit at 0xDF SMOD_1;
+
+// EIE
+sbit at 0xE8 EX2;
+sbit at 0xE9 EX3;
+sbit at 0xEA EX4;
+sbit at 0xEB EX5;
+sbit at 0xEC EWDI;
+
+// EIP0
+sbit at 0xF8 LPX2;
+sbit at 0xF9 LPX3;
+sbit at 0xFA LPX4;
+sbit at 0xFB LPX5;
+sbit at 0xFC LPWDI;
+*/
+
 static unsigned short int addr11_to_addr16(record *record) {
   return ((record->address + 2) & 0xF800) + ((record->bytecode[0] & 0x00E0) << 3) + record->bytecode[1];
 }
