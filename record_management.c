@@ -3,9 +3,8 @@
 
 record *record_map(record *(*function)(record *), record *forward) {
   record *current, *backward = NULL;
-  while ((current = forward)) {
-    forward = forward->record;
-    current = function(current);
+  while ((current = function(forward))) {
+    forward = current->record;
     current->record = backward;
     backward = current;
   } return backward;
