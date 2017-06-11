@@ -73,7 +73,6 @@
   } bytecode;
   */
 
-  //unsigned char instruction_size(unsigned char);
   extern record *extract_instructions(char *);
 #endif
 

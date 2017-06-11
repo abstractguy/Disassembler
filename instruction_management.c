@@ -282,6 +282,5 @@ unsigned char instruction_size(unsigned char bytecode) {
     case IMMEDIATE_OFFSET:
     case DIRECT_OFFSET:
       type = 3;
-  }
-  return type;
+  } return type;
 }
