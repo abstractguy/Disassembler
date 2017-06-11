@@ -4,7 +4,7 @@
   #define RECORD_MANAGEMENT_H
   #include "string_management.h"
 
-  record *record_map(record *(*f)(record *), record *);
+  record *record_map(record *(*)(record *), record *);
   record *identity(record *);
   record *reverse_records(record *);
 

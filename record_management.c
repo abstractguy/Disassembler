@@ -2,24 +2,17 @@
 
 #include "record_management.h"
 
-record *record_map(record *(*f)(record *), record *xs) {
-  record *(*function)(record *);
-  record *current, *forward;
-  record *backward = NULL;
-  if ((forward = xs)) {
-    function = f;
-    while ((current = forward)) {
-      forward = forward->record;
-      current = function(current);
-      current->record = backward;
-      backward = current;
-    }
+record *record_map(record *(*function)(record *), record *forward) {
+  record *current, *backward = NULL;
+  while ((current = forward)) {
+    forward = forward->record;
+    current = function(current);
+    current->record = backward;
+    backward = current;
   } return backward;
 }
- 
-record *identity(record *record) {
-  return record;
-}
+
+record *identity(record *record) {return record;}
  
 record *reverse_records(record *record) {
   return record_map(identity, record);
