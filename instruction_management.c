@@ -280,7 +280,8 @@ unsigned char instruction_size(unsigned char bytecode) {
     case DIRECT_IMMEDIATE:
     case DIRECT_DIRECT:
     case IMMEDIATE_OFFSET:
-    case DIRECT_OFFSET: type = 3;
+    case DIRECT_OFFSET:
+      type = 3;
   }
   return type;
 }
