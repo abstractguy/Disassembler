@@ -260,17 +260,20 @@ instruction_type instruction_types[256] = {
   ONE_BYTE_INSTRUCTION
 };
 
-/*
 unsigned char instruction_size(unsigned char bytecode) {
   instruction_type type = instruction_types[bytecode];
   switch (type) {
-    case ONE_BYTE_INSTRUCTION: type = 1;
+    case ONE_BYTE_INSTRUCTION:
+      type = 1;
+      break;
     case ADDR_11:
     case DIRECT:
     case IMMEDIATE:
     case OFFSET:
     case BIT:
-    case NOT_BIT: type = 2;
+    case NOT_BIT:
+      type = 2;
+      break;
     case ADDR_16:
     case IMMEDIATE_16:
     case BIT_OFFSET:
@@ -281,4 +284,3 @@ unsigned char instruction_size(unsigned char bytecode) {
   }
   return type;
 }
-*/
