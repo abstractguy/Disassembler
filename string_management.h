@@ -1,5 +1,4 @@
 // string_management.h
-
 #ifndef STRING_MANAGEMENT_H
   #define STRING_MANAGEMENT_H
   #include <string.h>

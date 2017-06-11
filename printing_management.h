@@ -1,8 +1,6 @@
 // printing_management.h
-
 #ifndef PRINTING_MANAGEMENT_H
   #define PRINTING_MANAGEMENT_H
-  #include "instruction_set.h"
   #include "instruction_management.h"
 
   //extern record *print_record(record *);

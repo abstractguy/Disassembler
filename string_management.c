@@ -1,5 +1,4 @@
 // string_management.c
-
 #include "string_management.h"
 
 char **string_separate(char *string, char *delimiters) {

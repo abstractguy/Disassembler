@@ -1,5 +1,4 @@
 // record_management.c
-
 #include "record_management.h"
 
 record *record_map(record *(*function)(record *), record *forward) {
@@ -78,6 +77,5 @@ extern record *hex_file_to_records(char *file) {
   }
  
   destroy_strings(strings, size);
- 
   return align_instructions(records);
 }

@@ -1,5 +1,4 @@
 // record_management.h
-
 #ifndef RECORD_MANAGEMENT_H
   #define RECORD_MANAGEMENT_H
   #include "string_management.h"

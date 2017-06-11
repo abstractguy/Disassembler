@@ -1,5 +1,4 @@
 // memory_management.c
-
 #include "memory_management.h"
 
 unsigned short int bytes_to_word(unsigned char byte1, unsigned char byte0) {
