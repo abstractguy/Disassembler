@@ -263,26 +263,22 @@ instruction_type instruction_types[256] = {
 unsigned char instruction_size(unsigned char bytecode) {
   instruction_type type = instruction_types[bytecode];
   switch (type) {
-    case ONE_BYTE_INSTRUCTION:
-      type = 1;
-      break;
+    case ONE_BYTE_INSTRUCTION: return 1;
     case ADDR_11:
     case DIRECT:
     case IMMEDIATE:
     case OFFSET:
     case BIT:
-    case NOT_BIT:
-      type = 2;
-      break;
+    case NOT_BIT: return 2;
     case ADDR_16:
     case IMMEDIATE_16:
     case BIT_OFFSET:
     case DIRECT_IMMEDIATE:
     case DIRECT_DIRECT:
     case IMMEDIATE_OFFSET:
-    case DIRECT_OFFSET:
-      type = 3;
-  } return type;
+    case DIRECT_OFFSET: return 3;
+    default: return 0;
+  }
 }
 
 record *extract_instructions(char *file) {

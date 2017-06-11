@@ -1,7 +1,7 @@
 // file_management.c
 #include "file_management.h"
 
-unsigned short int file_size(FILE * fp) {
+static unsigned short int file_size(FILE * fp) {
   unsigned short int end;
   fseek(fp, 0, SEEK_END);
   end = ftell(fp);

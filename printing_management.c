@@ -260,28 +260,7 @@
     "MOV\t\tR7,\tA\n"
  };
 
-/*
-extern record *print_record(record *record) {
-  printf("size: %u, address: 0x%4.4X, ", record->size, record->address);
- 
-  switch (record->mode) {
-    case DATA: printf("record mode: DATA"); break;
-    case END: printf("record mode: END");
-  }
- 
-  if (record->size) {
-    printf("\nbytecode: ");
-    for (unsigned short int j = 0; j < record->size; j++)
-      printf("%.2X", record->bytecode[j]);
-  }
- 
-  printf("\nchecksum: 0x%X\n\n", record->checksum);
- 
-  return destroy_record(record);
-}
-*/
-
-unsigned short int addr11_to_addr16(record *record) {
+static unsigned short int addr11_to_addr16(record *record) {
   return ((record->address + 2) & 0xF800) + ((record->bytecode[0] & 0x00E0) << 3) + record->bytecode[1];
 }
 
