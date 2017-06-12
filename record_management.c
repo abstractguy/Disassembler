@@ -1,15 +1,6 @@
 // record_management.c
 #include "record_management.h"
 
-void checksum(unsigned char *bytevector) {
-  unsigned char size = bytevector[0] + 4, sum = 0;
-  if (!bytevector[3]) {
-    for (unsigned char i = 0; i < size; i++) {
-      sum = (unsigned char)(sum + bytevector[i]) % 256;
-    } assert(!((unsigned char)(~sum + 1) - bytevector[size]));
-  }
-}
-
 record *record_reverse_map(record *(*function)(record *), record *forward) {
   record *current, *backward = NULL;
   while ((current = function(forward))) {
@@ -58,7 +49,6 @@ record *align_instructions(record *forward) {
   return reverse_records(record_reverse_map(align_instruction, forward));
 }
 
-
 extern record *hex_file_to_records(char *file) {
   record *records = NULL;
   unsigned short int i, size = 0, substring_size;
@@ -88,5 +78,5 @@ extern record *hex_file_to_records(char *file) {
   }
  
   destroy_strings(strings, size);
-  return align_instructions(records);
+  return records;
 }

@@ -282,7 +282,7 @@ unsigned char instruction_size(unsigned char bytecode) {
 }
 
 record *extract_instructions(char *file) {
-  record *forward  = hex_file_to_records(file);
+  record *forward  = align_instructions(hex_file_to_records(file));
   record *backward = NULL, *next = NULL;
   unsigned char size;
 

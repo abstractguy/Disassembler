@@ -8,5 +8,7 @@ int main(int argc, char *argv[]) {
   while (record) {
     print_instruction(record);
     record = destroy_record(record);
-  } return 0;
+  }
+
+  return 0;
 }

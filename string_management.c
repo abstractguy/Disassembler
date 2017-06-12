@@ -1,6 +1,15 @@
 // string_management.c
 #include "string_management.h"
 
+void checksum(unsigned char *bytevector) {
+  unsigned char size = bytevector[0] + 4, sum = 0;
+  if (!bytevector[3]) {
+    for (unsigned char i = 0; i < size; i++) {
+      sum = (unsigned char)(sum + bytevector[i]) % 256;
+    } assert(!((unsigned char)(~sum + 1) - bytevector[size]));
+  }
+}
+
 char **string_separate(char *string, char *delimiters) {
   char *token = NULL, **strings = create_strings(char_count(string, ':'));
 
