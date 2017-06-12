@@ -69,7 +69,7 @@
     "JC\t\t0x%2.2X\n",
     "AJMP\t0x%4.4X\n",
     "ORL\t\t%s,\tA\n",
-    "ORL\t\t0x%2.2X,\t0x%2.2X\n",
+    "ORL\t\t%s,\t0x%2.2X\n",
     "ORL\t\tA,\t0x%2.2X\n",
     "ORL\t\tA,\t%s\n",
     "ORL\t\tA,\t@R0\n",
@@ -85,7 +85,7 @@
     "JNC\t\t0x%2.2X\n",
     "ACALL\t0x%4.4X\n",
     "ANL\t\t%s,\tA\n",
-    "ANL\t\t0x%2.2X,\t0x%2.2X\n",
+    "ANL\t\t%s,\t0x%2.2X\n",
     "ANL\t\tA,\t0x%2.2X\n",
     "ANL\t\tA,\t%s\n",
     "ANL\t\tA,\t@R0\n",
@@ -101,7 +101,7 @@
     "JZ\t\t0x%2.2X\n",
     "AJMP\t0x%4.4X\n",
     "XRL\t\t%s,\tA\n",
-    "XRL\t\t0x%2.2X,\t0x%2.2X\n",
+    "XRL\t\t%s,\t0x%2.2X\n",
     "XRL\t\tA,\t0x%2.2X\n",
     "XRL\t\tA,\t%s\n",
     "XRL\t\tA,\t@R0\n",
@@ -119,7 +119,7 @@
     "ORL\t\tC,\t0x%2.2X\n",
     "JMP\t\t@A+DPTR\n",
     "MOV\t\tA,\t0x%2.2X\n",
-    "MOV\t\t0x%2.2X,\t0x%2.2X\n",
+    "MOV\t\t%s,\t0x%2.2X\n",
     "MOV\t\t@R0,\t0x%2.2X\n",
     "MOV\t\t@R1,\t0x%2.2X\n",
     "MOV\t\tR0,\t0x%2.2X\n",
@@ -135,7 +135,7 @@
     "ANL\t\tC,\t0x%2.2X\n",
     "MOVC\tA,\t@A+PC\n",
     "DIV\t\tA,\tB\n",
-    "MOV\t\t0x%2.2X,\t0x%2.2X\n",
+    "MOV\t\t%s,\t%s\n",
     "MOV\t\t%s,\t@R0\n",
     "MOV\t\t%s,\t@R1\n",
     "MOV\t\t%s,\tR0\n",
@@ -183,7 +183,7 @@
     "CPL\t\t0x%2.2X\n",
     "CPL\t\tC\n",
     "CJNE\tA,\t0x%2.2X,\t0x%2.2X\n",
-    "CJNE\tA,\t0x%2.2X,\t0x%2.2X\n",
+    "CJNE\tA,\t%s,\t0x%2.2X\n",
     "CJNE\t@R0,\t0x%2.2X,\t0x%2.2X\n",
     "CJNE\t@R1,\t0x%2.2X,\t0x%2.2X\n",
     "CJNE R0,\t0x%2.2X,\t0x%2.2X\n",
@@ -215,7 +215,7 @@
     "SETB\t0x%2.2X\n",
     "SETB\tC\n",
     "DA\t\tA\n",
-    "DJNZ\t0x%2.2X,\t0x%2.2X\n",
+    "DJNZ\t%s,\t0x%2.2X\n",
     "XCHD\tA,\t@R0\n",
     "XCHD\tA,\t@R1\n",
     "DJNZ\tR0,\t0x%2.2X\n",
@@ -524,6 +524,14 @@ void print_direct(unsigned char *bytecode) {
   printf(instructions[bytecode[0]], SFR[bytecode[1]]);
 }
 
+void print_direct_first(unsigned char *bytecode) {
+  printf(instructions[bytecode[0]], SFR[bytecode[1]], bytecode[2]);
+}
+
+void print_direct_twice(unsigned char *bytecode) {
+  printf(instructions[bytecode[0]], SFR[bytecode[1]], SFR[bytecode[2]]);
+}
+
 /*
 // BIT Registers
 
@@ -697,11 +705,13 @@ extern void print_instruction(record *records) {
     case IMMEDIATE_16:
       printf(instructions[instruction], bytes_to_word(bytecode[1], bytecode[2]));
       break;
+    case DIRECT_DIRECT:
+      print_direct_twice(bytecode);
+      break;
     case BIT_OFFSET:
     case DIRECT_IMMEDIATE:
-    case DIRECT_DIRECT:
     case IMMEDIATE_OFFSET:
     case DIRECT_OFFSET:
-      printf(instructions[instruction], bytecode[1], bytecode[2]);
+      print_direct_first(bytecode);
   }
 }
