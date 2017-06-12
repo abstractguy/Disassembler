@@ -17,7 +17,9 @@ record *reverse_records(record *record) {
 }
 
 record *copy_record_from_offset(record *records, unsigned short int size, unsigned short int offset, record *next) {
-  return create_record(size, records->address + offset, records->mode, &records->bytecode[offset], records->checksum, next);
+  unsigned char *bytecode = create_bytevector(size);
+  copy_bytes(bytecode, &records->bytecode[offset], size);
+  return create_record(size, records->address + offset, records->mode, bytecode, records->checksum, next);
 }
 
 record *align_instruction(record *forward) {
@@ -34,6 +36,36 @@ record *align_instruction(record *forward) {
  
     temporary = create_record(forward->size + forward->next->size, forward->address, forward->mode, bytecode, (unsigned char)(forward->checksum + forward->next->checksum), forward->next->next);
 
+      forward = destroy_record(destroy_record(forward));
+ 
+      return align_instruction(temporary);
+  } else {
+    if (!forward->size) forward = destroy_record(forward);
+    return forward;
+  }
+}
+
+/*
+unsigned char *concatenate_bytevectors(unsigned char *bytevector1, unsigned char size1, unsigned char *bytevector2, unsigned char size2) {
+  unsigned char *bytevector = create_bytevector(size1 + size2);
+
+  copy_bytes(&bytevector[0], bytevector1, size1);
+
+  copy_bytes(&bytevector[size1], bytevector2, size2);
+ 
+  return bytevector;
+}
+ 
+record *align_instruction(record *forward) {
+  record *temporary = NULL;
+  unsigned char *bytecode = NULL;
+ 
+  if (forward->next && (forward->address + forward->size) == forward->next->address) {
+ 
+    bytecode = concatenate_bytevectors(forward->bytecode, forward->size, forward->next->bytecode, forward->next->size);
+
+    temporary = create_record(forward->size + forward->next->size, forward->address, forward->mode, bytecode, (unsigned char)(forward->checksum + forward->next->checksum), forward->next->next);
+
       destroy_bytevector(bytecode);
 
       forward = destroy_record(destroy_record(forward));
@@ -44,7 +76,8 @@ record *align_instruction(record *forward) {
     return forward;
   }
 }
- 
+*/
+
 record *align_instructions(record *forward) {
   return reverse_records(record_reverse_map(align_instruction, forward));
 }
@@ -52,7 +85,7 @@ record *align_instructions(record *forward) {
 extern record *hex_file_to_records(char *file) {
   record *records = NULL;
   unsigned short int i, size = 0, substring_size;
-  unsigned char *bytevector = NULL;
+  unsigned char *bytevector = NULL, *new_bytevector = NULL;
   char *array = NULL, **strings = NULL;
  
   array          = file_to_array(file);
@@ -72,7 +105,11 @@ extern record *hex_file_to_records(char *file) {
 
     checksum(bytevector);
 
-    records = create_record((unsigned short int)bytevector[0], bytes_to_word(bytevector[1], bytevector[2]), bytevector[3], &bytevector[4], bytevector[bytevector[0] + 4], records);
+    new_bytevector = create_bytevector(bytevector[0]);
+
+    copy_bytes(new_bytevector, &bytevector[4], bytevector[0]);
+
+    records = create_record((unsigned short int)bytevector[0], bytes_to_word(bytevector[1], bytevector[2]), bytevector[3], new_bytevector, bytevector[bytevector[0] + 4], records);
 
     destroy_bytevector(bytevector);
   }

@@ -50,8 +50,10 @@ record *create_record(unsigned short int size, unsigned short int address, mode 
   new_record->address = address;
   new_record->mode = mode;
 
-  new_record->bytecode = create_bytevector(size);
-  copy_bytes(new_record->bytecode, bytecode, size);
+  //new_record->bytecode = create_bytevector(size);
+  //copy_bytes(new_record->bytecode, bytecode, size);
+
+  new_record->bytecode = bytecode;
 
   new_record->checksum = checksum;
   new_record->next = old_record;
