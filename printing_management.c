@@ -260,63 +260,268 @@
     "MOV\t\tR7,\tA\n"
  };
 
-// BYTE Registers
-char *direct_to_string(unsigned char direct_byte) {
-  char *direct_string = NULL;
-  switch (direct_byte) {
-    case 0x80: sprintf(direct_string, "P0"); break;
-    case 0x81: sprintf(direct_string, "SP"); break;
-    case 0x82: sprintf(direct_string, "DPL"); break;
-    case 0x83: sprintf(direct_string, "DPH"); break;
-    case 0x84: sprintf(direct_string, "DPL1"); break;
-    case 0x85: sprintf(direct_string, "DPH1"); break;
-    case 0x86: sprintf(direct_string, "DPS"); break;
-    case 0x87: sprintf(direct_string, "PCON"); break;
-    case 0x88: sprintf(direct_string, "TCON"); break;
-    case 0x89: sprintf(direct_string, "TMOD"); break;
-    case 0x8A: sprintf(direct_string, "TL0"); break;
-    case 0x8B: sprintf(direct_string, "TL1"); break;
-    case 0x8C: sprintf(direct_string, "TH0"); break;
-    case 0x8D: sprintf(direct_string, "TH1"); break;
-    case 0x8E: sprintf(direct_string, "CKCON"); break;
-    case 0x90: sprintf(direct_string, "P1"); break;
-    case 0x91: sprintf(direct_string, "EXIF"); break;
-    case 0x96: sprintf(direct_string, "CKMOD"); break;
-    case 0x98: sprintf(direct_string, "SCON0"); break;
-    case 0x99: sprintf(direct_string, "SBUF0"); break;
-    case 0x9D: sprintf(direct_string, "ACON"); break;
-    case 0xA0: sprintf(direct_string, "P2"); break;
-    case 0xA8: sprintf(direct_string, "IE"); break;
-    case 0xA9: sprintf(direct_string, "SADDR0"); break;
-    case 0xAA: sprintf(direct_string, "SADDR1"); break;
-    case 0xB0: sprintf(direct_string, "P3"); break;
-    case 0xB1: sprintf(direct_string, "IP1"); break;
-    case 0xB8: sprintf(direct_string, "IP0"); break;
-    case 0xB9: sprintf(direct_string, "SADEN0"); break;
-    case 0xBA: sprintf(direct_string, "SADEN1"); break;
-    case 0xC0: sprintf(direct_string, "SCON1"); break;
-    case 0xC1: sprintf(direct_string, "SBUF1"); break;
-    case 0xC2: sprintf(direct_string, "ROMSIZE"); break;
-    case 0xC4: sprintf(direct_string, "PMR"); break;
-    case 0xC5: sprintf(direct_string, "STATUS"); break;
-    case 0xC7: sprintf(direct_string, "TA"); break;
-    case 0xC8: sprintf(direct_string, "T2CON"); break;
-    case 0xC9: sprintf(direct_string, "T2MOD"); break;
-    case 0xCA: sprintf(direct_string, "RCAP2L"); break;
-    case 0xCB: sprintf(direct_string, "RCAP2H"); break;
-    case 0xCC: sprintf(direct_string, "TL2"); break;
-    case 0xCD: sprintf(direct_string, "TH2"); break;
-    case 0xD0: sprintf(direct_string, "PSW"); break;
-    case 0xD5: sprintf(direct_string, "FCNTL"); break;
-    case 0xD6: sprintf(direct_string, "FDATA"); break;
-    case 0xD8: sprintf(direct_string, "WDCON"); break;
-    case 0xE0: sprintf(direct_string, "A"); break;
-    case 0xE8: sprintf(direct_string, "EIE"); break;
-    case 0xF0: sprintf(direct_string, "B"); break;
-    case 0xF1: sprintf(direct_string, "EIP1"); break;
-    case 0xF8: sprintf(direct_string, "EIP0"); break;
-    default:   sprintf(direct_string, "0x%2.2X", direct_byte);
-  } return direct_string;
+// 0x80..0xFF
+char *SFR[256] = {
+  "0x00",
+  "0x01",
+  "0x02",
+  "0x03",
+  "0x04",
+  "0x05",
+  "0x06",
+  "0x07",
+  "0x08",
+  "0x09",
+  "0x0A",
+  "0x0B",
+  "0x0C",
+  "0x0D",
+  "0x0E",
+  "0x0F",
+  "0x10",
+  "0x11",
+  "0x12",
+  "0x13",
+  "0x14",
+  "0x15",
+  "0x16",
+  "0x17",
+  "0x18",
+  "0x19",
+  "0x1A",
+  "0x1B",
+  "0x1C",
+  "0x1D",
+  "0x1E",
+  "0x1F",
+  "0x20",
+  "0x21",
+  "0x22",
+  "0x23",
+  "0x24",
+  "0x25",
+  "0x26",
+  "0x27",
+  "0x28",
+  "0x29",
+  "0x2A",
+  "0x2B",
+  "0x2C",
+  "0x2D",
+  "0x2E",
+  "0x2F",
+  "0x30",
+  "0x31",
+  "0x32",
+  "0x33",
+  "0x34",
+  "0x35",
+  "0x36",
+  "0x37",
+  "0x38",
+  "0x39",
+  "0x3A",
+  "0x3B",
+  "0x3C",
+  "0x3D",
+  "0x3E",
+  "0x3F",
+  "0x40",
+  "0x41",
+  "0x42",
+  "0x43",
+  "0x44",
+  "0x45",
+  "0x46",
+  "0x47",
+  "0x48",
+  "0x49",
+  "0x4A",
+  "0x4B",
+  "0x4C",
+  "0x4D",
+  "0x4E",
+  "0x4F",
+  "0x50",
+  "0x51",
+  "0x52",
+  "0x53",
+  "0x54",
+  "0x55",
+  "0x56",
+  "0x57",
+  "0x58",
+  "0x59",
+  "0x5A",
+  "0x5B",
+  "0x5C",
+  "0x5D",
+  "0x5E",
+  "0x5F",
+  "0x60",
+  "0x61",
+  "0x62",
+  "0x63",
+  "0x64",
+  "0x65",
+  "0x66",
+  "0x67",
+  "0x68",
+  "0x69",
+  "0x6A",
+  "0x6B",
+  "0x6C",
+  "0x6D",
+  "0x6E",
+  "0x6F",
+  "0x70",
+  "0x71",
+  "0x72",
+  "0x73",
+  "0x74",
+  "0x75",
+  "0x76",
+  "0x77",
+  "0x78",
+  "0x79",
+  "0x7A",
+  "0x7B",
+  "0x7C",
+  "0x7D",
+  "0x7E",
+  "0x7F",
+  "P0",
+  "SP",
+  "DPL",
+  "DPH",
+  "DPL1",
+  "DPH1",
+  "DPS",
+  "PCON",
+  "TCON",
+  "TMOD",
+  "TL0",
+  "TL1",
+  "TH0",
+  "TH1",
+  "CKCON",
+  "0x8F",
+  "P1",
+  "EXIF",
+  "0x92",
+  "0x93",
+  "0x94",
+  "0x95",
+  "CKMOD",
+  "0x97",
+  "SCON0",
+  "SBUF0",
+  "0x9A",
+  "0x9B",
+  "0x9C",
+  "ACON",
+  "0x9E",
+  "0x9F",
+  "P2",
+  "0xA1",
+  "0xA2",
+  "0xA3",
+  "0xA4",
+  "0xA5",
+  "0xA6",
+  "0xA7",
+  "IE",
+  "SADDR0",
+  "SADDR1",
+  "0xAB",
+  "0xAC",
+  "0xAD",
+  "0xAE",
+  "0xAF",
+  "P3",
+  "IP1",
+  "0xB2",
+  "0xB3",
+  "0xB4",
+  "0xB5",
+  "0xB6",
+  "0xB7",
+  "IP0",
+  "SADEN0",
+  "SADEN1",
+  "0xBB",
+  "0xBC",
+  "0xBD",
+  "0xBE",
+  "0xBF",
+  "SCON1",
+  "SBUF1",
+  "ROMSIZE",
+  "0xC3",
+  "PMR",
+  "STATUS",
+  "0xC6",
+  "TA",
+  "T2CON",
+  "T2MOD",
+  "RCAP2L",
+  "RCAP2H",
+  "TL2",
+  "TH2",
+  "0xCE",
+  "0xCF",
+  "PSW",
+  "0xD1",
+  "0xD2",
+  "0xD3",
+  "0xD4",
+  "FCNTL",
+  "FDATA",
+  "0xD7",
+  "WDCON",
+  "0xD9",
+  "0xDA",
+  "0xDB",
+  "0xDC",
+  "0xDD",
+  "0xDE",
+  "0xDF",
+  "A",
+  "0xE1",
+  "0xE2",
+  "0xE3",
+  "0xE4",
+  "0xE5",
+  "0xE6",
+  "0xE7",
+  "EIE",
+  "0xE9",
+  "0xEA",
+  "0xEB",
+  "0xEC",
+  "0xED",
+  "0xEE",
+  "0xEF",
+  "B",
+  "EIP1",
+  "0xF2",
+  "0xF3",
+  "0xF4",
+  "0xF5",
+  "0xF6",
+  "0xF7",
+  "EIP0",
+  "0xF9",
+  "0xFA",
+  "0xFB",
+  "0xFC",
+  "0xFD",
+  "0xFE",
+  "0xFF"
+};
+
+void print_direct(unsigned char *bytecode) {
+  printf(instructions[bytecode[0]], bytecode[1]);
 }
 
 /*
