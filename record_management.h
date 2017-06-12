@@ -3,6 +3,7 @@
   #define RECORD_MANAGEMENT_H
   #include "string_management.h"
 
+  void checksum(unsigned char *);
   record *record_reverse_map(record *(*)(record *), record *);
   record *identity(record *);
   record *reverse_records(record *);
