@@ -290,14 +290,14 @@ record *extract_instructions(char *file) {
     size = instruction_size(forward->bytecode[0]);
     if (forward->size != size && forward->mode != END) {
 
-      next = copy_record_from_offset(forward, forward->size - size, size, forward->record);
+      next = copy_record_from_offset(forward, forward->size - size, size, forward->next);
 
       backward = copy_record_from_offset(forward, size, 0, backward);
 
       forward = destroy_record(forward);
     } else {
-      next            = forward->record;
-      forward->record = backward;
+      next            = forward->next;
+      forward->next   = backward;
       backward        = forward;
     }
 

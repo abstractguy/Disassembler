@@ -4,8 +4,8 @@
 record *record_reverse_map(record *(*function)(record *), record *forward) {
   record *current, *backward = NULL;
   while ((current = function(forward))) {
-    forward = current->record;
-    current->record = backward;
+    forward = current->next;
+    current->next = backward;
     backward = current;
   } return backward;
 }
@@ -24,15 +24,15 @@ record *align_instruction(record *forward) {
   record *temporary = NULL;
   unsigned char *bytecode = NULL;
  
-  if (forward->record && (forward->address + forward->size) == forward->record->address) {
+  if (forward->next && (forward->address + forward->size) == forward->next->address) {
  
-    bytecode = create_bytevector(forward->size + forward->record->size);
+    bytecode = create_bytevector(forward->size + forward->next->size);
 
     copy_bytes(bytecode, forward->bytecode, forward->size);
 
-    copy_bytes(&bytecode[forward->size], forward->record->bytecode, forward->record->size);
+    copy_bytes(&bytecode[forward->size], forward->next->bytecode, forward->next->size);
  
-    temporary = create_record(forward->size + forward->record->size, forward->address, forward->mode, bytecode, (unsigned char)(forward->checksum + forward->record->checksum), forward->record->record);
+    temporary = create_record(forward->size + forward->next->size, forward->address, forward->mode, bytecode, (unsigned char)(forward->checksum + forward->next->checksum), forward->next->next);
 
       destroy_bytevector(bytecode);
 

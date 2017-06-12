@@ -54,7 +54,7 @@ record *create_record(unsigned short int size, unsigned short int address, mode 
   copy_bytes(new_record->bytecode, bytecode, size);
 
   new_record->checksum = checksum;
-  new_record->record = old_record;
+  new_record->next = old_record;
 
   return new_record;
 }
@@ -62,7 +62,7 @@ record *create_record(unsigned short int size, unsigned short int address, mode 
 record *destroy_record(record *old_record) {
   record *new_record = NULL;
   if (old_record) {
-    new_record = old_record->record;
+    new_record = old_record->next;
     if (old_record->bytecode) free(old_record->bytecode);
     old_record->bytecode = NULL;
     free(old_record);

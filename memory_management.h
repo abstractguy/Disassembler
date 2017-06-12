@@ -8,7 +8,7 @@
   typedef enum {DATA, END} mode;
 
   typedef struct Record {
-    struct Record *record;
+    struct Record *next;
     unsigned short int size, address;
     unsigned char *bytecode, checksum;
     mode mode;
