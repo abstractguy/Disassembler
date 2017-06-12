@@ -1,7 +1,7 @@
 // record_management.c
 #include "record_management.h"
 
-record *record_map(record *(*function)(record *), record *forward) {
+record *record_reverse_map(record *(*function)(record *), record *forward) {
   record *current, *backward = NULL;
   while ((current = function(forward))) {
     forward = current->record;
@@ -13,42 +13,43 @@ record *record_map(record *(*function)(record *), record *forward) {
 record *identity(record *record) {return record;}
  
 record *reverse_records(record *record) {
-  return record_map(identity, record);
+  return record_reverse_map(identity, record);
 }
 
 record *copy_record_from_offset(record *records, unsigned short int size, unsigned short int offset, record *next) {
   return create_record(size, records->address + offset, records->mode, &records->bytecode[offset], records->checksum, next);
 }
 
-record *align_instructions(record *forward) {
-  record *temporary = NULL, *backward = NULL;
+record *align_instruction(record *forward) {
+  record *temporary = NULL;
   unsigned char *bytecode = NULL;
  
-  while (forward) {
-    if (forward->record && (forward->address + forward->size) == forward->record->address) {
+  if (forward->record && (forward->address + forward->size) == forward->record->address) {
+ 
+    bytecode = create_bytevector(forward->size + forward->record->size);
 
-      bytecode = create_bytevector(forward->size + forward->record->size);
+    copy_bytes(bytecode, forward->bytecode, forward->size);
 
-      copy_bytes(bytecode, forward->bytecode, forward->size);
-      copy_bytes(&bytecode[forward->size], forward->record->bytecode, forward->record->size);
-
-      temporary = create_record(forward->size + forward->record->size, forward->address, forward->mode, bytecode, (unsigned char)(forward->checksum + forward->record->checksum), forward->record->record);
+    copy_bytes(&bytecode[forward->size], forward->record->bytecode, forward->record->size);
+ 
+    temporary = create_record(forward->size + forward->record->size, forward->address, forward->mode, bytecode, (unsigned char)(forward->checksum + forward->record->checksum), forward->record->record);
 
       destroy_bytevector(bytecode);
 
       forward = destroy_record(destroy_record(forward));
-      forward = temporary;
-
-    } else {
-
-      if (forward->size) {
-        backward = create_record(forward->size, forward->address, forward->mode, forward->bytecode, forward->checksum, backward);
-      }
-      forward = destroy_record(forward);
-    }
-  } return reverse_records(backward);
+ 
+      return align_instruction(temporary);
+  } else {
+    if (!forward->size) forward = destroy_record(forward);
+    return forward;
+  }
 }
  
+record *align_instructions(record *forward) {
+  return reverse_records(record_reverse_map(align_instruction, forward));
+}
+
+
 extern record *hex_file_to_records(char *file) {
   record *records = NULL;
   unsigned short int i, size = 0, substring_size;
