@@ -41,27 +41,3 @@ void destroy_strings(char **strings, unsigned short int size) {
     free(strings);
   }
 }
-
-record *create_record(unsigned short int size, unsigned short int address, mode mode, unsigned char *bytecode, record *old_record) {
-  record *new_record = NULL;
-  assert(new_record = malloc(sizeof(record)));
-
-  new_record->size     = size;
-  new_record->address  = address;
-  new_record->mode     = mode;
-  new_record->bytecode = bytecode;
-  new_record->next     = old_record;
-
-  return new_record;
-}
-
-record *destroy_record(record *old_record) {
-  record *new_record = NULL;
-  if (old_record) {
-    new_record = old_record->next;
-    if (old_record->bytecode) free(old_record->bytecode);
-    old_record->bytecode = NULL;
-    free(old_record);
-    old_record = NULL;
-  } return new_record;
-}

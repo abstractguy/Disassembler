@@ -664,8 +664,7 @@ static unsigned short int addr11_to_addr16(record *record) {
 }
 
 extern void print_instruction(record *records) {
-  unsigned char *bytecode = records->bytecode, instruction;
-  instruction = bytecode[0];
+  unsigned char *bytecode = records->bytecode;
   printf("0x%4.4X\t", records->address);
 
   for (unsigned short int i = 0; i < 4; i++) {
@@ -675,33 +674,33 @@ extern void print_instruction(record *records) {
 
   switch (instruction_types[(unsigned char)records->bytecode[0]]) {
     case ONE_BYTE_INSTRUCTION:
-      printf(instructions[instruction]);
+      printf(instructions[bytecode[0]]);
       break;
     case ADDR_11:
-      printf(instructions[instruction], addr11_to_addr16(records));
+      printf(instructions[bytecode[0]], addr11_to_addr16(records));
       break;
     case DIRECT:
-      printf(instructions[instruction], SFR[bytecode[1]]);
+      printf(instructions[bytecode[0]], SFR[bytecode[1]]);
       break;
     case IMMEDIATE:
     case OFFSET:
     case BIT:
     case NOT_BIT:
-      printf(instructions[instruction], bytecode[1]);
+      printf(instructions[bytecode[0]], bytecode[1]);
       break;
     case ADDR_16:
     case IMMEDIATE_16:
-      printf(instructions[instruction], bytes_to_word(bytecode[1], bytecode[2]));
+      printf(instructions[bytecode[0]], bytes_to_word(bytecode[1], bytecode[2]));
       break;
     case BIT_OFFSET:
-      printf(instructions[instruction], bytecode[1], bytecode[2]);
+      printf(instructions[bytecode[0]], bytecode[1], bytecode[2]);
       break;
     case DIRECT_DIRECT:
-      printf(instructions[instruction], SFR[bytecode[1]], SFR[bytecode[2]]);
+      printf(instructions[bytecode[0]], SFR[bytecode[1]], SFR[bytecode[2]]);
       break;
     case DIRECT_IMMEDIATE:
     case IMMEDIATE_OFFSET:
     case DIRECT_OFFSET:
-      printf(instructions[instruction], SFR[bytecode[1]], bytecode[2]);
+      printf(instructions[bytecode[0]], SFR[bytecode[1]], bytecode[2]);
   }
 }

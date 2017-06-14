@@ -280,22 +280,3 @@ unsigned char instruction_size(unsigned char bytecode) {
     default: return 0;
   }
 }
-
-record *extract_instruction(record *forward) {
-  record *backward = NULL;
-  unsigned char size;
-
-  if (forward) {
-    size = instruction_size(forward->bytecode[0]);
-    if (forward->size != size && forward->mode != END) {
-      backward = copy_record_from_offset(forward, size, 0, copy_record_from_offset(forward, forward->size - size, size, forward->next));
-      forward = destroy_record(forward);
-      forward = backward;
-    }
-  }
-  return forward;
-}
- 
-record *extract_instructions(char *file) {
-  return reverse_records(record_reverse_for_each(extract_instruction, align_instructions(hex_file_to_records(file))));
-}
