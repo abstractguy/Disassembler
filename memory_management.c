@@ -42,7 +42,7 @@ void destroy_strings(char **strings, unsigned short int size) {
   }
 }
 
-record *create_record(unsigned short int size, unsigned short int address, mode mode, unsigned char *bytecode, unsigned char checksum, record *old_record) {
+record *create_record(unsigned short int size, unsigned short int address, mode mode, unsigned char *bytecode, record *old_record) {
   record *new_record = NULL;
   assert(new_record = malloc(sizeof(record)));
 
@@ -55,7 +55,6 @@ record *create_record(unsigned short int size, unsigned short int address, mode 
 
   new_record->bytecode = bytecode;
 
-  new_record->checksum = checksum;
   new_record->next = old_record;
 
   return new_record;

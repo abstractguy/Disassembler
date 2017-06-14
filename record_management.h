@@ -3,9 +3,7 @@
   #define RECORD_MANAGEMENT_H
   #include "string_management.h"
 
-  record *record_fold(record *(*)(record *, record *), record *(*)(record *), record *, record *);
   record *record_reverse_for_each(record *(*)(record *), record *);
-  record *record_reverse_map(record *(*)(record *), record *);
   record *identity(record *);
   record *reverse_records(record *);
 

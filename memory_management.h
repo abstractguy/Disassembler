@@ -10,7 +10,7 @@
   typedef struct Record {
     struct Record *next;
     unsigned short int size, address;
-    unsigned char *bytecode, checksum;
+    unsigned char *bytecode;
     mode mode;
   } record;
 
@@ -24,6 +24,6 @@
   char **create_strings(unsigned short int);
   void destroy_strings(char **, unsigned short int);
 
-  record *create_record(unsigned short int, unsigned short int, mode, unsigned char *, unsigned char, record *);
+  record *create_record(unsigned short int, unsigned short int, mode, unsigned char *, record *);
   record *destroy_record(record *);
 #endif

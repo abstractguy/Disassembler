@@ -1,18 +1,6 @@
 // record_management.c
 #include "record_management.h"
 
-/*
-record *record_unfold_right(record *(*predicate)(record *), record *(*function)(record *), record *(*iterator)(record *), record *seed, record *tail) {
-  record *current = NULL;
-
-  if (predicate(seed)) return tail;
-  else {
-    current = function(seed);
-    return record_unfold_right(predicate, function, iterator, iterator(seed), 
-  }
-}
-*/
-
 record *record_fold(record *(*function)(record *, record *), record *(*iterator)(record *), record *accumulator, record *records) {
   record *current = NULL;
   if (records) {
@@ -30,18 +18,6 @@ record *record_reverse_for_each(record *(*function)(record *), record *forward) 
   } return backward;
 }
 
-/*
-record *record_reverse_map(record *(*function)(record *), record *forward) {
-  record *current, *backward = NULL;
-  while ((current = forward)) {
-    forward = forward->next;
-    current = function(current);
-    current->next = backward;
-    backward = current;
-  } return backward;
-}
-*/
-
 record *identity(record *record) {return record;}
  
 record *reverse_records(record *record) {
@@ -51,7 +27,7 @@ record *reverse_records(record *record) {
 record *copy_record_from_offset(record *records, unsigned short int size, unsigned short int offset, record *next) {
   unsigned char *bytecode = create_bytevector(size);
   copy_bytes(bytecode, &records->bytecode[offset], size);
-  return create_record(size, records->address + offset, records->mode, bytecode, records->checksum, next);
+  return create_record(size, records->address + offset, records->mode, bytecode, next);
 }
 
 record *align_instruction(record *forward) {
@@ -66,7 +42,7 @@ record *align_instruction(record *forward) {
 
     copy_bytes(&bytecode[forward->size], forward->next->bytecode, forward->next->size);
  
-    temporary = create_record(forward->size + forward->next->size, forward->address, forward->mode, bytecode, (unsigned char)(forward->checksum + forward->next->checksum), forward->next->next);
+    temporary = create_record(forward->size + forward->next->size, forward->address, forward->mode, bytecode, forward->next->next);
 
       forward = destroy_record(destroy_record(forward));
  
@@ -114,7 +90,7 @@ extern record *hex_file_to_records(char *file) {
 
     copy_bytes(new_bytevector, &bytevector[4], bytevector[0]);
 
-    records = create_record((unsigned short int)bytevector[0], bytes_to_word(bytevector[1], bytevector[2]), bytevector[3], new_bytevector, bytevector[bytevector[0] + 4], records);
+    records = create_record((unsigned short int)bytevector[0], bytes_to_word(bytevector[1], bytevector[2]), bytevector[3], new_bytevector, records);
 
     destroy_bytevector(bytevector);
   }
