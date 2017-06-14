@@ -17,7 +17,8 @@
 
   record *record_reverse_for_each(record *(*)(record *), record *);
   record *identity(record *);
-  record *reverse_records(record *);
+  record *record_for_each(record *(*)(record *), record *);
+  //record *reverse_records(record *);
 
   record *copy_record_from_offset(record *, unsigned short int, unsigned short int, record *);
 #endif

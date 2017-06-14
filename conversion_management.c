@@ -91,8 +91,8 @@ record *align_instruction(record *forward) {
   }
 }
 
-record *align_instructions(record *forward) {
-  return reverse_records(record_reverse_for_each(align_instruction, forward));
+record *align_instructions(record *record) {
+  return record_for_each(align_instruction, record);
 }
 
 record *extract_instruction(record *forward) {
@@ -106,10 +106,9 @@ record *extract_instruction(record *forward) {
       forward = destroy_record(forward);
       forward = backward;
     }
-  }
-  return forward;
+  } return forward;
 }
  
 record *extract_instructions(char *file) {
-  return reverse_records(record_reverse_for_each(extract_instruction, align_instructions(hex_file_to_records(file))));
+  return record_for_each(extract_instruction, align_instructions(hex_file_to_records(file)));
 }

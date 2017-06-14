@@ -35,9 +35,15 @@ record *record_reverse_for_each(record *(*function)(record *), record *forward) 
 }
 
 record *identity(record *record) {return record;}
- 
-record *reverse_records(record *record) {
+
+/* 
+record *record_reverse(record *record) {
   return record_reverse_for_each(identity, record);
+}
+*/
+
+record *record_for_each(record *(*function)(record *), record *record) {
+  return record_reverse_for_each(identity, record_reverse_for_each(function, record));
 }
 
 record *copy_record_from_offset(record *records, unsigned short int size, unsigned short int offset, record *next) {
