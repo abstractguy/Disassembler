@@ -1,7 +1,7 @@
 // conversion_management.c
 #include "conversion_management.h"
 
-void checksum(unsigned char *bytevector) {
+static void checksum(unsigned char *bytevector) {
   unsigned char size = bytevector[0] + 4, sum = 0;
   if (!bytevector[3]) {
     for (unsigned char i = 0; i < size; i++) {
@@ -10,7 +10,7 @@ void checksum(unsigned char *bytevector) {
   }
 }
 
-char **string_separate(char *string, char *delimiters) {
+static char **string_separate(char *string, char *delimiters) {
   char *token = NULL, **strings = create_strings(char_count(string, ':'));
 
   if ((token = strtok(string, delimiters))) {
@@ -27,7 +27,7 @@ unsigned short int char_count(char *string, char character) {
   } return size;
 }
  
-unsigned char ASCII_to_byte(char *ASCII) {
+static unsigned char ASCII_to_byte(char *ASCII) {
   char *string = (char *)create_bytevector(3);
   unsigned char byte;
   //copy_bytes((unsigned char *)string, (unsigned char *)ASCII, 3);
@@ -37,7 +37,7 @@ unsigned char ASCII_to_byte(char *ASCII) {
   return byte;
 }
 
-record *hex_file_to_records(char *file) {
+extern record *hex_file_to_records(char *file) {
   record *records = NULL;
   unsigned short int i, size = 0, substring_size;
   unsigned char *bytevector = NULL, *new_bytevector = NULL, file_checksum = 0;
@@ -74,7 +74,7 @@ record *hex_file_to_records(char *file) {
   return records;
 }
 
-record *align_instruction(record *forward) {
+static record *align_instruction(record *forward) {
   record *temporary = NULL;
   unsigned char *bytecode = NULL;
  
@@ -91,11 +91,11 @@ record *align_instruction(record *forward) {
   }
 }
 
-record *align_instructions(record *record) {
-  return record_for_each(align_instruction, record);
+record *align_instructions(record *records) {
+  return record_for_each(align_instruction, records);
 }
 
-record *extract_instruction(record *forward) {
+static record *extract_instruction(record *forward) {
   record *backward = NULL;
   unsigned char size;
 
@@ -109,6 +109,6 @@ record *extract_instruction(record *forward) {
   } return forward;
 }
  
-record *extract_instructions(char *file) {
-  return record_for_each(extract_instruction, align_instructions(hex_file_to_records(file)));
+record *extract_instructions(record *records) {
+  return record_for_each(extract_instruction, records);
 }

@@ -25,7 +25,7 @@ record *destroy_record(record *old_record) {
   } return new_record;
 }
 
-record *record_reverse_for_each(record *(*function)(record *), record *forward) {
+static record *record_reverse_for_each(record *(*function)(record *), record *forward) {
   record *current, *backward = NULL;
   while ((current = function(forward))) {
     forward = current->next;
@@ -34,13 +34,7 @@ record *record_reverse_for_each(record *(*function)(record *), record *forward) 
   } return backward;
 }
 
-record *identity(record *record) {return record;}
-
-/* 
-record *record_reverse(record *record) {
-  return record_reverse_for_each(identity, record);
-}
-*/
+static record *identity(record *record) {return record;}
 
 record *record_for_each(record *(*function)(record *), record *record) {
   return record_reverse_for_each(identity, record_reverse_for_each(function, record));

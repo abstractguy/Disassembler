@@ -663,7 +663,7 @@ static unsigned short int addr11_to_addr16(record *record) {
   return ((record->address + 2) & 0xF800) + ((record->bytecode[0] & 0x00E0) << 3) + record->bytecode[1];
 }
 
-extern void print_instruction(record *records) {
+void print_instruction(record *records) {
   unsigned char *bytecode = records->bytecode;
   printf("0x%4.4X\t", records->address);
 
