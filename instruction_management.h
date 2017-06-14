@@ -11,5 +11,6 @@
 
   instruction_type instruction_types[256];
   unsigned char instruction_size(unsigned char);
-  extern record *extract_instructions(char *);
+  record *extract_instruction(record *);
+  record *extract_instructions(char *);
 #endif

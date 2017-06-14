@@ -281,28 +281,21 @@ unsigned char instruction_size(unsigned char bytecode) {
   }
 }
 
-record *extract_instructions(char *file) {
-  record *forward  = align_instructions(hex_file_to_records(file));
-  record *backward = NULL, *next = NULL;
+record *extract_instruction(record *forward) {
+  record *backward = NULL;
   unsigned char size;
 
-  while (forward) {
+  if (forward) {
     size = instruction_size(forward->bytecode[0]);
     if (forward->size != size && forward->mode != END) {
-
-      next = copy_record_from_offset(forward, forward->size - size, size, forward->next);
-
-      backward = copy_record_from_offset(forward, size, 0, backward);
-
+      backward = copy_record_from_offset(forward, size, 0, copy_record_from_offset(forward, forward->size - size, size, forward->next));
       forward = destroy_record(forward);
-    } else {
-      next            = forward->next;
-      forward->next   = backward;
-      backward        = forward;
+      forward = backward;
     }
-
-    forward = next;
   }
-
-  return reverse_records(backward);
+  return forward;
+}
+ 
+record *extract_instructions(char *file) {
+  return reverse_records(record_reverse_for_each(extract_instruction, align_instructions(hex_file_to_records(file))));
 }

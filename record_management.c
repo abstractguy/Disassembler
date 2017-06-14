@@ -1,14 +1,6 @@
 // record_management.c
 #include "record_management.h"
 
-record *record_fold(record *(*function)(record *, record *), record *(*iterator)(record *), record *accumulator, record *records) {
-  record *current = NULL;
-  if (records) {
-    current = function(accumulator, records);
-    return record_fold(function, iterator, current, iterator(current));
-  } else return accumulator;
-}
-
 record *record_reverse_for_each(record *(*function)(record *), record *forward) {
   record *current, *backward = NULL;
   while ((current = function(forward))) {
