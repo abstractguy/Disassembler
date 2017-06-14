@@ -46,16 +46,11 @@ record *create_record(unsigned short int size, unsigned short int address, mode 
   record *new_record = NULL;
   assert(new_record = malloc(sizeof(record)));
 
-  new_record->size = size;
-  new_record->address = address;
-  new_record->mode = mode;
-
-  //new_record->bytecode = create_bytevector(size);
-  //copy_bytes(new_record->bytecode, bytecode, size);
-
+  new_record->size     = size;
+  new_record->address  = address;
+  new_record->mode     = mode;
   new_record->bytecode = bytecode;
-
-  new_record->next = old_record;
+  new_record->next     = old_record;
 
   return new_record;
 }

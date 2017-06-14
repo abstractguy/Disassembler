@@ -520,18 +520,6 @@ char *SFR[256] = {
   "0xFF"
 };
 
-void print_direct(unsigned char *bytecode) {
-  printf(instructions[bytecode[0]], SFR[bytecode[1]]);
-}
-
-void print_direct_first(unsigned char *bytecode) {
-  printf(instructions[bytecode[0]], SFR[bytecode[1]], bytecode[2]);
-}
-
-void print_direct_twice(unsigned char *bytecode) {
-  printf(instructions[bytecode[0]], SFR[bytecode[1]], SFR[bytecode[2]]);
-}
-
 /*
 // BIT Registers
 
@@ -693,7 +681,7 @@ extern void print_instruction(record *records) {
       printf(instructions[instruction], addr11_to_addr16(records));
       break;
     case DIRECT:
-      print_direct(bytecode);
+      printf(instructions[instruction], SFR[bytecode[1]]);
       break;
     case IMMEDIATE:
     case OFFSET:
@@ -705,13 +693,15 @@ extern void print_instruction(record *records) {
     case IMMEDIATE_16:
       printf(instructions[instruction], bytes_to_word(bytecode[1], bytecode[2]));
       break;
-    case DIRECT_DIRECT:
-      print_direct_twice(bytecode);
-      break;
     case BIT_OFFSET:
+      printf(instructions[instruction], bytecode[1], bytecode[2]);
+      break;
+    case DIRECT_DIRECT:
+      printf(instructions[instruction], SFR[bytecode[1]], SFR[bytecode[2]]);
+      break;
     case DIRECT_IMMEDIATE:
     case IMMEDIATE_OFFSET:
     case DIRECT_OFFSET:
-      print_direct_first(bytecode);
+      printf(instructions[instruction], SFR[bytecode[1]], bytecode[2]);
   }
 }
