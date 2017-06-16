@@ -1,11 +1,14 @@
 // conversion_management.c
 #include "conversion_management.h"
 
-static unsigned char checksum(unsigned char *bytevector) {
+static void checksum(unsigned char *bytevector, unsigned char file_checksum) {
   unsigned char size = bytevector[0] + 4, sum = 0;
-  for (unsigned char i = 0; i < size; i++) {
-    sum = (unsigned char)(sum + bytevector[i]) % 256;
-  } return !((unsigned char)(~sum + 1) - bytevector[size]);
+  if (bytevector[3]) assert(!(file_checksum - RECORD_CHECKSUM));
+  else {
+    for (unsigned char i = 0; i < size; i++) {
+      sum = (unsigned char)(sum + bytevector[i]) % 256;
+    } assert(!((unsigned char)(~sum + 1) - bytevector[size]));
+  }
 }
 
 static char **string_separate(char *string, char *delimiters) {
@@ -61,8 +64,7 @@ extern record *hex_file_to_records(char *file) {
       bytevector[j] = ASCII_to_byte(&strings[i][j * 2]);
     }
 
-    file_checksum += RECORD_CHECKSUM;
-    assert((bytevector[3] && !(file_checksum - RECORD_CHECKSUM)) || checksum(bytevector));
+    checksum(bytevector, file_checksum += RECORD_CHECKSUM);
 
     new_bytevector = create_bytevector(bytevector[0]);
     copy_bytes(new_bytevector, &bytevector[4], bytevector[0]);
@@ -84,11 +86,10 @@ record *align_instruction(record *forward) {
     copy_bytes(&bytecode[forward->size], forward->next->bytecode, forward->next->size);
     temporary = create_record(forward->size + forward->next->size, forward->address, forward->mode, bytecode, forward->next->next);
     forward = destroy_record(destroy_record(forward));
-    return align_instruction(temporary);
-  } else {
-    if (!forward->size) forward = destroy_record(forward);
-    return forward;
-  }
+    forward = align_instruction(temporary);
+  } else if (!forward->size) forward = destroy_record(forward);
+
+  return forward;
 }
 
 record *extract_instruction(record *forward) {
