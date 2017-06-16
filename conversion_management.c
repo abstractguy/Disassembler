@@ -6,7 +6,7 @@ static void checksum(unsigned char *bytevector, unsigned char file_checksum) {
   if (bytevector[3]) assert(!(file_checksum - RECORD_CHECKSUM));
   else {
     for (unsigned char i = 0; i < size; i++) {
-      sum = (unsigned char)(sum + bytevector[i]) % 256;
+      sum = (unsigned char)(sum + bytevector[i]);
     } assert(!((unsigned char)(~sum + 1) - bytevector[size]));
   }
 }
