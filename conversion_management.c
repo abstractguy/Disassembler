@@ -57,16 +57,14 @@ extern record *hex_file_to_records(char *file) {
       bytevector[j] = ASCII_to_byte(&strings[i][j * 2]);
     }
 
-    file_checksum += (unsigned char)bytevector[bytevector[0] + 4];
+    file_checksum += RECORD_CHECKSUM;
     if (bytevector[3]) {
-      assert(!((unsigned char)file_checksum - bytevector[bytevector[0] + 4]));
+      assert(!(file_checksum - RECORD_CHECKSUM));
     } checksum(bytevector);
 
     new_bytevector = create_bytevector(bytevector[0]);
     copy_bytes(new_bytevector, &bytevector[4], bytevector[0]);
-
     records = create_record((unsigned short int)bytevector[0], bytes_to_word(bytevector[1], bytevector[2]), bytevector[3], new_bytevector, records);
-
     destroy_bytevector(bytevector);
   }
  
@@ -74,7 +72,7 @@ extern record *hex_file_to_records(char *file) {
   return records;
 }
 
-static record *align_instruction(record *forward) {
+record *align_instruction(record *forward) {
   record *temporary = NULL;
   unsigned char *bytecode = NULL;
  
@@ -91,11 +89,7 @@ static record *align_instruction(record *forward) {
   }
 }
 
-record *align_instructions(record *records) {
-  return record_for_each(align_instruction, records);
-}
-
-static record *extract_instruction(record *forward) {
+record *extract_instruction(record *forward) {
   record *backward = NULL;
   unsigned char size;
 
@@ -107,8 +101,4 @@ static record *extract_instruction(record *forward) {
       forward = backward;
     }
   } return forward;
-}
- 
-record *extract_instructions(record *records) {
-  return record_for_each(extract_instruction, records);
 }
