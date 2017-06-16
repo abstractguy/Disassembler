@@ -30,11 +30,17 @@ unsigned short int char_count(char *string, char character) {
 static unsigned char ASCII_to_byte(char *ASCII) {
   char *string = (char *)create_bytevector(3);
   unsigned char byte;
-  //copy_bytes((unsigned char *)string, (unsigned char *)ASCII, 3);
-  strncpy(string, ASCII, 2);
+  string[2] = '\0';
+  copy_bytes((unsigned char *)string, (unsigned char *)ASCII, 2);
   byte = (unsigned char)strtoul(string, NULL, 16);
   destroy_bytevector((unsigned char *)string);
   return byte;
+}
+
+static record *copy_record_from_offset(record *records, unsigned short int size, unsigned short int offset, record *next) {
+  unsigned char *bytecode = create_bytevector(size);
+  copy_bytes(bytecode, &records->bytecode[offset], size);
+  return create_record(size, records->address + offset, records->mode, bytecode, next);
 }
 
 extern record *hex_file_to_records(char *file) {

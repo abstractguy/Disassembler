@@ -39,9 +39,3 @@ static record *identity(record *record) {return record;}
 record *record_for_each(record *(*function)(record *), record *record) {
   return record_reverse_for_each(identity, record_reverse_for_each(function, record));
 }
-
-record *copy_record_from_offset(record *records, unsigned short int size, unsigned short int offset, record *next) {
-  unsigned char *bytecode = create_bytevector(size);
-  copy_bytes(bytecode, &records->bytecode[offset], size);
-  return create_record(size, records->address + offset, records->mode, bytecode, next);
-}
