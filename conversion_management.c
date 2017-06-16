@@ -1,13 +1,11 @@
 // conversion_management.c
 #include "conversion_management.h"
 
-static void checksum(unsigned char *bytevector) {
+static unsigned char checksum(unsigned char *bytevector) {
   unsigned char size = bytevector[0] + 4, sum = 0;
-  if (!bytevector[3]) {
-    for (unsigned char i = 0; i < size; i++) {
-      sum = (unsigned char)(sum + bytevector[i]) % 256;
-    } assert(!((unsigned char)(~sum + 1) - bytevector[size]));
-  }
+  for (unsigned char i = 0; i < size; i++) {
+    sum = (unsigned char)(sum + bytevector[i]) % 256;
+  } return !((unsigned char)(~sum + 1) - bytevector[size]);
 }
 
 static char **string_separate(char *string, char *delimiters) {
@@ -64,9 +62,7 @@ extern record *hex_file_to_records(char *file) {
     }
 
     file_checksum += RECORD_CHECKSUM;
-    if (bytevector[3]) {
-      assert(!(file_checksum - RECORD_CHECKSUM));
-    } checksum(bytevector);
+    assert((bytevector[3] && !(file_checksum - RECORD_CHECKSUM)) || checksum(bytevector));
 
     new_bytevector = create_bytevector(bytevector[0]);
     copy_bytes(new_bytevector, &bytevector[4], bytevector[0]);
