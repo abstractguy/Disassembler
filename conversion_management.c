@@ -11,6 +11,17 @@ static void checksum(unsigned char *bytevector, unsigned char file_checksum) {
   }
 }
 
+static unsigned char *string_to_bytevector(char *string) {
+  unsigned char substring_size = strlen(string) / 2, *bytevector = NULL;
+  bytevector = create_bytevector(substring_size);
+
+  for (unsigned short int i = 0; i < substring_size; i++) {
+    bytevector[i] = ASCII_to_byte(&string[i * 2]);
+  }
+
+  return bytevector;
+}
+
 static char **string_separate(char *string, char *delimiters) {
   char *token = NULL, **strings = create_strings(char_count(string, ':'));
 
@@ -28,7 +39,7 @@ unsigned short int char_count(char *string, char character) {
   } return size;
 }
  
-static unsigned char ASCII_to_byte(char *ASCII) {
+unsigned char ASCII_to_byte(char *ASCII) {
   char *string = (char *)create_bytevector(3);
   unsigned char byte;
   string[2] = '\0';
@@ -46,7 +57,7 @@ static record *copy_record_from_offset(record *records, unsigned short int size,
 
 extern record *hex_file_to_records(char *file) {
   record *records = NULL;
-  unsigned short int i, size = 0, substring_size;
+  unsigned short int i, size = 0;
   unsigned char *bytevector = NULL, *new_bytevector = NULL, file_checksum = 0;
   char *array = NULL, **strings = NULL;
  
@@ -57,12 +68,7 @@ extern record *hex_file_to_records(char *file) {
   destroy_bytevector((unsigned char *)array);
  
   while (i--) {
-    substring_size = strlen(strings[i]) / 2;
-    bytevector     = create_bytevector(substring_size);
- 
-    for (unsigned short int j = 0; j < substring_size; j++) {
-      bytevector[j] = ASCII_to_byte(&strings[i][j * 2]);
-    }
+    bytevector = string_to_bytevector(strings[i]);
 
     checksum(bytevector, file_checksum += RECORD_CHECKSUM);
 

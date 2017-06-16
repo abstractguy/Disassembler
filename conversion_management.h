@@ -7,6 +7,7 @@
 
   #define RECORD_CHECKSUM (unsigned char)bytevector[bytevector[0] + 4]
 
+  unsigned char ASCII_to_byte(char *);
   unsigned short int char_count(char *, char);
 
   extern record *hex_file_to_records(char *);
