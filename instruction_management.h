@@ -12,6 +12,7 @@
 
   char *instructions[256];
   instruction_type instruction_types[256];
+  unsigned short int bytes_to_word(unsigned char, unsigned char);
   unsigned char instruction_size(unsigned char);
   void print_instruction(record *);
 #endif

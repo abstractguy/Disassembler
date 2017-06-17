@@ -939,6 +939,10 @@ sbit at 0xFB LPX5;
 sbit at 0xFC LPWDI;
 */
 
+unsigned short int bytes_to_word(unsigned char byte1, unsigned char byte0) {
+  return ((unsigned short int)byte1 << 8) + (unsigned short int)byte0;
+}
+
 static unsigned short int addr11_to_addr16(record *record) {
   return ((record->address + 2) & 0xF800) + ((record->bytecode[0] & 0x00E0) << 3) + record->bytecode[1];
 }
