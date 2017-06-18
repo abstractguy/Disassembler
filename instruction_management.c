@@ -298,7 +298,7 @@ char *instructions[256] = {
   "INC\t\tR5\n",
   "INC\t\tR6\n",
   "INC\t\tR7\n",
-  "JBC\t\t0x%2.2X,\t0x%2.2X\n",
+  "JBC\t\t%s,\t0x%2.2X\n",
   "ACALL\t0x%4.4X\n",
   "LCALL\t0x%4.4X\n",
   "RRC\t\tA\n",
@@ -314,7 +314,7 @@ char *instructions[256] = {
   "DEC\t\tR5\n",
   "DEC\t\tR6\n",
   "DEC\t\tR7\n",
-  "JB\t\t0x%2.2X,\t0x%2.2X\n",
+  "JB\t\t%s,\t0x%2.2X\n",
   "AJMP\t0x%4.4X\n",
   "RET\n\n",
   "RL\t\tA\n",
@@ -330,7 +330,7 @@ char *instructions[256] = {
   "ADD\t\tA,\tR5\n",
   "ADD\t\tA,\tR6\n",
   "ADD\t\tA,\tR7\n",
-  "JNB\t\t0x%2.2X,\t0x%2.2X\n",
+  "JNB\t\t%s,\t0x%2.2X\n",
   "ACALL\t0x%4.4X\n",
   "RETI\n\n",
   "RLC\t\tA\n",
@@ -396,7 +396,7 @@ char *instructions[256] = {
   "XRL\t\tA,\tR7\n",
   "JNZ\t\t0x%2.2X\n",
   "ACALL\t0x%4.4X\n",
-  "ORL\t\tC,\t0x%2.2X\n",
+  "ORL\t\tC,\t%s\n",
   "JMP\t\t@A+DPTR\n",
   "MOV\t\tA,\t0x%2.2X\n",
   "MOV\t\t%s,\t0x%2.2X\n",
@@ -412,7 +412,7 @@ char *instructions[256] = {
   "MOV\t\tR7,\t0x%2.2X\n",
   "SJMP\t0x%2.2X\n",
   "AJMP\t0x%4.4X\n",
-  "ANL\t\tC,\t0x%2.2X\n",
+  "ANL\t\tC,\t%s\n",
   "MOVC\tA,\t@A+PC\n",
   "DIV\t\tA,\tB\n",
   "MOV\t\t%s,\t%s\n",
@@ -428,7 +428,7 @@ char *instructions[256] = {
   "MOV\t\t%s,\tR7\n",
   "MOV\t\tDPTR,\t0x%4.4X\n",
   "ACALL\t0x%4.4X\n",
-  "MOV\t\t0x%2.2X,\tC\n",
+  "MOV\t\t%s,\tC\n",
   "MOVC\tA,\t@A+DPTR\n",
   "SUBB\tA,\t0x%2.2X\n",
   "SUBB\tA,\t%s\n",
@@ -442,9 +442,9 @@ char *instructions[256] = {
   "SUBB\tA,\tR5\n",
   "SUBB\tA,\tR6\n",
   "SUBB\tA,\tR7\n",
-  "ORL\t\tC,\t/0x%2.2X\n",
+  "ORL\t\tC,\t/%s\n",
   "AJMP\t0x%4.4X\n",
-  "MOV\t\tC,\t0x%2.2X\n",
+  "MOV\t\tC,\t%s\n",
   "INC\t\tDPTR\n",
   "MUL\t\tA,\tB\n",
   "RESERVED\n",
@@ -458,9 +458,9 @@ char *instructions[256] = {
   "MOV\t\tR5,\t%s\n",
   "MOV\t\tR6,\t%s\n",
   "MOV\t\tR7,\t%s\n",
-  "ANL\t\tC,\t/0x%2.2X\n",
+  "ANL\t\tC,\t/%s\n",
   "ACALL\t0x%4.4X\n",
-  "CPL\t\t0x%2.2X\n",
+  "CPL\t\t%s\n",
   "CPL\t\tC\n",
   "CJNE\tA,\t0x%2.2X,\t0x%2.2X\n",
   "CJNE\tA,\t%s,\t0x%2.2X\n",
@@ -476,7 +476,7 @@ char *instructions[256] = {
   "CJNE R7,\t0x%2.2X,\t0x%2.2X\n",
   "PUSH\t%s\n",
   "AJMP\t0x%4.4X\n",
-  "CLR\t\t0x%2.2X\n",
+  "CLR\t\t%s\n",
   "CLR\t\tC\n",
   "SWAP\tA\n",
   "XCH\t\tA,\t%s\n",
@@ -492,7 +492,7 @@ char *instructions[256] = {
   "XCH\t\tA,\tR7\n",
   "POP\t\t%s\n",
   "ACALL\t0x%4.4X\n",
-  "SETB\t0x%2.2X\n",
+  "SETB\t%s\n",
   "SETB\tC\n",
   "DA\t\tA\n",
   "DJNZ\t%s,\t0x%2.2X\n",
@@ -1122,16 +1122,18 @@ void print_instruction(record *records) {
       break;
     case IMMEDIATE:
     case OFFSET:
+      printf(instructions[bytecode[0]], bytecode[1]);
+      break;
     case BIT:
     case NOT_BIT:
-      printf(instructions[bytecode[0]], bytecode[1]);
+      printf(instructions[bytecode[0]], SBIT[bytecode[1]]);
       break;
     case ADDR_16:
     case IMMEDIATE_16:
       printf(instructions[bytecode[0]], bytes_to_word(bytecode[1], bytecode[2]));
       break;
     case BIT_OFFSET:
-      printf(instructions[bytecode[0]], bytecode[1], bytecode[2]);
+      printf(instructions[bytecode[0]], SBIT[bytecode[1]], bytecode[2]);
       break;
     case DIRECT_DIRECT:
       printf(instructions[bytecode[0]], SFR[bytecode[1]], SFR[bytecode[2]]);
