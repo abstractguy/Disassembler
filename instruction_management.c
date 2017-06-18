@@ -800,144 +800,298 @@ char *SFR[256] = {
   "0xFF"
 };
 
-/*
 // BIT Registers
+// 0x80..0xFF
+char *SBIT[256] = {
+  "0x00",
+  "0x01",
+  "0x02",
+  "0x03",
+  "0x04",
+  "0x05",
+  "0x06",
+  "0x07",
+  "0x08",
+  "0x09",
+  "0x0A",
+  "0x0B",
+  "0x0C",
+  "0x0D",
+  "0x0E",
+  "0x0F",
+  "0x10",
+  "0x11",
+  "0x12",
+  "0x13",
+  "0x14",
+  "0x15",
+  "0x16",
+  "0x17",
+  "0x18",
+  "0x19",
+  "0x1A",
+  "0x1B",
+  "0x1C",
+  "0x1D",
+  "0x1E",
+  "0x1F",
+  "0x20",
+  "0x21",
+  "0x22",
+  "0x23",
+  "0x24",
+  "0x25",
+  "0x26",
+  "0x27",
+  "0x28",
+  "0x29",
+  "0x2A",
+  "0x2B",
+  "0x2C",
+  "0x2D",
+  "0x2E",
+  "0x2F",
+  "0x30",
+  "0x31",
+  "0x32",
+  "0x33",
+  "0x34",
+  "0x35",
+  "0x36",
+  "0x37",
+  "0x38",
+  "0x39",
+  "0x3A",
+  "0x3B",
+  "0x3C",
+  "0x3D",
+  "0x3E",
+  "0x3F",
+  "0x40",
+  "0x41",
+  "0x42",
+  "0x43",
+  "0x44",
+  "0x45",
+  "0x46",
+  "0x47",
+  "0x48",
+  "0x49",
+  "0x4A",
+  "0x4B",
+  "0x4C",
+  "0x4D",
+  "0x4E",
+  "0x4F",
+  "0x50",
+  "0x51",
+  "0x52",
+  "0x53",
+  "0x54",
+  "0x55",
+  "0x56",
+  "0x57",
+  "0x58",
+  "0x59",
+  "0x5A",
+  "0x5B",
+  "0x5C",
+  "0x5D",
+  "0x5E",
+  "0x5F",
+  "0x60",
+  "0x61",
+  "0x62",
+  "0x63",
+  "0x64",
+  "0x65",
+  "0x66",
+  "0x67",
+  "0x68",
+  "0x69",
+  "0x6A",
+  "0x6B",
+  "0x6C",
+  "0x6D",
+  "0x6E",
+  "0x6F",
+  "0x70",
+  "0x71",
+  "0x72",
+  "0x73",
+  "0x74",
+  "0x75",
+  "0x76",
+  "0x77",
+  "0x78",
+  "0x79",
+  "0x7A",
+  "0x7B",
+  "0x7C",
+  "0x7D",
+  "0x7E",
+  "0x7F",
 
-// P0
-sbit at 0x80 P0_0;
-sbit at 0x81 P0_1;
-sbit at 0x82 P0_2;
-sbit at 0x83 P0_3;
-sbit at 0x84 P0_4;
-sbit at 0x85 P0_5;
-sbit at 0x86 P0_6;
-sbit at 0x87 P0_7;
+  // P0 (0x80)
+  "P0_0",
+  "P0_1",
+  "P0_2",
+  "P0_3",
+  "P0_4",
+  "P0_5",
+  "P0_6",
+  "P0_7",
 
-// TCON
-sbit at 0x88 IT0;
-sbit at 0x89 IE0;
-sbit at 0x8A IT1;
-sbit at 0x8B IE1;
-sbit at 0x8C TR0;
-sbit at 0x8D TF0;
-sbit at 0x8E TR1;
-sbit at 0x8F TF1;
+  // TCON (0x88)
+  "IT0",
+  "IE0",
+  "IT1",
+  "IE1",
+  "TR0",
+  "TF0",
+  "TR1",
+  "TF1",
 
-// P1
-sbit at 0x90 P1_0;
-sbit at 0x91 P1_1;
-sbit at 0x92 P1_2;
-sbit at 0x93 P1_3;
-sbit at 0x94 P1_4;
-sbit at 0x95 P1_5;
-sbit at 0x96 P1_6;
-sbit at 0x97 P1_7;
+  // P1 (0x90)
+  "P1_0",
+  "P1_1",
+  "P1_2",
+  "P1_3",
+  "P1_4",
+  "P1_5",
+  "P1_6",
+  "P1_7",
 
-// SCON0
-sbit at 0x98 RI_0;
-sbit at 0x99 TI_0;
-sbit at 0x9A RB8_0;
-sbit at 0x9B TB8_0;
-sbit at 0x9C REN_0;
-sbit at 0x9D SM2_0;
-sbit at 0x9E SM1_0;
-sbit at 0x9F SM0_0;
-sbit at 0x9F FE_0;
+  // SCON0 (0x98)
+  "RI_0",
+  "TI_0",
+  "RB8_0",
+  "TB8_0",
+  "REN_0",
+  "SM2_0",
+  "SM1_0",
+  "SM0_0",
 
-// P2
-sbit at 0xA0 P2_0;
-sbit at 0xA1 P2_1;
-sbit at 0xA2 P2_2;
-sbit at 0xA3 P2_3;
-sbit at 0xA4 P2_4;
-sbit at 0xA5 P2_5;
-sbit at 0xA6 P2_6;
-sbit at 0xA7 P2_7;
+  // P2 (0xA0)
+  "P2_0",
+  "P2_1",
+  "P2_2",
+  "P2_3",
+  "P2_4",
+  "P2_5",
+  "P2_6",
+  "P2_7",
 
-// IE
-sbit at 0xA8 EX0;
-sbit at 0xA9 ET0;
-sbit at 0xAA EX1;
-sbit at 0xAB ET1;
-sbit at 0xAC ES0;
-sbit at 0xAD ET2;
-sbit at 0xAE ES1;
-sbit at 0xAF EA;
+  // IE (0xA8)
+  "EX0",
+  "ET0",
+  "EX1",
+  "ET1",
+  "ES0",
+  "ET2",
+  "ES1",
+  "EA",
 
-// P3
-sbit at 0xB0 P3_0;
-sbit at 0xB1 P3_1;
-sbit at 0xB2 P3_2;
-sbit at 0xB3 P3_3;
-sbit at 0xB4 P3_4;
-sbit at 0xB5 P3_5;
-sbit at 0xB6 P3_6;
-sbit at 0xB7 P3_7;
+  // P3 (0xB0)
+  "P3_0",
+  "P3_1",
+  "P3_2",
+  "P3_3",
+  "P3_4",
+  "P3_5",
+  "P3_6",
+  "P3_7",
 
-// IP0
-sbit at 0xB8 LPX0;
-sbit at 0xB9 LPT0;
-sbit at 0xBA LPX1;
-sbit at 0xBB LPT1;
-sbit at 0xBC LPS0;
-sbit at 0xBD LPT2;
-sbit at 0xBE LPS1;
+  // IP0 (0xB8)
+  "LPX0",
+  "LPT0",
+  "LPX1",
+  "LPT1",
+  "LPS0",
+  "LPT2",
+  "LPS1",
 
-// SCON1
-sbit at 0xC0 RI_1;
-sbit at 0xC1 TI_1;
-sbit at 0xC2 RB8_1;
-sbit at 0xC3 TB8_1;
-sbit at 0xC4 REN_1;
-sbit at 0xC5 SM2_1;
-sbit at 0xC6 SM1_1;
-sbit at 0xC7 SM0_1;
+  "0xBF",
 
-// T2CON
-sbit at 0xC8 CP_RL_2;
-sbit at 0xC9 C_T_2;
-sbit at 0xCA TR_2;
-sbit at 0xCB EXEN_2;
-sbit at 0xCC TCLK;
-sbit at 0xCD RCLK;
-sbit at 0xCE EXF_2;
-sbit at 0xCF TF_2;
+  // SCON1 (0xC0)
+  "RI_1",
+  "TI_1",
+  "RB8_1",
+  "TB8_1",
+  "REN_1",
+  "SM2_1",
+  "SM1_1",
+  "SM0_1",
 
-// PSW
-sbit at 0xD0 PARITY;
-sbit at 0xD0 P;
-sbit at 0xD1 F1;
-sbit at 0xD2 OV;
-sbit at 0xD3 RS0;
-sbit at 0xD4 RS1;
-sbit at 0xD5 F0;
-sbit at 0xD6 AC;
-sbit at 0xD7 CY;
+  // T2CON (0xC8)
+  "CP_RL_2",
+  "C_T_2",
+  "TR_2",
+  "EXEN_2",
+  "TCLK",
+  "RCLK",
+  "EXF_2",
+  "TF_2",
 
-// WDCON
-sbit at 0xD8 RWT;
-sbit at 0xD9 EWT;
-sbit at 0xDA WTRF;
-sbit at 0xDB WDIF;
-sbit at 0xDC PFI;
-sbit at 0xDD EPFI;
-sbit at 0xDE POR;
-sbit at 0xDF SMOD_1;
+  // PSW (0xD0)
+  "PARITY",
+  "F1",
+  "OV",
+  "RS0",
+  "RS1",
+  "F0",
+  "AC",
+  "CY",
 
-// EIE
-sbit at 0xE8 EX2;
-sbit at 0xE9 EX3;
-sbit at 0xEA EX4;
-sbit at 0xEB EX5;
-sbit at 0xEC EWDI;
+  // WDCON (0xD8)
+  "RWT",
+  "EWT",
+  "WTRF",
+  "WDIF",
+  "PFI",
+  "EPFI",
+  "POR",
+  "SMOD_1",
 
-// EIP0
-sbit at 0xF8 LPX2;
-sbit at 0xF9 LPX3;
-sbit at 0xFA LPX4;
-sbit at 0xFB LPX5;
-sbit at 0xFC LPWDI;
-*/
+  "0xE0",
+  "0xE1",
+  "0xE2",
+  "0xE3",
+  "0xE4",
+  "0xE5",
+  "0xE6",
+  "0xE7",
+
+  // EIE (0xE8)
+  "EX2",
+  "EX3",
+  "EX4",
+  "EX5",
+  "EWDI",
+
+  "0xED",
+  "0xEE",
+  "0xEF",
+  "0xF0",
+  "0xF1",
+  "0xF2",
+  "0xF3",
+  "0xF4",
+  "0xF5",
+  "0xF6",
+  "0xF7",
+
+  // EIP0 (0xF8)
+  "LPX2",
+  "LPX3",
+  "LPX4",
+  "LPX5",
+  "LPWDI",
+
+  "0xFD",
+  "0xFE",
+  "0xFF"
+};
 
 unsigned short int bytes_to_word(unsigned char byte1, unsigned char byte0) {
   return ((unsigned short int)byte1 << 8) + (unsigned short int)byte0;
