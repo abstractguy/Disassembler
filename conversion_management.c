@@ -78,6 +78,16 @@ static record *copy_record_from_offset(record *records, unsigned short int size,
   return create_record(size, records->address + offset, records->mode, bytecode, next);
 }
 
+static record *create_record_from_bytevector(unsigned char *bytevector, record *old_record) {
+  record *new_record = NULL;
+  unsigned short int size = (unsigned short int)bytevector[0];
+  unsigned char *new_bytevector = NULL;
+  new_bytevector = create_bytevector(size);
+  copy_bytes(new_bytevector, &bytevector[4], size);
+  new_record = create_record(size, bytes_to_word(bytevector[1], bytevector[2]), bytevector[3], new_bytevector, old_record);
+  return new_record;
+}
+
 static char **hex_file_to_record_strings(char *file) {
   char *array = file_to_array(file), **strings = NULL;
   strings = string_separate(array, "\r\n:");
@@ -88,20 +98,15 @@ static char **hex_file_to_record_strings(char *file) {
 extern record *hex_file_to_records(char *file) {
   record *records = NULL;
   unsigned short int i, size;
-  unsigned char *bytevector = NULL, *new_bytevector = NULL, file_checksum = 0;
+  unsigned char *bytevector = NULL, file_checksum = 0;
   char **strings = hex_file_to_record_strings(file);
-  //char **strings = string_separate(file_to_array(file), "\r\n:");
 
   assert(size = i = record_count);
 
   while (i--) {
     bytevector = string_to_bytevector(strings[i]);
-
     checksum(bytevector, file_checksum += RECORD_CHECKSUM);
-
-    new_bytevector = create_bytevector(bytevector[0]);
-    copy_bytes(new_bytevector, &bytevector[4], bytevector[0]);
-    records = create_record((unsigned short int)bytevector[0], bytes_to_word(bytevector[1], bytevector[2]), bytevector[3], new_bytevector, records);
+    records = create_record_from_bytevector(bytevector, records);
     destroy_bytevector(bytevector);
   }
 
