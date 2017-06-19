@@ -172,20 +172,20 @@ void print_instruction(record *records) {
 
 extern record *hex_file_to_records(char *file) {
   record *records = NULL;
-  unsigned short int i, size;
+  unsigned short int size;
   unsigned char *bytevector = NULL, file_checksum = 0;
   char **strings = hex_file_to_record_strings(file);
 
-  assert(size = i = record_count);
+  assert(size = record_count);
 
-  while (i--) {
-    bytevector = string_to_bytevector(strings[i]);
+  while (size--) {
+    bytevector = string_to_bytevector(strings[size]);
     checksum(bytevector, file_checksum += RECORD_CHECKSUM);
     records = create_record_from_bytevector(bytevector, records);
     destroy_bytevector(bytevector);
   }
 
-  destroy_strings(strings, size);
+  destroy_strings(strings, record_count);
   return records;
 }
 
