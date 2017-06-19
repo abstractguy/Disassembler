@@ -15,6 +15,60 @@ static void destroy_strings(char **strings, unsigned short int size) {
   }
 }
 
+unsigned short int bytes_to_word(unsigned char byte1, unsigned char byte0) {
+  return ((unsigned short int)byte1 << 8) + (unsigned short int)byte0;
+}
+
+unsigned short int addr11_to_addr16(record *record) {
+  return ((record->address + 2) & 0xF800) + ((record->bytecode[0] & 0x00E0) << 3) + record->bytecode[1];
+}
+
+void print_instruction(record *records) {
+  unsigned char *bytecode = records->bytecode;
+  printf("0x%4.4X\t", records->address);
+
+  for (unsigned short int i = 0; i < 4; i++) {
+    if (i < records->size) printf("%2.2X ", records->bytecode[i]);
+    else printf("   ");
+  }
+
+  switch (instruction_types[(unsigned char)records->bytecode[0]]) {
+    case ONE_BYTE_INSTRUCTION:
+      printf(instructions[bytecode[0]]);
+      break;
+    case ADDR_11:
+      printf(instructions[bytecode[0]], addr11_to_addr16(records));
+      break;
+    case DIRECT:
+      printf(instructions[bytecode[0]], SFR[bytecode[1]]);
+      break;
+    case IMMEDIATE:
+    case OFFSET:
+      printf(instructions[bytecode[0]], bytecode[1]);
+      break;
+    case BIT:
+    case NOT_BIT:
+      printf(instructions[bytecode[0]], SBIT[bytecode[1]]);
+      break;
+    case ADDR_16:
+    case IMMEDIATE_16:
+      printf(instructions[bytecode[0]], bytes_to_word(bytecode[1], bytecode[2]));
+      break;
+    case BIT_OFFSET:
+      printf(instructions[bytecode[0]], SBIT[bytecode[1]], bytecode[2]);
+      break;
+    case DIRECT_DIRECT:
+      printf(instructions[bytecode[0]], SFR[bytecode[1]], SFR[bytecode[2]]);
+      break;
+    case IMMEDIATE_OFFSET:
+      printf(instructions[bytecode[0]], bytecode[1], bytecode[2]);
+      break;
+    case DIRECT_IMMEDIATE:
+    case DIRECT_OFFSET:
+      printf(instructions[bytecode[0]], SFR[bytecode[1]], bytecode[2]);
+  }
+}
+
 static void copy_bytes(unsigned char *destination, unsigned char *source, unsigned short int size) {
   for (unsigned short int i = 0; i < size; i++) {
     destination[i] = source[i];
