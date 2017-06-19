@@ -3,6 +3,7 @@
   #define CONVERSION_MANAGEMENT_H
   #include <string.h>
   #include "instruction_management.h"
+  #include "record_management.h"
   #include "file_management.h"
 
   #define RECORD_CHECKSUM (unsigned char)bytevector[bytevector[0] + 4]

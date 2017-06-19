@@ -1,7 +1,6 @@
 // instruction_management.h
 #ifndef INSTRUCTION_MANAGEMENT_H
   #define INSTRUCTION_MANAGEMENT_H
-  #include "record_management.h"
 
   typedef enum {
     ONE_BYTE_INSTRUCTION, ADDR_11, DIRECT, IMMEDIATE,
