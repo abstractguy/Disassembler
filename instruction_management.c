@@ -260,6 +260,7 @@ instruction_type instruction_types[256] = {
   ONE_BYTE_INSTRUCTION
 };
 
+/*
 unsigned char instruction_size(unsigned char bytecode) {
   instruction_type type = instruction_types[bytecode];
   switch (type) {
@@ -280,6 +281,7 @@ unsigned char instruction_size(unsigned char bytecode) {
     default: return 0;
   }
 }
+*/
 
 char *instructions[256] = {
   "NOP\n",

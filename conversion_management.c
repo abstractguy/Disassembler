@@ -15,12 +15,113 @@ static void destroy_strings(char **strings, unsigned short int size) {
   }
 }
 
-unsigned short int bytes_to_word(unsigned char byte1, unsigned char byte0) {
+static unsigned short int bytes_to_word(unsigned char byte1, unsigned char byte0) {
   return ((unsigned short int)byte1 << 8) + (unsigned short int)byte0;
 }
 
-unsigned short int addr11_to_addr16(record *record) {
+static unsigned short int addr11_to_addr16(record *record) {
   return ((record->address + 2) & 0xF800) + ((record->bytecode[0] & 0x00E0) << 3) + record->bytecode[1];
+}
+
+static unsigned char instruction_size(unsigned char bytecode) {
+  instruction_type type = instruction_types[bytecode];
+  switch (type) {
+    case ONE_BYTE_INSTRUCTION: return 1;
+    case ADDR_11:
+    case DIRECT:
+    case IMMEDIATE:
+    case OFFSET:
+    case BIT:
+    case NOT_BIT: return 2;
+    case ADDR_16:
+    case IMMEDIATE_16:
+    case BIT_OFFSET:
+    case DIRECT_IMMEDIATE:
+    case DIRECT_DIRECT:
+    case IMMEDIATE_OFFSET:
+    case DIRECT_OFFSET: return 3;
+    default: return 0;
+  }
+}
+
+static void copy_bytes(unsigned char *destination, unsigned char *source, unsigned short int size) {
+  for (unsigned short int i = 0; i < size; i++) {
+    destination[i] = source[i];
+  }
+}
+
+static void checksum(unsigned char *bytevector, unsigned char file_checksum) {
+  unsigned char size = bytevector[0] + 4, sum = 0;
+  if (bytevector[3]) assert(!(file_checksum - RECORD_CHECKSUM));
+  else {
+    for (unsigned char i = 0; i < size; i++) {
+      sum = (unsigned char)(sum + bytevector[i]);
+    } assert(!((unsigned char)(~sum + 1) - bytevector[size]));
+  }
+}
+
+static unsigned char ASCII_to_byte(char *ASCII) {
+  char *string = (char *)create_bytevector(3);
+  unsigned char byte;
+  string[2] = '\0';
+  copy_bytes((unsigned char *)string, (unsigned char *)ASCII, 2);
+  byte = (unsigned char)strtoul(string, NULL, 16);
+  destroy_bytevector((unsigned char *)string);
+  return byte;
+}
+
+static unsigned char *string_to_bytevector(char *string) {
+  unsigned char substring_size = strlen(string) / 2, *bytevector = NULL;
+  bytevector = create_bytevector(substring_size);
+
+  for (unsigned short int i = 0; i < substring_size; i++) {
+    bytevector[i] = ASCII_to_byte(&string[i * 2]);
+  }
+
+  return bytevector;
+}
+
+static unsigned short int char_count(char *string, char character) {
+  unsigned short int size = 0;
+  for (unsigned short int i = 0; string[i]; i++) {
+    if (string[i] == character) size++;
+  } return size;
+}
+
+static unsigned short int record_count = 0;
+
+static char **string_separate(char *string, char *delimiters) {
+  char *token = NULL, **strings = create_strings(char_count(string, ':'));
+
+  if ((token = strtok(string, delimiters))) {
+    for (unsigned short int i = 0; token; i++, token = strtok(NULL, delimiters)) {
+      strings[i] = strdup(token);
+      record_count++;
+    }
+  } return strings;
+}
+
+static record *copy_record_from_offset(record *records, unsigned short int size, unsigned short int offset, record *next) {
+  unsigned char *bytecode = create_bytevector(size);
+  copy_bytes(bytecode, &records->bytecode[offset], size);
+  return create_record(size, records->address + offset, records->mode, bytecode, next);
+}
+
+static record *create_record_from_bytevector(unsigned char *bytevector, record *old_record) {
+  record *new_record = NULL;
+  unsigned short int size = (unsigned short int)bytevector[0];
+  unsigned char *new_bytevector = NULL;
+  new_bytevector = create_bytevector(size);
+  copy_bytes(new_bytevector, &bytevector[4], size);
+  new_record = create_record(size, bytes_to_word(bytevector[1], bytevector[2]), bytevector[3], new_bytevector, old_record);
+  return new_record;
+}
+
+static char **hex_file_to_record_strings(char *file) {
+  char *array = file_to_array(file), **strings = NULL;
+  strings = string_separate(array, "\r\n:");
+  destroy_bytevector((unsigned char *)array);
+  return strings;
 }
 
 void print_instruction(record *records) {
@@ -67,86 +168,6 @@ void print_instruction(record *records) {
     case DIRECT_OFFSET:
       printf(instructions[bytecode[0]], SFR[bytecode[1]], bytecode[2]);
   }
-}
-
-static void copy_bytes(unsigned char *destination, unsigned char *source, unsigned short int size) {
-  for (unsigned short int i = 0; i < size; i++) {
-    destination[i] = source[i];
-  }
-}
-
-static void checksum(unsigned char *bytevector, unsigned char file_checksum) {
-  unsigned char size = bytevector[0] + 4, sum = 0;
-  if (bytevector[3]) assert(!(file_checksum - RECORD_CHECKSUM));
-  else {
-    for (unsigned char i = 0; i < size; i++) {
-      sum = (unsigned char)(sum + bytevector[i]);
-    } assert(!((unsigned char)(~sum + 1) - bytevector[size]));
-  }
-}
-
-static unsigned char *string_to_bytevector(char *string) {
-  unsigned char substring_size = strlen(string) / 2, *bytevector = NULL;
-  bytevector = create_bytevector(substring_size);
-
-  for (unsigned short int i = 0; i < substring_size; i++) {
-    bytevector[i] = ASCII_to_byte(&string[i * 2]);
-  }
-
-  return bytevector;
-}
-
-unsigned short int record_count = 0;
-
-static char **string_separate(char *string, char *delimiters) {
-  char *token = NULL, **strings = create_strings(char_count(string, ':'));
-
-  if ((token = strtok(string, delimiters))) {
-    for (unsigned short int i = 0; token; i++, token = strtok(NULL, delimiters)) {
-      strings[i] = strdup(token);
-      record_count++;
-    }
-  } return strings;
-}
- 
-unsigned short int char_count(char *string, char character) {
-  unsigned short int size = 0;
-  for (unsigned short int i = 0; string[i]; i++) {
-    if (string[i] == character) size++;
-  } return size;
-}
- 
-unsigned char ASCII_to_byte(char *ASCII) {
-  char *string = (char *)create_bytevector(3);
-  unsigned char byte;
-  string[2] = '\0';
-  copy_bytes((unsigned char *)string, (unsigned char *)ASCII, 2);
-  byte = (unsigned char)strtoul(string, NULL, 16);
-  destroy_bytevector((unsigned char *)string);
-  return byte;
-}
-
-static record *copy_record_from_offset(record *records, unsigned short int size, unsigned short int offset, record *next) {
-  unsigned char *bytecode = create_bytevector(size);
-  copy_bytes(bytecode, &records->bytecode[offset], size);
-  return create_record(size, records->address + offset, records->mode, bytecode, next);
-}
-
-static record *create_record_from_bytevector(unsigned char *bytevector, record *old_record) {
-  record *new_record = NULL;
-  unsigned short int size = (unsigned short int)bytevector[0];
-  unsigned char *new_bytevector = NULL;
-  new_bytevector = create_bytevector(size);
-  copy_bytes(new_bytevector, &bytevector[4], size);
-  new_record = create_record(size, bytes_to_word(bytevector[1], bytevector[2]), bytevector[3], new_bytevector, old_record);
-  return new_record;
-}
-
-static char **hex_file_to_record_strings(char *file) {
-  char *array = file_to_array(file), **strings = NULL;
-  strings = string_separate(array, "\r\n:");
-  destroy_bytevector((unsigned char *)array);
-  return strings;
 }
 
 extern record *hex_file_to_records(char *file) {
