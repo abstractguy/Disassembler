@@ -14,5 +14,6 @@
 
   record *create_record(unsigned short int, unsigned short int, mode, unsigned char *, record *);
   record *destroy_record(record *);
+  record *record_reverse(record *);
   record *record_for_each(record *(*)(record *), record *);
 #endif
