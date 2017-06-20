@@ -1,7 +1,7 @@
 // instruction_management.c
 #include "instruction_management.h"
 
-instruction_type instruction_types[256] = {
+static instruction_type instruction_types[256] = {
   ONE_BYTE_INSTRUCTION,
   ADDR_11,
   ADDR_16,
@@ -260,7 +260,7 @@ instruction_type instruction_types[256] = {
   ONE_BYTE_INSTRUCTION
 };
 
-char *instructions[256] = {
+static char *instructions[256] = {
   "NOP\n",
   "AJMP\t0x%4.4X\n",
   "LJMP\t0x%4.4X\n",
@@ -520,7 +520,7 @@ char *instructions[256] = {
 };
 
 // 0x80..0xFF
-char *SFR[256] = {
+static char *SFR[256] = {
   "0x00",
   "0x01",
   "0x02",
@@ -781,7 +781,7 @@ char *SFR[256] = {
 
 // BIT Registers
 // 0x80..0xFF
-char *SBIT[256] = {
+static char *SBIT[256] = {
   "0x00",
   "0x01",
   "0x02",
@@ -1071,3 +1071,104 @@ char *SBIT[256] = {
   "0xFE",
   "0xFF"
 };
+
+unsigned short int bytes_to_word(unsigned char byte1, unsigned char byte0) {
+  return ((unsigned short int)byte1 << 8) + (unsigned short int)byte0;
+}
+
+static unsigned short int addr11_to_addr16(record *record) {
+  return ((record->address + 2) & 0xF800) + ((record->bytecode[0] & 0x00E0) << 3) + record->bytecode[1];
+}
+
+static unsigned char instruction_size(unsigned char bytecode) {
+  instruction_type type = instruction_types[bytecode];
+  switch (type) {
+    case ONE_BYTE_INSTRUCTION: return 1;
+    case ADDR_11:
+    case DIRECT:
+    case IMMEDIATE:
+    case OFFSET:
+    case BIT:
+    case NOT_BIT: return 2;
+    case ADDR_16:
+    case IMMEDIATE_16:
+    case BIT_OFFSET:
+    case DIRECT_IMMEDIATE:
+    case DIRECT_DIRECT:
+    case IMMEDIATE_OFFSET:
+    case DIRECT_OFFSET: return 3;
+    default: return 0;
+  }
+}
+
+void print_instruction(record *records) {
+  unsigned char *bytecode = records->bytecode;
+  printf("0x%4.4X\t", records->address);
+
+  for (unsigned short int i = 0; i < 4; i++) {
+    if (i < records->size) printf("%2.2X ", records->bytecode[i]);
+    else printf("   ");
+  }
+
+  switch (instruction_types[(unsigned char)records->bytecode[0]]) {
+    case ONE_BYTE_INSTRUCTION:
+      printf(instructions[bytecode[0]]);
+      break;
+    case ADDR_11:
+      printf(instructions[bytecode[0]], addr11_to_addr16(records));
+      break;
+    case DIRECT:
+      printf(instructions[bytecode[0]], SFR[bytecode[1]]);
+      break;
+    case IMMEDIATE:
+    case OFFSET:
+      printf(instructions[bytecode[0]], bytecode[1]);
+      break;
+    case BIT:
+    case NOT_BIT:
+      printf(instructions[bytecode[0]], SBIT[bytecode[1]]);
+      break;
+    case ADDR_16:
+    case IMMEDIATE_16:
+      printf(instructions[bytecode[0]], bytes_to_word(bytecode[1], bytecode[2]));
+      break;
+    case BIT_OFFSET:
+      printf(instructions[bytecode[0]], SBIT[bytecode[1]], bytecode[2]);
+      break;
+    case DIRECT_DIRECT:
+      printf(instructions[bytecode[0]], SFR[bytecode[1]], SFR[bytecode[2]]);
+      break;
+    case IMMEDIATE_OFFSET:
+      printf(instructions[bytecode[0]], bytecode[1], bytecode[2]);
+      break;
+    case DIRECT_IMMEDIATE:
+    case DIRECT_OFFSET:
+      printf(instructions[bytecode[0]], SFR[bytecode[1]], bytecode[2]);
+  }
+}
+
+void copy_bytes(unsigned char *destination, unsigned char *source, unsigned short int size) {
+  for (unsigned short int i = 0; i < size; i++) {
+    destination[i] = source[i];
+  }
+}
+
+static record *copy_record_from_offset(record *records, unsigned short int size, unsigned short int offset, record *next) {
+  unsigned char *bytecode = create_bytevector(size);
+  copy_bytes(bytecode, &records->bytecode[offset], size);
+  return create_record(size, records->address + offset, bytecode, next);
+}
+
+record *extract_instruction(record *forward) {
+  record *backward = NULL;
+  unsigned char size;
+
+  if (forward) {
+    size = instruction_size(forward->bytecode[0]);
+    if (forward->size != size) {
+      backward = copy_record_from_offset(forward, size, 0, copy_record_from_offset(forward, forward->size - size, size, forward->next));
+      forward = destroy_record(forward);
+      forward = backward;
+    }
+  } return forward;
+}
