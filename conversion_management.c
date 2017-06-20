@@ -74,7 +74,7 @@ static unsigned char *file_pointer_to_record_bytevector(FILE *fp) {
 static record *copy_record_from_offset(record *records, unsigned short int size, unsigned short int offset, record *next) {
   unsigned char *bytecode = create_bytevector(size);
   copy_bytes(bytecode, &records->bytecode[offset], size);
-  return create_record(size, records->address + offset, records->mode, bytecode, next);
+  return create_record(size, records->address + offset, bytecode, next);
 }
  
 static record *bytevector_to_record(unsigned char *bytevector, record *old_record) {
@@ -83,7 +83,7 @@ static record *bytevector_to_record(unsigned char *bytevector, record *old_recor
   unsigned char *new_bytevector = NULL;
   new_bytevector = create_bytevector(size);
   copy_bytes(new_bytevector, &bytevector[4], size);
-  new_record = create_record(size, bytes_to_word(bytevector[1], bytevector[2]), bytevector[3], new_bytevector, old_record);
+  new_record = create_record(size, bytes_to_word(bytevector[1], bytevector[2]), new_bytevector, old_record);
   return new_record;
 }
  
@@ -179,7 +179,7 @@ record *align_instruction(record *forward) {
       bytecode = create_bytevector(forward->size + forward->next->size);
       copy_bytes(bytecode, forward->bytecode, forward->size);
       copy_bytes(&bytecode[forward->size], forward->next->bytecode, forward->next->size);
-      temporary = create_record(forward->size + forward->next->size, forward->address, forward->mode, bytecode, forward->next->next);
+      temporary = create_record(forward->size + forward->next->size, forward->address, bytecode, forward->next->next);
       forward = destroy_record(destroy_record(forward));
       forward = align_instruction(temporary);
     } else if (!forward->size) forward = destroy_record(forward);
@@ -195,11 +195,10 @@ record *extract_instruction(record *forward) {
  
   if (forward) {
     size = instruction_size(forward->bytecode[0]);
-    if (forward->size != size && forward->mode != END) {
+    if (forward->size != size) {
       backward = copy_record_from_offset(forward, size, 0, copy_record_from_offset(forward, forward->size - size, size, forward->next));
       forward = destroy_record(forward);
       forward = backward;
     }
   } return forward;
 }
-
