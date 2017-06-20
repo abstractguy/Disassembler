@@ -2,7 +2,6 @@
 #ifndef CONVERSION_MANAGEMENT_H
   #define CONVERSION_MANAGEMENT_H
   #include <stdio.h>
-  #include <string.h>
   #include "instruction_management.h"
   #include "record_management.h"
 
