@@ -1,14 +1,14 @@
 // record_management.c
 #include "record_management.h"
 
-record *create_record(unsigned short int size, unsigned short int address, unsigned char *bytecode, record *old_record) {
+record *create_record(unsigned short int size, unsigned short int address, unsigned char *bytecode, record *next) {
   record *new_record = NULL;
   assert(new_record = malloc(sizeof(record)));
 
   new_record->size     = size;
   new_record->address  = address;
   new_record->bytecode = bytecode;
-  new_record->next     = old_record;
+  new_record->next     = next;
 
   return new_record;
 }

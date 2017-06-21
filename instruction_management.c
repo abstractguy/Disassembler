@@ -1,7 +1,7 @@
 // instruction_management.c
 #include "instruction_management.h"
 
-static instruction_type instruction_types[256] = {
+instruction_type instruction_types[256] = {
   ONE_BYTE_INSTRUCTION,
   ADDR_11,
   ADDR_16,
