@@ -75,18 +75,20 @@ record *hex_file_to_records(char *file) {
   return record_reverse(destroy_record(records));
 }
 
+static record *record_concatenate(record *record_1, record *record_2) {
+  unsigned char *bytecode = create_bytevector(record_1->size + record_2->size);
+  copy_bytes(&bytecode[0], record_1->bytecode, record_1->size);
+  copy_bytes(&bytecode[record_1->size], record_2->bytecode, record_2->size);
+  return create_record(record_1->size + record_2->size, record_1->address, bytecode, record_2->next);
+}
+
 record *align_instruction(record *forward) {
   record *temporary = NULL;
-  unsigned char *bytecode = NULL;
-
   if (forward) {
     if (forward->next &&
          (forward->address + forward->size)
            == forward->next->address) {
-      bytecode = create_bytevector(forward->size + forward->next->size);
-      copy_bytes(bytecode, forward->bytecode, forward->size);
-      copy_bytes(&bytecode[forward->size], forward->next->bytecode, forward->next->size);
-      temporary = create_record(forward->size + forward->next->size, forward->address, bytecode, forward->next->next);
+      temporary = record_concatenate(forward, forward->next);
       forward = destroy_record(destroy_record(forward));
       forward = align_instruction(temporary);
     } else if (!forward->size) forward = destroy_record(forward);
