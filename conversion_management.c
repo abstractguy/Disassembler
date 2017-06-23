@@ -65,21 +65,18 @@ record *hex_file_to_records(char *file) {
   FILE *fp = NULL;
   record *records = NULL;
   assert(fp = fopen(file, "r"));
-  fp = next_record_file_pointer(fp);
-  assert(!feof(fp));
-  do {
-    records = file_pointer_to_record(fp, records);
-    fp = next_record_file_pointer(fp);
-  } while (!feof(fp));
+  assert(!feof(fp = next_record_file_pointer(fp)));
+  do {records = file_pointer_to_record(fp, records);
+  } while (!feof(fp = next_record_file_pointer(fp)));
   fclose(fp);
   return record_reverse(destroy_record(records));
 }
 
-static record *record_concatenate(record *record_1, record *record_2) {
-  unsigned char *bytecode = create_bytevector(record_1->size + record_2->size);
-  copy_bytes(&bytecode[0], record_1->bytecode, record_1->size);
-  copy_bytes(&bytecode[record_1->size], record_2->bytecode, record_2->size);
-  return create_record(record_1->size + record_2->size, record_1->address, bytecode, record_2->next);
+static inline record *record_concatenate(record *r1, record *r2) {
+  unsigned char *bytecode = create_bytevector(r1->size + r2->size);
+  copy_bytes(&bytecode[0], r1->bytecode, r1->size);
+  copy_bytes(&bytecode[r1->size], r2->bytecode, r2->size);
+  return create_record(r1->size + r2->size, r1->address, bytecode, r2->next);
 }
 
 record *align_instruction(record *forward) {

@@ -5,6 +5,5 @@
 
   #define RECORD_CHECKSUM (unsigned char)bytevector[bytevector[0] + 4]
 
-  record *hex_file_to_records(char *);
-  record *align_instruction(record *);
+  record *hex_file_to_records(char *), *align_instruction(record *);
 #endif

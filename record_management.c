@@ -24,7 +24,7 @@ record *destroy_record(record *old_record) {
   } return new_record;
 }
 
-static record *record_reverse_for_each(record *(*function)(record *), record *forward) {
+static inline record *record_reverse_for_each(record *(*function)(record *), record *forward) {
   record *current, *backward = NULL;
   while ((current = function(forward))) {
     forward = current->next;
@@ -33,7 +33,7 @@ static record *record_reverse_for_each(record *(*function)(record *), record *fo
   } return backward;
 }
 
-static record *identity(record *record) {return record;}
+static inline record *identity(record *record) {return record;}
 
 record *record_reverse(record *record) {
   return record_reverse_for_each(identity, record);
