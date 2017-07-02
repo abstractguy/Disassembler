@@ -1,16 +1,11 @@
 // conversion_management.c
 #include "conversion_management.h"
 
-static unsigned char file_checksum = 0;
-
 static void checksum(unsigned char *bytevector) {
-  unsigned char size = bytevector[0] + 4, sum = 0;
-  if (bytevector[3]) assert(!(file_checksum - RECORD_CHECKSUM));
-  else {
-    for (unsigned char i = 0; i < size; i++) {
-      sum = (unsigned char)(sum + bytevector[i]);
-    } assert(!((unsigned char)(~sum + 1) - bytevector[size]));
-  }
+  static unsigned char sum = 0;
+  unsigned char size = bytevector[0] + 4;
+  for (unsigned char i = 0; i <= size; i++) sum += bytevector[i];
+  assert(!sum);
 }
 
 static unsigned char ASCII_stream_to_byte(FILE *fp) {
@@ -23,11 +18,11 @@ static unsigned char ASCII_stream_to_byte(FILE *fp) {
 static unsigned char *file_pointer_to_record_bytevector(FILE *fp) {
   unsigned char *bytevector = NULL;
   unsigned short int size = (unsigned short int)ASCII_stream_to_byte(fp);
-  bytevector = create_bytevector(4 + size);
+  bytevector = create_bytevector(5 + size);
   assert(((bytevector[0] = size)) <= 20);
-  for (unsigned short int i = 1; i < size + 4; i++) {
+  for (unsigned short int i = 1; i < size + 5; i++)
     bytevector[i] = ASCII_stream_to_byte(fp);
-  } return bytevector;
+  return bytevector;
 }
 
 static record *bytevector_to_record(unsigned char *bytevector, record *old_record) {
@@ -44,7 +39,7 @@ static record *file_pointer_to_record(FILE *fp, record *old_record) {
   record *new_record = NULL;
   unsigned char *bytevector = file_pointer_to_record_bytevector(fp);
   if (bytevector) {
-    //checksum(bytevector);
+    checksum(bytevector);
     new_record = bytevector_to_record(bytevector, old_record);
     destroy_bytevector(bytevector);
   } return new_record;
@@ -79,15 +74,13 @@ static inline record *record_concatenate(record *r1, record *r2) {
   return create_record(r1->size + r2->size, r1->address, bytecode, r2->next);
 }
 
-record *align_instruction(record *forward) {
-  record *temporary = NULL;
-  if (forward) {
-    if (forward->next &&
-         (forward->address + forward->size)
-           == forward->next->address) {
-      temporary = record_concatenate(forward, forward->next);
-      forward = destroy_record(destroy_record(forward));
-      forward = align_instruction(temporary);
-    } else if (!forward->size) forward = destroy_record(forward);
-  } return forward;
+record *align_instruction(record *r1) {
+  record *r2 = NULL;
+  if (r1) {
+    if (r1->next && (r1->address + r1->size) == r1->next->address) {
+      r2 = record_concatenate(r1, r1->next);
+      r1 = destroy_record(destroy_record(r1));
+      r1 = align_instruction(r2);
+    } else if (!r1->size) r1 = destroy_record(r1);
+  } return r1;
 }
