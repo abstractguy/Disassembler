@@ -24,14 +24,14 @@ static unsigned char *file_pointer_to_record_bytevector(FILE *fp) {
   return bytevector;
 }
 
-static record *bytevector_to_record(unsigned char *bytevector, record *old_record) {
-  record *new_record = NULL;
+static record *bytevector_to_record(unsigned char *bytevector, record *r1) {
+  record *r2 = NULL;
   unsigned short int size = (unsigned short int)bytevector[0];
   unsigned char *new_bytevector = NULL;
   new_bytevector = create_bytevector(size);
   copy_bytes(new_bytevector, &bytevector[4], size);
-  new_record = create_record(size, bytes_to_word(bytevector[1], bytevector[2]), new_bytevector, old_record);
-  return new_record;
+  r2 = create_record(size, bytes_to_word(bytevector[1], bytevector[2]), new_bytevector, r1);
+  return r2;
 }
 
 static record *file_pointer_to_record(FILE *fp, record *old_record) {

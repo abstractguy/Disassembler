@@ -1148,27 +1148,22 @@ void print_instruction(record *records) {
 }
 
 void copy_bytes(unsigned char *destination, unsigned char *source, unsigned short int size) {
-  for (unsigned short int i = 0; i < size; i++) {
-    destination[i] = source[i];
-  }
+  for (unsigned short int i = 0; i < size; i++) destination[i] = source[i];
 }
 
-static inline record *copy_record_from_offset(record *records, unsigned short int size, unsigned short int offset, record *next) {
+static inline record *copy_record_from_offset(record *r1, unsigned short int size, unsigned short int offset, record *r2) {
   unsigned char *bytecode = create_bytevector(size);
-  copy_bytes(bytecode, &records->bytecode[offset], size);
-  return create_record(size, records->address + offset, bytecode, next);
+  copy_bytes(bytecode, &r1->bytecode[offset], size);
+  return create_record(size, r1->address + offset, bytecode, r2);
 }
 
-record *extract_instruction(record *forward) {
-  record *backward = NULL;
+record *extract_instruction(record *r1) {
+  record *r2 = NULL;
   unsigned char size;
 
-  if (forward) {
-    size = instruction_size(forward->bytecode[0]);
-    if (forward->size != size) {
-      backward = copy_record_from_offset(forward, size, 0, copy_record_from_offset(forward, forward->size - size, size, forward->next));
-      forward = destroy_record(forward);
-      forward = backward;
-    }
-  } return forward;
+  if (r1 && (r1->size != ((size = instruction_size(r1->bytecode[0]))))) {
+    r2 = copy_record_from_offset(r1, size, 0, copy_record_from_offset(r1, r1->size - size, size, r1->next));
+    r1 = destroy_record(r1);
+    r1 = r2;
+  } return r1;
 }
