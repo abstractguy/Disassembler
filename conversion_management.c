@@ -34,14 +34,14 @@ static record *bytevector_to_record(unsigned char *bytevector, record *r1) {
   return r2;
 }
 
-static record *file_pointer_to_record(FILE *fp, record *old_record) {
-  record *new_record = NULL;
+static record *file_pointer_to_record(FILE *fp, record *r1) {
+  record *r2 = NULL;
   unsigned char *bytevector = file_pointer_to_record_bytevector(fp);
   if (bytevector) {
     checksum(bytevector);
-    new_record = bytevector_to_record(bytevector, old_record);
+    r2 = bytevector_to_record(bytevector, r1);
     destroy_bytevector(bytevector);
-  } return new_record;
+  } return r2;
 }
 
 static FILE *next_record_file_pointer(FILE * fp) {
