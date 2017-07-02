@@ -2,8 +2,7 @@
 #include "conversion_management.h"
 
 static void checksum(unsigned char *bytevector) {
-  static unsigned char sum = 0;
-  unsigned char size = bytevector[0] + 4;
+  unsigned char size = bytevector[0] + 4, sum = 0;
   for (unsigned char i = 0; i <= size; i++) sum += bytevector[i];
   assert(!sum);
 }
