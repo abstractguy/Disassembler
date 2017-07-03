@@ -10,7 +10,7 @@
     DIRECT_IMMEDIATE, DIRECT_DIRECT, IMMEDIATE_OFFSET, DIRECT_OFFSET
   } instruction_type;
 
-  unsigned short int bytes_to_word(unsigned char, unsigned char);
+  unsigned short int bytevector_to_word(unsigned char *);
   void print_instruction(record *);
   void copy_bytes(unsigned char *, unsigned char *, unsigned short int);
   record *extract_instruction(record *);

@@ -1072,8 +1072,8 @@ static char *SBIT[256] = {
   "FFh"
 };
 
-unsigned short int bytes_to_word(unsigned char byte1, unsigned char byte0) {
-  return ((unsigned short int)byte1 << 8) + (unsigned short int)byte0;
+unsigned short int bytevector_to_word(unsigned char *bytevector) {
+  return ((unsigned short int)bytevector[1] << 8) + bytevector[2];
 }
 
 static inline unsigned short int addr11_to_addr16(record *record) {
@@ -1130,7 +1130,7 @@ void print_instruction(record *records) {
       break;
     case ADDR_16:
     case IMMEDIATE_16:
-      printf(instructions[bytecode[0]], bytes_to_word(bytecode[1], bytecode[2]));
+      printf(instructions[bytecode[0]], bytevector_to_word(bytecode));
       break;
     case BIT_OFFSET:
       printf(instructions[bytecode[0]], SBIT[bytecode[1]], bytecode[2]);
