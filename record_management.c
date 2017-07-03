@@ -13,24 +13,24 @@ record *create_record(unsigned short int size, unsigned short int address, unsig
   return new_record;
 }
 
-record *destroy_record(record *old_record) {
-  record *new_record = NULL;
-  if (old_record) {
-    new_record = old_record->next;
-    if (old_record->bytecode) free(old_record->bytecode);
-    old_record->bytecode = NULL;
-    free(old_record);
-    old_record = NULL;
-  } return new_record;
+record *destroy_record(record *r1) {
+  record *r2 = NULL;
+  if (r1) {
+    r2 = r1->next;
+    if (r1->bytecode) free(r1->bytecode);
+    r1->bytecode = NULL;
+    free(r1);
+    r1 = NULL;
+  } return r2;
 }
 
-static inline record *record_reverse_for_each(record *(*function)(record *), record *forward) {
-  record *current, *backward = NULL;
-  while ((current = function(forward))) {
-    forward = current->next;
-    current->next = backward;
-    backward = current;
-  } return backward;
+static inline record *record_reverse_for_each(record *(*function)(record *), record *r1) {
+  record *r2, *r3 = NULL;
+  while ((r2 = function(r1))) {
+    r1 = r2->next;
+    r2->next = r3;
+    r3 = r2;
+  } return r3;
 }
 
 static inline record *identity(record *record) {return record;}

@@ -2,13 +2,13 @@
 #include "conversion_management.h"
 
 int main(int argc, char *argv[]) {
-  record *records = NULL;
+  record *record = NULL;
   assert(argc == 2);
-  records = hex_file_to_records(argv[1]);
-  records = record_for_each(align_instruction, records);
-  records = record_for_each(extract_instruction, records);
-  while (records) {
-    print_instruction(records);
-    records = destroy_record(records);
+  record = hex_file_to_records(argv[1]);
+  record = record_for_each(align_instruction, record);
+  record = record_for_each(extract_instruction, record);
+  while (record) {
+    print_instruction(record);
+    record = destroy_record(record);
   } return 0;
 }

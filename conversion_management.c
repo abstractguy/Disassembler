@@ -46,7 +46,6 @@ static record *file_pointer_to_record(FILE *fp, record *r1) {
 static FILE *next_record_file_pointer(FILE * fp) {
   unsigned char i = 0;
   do {assert(++i < 4);} while (fgetc(fp) != ':' && !feof(fp));
-  assert(i);
   return fp;
 }
 
