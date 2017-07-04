@@ -25,13 +25,10 @@ static unsigned char *file_pointer_to_record_bytevector(FILE *fp) {
 }
 
 static record *bytevector_to_record(unsigned char *b1, record *r1) {
-  record *r2 = NULL;
   unsigned short int size = b1[0];
-  unsigned char *b2 = NULL;
-  b2 = create_bytevector(size);
+  unsigned char *b2 = create_bytevector(b1[0]);
   copy_bytes(b2, &b1[4], size);
-  r2 = create_record(size, bytevector_to_word(b1), b2, r1);
-  return r2;
+  return create_record(size, bytevector_to_word(b1), b2, r1);
 }
 
 static record *file_pointer_to_record(FILE *fp, record *r1) {

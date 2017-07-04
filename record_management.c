@@ -17,8 +17,7 @@ record *destroy_record(record *r1) {
   record *r2 = NULL;
   if (r1) {
     r2 = r1->next;
-    if (r1->bytecode) free(r1->bytecode);
-    r1->bytecode = NULL;
+    destroy_bytevector(r1->bytecode);
     free(r1);
     r1 = NULL;
   } return r2;
