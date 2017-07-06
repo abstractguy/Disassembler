@@ -1,0 +1,6475 @@
+0000h	02 00 71    LJMP	0071h
+0023h	02 0D 09    LJMP	0D09h
+0026h	02 0F DE    LJMP	0FDEh
+0029h	12 00 80    LCALL	0080h
+002Ch	B9 00 03    CJNE R1,	00h,	03h
+002Fh	02 00 6B    LJMP	006Bh
+0032h	E4          CLR		A
+0033h	90 90 FF    MOV		DPTR,	90FFh
+0036h	78 09       MOV		R0,	09h
+0038h	79 01       MOV		R1,	01h
+003Ah	80 02       SJMP	02h
+003Ch	F0          MOVX	@DPTR,	A
+003Dh	A3          INC		DPTR
+003Eh	D8 FC       DJNZ	R0,	FCh
+0040h	D9 FA       DJNZ	R1,	FAh
+0042h	90 91 07    MOV		DPTR,	9107h
+0045h	AA 82       MOV		R2,	DPL
+0047h	AB 83       MOV		R3,	DPH
+0049h	90 00 83    MOV		DPTR,	0083h
+004Ch	78 1E       MOV		R0,	1Eh
+004Eh	79 01       MOV		R1,	01h
+0050h	80 15       SJMP	15h
+0052h	E4          CLR		A
+0053h	93          MOVC	A,	@A+DPTR
+0054h	A3          INC		DPTR
+0055h	AC 82       MOV		R4,	DPL
+0057h	AD 83       MOV		R5,	DPH
+0059h	8A 82       MOV		DPL,	R2
+005Bh	8B 83       MOV		DPH,	R3
+005Dh	F0          MOVX	@DPTR,	A
+005Eh	A3          INC		DPTR
+005Fh	AA 82       MOV		R2,	DPL
+0061h	AB 83       MOV		R3,	DPH
+0063h	8C 82       MOV		DPL,	R4
+0065h	8D 83       MOV		DPH,	R5
+0067h	D8 E9       DJNZ	R0,	E9h
+0069h	D9 E7       DJNZ	R1,	E7h
+006Bh	12 0E 53    LCALL	0E53h
+006Eh	12 10 24    LCALL	1024h
+0071h	75 D0 00    MOV		PSW,	00h
+0074h	75 81 BF    MOV		SP,	BFh
+0077h	75 10 FF    MOV		R0 #2,	FFh
+007Ah	75 11 90    MOV		R1 #2,	90h
+007Dh	02 00 29    LJMP	0029h
+0080h	79 01       MOV		R1,	01h
+0082h	22          RET
+
+0083h	07          INC		@R1
+0084h	25 78       ADD		A,	#78h
+0086h	00          NOP
+0087h	38          ADDC	A,	R0
+0088h	0C          INC		R4
+0089h	01 02       AJMP	0002h
+008Bh	06          INC		@R0
+008Ch	00          NOP
+008Dh	40 14       JC		14h
+008Fh	54 02       ANL		A,	02h
+0091h	00          NOP
+0092h	00          NOP
+0093h	00          NOP
+0094h	FF          MOV		R7,	A
+0095h	FF          MOV		R7,	A
+0096h	FF          MOV		R7,	A
+0097h	FF          MOV		R7,	A
+0098h	00          NOP
+0099h	00          NOP
+009Ah	00          NOP
+009Bh	00          NOP
+009Ch	FF          MOV		R7,	A
+009Dh	FF          MOV		R7,	A
+009Eh	00          NOP
+009Fh	00          NOP
+00A0h	C0 08       PUSH	R0 #1
+00A2h	C3          CLR		C
+00A3h	E0          MOVX	A,	@DPTR
+00A4h	96          SUBB	A,	@R0
+00A5h	F5 08       MOV		R0 #1,	A
+00A7h	08          INC		R0
+00A8h	A3          INC		DPTR
+00A9h	E0          MOVX	A,	@DPTR
+00AAh	96          SUBB	A,	@R0
+00ABh	42 08       ORL		R0 #1,	A
+00ADh	08          INC		R0
+00AEh	A3          INC		DPTR
+00AFh	E0          MOVX	A,	@DPTR
+00B0h	96          SUBB	A,	@R0
+00B1h	42 08       ORL		R0 #1,	A
+00B3h	08          INC		R0
+00B4h	A3          INC		DPTR
+00B5h	E0          MOVX	A,	@DPTR
+00B6h	96          SUBB	A,	@R0
+00B7h	42 08       ORL		R0 #1,	A
+00B9h	A2 D2       MOV		C,	OV
+00BBh	65 D0       XRL		A,	PSW
+00BDh	33          RLC		A
+00BEh	E5 08       MOV		A,	R0 #1
+00C0h	70 01       JNZ		01h
+00C2h	D3          SETB	C
+00C3h	D0 08       POP		R0 #1
+00C5h	22          RET
+
+00C6h	E4          CLR		A
+00C7h	CF          XCH		A,	R7
+00C8h	C0 E0       PUSH	ACC
+00CAh	E4          CLR		A
+00CBh	CE          XCH		A,	R6
+00CCh	C0 E0       PUSH	ACC
+00CEh	E4          CLR		A
+00CFh	CD          XCH		A,	R5
+00D0h	C0 E0       PUSH	ACC
+00D2h	E4          CLR		A
+00D3h	CC          XCH		A,	R4
+00D4h	C0 E0       PUSH	ACC
+00D6h	75 F0 20    MOV		B,	20h
+00D9h	C3          CLR		C
+00DAh	E6          MOV		A,	@R0
+00DBh	33          RLC		A
+00DCh	F6          MOV		@R0,	A
+00DDh	08          INC		R0
+00DEh	E6          MOV		A,	@R0
+00DFh	33          RLC		A
+00E0h	F6          MOV		@R0,	A
+00E1h	08          INC		R0
+00E2h	E6          MOV		A,	@R0
+00E3h	33          RLC		A
+00E4h	F6          MOV		@R0,	A
+00E5h	08          INC		R0
+00E6h	E6          MOV		A,	@R0
+00E7h	33          RLC		A
+00E8h	F6          MOV		@R0,	A
+00E9h	18          DEC		R0
+00EAh	18          DEC		R0
+00EBh	18          DEC		R0
+00ECh	EC          MOV		A,	R4
+00EDh	33          RLC		A
+00EEh	FC          MOV		R4,	A
+00EFh	ED          MOV		A,	R5
+00F0h	33          RLC		A
+00F1h	FD          MOV		R5,	A
+00F2h	EE          MOV		A,	R6
+00F3h	33          RLC		A
+00F4h	FE          MOV		R6,	A
+00F5h	EF          MOV		A,	R7
+00F6h	33          RLC		A
+00F7h	FF          MOV		R7,	A
+00F8h	C3          CLR		C
+00F9h	EC          MOV		A,	R4
+00FAh	97          SUBB	A,	@R1
+00FBh	09          INC		R1
+00FCh	ED          MOV		A,	R5
+00FDh	97          SUBB	A,	@R1
+00FEh	09          INC		R1
+00FFh	EE          MOV		A,	R6
+0100h	97          SUBB	A,	@R1
+0101h	09          INC		R1
+0102h	EF          MOV		A,	R7
+0103h	97          SUBB	A,	@R1
+0104h	19          DEC		R1
+0105h	19          DEC		R1
+0106h	19          DEC		R1
+0107h	40 0F       JC		0Fh
+0109h	FF          MOV		R7,	A
+010Ah	EC          MOV		A,	R4
+010Bh	97          SUBB	A,	@R1
+010Ch	FC          MOV		R4,	A
+010Dh	09          INC		R1
+010Eh	ED          MOV		A,	R5
+010Fh	97          SUBB	A,	@R1
+0110h	FD          MOV		R5,	A
+0111h	09          INC		R1
+0112h	EE          MOV		A,	R6
+0113h	97          SUBB	A,	@R1
+0114h	FE          MOV		R6,	A
+0115h	19          DEC		R1
+0116h	19          DEC		R1
+0117h	06          INC		@R0
+0118h	D5 F0 BE    DJNZ	B,	BEh
+011Bh	EC          MOV		A,	R4
+011Ch	F7          MOV		@R1,	A
+011Dh	09          INC		R1
+011Eh	ED          MOV		A,	R5
+011Fh	F7          MOV		@R1,	A
+0120h	09          INC		R1
+0121h	EE          MOV		A,	R6
+0122h	F7          MOV		@R1,	A
+0123h	09          INC		R1
+0124h	EF          MOV		A,	R7
+0125h	F7          MOV		@R1,	A
+0126h	19          DEC		R1
+0127h	19          DEC		R1
+0128h	19          DEC		R1
+0129h	D0 E0       POP		ACC
+012Bh	FC          MOV		R4,	A
+012Ch	D0 E0       POP		ACC
+012Eh	FD          MOV		R5,	A
+012Fh	D0 E0       POP		ACC
+0131h	FE          MOV		R6,	A
+0132h	D0 E0       POP		ACC
+0134h	FF          MOV		R7,	A
+0135h	22          RET
+
+0136h	E4          CLR		A
+0137h	C3          CLR		C
+0138h	96          SUBB	A,	@R0
+0139h	F6          MOV		@R0,	A
+013Ah	08          INC		R0
+013Bh	E4          CLR		A
+013Ch	96          SUBB	A,	@R0
+013Dh	F6          MOV		@R0,	A
+013Eh	08          INC		R0
+013Fh	E4          CLR		A
+0140h	96          SUBB	A,	@R0
+0141h	F6          MOV		@R0,	A
+0142h	08          INC		R0
+0143h	E4          CLR		A
+0144h	96          SUBB	A,	@R0
+0145h	F6          MOV		@R0,	A
+0146h	22          RET
+
+0147h	E0          MOVX	A,	@DPTR
+0148h	26          ADD		A,	@R0
+0149h	F6          MOV		@R0,	A
+014Ah	08          INC		R0
+014Bh	A3          INC		DPTR
+014Ch	E0          MOVX	A,	@DPTR
+014Dh	36          ADDC	A,	@R0
+014Eh	F6          MOV		@R0,	A
+014Fh	08          INC		R0
+0150h	A3          INC		DPTR
+0151h	E0          MOVX	A,	@DPTR
+0152h	36          ADDC	A,	@R0
+0153h	F6          MOV		@R0,	A
+0154h	08          INC		R0
+0155h	A3          INC		DPTR
+0156h	E0          MOVX	A,	@DPTR
+0157h	36          ADDC	A,	@R0
+0158h	F6          MOV		@R0,	A
+0159h	22          RET
+
+015Ah	E0          MOVX	A,	@DPTR
+015Bh	56          ANL		A,	@R0
+015Ch	F6          MOV		@R0,	A
+015Dh	08          INC		R0
+015Eh	A3          INC		DPTR
+015Fh	E0          MOVX	A,	@DPTR
+0160h	56          ANL		A,	@R0
+0161h	F6          MOV		@R0,	A
+0162h	08          INC		R0
+0163h	A3          INC		DPTR
+0164h	E0          MOVX	A,	@DPTR
+0165h	56          ANL		A,	@R0
+0166h	F6          MOV		@R0,	A
+0167h	08          INC		R0
+0168h	A3          INC		DPTR
+0169h	E0          MOVX	A,	@DPTR
+016Ah	56          ANL		A,	@R0
+016Bh	F6          MOV		@R0,	A
+016Ch	22          RET
+
+016Dh	E0          MOVX	A,	@DPTR
+016Eh	F6          MOV		@R0,	A
+016Fh	08          INC		R0
+0170h	A3          INC		DPTR
+0171h	E0          MOVX	A,	@DPTR
+0172h	F6          MOV		@R0,	A
+0173h	08          INC		R0
+0174h	A3          INC		DPTR
+0175h	E0          MOVX	A,	@DPTR
+0176h	F6          MOV		@R0,	A
+0177h	08          INC		R0
+0178h	A3          INC		DPTR
+0179h	E0          MOVX	A,	@DPTR
+017Ah	F6          MOV		@R0,	A
+017Bh	22          RET
+
+017Ch	E6          MOV		A,	@R0
+017Dh	F0          MOVX	@DPTR,	A
+017Eh	08          INC		R0
+017Fh	A3          INC		DPTR
+0180h	E6          MOV		A,	@R0
+0181h	F0          MOVX	@DPTR,	A
+0182h	08          INC		R0
+0183h	A3          INC		DPTR
+0184h	E6          MOV		A,	@R0
+0185h	F0          MOVX	@DPTR,	A
+0186h	08          INC		R0
+0187h	A3          INC		DPTR
+0188h	E6          MOV		A,	@R0
+0189h	F0          MOVX	@DPTR,	A
+018Ah	22          RET
+
+018Bh	CA          XCH		A,	R2
+018Ch	C0 E0       PUSH	ACC
+018Eh	E6          MOV		A,	@R0
+018Fh	F0          MOVX	@DPTR,	A
+0190h	A3          INC		DPTR
+0191h	08          INC		R0
+0192h	DA FA       DJNZ	R2,	FAh
+0194h	D0 E0       POP		ACC
+0196h	FA          MOV		R2,	A
+0197h	22          RET
+
+0198h	CA          XCH		A,	R2
+0199h	C0 E0       PUSH	ACC
+019Bh	E0          MOVX	A,	@DPTR
+019Ch	A3          INC		DPTR
+019Dh	C5 82       XCH		A,	DPL
+019Fh	CC          XCH		A,	R4
+01A0h	C5 82       XCH		A,	DPL
+01A2h	C5 83       XCH		A,	DPH
+01A4h	CD          XCH		A,	R5
+01A5h	C5 83       XCH		A,	DPH
+01A7h	F0          MOVX	@DPTR,	A
+01A8h	A3          INC		DPTR
+01A9h	C5 82       XCH		A,	DPL
+01ABh	CC          XCH		A,	R4
+01ACh	C5 82       XCH		A,	DPL
+01AEh	C5 83       XCH		A,	DPH
+01B0h	CD          XCH		A,	R5
+01B1h	C5 83       XCH		A,	DPH
+01B3h	DA E6       DJNZ	R2,	E6h
+01B5h	D0 E0       POP		ACC
+01B7h	CA          XCH		A,	R2
+01B8h	22          RET
+
+01B9h	25 10       ADD		A,	R0 #2
+01BBh	10 AF 08    JBC		EA,	08h
+01BEh	F5 10       MOV		R0 #2,	A
+01C0h	40 02       JC		02h
+01C2h	15 11       DEC		R1 #2
+01C4h	80 08       SJMP	08h
+01C6h	F5 10       MOV		R0 #2,	A
+01C8h	40 02       JC		02h
+01CAh	15 11       DEC		R1 #2
+01CCh	D2 AF       SETB	EA
+01CEh	22          RET
+
+01CFh	C0 D0       PUSH	PSW
+01D1h	25 10       ADD		A,	R0 #2
+01D3h	10 AF 08    JBC		EA,	08h
+01D6h	F5 10       MOV		R0 #2,	A
+01D8h	50 02       JNC		02h
+01DAh	05 11       INC		R1 #2
+01DCh	80 08       SJMP	08h
+01DEh	F5 10       MOV		R0 #2,	A
+01E0h	50 02       JNC		02h
+01E2h	05 11       INC		R1 #2
+01E4h	D2 AF       SETB	EA
+01E6h	D0 D0       POP		PSW
+01E8h	22          RET
+
+01E9h	25 10       ADD		A,	R0 #2
+01EBh	F5 82       MOV		DPL,	A
+01EDh	10 AF 08    JBC		EA,	08h
+01F0h	F5 10       MOV		R0 #2,	A
+01F2h	40 02       JC		02h
+01F4h	15 11       DEC		R1 #2
+01F6h	80 08       SJMP	08h
+01F8h	F5 10       MOV		R0 #2,	A
+01FAh	40 02       JC		02h
+01FCh	15 11       DEC		R1 #2
+01FEh	D2 AF       SETB	EA
+0200h	85 11 83    MOV		R1 #2,	DPH
+0203h	22          RET
+
+0204h	25 10       ADD		A,	R0 #2
+0206h	F5 82       MOV		DPL,	A
+0208h	E4          CLR		A
+0209h	35 11       ADDC	A,	R1 #2
+020Bh	F5 83       MOV		DPH,	A
+020Dh	22          RET
+
+020Eh	E4          CLR		A
+020Fh	73          JMP		@A+DPTR
+0210h	25 10       ADD		A,	R0 #2
+0212h	C5 82       XCH		A,	DPL
+0214h	C0 E0       PUSH	ACC
+0216h	E5 11       MOV		A,	R1 #2
+0218h	34 FF       ADDC	A,	FFh
+021Ah	C5 83       XCH		A,	DPH
+021Ch	C0 E0       PUSH	ACC
+021Eh	E5 10       MOV		A,	R0 #2
+0220h	C3          CLR		C
+0221h	95 82       SUBB	A,	DPL
+0223h	24 F9       ADD		A,	F9h
+0225h	10 AF 08    JBC		EA,	08h
+0228h	85 83 11    MOV		DPH,	R1 #2
+022Bh	85 82 10    MOV		DPL,	R0 #2
+022Eh	80 08       SJMP	08h
+0230h	85 83 11    MOV		DPH,	R1 #2
+0233h	85 82 10    MOV		DPL,	R0 #2
+0236h	D2 AF       SETB	EA
+0238h	CE          XCH		A,	R6
+0239h	F0          MOVX	@DPTR,	A
+023Ah	A3          INC		DPTR
+023Bh	E5 20       MOV		A,	#20h
+023Dh	F0          MOVX	@DPTR,	A
+023Eh	A3          INC		DPTR
+023Fh	78 08       MOV		R0,	08h
+0241h	E6          MOV		A,	@R0
+0242h	08          INC		R0
+0243h	F0          MOVX	@DPTR,	A
+0244h	A3          INC		DPTR
+0245h	DE FA       DJNZ	R6,	FAh
+0247h	EF          MOV		A,	R7
+0248h	F0          MOVX	@DPTR,	A
+0249h	A3          INC		DPTR
+024Ah	E5 81       MOV		A,	SP
+024Ch	24 FB       ADD		A,	FBh
+024Eh	F8          MOV		R0,	A
+024Fh	E6          MOV		A,	@R0
+0250h	08          INC		R0
+0251h	F0          MOVX	@DPTR,	A
+0252h	A3          INC		DPTR
+0253h	E6          MOV		A,	@R0
+0254h	08          INC		R0
+0255h	F0          MOVX	@DPTR,	A
+0256h	A3          INC		DPTR
+0257h	08          INC		R0
+0258h	08          INC		R0
+0259h	E6          MOV		A,	@R0
+025Ah	08          INC		R0
+025Bh	F0          MOVX	@DPTR,	A
+025Ch	A3          INC		DPTR
+025Dh	E6          MOV		A,	@R0
+025Eh	08          INC		R0
+025Fh	F0          MOVX	@DPTR,	A
+0260h	A3          INC		DPTR
+0261h	15 81       DEC		SP
+0263h	15 81       DEC		SP
+0265h	D0 E0       POP		ACC
+0267h	FE          MOV		R6,	A
+0268h	D0 E0       POP		ACC
+026Ah	F8          MOV		R0,	A
+026Bh	15 81       DEC		SP
+026Dh	15 81       DEC		SP
+026Fh	E8          MOV		A,	R0
+0270h	C0 E0       PUSH	ACC
+0272h	EE          MOV		A,	R6
+0273h	C0 E0       PUSH	ACC
+0275h	22          RET
+
+0276h	85 11 83    MOV		R1 #2,	DPH
+0279h	85 10 82    MOV		R0 #2,	DPL
+027Ch	E0          MOVX	A,	@DPTR
+027Dh	A3          INC		DPTR
+027Eh	FE          MOV		R6,	A
+027Fh	E0          MOVX	A,	@DPTR
+0280h	A3          INC		DPTR
+0281h	F5 20       MOV		#20h,	A
+0283h	78 08       MOV		R0,	08h
+0285h	E0          MOVX	A,	@DPTR
+0286h	A3          INC		DPTR
+0287h	F6          MOV		@R0,	A
+0288h	08          INC		R0
+0289h	DF FA       DJNZ	R7,	FAh
+028Bh	E0          MOVX	A,	@DPTR
+028Ch	A3          INC		DPTR
+028Dh	FF          MOV		R7,	A
+028Eh	E0          MOVX	A,	@DPTR
+028Fh	A3          INC		DPTR
+0290h	C0 E0       PUSH	ACC
+0292h	E0          MOVX	A,	@DPTR
+0293h	A3          INC		DPTR
+0294h	C0 E0       PUSH	ACC
+0296h	E0          MOVX	A,	@DPTR
+0297h	A3          INC		DPTR
+0298h	C0 E0       PUSH	ACC
+029Ah	E0          MOVX	A,	@DPTR
+029Bh	A3          INC		DPTR
+029Ch	C0 E0       PUSH	ACC
+029Eh	10 AF 08    JBC		EA,	08h
+02A1h	85 82 10    MOV		DPL,	R0 #2
+02A4h	85 83 11    MOV		DPH,	R1 #2
+02A7h	80 08       SJMP	08h
+02A9h	85 82 10    MOV		DPL,	R0 #2
+02ACh	85 83 11    MOV		DPH,	R1 #2
+02AFh	D2 AF       SETB	EA
+02B1h	D0 83       POP		DPH
+02B3h	D0 82       POP		DPL
+02B5h	22          RET
+
+02B6h	74 02       MOV		A,	02h
+02B8h	80 02       SJMP	02h
+02BAh	74 01       MOV		A,	01h
+02BCh	C0 E0       PUSH	ACC
+02BEh	F4          CPL		A
+02BFh	04          INC		A
+02C0h	12 01 E9    LCALL	01E9h
+02C3h	D0 E0       POP		ACC
+02C5h	12 01 8B    LCALL	018Bh
+02C8h	22          RET
+
+02C9h	74 04       MOV		A,	04h
+02CBh	80 04       SJMP	04h
+02CDh	74 02       MOV		A,	02h
+02CFh	80 00       SJMP	00h
+02D1h	CC          XCH		A,	R4
+02D2h	C0 E0       PUSH	ACC
+02D4h	ED          MOV		A,	R5
+02D5h	C0 E0       PUSH	ACC
+02D7h	E5 10       MOV		A,	R0 #2
+02D9h	C3          CLR		C
+02DAh	9C          SUBB	A,	R4
+02DBh	CC          XCH		A,	R4
+02DCh	AD 11       MOV		R5,	R1 #2
+02DEh	50 01       JNC		01h
+02E0h	1D          DEC		R5
+02E1h	10 AF 06    JBC		EA,	06h
+02E4h	8C 10       MOV		R0 #2,	R4
+02E6h	8D 11       MOV		R1 #2,	R5
+02E8h	80 06       SJMP	06h
+02EAh	8C 10       MOV		R0 #2,	R4
+02ECh	8D 11       MOV		R1 #2,	R5
+02EEh	D2 AF       SETB	EA
+02F0h	12 01 98    LCALL	0198h
+02F3h	D0 E0       POP		ACC
+02F5h	FD          MOV		R5,	A
+02F6h	D0 E0       POP		ACC
+02F8h	FC          MOV		R4,	A
+02F9h	22          RET
+
+02FAh	74 F1       MOV		A,	F1h
+02FCh	12 02 10    LCALL	0210h
+02FFh	74 E6       MOV		A,	E6h
+0301h	12 01 B9    LCALL	01B9h
+0304h	74 03       MOV		A,	03h
+0306h	12 02 04    LCALL	0204h
+0309h	EA          MOV		A,	R2
+030Ah	F0          MOVX	@DPTR,	A
+030Bh	A3          INC		DPTR
+030Ch	EB          MOV		A,	R3
+030Dh	F0          MOVX	@DPTR,	A
+030Eh	74 01       MOV		A,	01h
+0310h	12 02 04    LCALL	0204h
+0313h	EC          MOV		A,	R4
+0314h	F0          MOVX	@DPTR,	A
+0315h	A3          INC		DPTR
+0316h	ED          MOV		A,	R5
+0317h	F0          MOVX	@DPTR,	A
+0318h	74 29       MOV		A,	29h
+031Ah	12 02 04    LCALL	0204h
+031Dh	E0          MOVX	A,	@DPTR
+031Eh	F8          MOV		R0,	A
+031Fh	A3          INC		DPTR
+0320h	E0          MOVX	A,	@DPTR
+0321h	F9          MOV		R1,	A
+0322h	74 29       MOV		A,	29h
+0324h	12 02 04    LCALL	0204h
+0327h	12 06 F5    LCALL	06F5h
+032Ah	74 2B       MOV		A,	2Bh
+032Ch	12 02 04    LCALL	0204h
+032Fh	E0          MOVX	A,	@DPTR
+0330h	F8          MOV		R0,	A
+0331h	A3          INC		DPTR
+0332h	E0          MOVX	A,	@DPTR
+0333h	F9          MOV		R1,	A
+0334h	74 2B       MOV		A,	2Bh
+0336h	12 02 04    LCALL	0204h
+0339h	E8          MOV		A,	R0
+033Ah	F0          MOVX	@DPTR,	A
+033Bh	A3          INC		DPTR
+033Ch	E9          MOV		A,	R1
+033Dh	80 24       SJMP	24h
+033Fh	74 01       MOV		A,	01h
+0341h	12 02 04    LCALL	0204h
+0344h	12 06 97    LCALL	0697h
+0347h	12 02 04    LCALL	0204h
+034Ah	12 06 9F    LCALL	069Fh
+034Dh	12 02 0E    LCALL	020Eh
+0350h	74 01       MOV		A,	01h
+0352h	12 02 04    LCALL	0204h
+0355h	EA          MOV		A,	R2
+0356h	F0          MOVX	@DPTR,	A
+0357h	A3          INC		DPTR
+0358h	EB          MOV		A,	R3
+0359h	F0          MOVX	@DPTR,	A
+035Ah	74 29       MOV		A,	29h
+035Ch	12 02 04    LCALL	0204h
+035Fh	EE          MOV		A,	R6
+0360h	F0          MOVX	@DPTR,	A
+0361h	A3          INC		DPTR
+0362h	EF          MOV		A,	R7
+0363h	F0          MOVX	@DPTR,	A
+0364h	74 29       MOV		A,	29h
+0366h	12 02 04    LCALL	0204h
+0369h	12 06 AC    LCALL	06ACh
+036Ch	F9          MOV		R1,	A
+036Dh	70 0E       JNZ		0Eh
+036Fh	7A 00       MOV		R2,	00h
+0371h	7B 00       MOV		R3,	00h
+0373h	74 1A       MOV		A,	1Ah
+0375h	12 01 CF    LCALL	01CFh
+0378h	7F 08       MOV		R7,	08h
+037Ah	02 02 76    LJMP	0276h
+037Dh	74 29       MOV		A,	29h
+037Fh	12 02 04    LCALL	0204h
+0382h	E0          MOVX	A,	@DPTR
+0383h	24 01       ADD		A,	01h
+0385h	FE          MOV		R6,	A
+0386h	A3          INC		DPTR
+0387h	E0          MOVX	A,	@DPTR
+0388h	34 00       ADDC	A,	00h
+038Ah	FF          MOV		R7,	A
+038Bh	74 25       MOV		A,	25h
+038Dh	69          XRL		A,	R1
+038Eh	70 AF       JNZ		AFh
+0390h	74 29       MOV		A,	29h
+0392h	12 02 04    LCALL	0204h
+0395h	EE          MOV		A,	R6
+0396h	F0          MOVX	@DPTR,	A
+0397h	A3          INC		DPTR
+0398h	EF          MOV		A,	R7
+0399h	F0          MOVX	@DPTR,	A
+039Ah	74 29       MOV		A,	29h
+039Ch	12 02 04    LCALL	0204h
+039Fh	12 06 AC    LCALL	06ACh
+03A2h	85 10 82    MOV		R0 #2,	DPL
+03A5h	85 11 83    MOV		R1 #2,	DPH
+03A8h	F0          MOVX	@DPTR,	A
+03A9h	74 29       MOV		A,	29h
+03ABh	12 02 04    LCALL	0204h
+03AEh	E0          MOVX	A,	@DPTR
+03AFh	24 01       ADD		A,	01h
+03B1h	F8          MOV		R0,	A
+03B2h	A3          INC		DPTR
+03B3h	E0          MOVX	A,	@DPTR
+03B4h	34 00       ADDC	A,	00h
+03B6h	F9          MOV		R1,	A
+03B7h	74 29       MOV		A,	29h
+03B9h	12 02 04    LCALL	0204h
+03BCh	12 06 F5    LCALL	06F5h
+03BFh	85 10 82    MOV		R0 #2,	DPL
+03C2h	85 11 83    MOV		R1 #2,	DPH
+03C5h	E0          MOVX	A,	@DPTR
+03C6h	24 DB       ADD		A,	DBh
+03C8h	70 03       JNZ		03h
+03CAh	02 06 87    LJMP	0687h
+03CDh	24 CD       ADD		A,	CDh
+03CFh	70 03       JNZ		03h
+03D1h	02 05 E4    LJMP	05E4h
+03D4h	24 F5       ADD		A,	F5h
+03D6h	60 2C       JZ		2Ch
+03D8h	14          DEC		A
+03D9h	60 62       JZ		62h
+03DBh	24 FB       ADD		A,	FBh
+03DDh	60 5E       JZ		5Eh
+03DFh	24 FA       ADD		A,	FAh
+03E1h	70 03       JNZ		03h
+03E3h	02 05 E4    LJMP	05E4h
+03E6h	14          DEC		A
+03E7h	70 03       JNZ		03h
+03E9h	02 05 FF    LJMP	05FFh
+03ECh	24 FD       ADD		A,	FDh
+03EEh	70 03       JNZ		03h
+03F0h	02 06 26    LJMP	0626h
+03F3h	24 FE       ADD		A,	FEh
+03F5h	70 03       JNZ		03h
+03F7h	02 05 E4    LJMP	05E4h
+03FAh	24 FD       ADD		A,	FDh
+03FCh	70 03       JNZ		03h
+03FEh	02 05 E4    LJMP	05E4h
+0401h	02 03 64    LJMP	0364h
+0404h	74 2B       MOV		A,	2Bh
+0406h	12 02 04    LCALL	0204h
+0409h	12 06 B9    LCALL	06B9h
+040Ch	FA          MOV		R2,	A
+040Dh	12 06 8C    LCALL	068Ch
+0410h	12 02 04    LCALL	0204h
+0413h	E0          MOVX	A,	@DPTR
+0414h	FB          MOV		R3,	A
+0415h	A3          INC		DPTR
+0416h	E0          MOVX	A,	@DPTR
+0417h	F5 83       MOV		DPH,	A
+0419h	8B 82       MOV		DPL,	R3
+041Bh	12 06 F5    LCALL	06F5h
+041Eh	EA          MOV		A,	R2
+041Fh	F9          MOV		R1,	A
+0420h	74 01       MOV		A,	01h
+0422h	12 02 04    LCALL	0204h
+0425h	12 06 97    LCALL	0697h
+0428h	12 02 04    LCALL	0204h
+042Bh	12 06 9F    LCALL	069Fh
+042Eh	12 02 0E    LCALL	020Eh
+0431h	74 01       MOV		A,	01h
+0433h	12 02 04    LCALL	0204h
+0436h	EA          MOV		A,	R2
+0437h	F0          MOVX	@DPTR,	A
+0438h	A3          INC		DPTR
+0439h	EB          MOV		A,	R3
+043Ah	02 03 63    LJMP	0363h
+043Dh	74 2B       MOV		A,	2Bh
+043Fh	12 02 04    LCALL	0204h
+0442h	12 06 AC    LCALL	06ACh
+0445h	F8          MOV		R0,	A
+0446h	A3          INC		DPTR
+0447h	E0          MOVX	A,	@DPTR
+0448h	12 06 D1    LCALL	06D1h
+044Bh	33          RLC		A
+044Ch	95 E0       SUBB	A,	ACC
+044Eh	F5 0A       MOV		R2 #1,	A
+0450h	F5 0B       MOV		R3 #1,	A
+0452h	74 2B       MOV		A,	2Bh
+0454h	12 02 04    LCALL	0204h
+0457h	12 06 E4    LCALL	06E4h
+045Ah	12 02 04    LCALL	0204h
+045Dh	12 06 F2    LCALL	06F2h
+0460h	90 91 1C    MOV		DPTR,	911Ch
+0463h	78 08       MOV		R0,	08h
+0465h	12 00 A0    LCALL	00A0h
+0468h	40 1D       JC		1Dh
+046Ah	79 2D       MOV		R1,	2Dh
+046Ch	74 01       MOV		A,	01h
+046Eh	12 02 04    LCALL	0204h
+0471h	12 06 97    LCALL	0697h
+0474h	12 02 04    LCALL	0204h
+0477h	12 06 9F    LCALL	069Fh
+047Ah	12 02 0E    LCALL	020Eh
+047Dh	74 01       MOV		A,	01h
+047Fh	12 02 04    LCALL	0204h
+0482h	EA          MOV		A,	R2
+0483h	F0          MOVX	@DPTR,	A
+0484h	A3          INC		DPTR
+0485h	EB          MOV		A,	R3
+0486h	F0          MOVX	@DPTR,	A
+0487h	85 10 82    MOV		R0 #2,	DPL
+048Ah	85 11 83    MOV		R1 #2,	DPH
+048Dh	E0          MOVX	A,	@DPTR
+048Eh	64 6F       XRL		A,	6Fh
+0490h	70 09       JNZ		09h
+0492h	74 0B       MOV		A,	0Bh
+0494h	12 02 04    LCALL	0204h
+0497h	74 08       MOV		A,	08h
+0499h	80 17       SJMP	17h
+049Bh	E0          MOVX	A,	@DPTR
+049Ch	44 20       ORL		A,	20h
+049Eh	64 78       XRL		A,	78h
+04A0h	60 09       JZ		09h
+04A2h	74 0B       MOV		A,	0Bh
+04A4h	12 02 04    LCALL	0204h
+04A7h	74 0A       MOV		A,	0Ah
+04A9h	80 07       SJMP	07h
+04ABh	74 0B       MOV		A,	0Bh
+04ADh	12 02 04    LCALL	0204h
+04B0h	74 10       MOV		A,	10h
+04B2h	F0          MOVX	@DPTR,	A
+04B3h	A3          INC		DPTR
+04B4h	E4          CLR		A
+04B5h	F0          MOVX	@DPTR,	A
+04B6h	A3          INC		DPTR
+04B7h	F0          MOVX	@DPTR,	A
+04B8h	A3          INC		DPTR
+04B9h	F0          MOVX	@DPTR,	A
+04BAh	7A 0B       MOV		R2,	0Bh
+04BCh	7B 00       MOV		R3,	00h
+04BEh	74 05       MOV		A,	05h
+04C0h	12 02 04    LCALL	0204h
+04C3h	78 08       MOV		R0,	08h
+04C5h	12 01 7C    LCALL	017Ch
+04C8h	85 10 82    MOV		R0 #2,	DPL
+04CBh	85 11 83    MOV		R1 #2,	DPH
+04CEh	E0          MOVX	A,	@DPTR
+04CFh	64 64       XRL		A,	64h
+04D1h	70 23       JNZ		23h
+04D3h	90 91 1C    MOV		DPTR,	911Ch
+04D6h	78 08       MOV		R0,	08h
+04D8h	12 00 A0    LCALL	00A0h
+04DBh	40 19       JC		19h
+04DDh	74 05       MOV		A,	05h
+04DFh	12 02 04    LCALL	0204h
+04E2h	78 08       MOV		R0,	08h
+04E4h	12 01 6D    LCALL	016Dh
+04E7h	78 08       MOV		R0,	08h
+04E9h	12 01 36    LCALL	0136h
+04ECh	74 05       MOV		A,	05h
+04EEh	12 02 04    LCALL	0204h
+04F1h	78 08       MOV		R0,	08h
+04F3h	12 01 7C    LCALL	017Ch
+04F6h	EA          MOV		A,	R2
+04F7h	24 FF       ADD		A,	FFh
+04F9h	FC          MOV		R4,	A
+04FAh	EB          MOV		A,	R3
+04FBh	34 FF       ADDC	A,	FFh
+04FDh	FD          MOV		R5,	A
+04FEh	1A          DEC		R2
+04FFh	FB          MOV		R3,	A
+0500h	74 05       MOV		A,	05h
+0502h	12 02 04    LCALL	0204h
+0505h	78 0C       MOV		R0,	0Ch
+0507h	12 01 6D    LCALL	016Dh
+050Ah	74 0B       MOV		A,	0Bh
+050Ch	12 02 04    LCALL	0204h
+050Fh	78 08       MOV		R0,	08h
+0511h	12 01 6D    LCALL	016Dh
+0514h	78 0C       MOV		R0,	0Ch
+0516h	79 08       MOV		R1,	08h
+0518h	12 00 C6    LCALL	00C6h
+051Bh	E5 08       MOV		A,	R0 #1
+051Dh	24 30       ADD		A,	30h
+051Fh	FE          MOV		R6,	A
+0520h	C3          CLR		C
+0521h	94 3A       SUBB	A,	3Ah
+0523h	40 0B       JC		0Bh
+0525h	85 10 82    MOV		R0 #2,	DPL
+0528h	85 11 83    MOV		R1 #2,	DPH
+052Bh	E0          MOVX	A,	@DPTR
+052Ch	24 AF       ADD		A,	AFh
+052Eh	2E          ADD		A,	R6
+052Fh	FE          MOV		R6,	A
+0530h	74 0F       MOV		A,	0Fh
+0532h	12 02 04    LCALL	0204h
+0535h	E5 82       MOV		A,	DPL
+0537h	2C          ADD		A,	R4
+0538h	F8          MOV		R0,	A
+0539h	E5 83       MOV		A,	DPH
+053Bh	3D          ADDC	A,	R5
+053Ch	F9          MOV		R1,	A
+053Dh	74 09       MOV		A,	09h
+053Fh	12 02 04    LCALL	0204h
+0542h	12 06 F5    LCALL	06F5h
+0545h	74 09       MOV		A,	09h
+0547h	12 02 04    LCALL	0204h
+054Ah	12 06 9F    LCALL	069Fh
+054Dh	EE          MOV		A,	R6
+054Eh	F0          MOVX	@DPTR,	A
+054Fh	74 05       MOV		A,	05h
+0551h	12 02 04    LCALL	0204h
+0554h	78 0C       MOV		R0,	0Ch
+0556h	12 01 6D    LCALL	016Dh
+0559h	74 0B       MOV		A,	0Bh
+055Bh	12 02 04    LCALL	0204h
+055Eh	78 08       MOV		R0,	08h
+0560h	12 01 6D    LCALL	016Dh
+0563h	78 0C       MOV		R0,	0Ch
+0565h	79 08       MOV		R1,	08h
+0567h	12 00 C6    LCALL	00C6h
+056Ah	74 05       MOV		A,	05h
+056Ch	12 02 04    LCALL	0204h
+056Fh	78 0C       MOV		R0,	0Ch
+0571h	12 01 7C    LCALL	017Ch
+0574h	74 05       MOV		A,	05h
+0576h	12 02 04    LCALL	0204h
+0579h	78 08       MOV		R0,	08h
+057Bh	12 01 6D    LCALL	016Dh
+057Eh	E5 08       MOV		A,	R0 #1
+0580h	45 09       ORL		A,	R1 #1
+0582h	45 0A       ORL		A,	R2 #1
+0584h	45 0B       ORL		A,	R3 #1
+0586h	60 11       JZ		11h
+0588h	C3          CLR		C
+0589h	EA          MOV		A,	R2
+058Ah	94 01       SUBB	A,	01h
+058Ch	EB          MOV		A,	R3
+058Dh	94 00       SUBB	A,	00h
+058Fh	A2 D2       MOV		C,	OV
+0591h	65 D0       XRL		A,	PSW
+0593h	33          RLC		A
+0594h	40 03       JC		03h
+0596h	02 04 F6    LJMP	04F6h
+0599h	74 0B       MOV		A,	0Bh
+059Bh	C3          CLR		C
+059Ch	9A          SUBB	A,	R2
+059Dh	FE          MOV		R6,	A
+059Eh	E4          CLR		A
+059Fh	9B          SUBB	A,	R3
+05A0h	FF          MOV		R7,	A
+05A1h	74 09       MOV		A,	09h
+05A3h	12 02 04    LCALL	0204h
+05A6h	12 06 D5    LCALL	06D5h
+05A9h	74 01       MOV		A,	01h
+05ABh	12 02 04    LCALL	0204h
+05AEh	E0          MOVX	A,	@DPTR
+05AFh	FA          MOV		R2,	A
+05B0h	A3          INC		DPTR
+05B1h	E0          MOVX	A,	@DPTR
+05B2h	FB          MOV		R3,	A
+05B3h	80 28       SJMP	28h
+05B5h	85 08 82    MOV		R0 #1,	DPL
+05B8h	85 09 83    MOV		R1 #1,	DPH
+05BBh	E0          MOVX	A,	@DPTR
+05BCh	F9          MOV		R1,	A
+05BDh	74 03       MOV		A,	03h
+05BFh	12 02 04    LCALL	0204h
+05C2h	12 06 9F    LCALL	069Fh
+05C5h	12 02 0E    LCALL	020Eh
+05C8h	85 08 82    MOV		R0 #1,	DPL
+05CBh	85 09 83    MOV		R1 #1,	DPH
+05CEh	A3          INC		DPTR
+05CFh	85 82 08    MOV		DPL,	R0 #1
+05D2h	85 83 09    MOV		DPH,	R1 #1
+05D5h	EE          MOV		A,	R6
+05D6h	24 FF       ADD		A,	FFh
+05D8h	1E          DEC		R6
+05D9h	EF          MOV		A,	R7
+05DAh	34 FF       ADDC	A,	FFh
+05DCh	FF          MOV		R7,	A
+05DDh	EE          MOV		A,	R6
+05DEh	4F          ORL		A,	R7
+05DFh	70 D4       JNZ		D4h
+05E1h	02 04 31    LJMP	0431h
+05E4h	74 2B       MOV		A,	2Bh
+05E6h	12 02 04    LCALL	0204h
+05E9h	12 06 C3    LCALL	06C3h
+05ECh	12 02 04    LCALL	0204h
+05EFh	12 06 E4    LCALL	06E4h
+05F2h	12 02 04    LCALL	0204h
+05F5h	12 06 FB    LCALL	06FBh
+05F8h	E8          MOV		A,	R0
+05F9h	F0          MOVX	@DPTR,	A
+05FAh	A3          INC		DPTR
+05FBh	E9          MOV		A,	R1
+05FCh	02 04 86    LJMP	0486h
+05FFh	74 2B       MOV		A,	2Bh
+0601h	12 02 04    LCALL	0204h
+0604h	12 06 C3    LCALL	06C3h
+0607h	12 02 04    LCALL	0204h
+060Ah	12 06 E4    LCALL	06E4h
+060Dh	12 02 04    LCALL	0204h
+0610h	12 06 F2    LCALL	06F2h
+0613h	90 91 20    MOV		DPTR,	9120h
+0616h	78 08       MOV		R0,	08h
+0618h	12 01 5A    LCALL	015Ah
+061Bh	85 10 82    MOV		R0 #2,	DPL
+061Eh	85 11 83    MOV		R1 #2,	DPH
+0621h	74 78       MOV		A,	78h
+0623h	02 04 86    LJMP	0486h
+0626h	74 2B       MOV		A,	2Bh
+0628h	12 02 04    LCALL	0204h
+062Bh	12 06 B9    LCALL	06B9h
+062Eh	F5 08       MOV		R0 #1,	A
+0630h	A3          INC		DPTR
+0631h	E0          MOVX	A,	@DPTR
+0632h	F5 09       MOV		R1 #1,	A
+0634h	12 06 8C    LCALL	068Ch
+0637h	12 02 04    LCALL	0204h
+063Ah	12 06 F2    LCALL	06F2h
+063Dh	AA 08       MOV		R2,	R0 #1
+063Fh	AB 09       MOV		R3,	R1 #1
+0641h	12 10 08    LCALL	1008h
+0644h	8A 0A       MOV		R2 #1,	R2
+0646h	8B 0B       MOV		R3 #1,	R3
+0648h	AE 0A       MOV		R6,	R2 #1
+064Ah	AF 0B       MOV		R7,	R3 #1
+064Ch	74 01       MOV		A,	01h
+064Eh	12 02 04    LCALL	0204h
+0651h	E0          MOVX	A,	@DPTR
+0652h	FA          MOV		R2,	A
+0653h	A3          INC		DPTR
+0654h	E0          MOVX	A,	@DPTR
+0655h	FB          MOV		R3,	A
+0656h	80 28       SJMP	28h
+0658h	85 08 82    MOV		R0 #1,	DPL
+065Bh	85 09 83    MOV		R1 #1,	DPH
+065Eh	E0          MOVX	A,	@DPTR
+065Fh	F9          MOV		R1,	A
+0660h	74 03       MOV		A,	03h
+0662h	12 02 04    LCALL	0204h
+0665h	12 06 9F    LCALL	069Fh
+0668h	12 02 0E    LCALL	020Eh
+066Bh	85 08 82    MOV		R0 #1,	DPL
+066Eh	85 09 83    MOV		R1 #1,	DPH
+0671h	A3          INC		DPTR
+0672h	85 82 08    MOV		DPL,	R0 #1
+0675h	85 83 09    MOV		DPH,	R1 #1
+0678h	EE          MOV		A,	R6
+0679h	24 FF       ADD		A,	FFh
+067Bh	1E          DEC		R6
+067Ch	EF          MOV		A,	R7
+067Dh	34 FF       ADDC	A,	FFh
+067Fh	FF          MOV		R7,	A
+0680h	EE          MOV		A,	R6
+0681h	4F          ORL		A,	R7
+0682h	70 D4       JNZ		D4h
+0684h	02 04 31    LJMP	0431h
+0687h	79 25       MOV		R1,	25h
+0689h	02 04 20    LJMP	0420h
+068Ch	E8          MOV		A,	R0
+068Dh	24 02       ADD		A,	02h
+068Fh	F8          MOV		R0,	A
+0690h	E9          MOV		A,	R1
+0691h	34 00       ADDC	A,	00h
+0693h	F9          MOV		R1,	A
+0694h	74 2B       MOV		A,	2Bh
+0696h	22          RET
+
+0697h	E0          MOVX	A,	@DPTR
+0698h	FA          MOV		R2,	A
+0699h	A3          INC		DPTR
+069Ah	E0          MOVX	A,	@DPTR
+069Bh	FB          MOV		R3,	A
+069Ch	74 03       MOV		A,	03h
+069Eh	22          RET
+
+069Fh	12 06 A3    LCALL	06A3h
+06A2h	22          RET
+
+06A3h	E0          MOVX	A,	@DPTR
+06A4h	F8          MOV		R0,	A
+06A5h	A3          INC		DPTR
+06A6h	E0          MOVX	A,	@DPTR
+06A7h	F5 83       MOV		DPH,	A
+06A9h	88 82       MOV		DPL,	R0
+06ABh	22          RET
+
+06ACh	12 06 B0    LCALL	06B0h
+06AFh	22          RET
+
+06B0h	12 06 B4    LCALL	06B4h
+06B3h	22          RET
+
+06B4h	12 06 A3    LCALL	06A3h
+06B7h	E0          MOVX	A,	@DPTR
+06B8h	22          RET
+
+06B9h	12 06 DD    LCALL	06DDh
+06BCh	F9          MOV		R1,	A
+06BDh	88 82       MOV		DPL,	R0
+06BFh	89 83       MOV		DPH,	R1
+06C1h	E0          MOVX	A,	@DPTR
+06C2h	22          RET
+
+06C3h	12 06 DD    LCALL	06DDh
+06C6h	12 06 D1    LCALL	06D1h
+06C9h	E4          CLR		A
+06CAh	F5 0A       MOV		R2 #1,	A
+06CCh	F5 0B       MOV		R3 #1,	A
+06CEh	74 2B       MOV		A,	2Bh
+06D0h	22          RET
+
+06D1h	F5 83       MOV		DPH,	A
+06D3h	88 82       MOV		DPL,	R0
+06D5h	E0          MOVX	A,	@DPTR
+06D6h	F5 08       MOV		R0 #1,	A
+06D8h	A3          INC		DPTR
+06D9h	E0          MOVX	A,	@DPTR
+06DAh	F5 09       MOV		R1 #1,	A
+06DCh	22          RET
+
+06DDh	12 06 B4    LCALL	06B4h
+06E0h	F8          MOV		R0,	A
+06E1h	A3          INC		DPTR
+06E2h	E0          MOVX	A,	@DPTR
+06E3h	22          RET
+
+06E4h	12 06 B0    LCALL	06B0h
+06E7h	24 02       ADD		A,	02h
+06E9h	F8          MOV		R0,	A
+06EAh	A3          INC		DPTR
+06EBh	E0          MOVX	A,	@DPTR
+06ECh	34 00       ADDC	A,	00h
+06EEh	F9          MOV		R1,	A
+06EFh	74 2B       MOV		A,	2Bh
+06F1h	22          RET
+
+06F2h	12 06 FB    LCALL	06FBh
+06F5h	E8          MOV		A,	R0
+06F6h	F0          MOVX	@DPTR,	A
+06F7h	A3          INC		DPTR
+06F8h	E9          MOV		A,	R1
+06F9h	F0          MOVX	@DPTR,	A
+06FAh	22          RET
+
+06FBh	E0          MOVX	A,	@DPTR
+06FCh	FA          MOV		R2,	A
+06FDh	A3          INC		DPTR
+06FEh	E0          MOVX	A,	@DPTR
+06FFh	F5 83       MOV		DPH,	A
+0701h	8A 82       MOV		DPL,	R2
+0703h	22          RET
+
+0704h	74 F8       MOV		A,	F8h
+0706h	12 02 10    LCALL	0210h
+0709h	EA          MOV		A,	R2
+070Ah	FE          MOV		R6,	A
+070Bh	EB          MOV		A,	R3
+070Ch	FF          MOV		R7,	A
+070Dh	EE          MOV		A,	R6
+070Eh	FA          MOV		R2,	A
+070Fh	EF          MOV		A,	R7
+0710h	FB          MOV		R3,	A
+0711h	12 0F 82    LCALL	0F82h
+0714h	8E 82       MOV		DPL,	R6
+0716h	8F 83       MOV		DPH,	R7
+0718h	74 00       MOV		A,	00h
+071Ah	F0          MOVX	@DPTR,	A
+071Bh	A3          INC		DPTR
+071Ch	74 F8       MOV		A,	F8h
+071Eh	F0          MOVX	@DPTR,	A
+071Fh	8E 82       MOV		DPL,	R6
+0721h	8F 83       MOV		DPH,	R7
+0723h	E0          MOVX	A,	@DPTR
+0724h	24 01       ADD		A,	01h
+0726h	F8          MOV		R0,	A
+0727h	A3          INC		DPTR
+0728h	E0          MOVX	A,	@DPTR
+0729h	34 00       ADDC	A,	00h
+072Bh	F9          MOV		R1,	A
+072Ch	8E 82       MOV		DPL,	R6
+072Eh	8F 83       MOV		DPH,	R7
+0730h	A3          INC		DPTR
+0731h	A3          INC		DPTR
+0732h	E8          MOV		A,	R0
+0733h	F0          MOVX	@DPTR,	A
+0734h	A3          INC		DPTR
+0735h	E9          MOV		A,	R1
+0736h	F0          MOVX	@DPTR,	A
+0737h	8E 82       MOV		DPL,	R6
+0739h	8F 83       MOV		DPH,	R7
+073Bh	E0          MOVX	A,	@DPTR
+073Ch	24 02       ADD		A,	02h
+073Eh	F8          MOV		R0,	A
+073Fh	A3          INC		DPTR
+0740h	E0          MOVX	A,	@DPTR
+0741h	34 00       ADDC	A,	00h
+0743h	F9          MOV		R1,	A
+0744h	8E 82       MOV		DPL,	R6
+0746h	8F 83       MOV		DPH,	R7
+0748h	A3          INC		DPTR
+0749h	A3          INC		DPTR
+074Ah	A3          INC		DPTR
+074Bh	A3          INC		DPTR
+074Ch	E8          MOV		A,	R0
+074Dh	F0          MOVX	@DPTR,	A
+074Eh	A3          INC		DPTR
+074Fh	E9          MOV		A,	R1
+0750h	F0          MOVX	@DPTR,	A
+0751h	8E 82       MOV		DPL,	R6
+0753h	8F 83       MOV		DPH,	R7
+0755h	E0          MOVX	A,	@DPTR
+0756h	24 03       ADD		A,	03h
+0758h	F8          MOV		R0,	A
+0759h	A3          INC		DPTR
+075Ah	E0          MOVX	A,	@DPTR
+075Bh	34 00       ADDC	A,	00h
+075Dh	F9          MOV		R1,	A
+075Eh	8E 82       MOV		DPL,	R6
+0760h	8F 83       MOV		DPH,	R7
+0762h	A3          INC		DPTR
+0763h	A3          INC		DPTR
+0764h	A3          INC		DPTR
+0765h	A3          INC		DPTR
+0766h	A3          INC		DPTR
+0767h	A3          INC		DPTR
+0768h	E8          MOV		A,	R0
+0769h	F0          MOVX	@DPTR,	A
+076Ah	A3          INC		DPTR
+076Bh	E9          MOV		A,	R1
+076Ch	F0          MOVX	@DPTR,	A
+076Dh	EE          MOV		A,	R6
+076Eh	FA          MOV		R2,	A
+076Fh	EF          MOV		A,	R7
+0770h	FB          MOV		R3,	A
+0771h	12 08 66    LCALL	0866h
+0774h	EE          MOV		A,	R6
+0775h	FA          MOV		R2,	A
+0776h	EF          MOV		A,	R7
+0777h	FB          MOV		R3,	A
+0778h	7F 01       MOV		R7,	01h
+077Ah	02 02 76    LJMP	0276h
+077Dh	74 F8       MOV		A,	F8h
+077Fh	12 02 10    LCALL	0210h
+0782h	EA          MOV		A,	R2
+0783h	FE          MOV		R6,	A
+0784h	EB          MOV		A,	R3
+0785h	FF          MOV		R7,	A
+0786h	89 08       MOV		R0 #1,	R1
+0788h	EE          MOV		A,	R6
+0789h	FA          MOV		R2,	A
+078Ah	EF          MOV		A,	R7
+078Bh	FB          MOV		R3,	A
+078Ch	12 09 83    LCALL	0983h
+078Fh	A9 08       MOV		R1,	R0 #1
+0791h	8E 82       MOV		DPL,	R6
+0793h	8F 83       MOV		DPH,	R7
+0795h	A3          INC		DPTR
+0796h	A3          INC		DPTR
+0797h	A3          INC		DPTR
+0798h	A3          INC		DPTR
+0799h	E0          MOVX	A,	@DPTR
+079Ah	FC          MOV		R4,	A
+079Bh	A3          INC		DPTR
+079Ch	E0          MOVX	A,	@DPTR
+079Dh	FD          MOV		R5,	A
+079Eh	EE          MOV		A,	R6
+079Fh	FA          MOV		R2,	A
+07A0h	EF          MOV		A,	R7
+07A1h	FB          MOV		R3,	A
+07A2h	12 0F 86    LCALL	0F86h
+07A5h	7F 01       MOV		R7,	01h
+07A7h	02 02 76    LJMP	0276h
+07AAh	74 F6       MOV		A,	F6h
+07ACh	12 02 10    LCALL	0210h
+07AFh	74 FB       MOV		A,	FBh
+07B1h	12 01 B9    LCALL	01B9h
+07B4h	EA          MOV		A,	R2
+07B5h	FE          MOV		R6,	A
+07B6h	EB          MOV		A,	R3
+07B7h	FF          MOV		R7,	A
+07B8h	89 0A       MOV		R2 #1,	R1
+07BAh	EE          MOV		A,	R6
+07BBh	FA          MOV		R2,	A
+07BCh	EF          MOV		A,	R7
+07BDh	FB          MOV		R3,	A
+07BEh	12 09 83    LCALL	0983h
+07C1h	85 0A 08    MOV		R2 #1,	R0 #1
+07C4h	75 09 00    MOV		R1 #1,	00h
+07C7h	78 08       MOV		R0,	08h
+07C9h	12 02 B6    LCALL	02B6h
+07CCh	7C 08       MOV		R4,	08h
+07CEh	7D 91       MOV		R5,	91h
+07D0h	74 02       MOV		A,	02h
+07D2h	12 02 04    LCALL	0204h
+07D5h	AA 82       MOV		R2,	DPL
+07D7h	AB 83       MOV		R3,	DPH
+07D9h	12 0D BF    LCALL	0DBFh
+07DCh	74 02       MOV		A,	02h
+07DEh	12 01 CF    LCALL	01CFh
+07E1h	85 10 82    MOV		R0 #2,	DPL
+07E4h	85 11 83    MOV		R1 #2,	DPH
+07E7h	AC 82       MOV		R4,	DPL
+07E9h	AD 83       MOV		R5,	DPH
+07EBh	EE          MOV		A,	R6
+07ECh	FA          MOV		R2,	A
+07EDh	EF          MOV		A,	R7
+07EEh	FB          MOV		R3,	A
+07EFh	12 07 FC    LCALL	07FCh
+07F2h	74 05       MOV		A,	05h
+07F4h	12 01 CF    LCALL	01CFh
+07F7h	7F 03       MOV		R7,	03h
+07F9h	02 02 76    LJMP	0276h
+07FCh	74 F3       MOV		A,	F3h
+07FEh	12 02 10    LCALL	0210h
+0801h	8A 0C       MOV		R4 #1,	R2
+0803h	8B 0D       MOV		R5 #1,	R3
+0805h	EC          MOV		A,	R4
+0806h	FE          MOV		R6,	A
+0807h	ED          MOV		A,	R5
+0808h	FF          MOV		R7,	A
+0809h	EE          MOV		A,	R6
+080Ah	FA          MOV		R2,	A
+080Bh	EF          MOV		A,	R7
+080Ch	FB          MOV		R3,	A
+080Dh	12 10 08    LCALL	1008h
+0810h	EA          MOV		A,	R2
+0811h	F5 09       MOV		R1 #1,	A
+0813h	75 08 00    MOV		R0 #1,	00h
+0816h	80 1B       SJMP	1Bh
+0818h	85 08 0A    MOV		R0 #1,	R2 #1
+081Bh	75 0B 00    MOV		R3 #1,	00h
+081Eh	EE          MOV		A,	R6
+081Fh	25 0A       ADD		A,	R2 #1
+0821h	F5 82       MOV		DPL,	A
+0823h	EF          MOV		A,	R7
+0824h	35 0B       ADDC	A,	R3 #1
+0826h	F5 83       MOV		DPH,	A
+0828h	E0          MOVX	A,	@DPTR
+0829h	F9          MOV		R1,	A
+082Ah	AA 0C       MOV		R2,	R4 #1
+082Ch	AB 0D       MOV		R3,	R5 #1
+082Eh	12 07 7D    LCALL	077Dh
+0831h	05 08       INC		R0 #1
+0833h	E5 08       MOV		A,	R0 #1
+0835h	C3          CLR		C
+0836h	95 09       SUBB	A,	R1 #1
+0838h	40 DE       JC		DEh
+083Ah	7F 06       MOV		R7,	06h
+083Ch	02 02 76    LJMP	0276h
+083Fh	74 F8       MOV		A,	F8h
+0841h	12 02 10    LCALL	0210h
+0844h	EA          MOV		A,	R2
+0845h	FE          MOV		R6,	A
+0846h	EB          MOV		A,	R3
+0847h	FF          MOV		R7,	A
+0848h	EE          MOV		A,	R6
+0849h	FA          MOV		R2,	A
+084Ah	EF          MOV		A,	R7
+084Bh	FB          MOV		R3,	A
+084Ch	12 09 83    LCALL	0983h
+084Fh	79 01       MOV		R1,	01h
+0851h	8E 82       MOV		DPL,	R6
+0853h	8F 83       MOV		DPH,	R7
+0855h	E0          MOVX	A,	@DPTR
+0856h	FC          MOV		R4,	A
+0857h	A3          INC		DPTR
+0858h	E0          MOVX	A,	@DPTR
+0859h	FD          MOV		R5,	A
+085Ah	EE          MOV		A,	R6
+085Bh	FA          MOV		R2,	A
+085Ch	EF          MOV		A,	R7
+085Dh	FB          MOV		R3,	A
+085Eh	12 0F 86    LCALL	0F86h
+0861h	7F 01       MOV		R7,	01h
+0863h	02 02 76    LJMP	0276h
+0866h	74 F5       MOV		A,	F5h
+0868h	12 02 10    LCALL	0210h
+086Bh	74 FB       MOV		A,	FBh
+086Dh	12 01 B9    LCALL	01B9h
+0870h	EA          MOV		A,	R2
+0871h	FE          MOV		R6,	A
+0872h	EB          MOV		A,	R3
+0873h	FF          MOV		R7,	A
+0874h	90 91 0B    MOV		DPTR,	910Bh
+0877h	C0 82       PUSH	DPL
+0879h	C0 83       PUSH	DPH
+087Bh	85 10 82    MOV		R0 #2,	DPL
+087Eh	85 11 83    MOV		R1 #2,	DPH
+0881h	AC 82       MOV		R4,	DPL
+0883h	AD 83       MOV		R5,	DPH
+0885h	D0 83       POP		DPH
+0887h	D0 82       POP		DPL
+0889h	74 05       MOV		A,	05h
+088Bh	12 01 98    LCALL	0198h
+088Eh	EE          MOV		A,	R6
+088Fh	FA          MOV		R2,	A
+0890h	EF          MOV		A,	R7
+0891h	FB          MOV		R3,	A
+0892h	12 08 3F    LCALL	083Fh
+0895h	75 08 00    MOV		R0 #1,	00h
+0898h	80 20       SJMP	20h
+089Ah	E8          MOV		A,	R0
+089Bh	24 FF       ADD		A,	FFh
+089Dh	F8          MOV		R0,	A
+089Eh	E9          MOV		A,	R1
+089Fh	34 FF       ADDC	A,	FFh
+08A1h	F9          MOV		R1,	A
+08A2h	E8          MOV		A,	R0
+08A3h	49          ORL		A,	R1
+08A4h	70 F4       JNZ		F4h
+08A6h	79 38       MOV		R1,	38h
+08A8h	8E 82       MOV		DPL,	R6
+08AAh	8F 83       MOV		DPH,	R7
+08ACh	E0          MOVX	A,	@DPTR
+08ADh	FC          MOV		R4,	A
+08AEh	A3          INC		DPTR
+08AFh	E0          MOVX	A,	@DPTR
+08B0h	FD          MOV		R5,	A
+08B1h	EE          MOV		A,	R6
+08B2h	FA          MOV		R2,	A
+08B3h	EF          MOV		A,	R7
+08B4h	FB          MOV		R3,	A
+08B5h	12 0F 86    LCALL	0F86h
+08B8h	05 08       INC		R0 #1
+08BAh	E5 08       MOV		A,	R0 #1
+08BCh	C3          CLR		C
+08BDh	94 03       SUBB	A,	03h
+08BFh	50 06       JNC		06h
+08C1h	78 10       MOV		R0,	10h
+08C3h	79 27       MOV		R1,	27h
+08C5h	80 DB       SJMP	DBh
+08C7h	75 08 00    MOV		R0 #1,	00h
+08CAh	80 33       SJMP	33h
+08CCh	EE          MOV		A,	R6
+08CDh	FA          MOV		R2,	A
+08CEh	EF          MOV		A,	R7
+08CFh	FB          MOV		R3,	A
+08D0h	12 09 83    LCALL	0983h
+08D3h	85 08 0A    MOV		R0 #1,	R2 #1
+08D6h	75 0B 00    MOV		R3 #1,	00h
+08D9h	85 10 82    MOV		R0 #2,	DPL
+08DCh	85 11 83    MOV		R1 #2,	DPH
+08DFh	E5 82       MOV		A,	DPL
+08E1h	25 0A       ADD		A,	R2 #1
+08E3h	F5 82       MOV		DPL,	A
+08E5h	E5 83       MOV		A,	DPH
+08E7h	35 0B       ADDC	A,	R3 #1
+08E9h	F5 83       MOV		DPH,	A
+08EBh	E0          MOVX	A,	@DPTR
+08ECh	F9          MOV		R1,	A
+08EDh	8E 82       MOV		DPL,	R6
+08EFh	8F 83       MOV		DPH,	R7
+08F1h	E0          MOVX	A,	@DPTR
+08F2h	FC          MOV		R4,	A
+08F3h	A3          INC		DPTR
+08F4h	E0          MOVX	A,	@DPTR
+08F5h	FD          MOV		R5,	A
+08F6h	EE          MOV		A,	R6
+08F7h	FA          MOV		R2,	A
+08F8h	EF          MOV		A,	R7
+08F9h	FB          MOV		R3,	A
+08FAh	12 0F 86    LCALL	0F86h
+08FDh	05 08       INC		R0 #1
+08FFh	E5 08       MOV		A,	R0 #1
+0901h	C3          CLR		C
+0902h	94 05       SUBB	A,	05h
+0904h	40 C6       JC		C6h
+0906h	74 05       MOV		A,	05h
+0908h	12 01 CF    LCALL	01CFh
+090Bh	7F 04       MOV		R7,	04h
+090Dh	02 02 76    LJMP	0276h
+0910h	74 F5       MOV		A,	F5h
+0912h	12 02 10    LCALL	0210h
+0915h	74 FC       MOV		A,	FCh
+0917h	12 01 B9    LCALL	01B9h
+091Ah	EA          MOV		A,	R2
+091Bh	FE          MOV		R6,	A
+091Ch	EB          MOV		A,	R3
+091Dh	FF          MOV		R7,	A
+091Eh	89 08       MOV		R0 #1,	R1
+0920h	8C 09       MOV		R1 #1,	R4
+0922h	90 91 10    MOV		DPTR,	9110h
+0925h	C0 82       PUSH	DPL
+0927h	C0 83       PUSH	DPH
+0929h	85 10 82    MOV		R0 #2,	DPL
+092Ch	85 11 83    MOV		R1 #2,	DPH
+092Fh	AC 82       MOV		R4,	DPL
+0931h	AD 83       MOV		R5,	DPH
+0933h	D0 83       POP		DPH
+0935h	D0 82       POP		DPL
+0937h	74 04       MOV		A,	04h
+0939h	12 01 98    LCALL	0198h
+093Ch	EE          MOV		A,	R6
+093Dh	FA          MOV		R2,	A
+093Eh	EF          MOV		A,	R7
+093Fh	FB          MOV		R3,	A
+0940h	12 09 83    LCALL	0983h
+0943h	85 09 0A    MOV		R1 #1,	R2 #1
+0946h	75 0B 00    MOV		R3 #1,	00h
+0949h	85 10 82    MOV		R0 #2,	DPL
+094Ch	85 11 83    MOV		R1 #2,	DPH
+094Fh	E5 82       MOV		A,	DPL
+0951h	25 0A       ADD		A,	R2 #1
+0953h	F8          MOV		R0,	A
+0954h	E5 83       MOV		A,	DPH
+0956h	35 0B       ADDC	A,	R3 #1
+0958h	F9          MOV		R1,	A
+0959h	E8          MOV		A,	R0
+095Ah	24 FF       ADD		A,	FFh
+095Ch	F5 82       MOV		DPL,	A
+095Eh	E9          MOV		A,	R1
+095Fh	34 FF       ADDC	A,	FFh
+0961h	F5 83       MOV		DPH,	A
+0963h	E0          MOVX	A,	@DPTR
+0964h	25 08       ADD		A,	R0 #1
+0966h	24 80       ADD		A,	80h
+0968h	F9          MOV		R1,	A
+0969h	8E 82       MOV		DPL,	R6
+096Bh	8F 83       MOV		DPH,	R7
+096Dh	E0          MOVX	A,	@DPTR
+096Eh	FC          MOV		R4,	A
+096Fh	A3          INC		DPTR
+0970h	E0          MOVX	A,	@DPTR
+0971h	FD          MOV		R5,	A
+0972h	EE          MOV		A,	R6
+0973h	FA          MOV		R2,	A
+0974h	EF          MOV		A,	R7
+0975h	FB          MOV		R3,	A
+0976h	12 0F 86    LCALL	0F86h
+0979h	74 04       MOV		A,	04h
+097Bh	12 01 CF    LCALL	01CFh
+097Eh	7F 04       MOV		R7,	04h
+0980h	02 02 76    LJMP	0276h
+0983h	74 F8       MOV		A,	F8h
+0985h	12 02 10    LCALL	0210h
+0988h	EA          MOV		A,	R2
+0989h	FE          MOV		R6,	A
+098Ah	EB          MOV		A,	R3
+098Bh	FF          MOV		R7,	A
+098Ch	8E 82       MOV		DPL,	R6
+098Eh	8F 83       MOV		DPH,	R7
+0990h	A3          INC		DPTR
+0991h	A3          INC		DPTR
+0992h	E0          MOVX	A,	@DPTR
+0993h	FC          MOV		R4,	A
+0994h	A3          INC		DPTR
+0995h	E0          MOVX	A,	@DPTR
+0996h	FD          MOV		R5,	A
+0997h	EE          MOV		A,	R6
+0998h	FA          MOV		R2,	A
+0999h	EF          MOV		A,	R7
+099Ah	FB          MOV		R3,	A
+099Bh	12 0F 83    LCALL	0F83h
+099Eh	E9          MOV		A,	R1
+099Fh	F8          MOV		R0,	A
+09A0h	A2 E7       MOV		C,	E7h
+09A2h	40 E8       JC		E8h
+09A4h	7F 01       MOV		R7,	01h
+09A6h	02 02 76    LJMP	0276h
+09A9h	74 F8       MOV		A,	F8h
+09ABh	12 02 10    LCALL	0210h
+09AEh	7C 10       MOV		R4,	10h
+09B0h	7D 27       MOV		R5,	27h
+09B2h	7E 00       MOV		R6,	00h
+09B4h	7F 00       MOV		R7,	00h
+09B6h	8A 82       MOV		DPL,	R2
+09B8h	8B 83       MOV		DPH,	R3
+09BAh	EC          MOV		A,	R4
+09BBh	F0          MOVX	@DPTR,	A
+09BCh	A3          INC		DPTR
+09BDh	ED          MOV		A,	R5
+09BEh	F0          MOVX	@DPTR,	A
+09BFh	A3          INC		DPTR
+09C0h	EE          MOV		A,	R6
+09C1h	F0          MOVX	@DPTR,	A
+09C2h	A3          INC		DPTR
+09C3h	EF          MOV		A,	R7
+09C4h	F0          MOVX	@DPTR,	A
+09C5h	7F 01       MOV		R7,	01h
+09C7h	02 02 76    LJMP	0276h
+09CAh	74 F7       MOV		A,	F7h
+09CCh	12 02 10    LCALL	0210h
+09CFh	EA          MOV		A,	R2
+09D0h	FE          MOV		R6,	A
+09D1h	EB          MOV		A,	R3
+09D2h	FF          MOV		R7,	A
+09D3h	89 08       MOV		R0 #1,	R1
+09D5h	E5 08       MOV		A,	R0 #1
+09D7h	60 04       JZ		04h
+09D9h	78 01       MOV		R0,	01h
+09DBh	80 02       SJMP	02h
+09DDh	78 00       MOV		R0,	00h
+09DFh	88 09       MOV		R1 #1,	R0
+09E1h	E8          MOV		A,	R0
+09E2h	A2 E0       MOV		C,	E0h
+09E4h	92 B4       MOV		P3_4,	C
+09E6h	90 91 14    MOV		DPTR,	9114h
+09E9h	12 02 C9    LCALL	02C9h
+09ECh	EE          MOV		A,	R6
+09EDh	FA          MOV		R2,	A
+09EEh	EF          MOV		A,	R7
+09EFh	FB          MOV		R3,	A
+09F0h	12 0B 8D    LCALL	0B8Dh
+09F3h	74 04       MOV		A,	04h
+09F5h	12 01 CF    LCALL	01CFh
+09F8h	D2 B5       SETB	P3_5
+09FAh	90 91 14    MOV		DPTR,	9114h
+09FDh	12 02 C9    LCALL	02C9h
+0A00h	EE          MOV		A,	R6
+0A01h	FA          MOV		R2,	A
+0A02h	EF          MOV		A,	R7
+0A03h	FB          MOV		R3,	A
+0A04h	12 0B 8D    LCALL	0B8Dh
+0A07h	74 04       MOV		A,	04h
+0A09h	12 01 CF    LCALL	01CFh
+0A0Ch	C2 B5       CLR		P3_5
+0A0Eh	90 91 14    MOV		DPTR,	9114h
+0A11h	12 02 C9    LCALL	02C9h
+0A14h	EE          MOV		A,	R6
+0A15h	FA          MOV		R2,	A
+0A16h	EF          MOV		A,	R7
+0A17h	FB          MOV		R3,	A
+0A18h	12 0B 8D    LCALL	0B8Dh
+0A1Bh	74 04       MOV		A,	04h
+0A1Dh	12 01 CF    LCALL	01CFh
+0A20h	7F 02       MOV		R7,	02h
+0A22h	02 02 76    LJMP	0276h
+0A25h	74 F8       MOV		A,	F8h
+0A27h	12 02 10    LCALL	0210h
+0A2Ah	EA          MOV		A,	R2
+0A2Bh	FE          MOV		R6,	A
+0A2Ch	EB          MOV		A,	R3
+0A2Dh	FF          MOV		R7,	A
+0A2Eh	D2 B4       SETB	P3_4
+0A30h	D2 B5       SETB	P3_5
+0A32h	90 91 14    MOV		DPTR,	9114h
+0A35h	12 02 C9    LCALL	02C9h
+0A38h	EE          MOV		A,	R6
+0A39h	FA          MOV		R2,	A
+0A3Ah	EF          MOV		A,	R7
+0A3Bh	FB          MOV		R3,	A
+0A3Ch	12 0B 8D    LCALL	0B8Dh
+0A3Fh	74 04       MOV		A,	04h
+0A41h	12 01 CF    LCALL	01CFh
+0A44h	C2 B4       CLR		P3_4
+0A46h	90 91 14    MOV		DPTR,	9114h
+0A49h	12 02 C9    LCALL	02C9h
+0A4Ch	EE          MOV		A,	R6
+0A4Dh	FA          MOV		R2,	A
+0A4Eh	EF          MOV		A,	R7
+0A4Fh	FB          MOV		R3,	A
+0A50h	12 0B 8D    LCALL	0B8Dh
+0A53h	74 04       MOV		A,	04h
+0A55h	12 01 CF    LCALL	01CFh
+0A58h	C2 B5       CLR		P3_5
+0A5Ah	90 91 14    MOV		DPTR,	9114h
+0A5Dh	12 02 C9    LCALL	02C9h
+0A60h	EE          MOV		A,	R6
+0A61h	FA          MOV		R2,	A
+0A62h	EF          MOV		A,	R7
+0A63h	FB          MOV		R3,	A
+0A64h	12 0B 8D    LCALL	0B8Dh
+0A67h	74 04       MOV		A,	04h
+0A69h	12 01 CF    LCALL	01CFh
+0A6Ch	7F 01       MOV		R7,	01h
+0A6Eh	02 02 76    LJMP	0276h
+0A71h	74 F8       MOV		A,	F8h
+0A73h	12 02 10    LCALL	0210h
+0A76h	EA          MOV		A,	R2
+0A77h	FE          MOV		R6,	A
+0A78h	EB          MOV		A,	R3
+0A79h	FF          MOV		R7,	A
+0A7Ah	C2 B4       CLR		P3_4
+0A7Ch	C2 B5       CLR		P3_5
+0A7Eh	90 91 14    MOV		DPTR,	9114h
+0A81h	12 02 C9    LCALL	02C9h
+0A84h	EE          MOV		A,	R6
+0A85h	FA          MOV		R2,	A
+0A86h	EF          MOV		A,	R7
+0A87h	FB          MOV		R3,	A
+0A88h	12 0B 8D    LCALL	0B8Dh
+0A8Bh	74 04       MOV		A,	04h
+0A8Dh	12 01 CF    LCALL	01CFh
+0A90h	D2 B5       SETB	P3_5
+0A92h	90 91 14    MOV		DPTR,	9114h
+0A95h	12 02 C9    LCALL	02C9h
+0A98h	EE          MOV		A,	R6
+0A99h	FA          MOV		R2,	A
+0A9Ah	EF          MOV		A,	R7
+0A9Bh	FB          MOV		R3,	A
+0A9Ch	12 0B 8D    LCALL	0B8Dh
+0A9Fh	74 04       MOV		A,	04h
+0AA1h	12 01 CF    LCALL	01CFh
+0AA4h	D2 B4       SETB	P3_4
+0AA6h	90 91 14    MOV		DPTR,	9114h
+0AA9h	12 02 C9    LCALL	02C9h
+0AACh	EE          MOV		A,	R6
+0AADh	FA          MOV		R2,	A
+0AAEh	EF          MOV		A,	R7
+0AAFh	FB          MOV		R3,	A
+0AB0h	12 0B 8D    LCALL	0B8Dh
+0AB3h	74 04       MOV		A,	04h
+0AB5h	12 01 CF    LCALL	01CFh
+0AB8h	7F 01       MOV		R7,	01h
+0ABAh	02 02 76    LJMP	0276h
+0ABDh	74 F8       MOV		A,	F8h
+0ABFh	12 02 10    LCALL	0210h
+0AC2h	EA          MOV		A,	R2
+0AC3h	FE          MOV		R6,	A
+0AC4h	EB          MOV		A,	R3
+0AC5h	FF          MOV		R7,	A
+0AC6h	D2 B4       SETB	P3_4
+0AC8h	90 91 14    MOV		DPTR,	9114h
+0ACBh	12 02 C9    LCALL	02C9h
+0ACEh	EE          MOV		A,	R6
+0ACFh	FA          MOV		R2,	A
+0AD0h	EF          MOV		A,	R7
+0AD1h	FB          MOV		R3,	A
+0AD2h	12 0B 8D    LCALL	0B8Dh
+0AD5h	74 04       MOV		A,	04h
+0AD7h	12 01 CF    LCALL	01CFh
+0ADAh	D2 B5       SETB	P3_5
+0ADCh	90 91 14    MOV		DPTR,	9114h
+0ADFh	12 02 C9    LCALL	02C9h
+0AE2h	EE          MOV		A,	R6
+0AE3h	FA          MOV		R2,	A
+0AE4h	EF          MOV		A,	R7
+0AE5h	FB          MOV		R3,	A
+0AE6h	12 0B 8D    LCALL	0B8Dh
+0AE9h	74 04       MOV		A,	04h
+0AEBh	12 01 CF    LCALL	01CFh
+0AEEh	A2 B4       MOV		C,	P3_4
+0AF0h	E4          CLR		A
+0AF1h	33          RLC		A
+0AF2h	F5 08       MOV		R0 #1,	A
+0AF4h	90 91 14    MOV		DPTR,	9114h
+0AF7h	12 02 C9    LCALL	02C9h
+0AFAh	EE          MOV		A,	R6
+0AFBh	FA          MOV		R2,	A
+0AFCh	EF          MOV		A,	R7
+0AFDh	FB          MOV		R3,	A
+0AFEh	12 0B 8D    LCALL	0B8Dh
+0B01h	74 04       MOV		A,	04h
+0B03h	12 01 CF    LCALL	01CFh
+0B06h	C2 B5       CLR		P3_5
+0B08h	90 91 14    MOV		DPTR,	9114h
+0B0Bh	12 02 C9    LCALL	02C9h
+0B0Eh	EE          MOV		A,	R6
+0B0Fh	FA          MOV		R2,	A
+0B10h	EF          MOV		A,	R7
+0B11h	FB          MOV		R3,	A
+0B12h	12 0B 8D    LCALL	0B8Dh
+0B15h	74 04       MOV		A,	04h
+0B17h	12 01 CF    LCALL	01CFh
+0B1Ah	A9 08       MOV		R1,	R0 #1
+0B1Ch	7F 01       MOV		R7,	01h
+0B1Eh	02 02 76    LJMP	0276h
+0B21h	74 F8       MOV		A,	F8h
+0B23h	12 02 10    LCALL	0210h
+0B26h	8A 82       MOV		DPL,	R2
+0B28h	8B 83       MOV		DPH,	R3
+0B2Ah	E9          MOV		A,	R1
+0B2Bh	FF          MOV		R7,	A
+0B2Ch	7E 00       MOV		R6,	00h
+0B2Eh	80 12       SJMP	12h
+0B30h	EF          MOV		A,	R7
+0B31h	A2 E7       MOV		C,	E7h
+0B33h	E4          CLR		A
+0B34h	33          RLC		A
+0B35h	F9          MOV		R1,	A
+0B36h	AA 82       MOV		R2,	DPL
+0B38h	AB 83       MOV		R3,	DPH
+0B3Ah	12 09 CA    LCALL	09CAh
+0B3Dh	0E          INC		R6
+0B3Eh	EF          MOV		A,	R7
+0B3Fh	C3          CLR		C
+0B40h	33          RLC		A
+0B41h	FF          MOV		R7,	A
+0B42h	EE          MOV		A,	R6
+0B43h	C3          CLR		C
+0B44h	94 08       SUBB	A,	08h
+0B46h	40 E8       JC		E8h
+0B48h	AA 82       MOV		R2,	DPL
+0B4Ah	AB 83       MOV		R3,	DPH
+0B4Ch	12 0A BD    LCALL	0ABDh
+0B4Fh	7F 01       MOV		R7,	01h
+0B51h	02 02 76    LJMP	0276h
+0B54h	74 F8       MOV		A,	F8h
+0B56h	12 02 10    LCALL	0210h
+0B59h	8A 82       MOV		DPL,	R2
+0B5Bh	8B 83       MOV		DPH,	R3
+0B5Dh	E9          MOV		A,	R1
+0B5Eh	FF          MOV		R7,	A
+0B5Fh	7E 00       MOV		R6,	00h
+0B61h	75 08 00    MOV		R0 #1,	00h
+0B64h	80 10       SJMP	10h
+0B66h	AA 82       MOV		R2,	DPL
+0B68h	AB 83       MOV		R3,	DPH
+0B6Ah	12 0A BD    LCALL	0ABDh
+0B6Dh	E9          MOV		A,	R1
+0B6Eh	F8          MOV		R0,	A
+0B6Fh	EE          MOV		A,	R6
+0B70h	C3          CLR		C
+0B71h	33          RLC		A
+0B72h	28          ADD		A,	R0
+0B73h	FE          MOV		R6,	A
+0B74h	05 08       INC		R0 #1
+0B76h	E5 08       MOV		A,	R0 #1
+0B78h	C3          CLR		C
+0B79h	94 08       SUBB	A,	08h
+0B7Bh	40 E9       JC		E9h
+0B7Dh	EF          MOV		A,	R7
+0B7Eh	F9          MOV		R1,	A
+0B7Fh	AA 82       MOV		R2,	DPL
+0B81h	AB 83       MOV		R3,	DPH
+0B83h	12 09 CA    LCALL	09CAh
+0B86h	EE          MOV		A,	R6
+0B87h	F9          MOV		R1,	A
+0B88h	7F 01       MOV		R7,	01h
+0B8Ah	02 02 76    LJMP	0276h
+0B8Dh	74 F5       MOV		A,	F5h
+0B8Fh	12 02 10    LCALL	0210h
+0B92h	74 0B       MOV		A,	0Bh
+0B94h	12 02 04    LCALL	0204h
+0B97h	78 08       MOV		R0,	08h
+0B99h	12 01 6D    LCALL	016Dh
+0B9Ch	80 08       SJMP	08h
+0B9Eh	90 91 18    MOV		DPTR,	9118h
+0BA1h	78 08       MOV		R0,	08h
+0BA3h	12 01 47    LCALL	0147h
+0BA6h	E5 08       MOV		A,	R0 #1
+0BA8h	45 09       ORL		A,	R1 #1
+0BAAh	45 0A       ORL		A,	R2 #1
+0BACh	45 0B       ORL		A,	R3 #1
+0BAEh	70 EE       JNZ		EEh
+0BB0h	7F 04       MOV		R7,	04h
+0BB2h	02 02 76    LJMP	0276h
+0BB5h	74 F8       MOV		A,	F8h
+0BB7h	12 02 10    LCALL	0210h
+0BBAh	EA          MOV		A,	R2
+0BBBh	FE          MOV		R6,	A
+0BBCh	EB          MOV		A,	R3
+0BBDh	FF          MOV		R7,	A
+0BBEh	89 08       MOV		R0 #1,	R1
+0BC0h	EE          MOV		A,	R6
+0BC1h	FA          MOV		R2,	A
+0BC2h	EF          MOV		A,	R7
+0BC3h	FB          MOV		R3,	A
+0BC4h	12 09 A9    LCALL	09A9h
+0BC7h	E5 08       MOV		A,	R0 #1
+0BC9h	8E 82       MOV		DPL,	R6
+0BCBh	8F 83       MOV		DPH,	R7
+0BCDh	A3          INC		DPTR
+0BCEh	A3          INC		DPTR
+0BCFh	A3          INC		DPTR
+0BD0h	A3          INC		DPTR
+0BD1h	E5 08       MOV		A,	R0 #1
+0BD3h	F0          MOVX	@DPTR,	A
+0BD4h	EE          MOV		A,	R6
+0BD5h	FA          MOV		R2,	A
+0BD6h	EF          MOV		A,	R7
+0BD7h	FB          MOV		R3,	A
+0BD8h	7F 01       MOV		R7,	01h
+0BDAh	02 02 76    LJMP	0276h
+0BDDh	74 F3       MOV		A,	F3h
+0BDFh	12 02 10    LCALL	0210h
+0BE2h	8A 08       MOV		R0 #1,	R2
+0BE4h	8B 09       MOV		R1 #1,	R3
+0BE6h	89 0A       MOV		R2 #1,	R1
+0BE8h	EC          MOV		A,	R4
+0BE9h	FE          MOV		R6,	A
+0BEAh	ED          MOV		A,	R5
+0BEBh	FF          MOV		R7,	A
+0BECh	74 0D       MOV		A,	0Dh
+0BEEh	12 02 04    LCALL	0204h
+0BF1h	E0          MOVX	A,	@DPTR
+0BF2h	F5 0C       MOV		R4 #1,	A
+0BF4h	A3          INC		DPTR
+0BF5h	E0          MOVX	A,	@DPTR
+0BF6h	F5 0D       MOV		R5 #1,	A
+0BF8h	74 0F       MOV		A,	0Fh
+0BFAh	12 02 04    LCALL	0204h
+0BFDh	E0          MOVX	A,	@DPTR
+0BFEh	F5 0B       MOV		R3 #1,	A
+0C00h	AA 08       MOV		R2,	R0 #1
+0C02h	AB 09       MOV		R3,	R1 #1
+0C04h	12 0A 25    LCALL	0A25h
+0C07h	74 FE       MOV		A,	FEh
+0C09h	55 0A       ANL		A,	R2 #1
+0C0Bh	F9          MOV		R1,	A
+0C0Ch	AA 08       MOV		R2,	R0 #1
+0C0Eh	AB 09       MOV		R3,	R1 #1
+0C10h	12 0B 21    LCALL	0B21h
+0C13h	E9          MOV		A,	R1
+0C14h	85 08 82    MOV		R0 #1,	DPL
+0C17h	85 09 83    MOV		R1 #1,	DPH
+0C1Ah	A3          INC		DPTR
+0C1Bh	A3          INC		DPTR
+0C1Ch	A3          INC		DPTR
+0C1Dh	A3          INC		DPTR
+0C1Eh	E0          MOVX	A,	@DPTR
+0C1Fh	60 2E       JZ		2Eh
+0C21h	14          DEC		A
+0C22h	60 05       JZ		05h
+0C24h	14          DEC		A
+0C25h	60 0E       JZ		0Eh
+0C27h	80 26       SJMP	26h
+0C29h	EE          MOV		A,	R6
+0C2Ah	F9          MOV		R1,	A
+0C2Bh	AA 08       MOV		R2,	R0 #1
+0C2Dh	AB 09       MOV		R3,	R1 #1
+0C2Fh	12 0B 21    LCALL	0B21h
+0C32h	E9          MOV		A,	R1
+0C33h	80 1A       SJMP	1Ah
+0C35h	EE          MOV		A,	R6
+0C36h	F8          MOV		R0,	A
+0C37h	EF          MOV		A,	R7
+0C38h	F9          MOV		R1,	A
+0C39h	E4          CLR		A
+0C3Ah	E9          MOV		A,	R1
+0C3Bh	F8          MOV		R0,	A
+0C3Ch	F9          MOV		R1,	A
+0C3Dh	AA 08       MOV		R2,	R0 #1
+0C3Fh	AB 09       MOV		R3,	R1 #1
+0C41h	12 0B 21    LCALL	0B21h
+0C44h	E9          MOV		A,	R1
+0C45h	EE          MOV		A,	R6
+0C46h	F9          MOV		R1,	A
+0C47h	AA 08       MOV		R2,	R0 #1
+0C49h	AB 09       MOV		R3,	R1 #1
+0C4Bh	12 0B 21    LCALL	0B21h
+0C4Eh	E9          MOV		A,	R1
+0C4Fh	E5 0B       MOV		A,	R3 #1
+0C51h	F5 0B       MOV		R3 #1,	A
+0C53h	78 0B       MOV		R0,	0Bh
+0C55h	12 02 BA    LCALL	02BAh
+0C58h	AC 0C       MOV		R4,	R4 #1
+0C5Ah	AD 0D       MOV		R5,	R5 #1
+0C5Ch	A9 0A       MOV		R1,	R2 #1
+0C5Eh	AA 08       MOV		R2,	R0 #1
+0C60h	AB 09       MOV		R3,	R1 #1
+0C62h	12 0C 6F    LCALL	0C6Fh
+0C65h	74 01       MOV		A,	01h
+0C67h	12 01 CF    LCALL	01CFh
+0C6Ah	7F 06       MOV		R7,	06h
+0C6Ch	02 02 76    LJMP	0276h
+0C6Fh	74 F2       MOV		A,	F2h
+0C71h	12 02 10    LCALL	0210h
+0C74h	EA          MOV		A,	R2
+0C75h	FE          MOV		R6,	A
+0C76h	EB          MOV		A,	R3
+0C77h	FF          MOV		R7,	A
+0C78h	89 0E       MOV		R6 #1,	R1
+0C7Ah	8C 0C       MOV		R4 #1,	R4
+0C7Ch	8D 0D       MOV		R5 #1,	R5
+0C7Eh	75 08 00    MOV		R0 #1,	00h
+0C81h	EE          MOV		A,	R6
+0C82h	FA          MOV		R2,	A
+0C83h	EF          MOV		A,	R7
+0C84h	FB          MOV		R3,	A
+0C85h	12 0A 25    LCALL	0A25h
+0C88h	74 01       MOV		A,	01h
+0C8Ah	45 0E       ORL		A,	R6 #1
+0C8Ch	F9          MOV		R1,	A
+0C8Dh	EE          MOV		A,	R6
+0C8Eh	FA          MOV		R2,	A
+0C8Fh	EF          MOV		A,	R7
+0C90h	FB          MOV		R3,	A
+0C91h	12 0B 21    LCALL	0B21h
+0C94h	E9          MOV		A,	R1
+0C95h	74 0E       MOV		A,	0Eh
+0C97h	12 02 04    LCALL	0204h
+0C9Ah	E0          MOVX	A,	@DPTR
+0C9Bh	F5 09       MOV		R1 #1,	A
+0C9Dh	E5 09       MOV		A,	R1 #1
+0C9Fh	C3          CLR		C
+0CA0h	94 02       SUBB	A,	02h
+0CA2h	40 38       JC		38h
+0CA4h	80 29       SJMP	29h
+0CA6h	79 00       MOV		R1,	00h
+0CA8h	EE          MOV		A,	R6
+0CA9h	FA          MOV		R2,	A
+0CAAh	EF          MOV		A,	R7
+0CABh	FB          MOV		R3,	A
+0CACh	12 0B 54    LCALL	0B54h
+0CAFh	E9          MOV		A,	R1
+0CB0h	C0 E0       PUSH	ACC
+0CB2h	85 08 0A    MOV		R0 #1,	R2 #1
+0CB5h	75 0B 00    MOV		R3 #1,	00h
+0CB8h	E5 0C       MOV		A,	R4 #1
+0CBAh	25 0A       ADD		A,	R2 #1
+0CBCh	F8          MOV		R0,	A
+0CBDh	E5 0D       MOV		A,	R5 #1
+0CBFh	35 0B       ADDC	A,	R3 #1
+0CC1h	F9          MOV		R1,	A
+0CC2h	E8          MOV		A,	R0
+0CC3h	24 FF       ADD		A,	FFh
+0CC5h	F5 82       MOV		DPL,	A
+0CC7h	E9          MOV		A,	R1
+0CC8h	34 FF       ADDC	A,	FFh
+0CCAh	F5 83       MOV		DPH,	A
+0CCCh	D0 E0       POP		ACC
+0CCEh	F0          MOVX	@DPTR,	A
+0CCFh	74 01       MOV		A,	01h
+0CD1h	25 08       ADD		A,	R0 #1
+0CD3h	F8          MOV		R0,	A
+0CD4h	88 08       MOV		R0 #1,	R0
+0CD6h	E8          MOV		A,	R0
+0CD7h	C3          CLR		C
+0CD8h	95 09       SUBB	A,	R1 #1
+0CDAh	40 CA       JC		CAh
+0CDCh	79 01       MOV		R1,	01h
+0CDEh	EE          MOV		A,	R6
+0CDFh	FA          MOV		R2,	A
+0CE0h	EF          MOV		A,	R7
+0CE1h	FB          MOV		R3,	A
+0CE2h	12 0B 54    LCALL	0B54h
+0CE5h	E9          MOV		A,	R1
+0CE6h	C0 E0       PUSH	ACC
+0CE8h	85 08 0A    MOV		R0 #1,	R2 #1
+0CEBh	75 0B 00    MOV		R3 #1,	00h
+0CEEh	E5 0C       MOV		A,	R4 #1
+0CF0h	25 0A       ADD		A,	R2 #1
+0CF2h	F5 82       MOV		DPL,	A
+0CF4h	E5 0D       MOV		A,	R5 #1
+0CF6h	35 0B       ADDC	A,	R3 #1
+0CF8h	F5 83       MOV		DPH,	A
+0CFAh	D0 E0       POP		ACC
+0CFCh	F0          MOVX	@DPTR,	A
+0CFDh	EE          MOV		A,	R6
+0CFEh	FA          MOV		R2,	A
+0CFFh	EF          MOV		A,	R7
+0D00h	FB          MOV		R3,	A
+0D01h	12 0A 71    LCALL	0A71h
+0D04h	7F 07       MOV		R7,	07h
+0D06h	02 02 76    LJMP	0276h
+0D09h	C0 E0       PUSH	ACC
+0D0Bh	C0 D0       PUSH	PSW
+0D0Dh	E8          MOV		A,	R0
+0D0Eh	C0 E0       PUSH	ACC
+0D10h	E9          MOV		A,	R1
+0D11h	C0 E0       PUSH	ACC
+0D13h	EA          MOV		A,	R2
+0D14h	C0 E0       PUSH	ACC
+0D16h	EB          MOV		A,	R3
+0D17h	C0 E0       PUSH	ACC
+0D19h	C0 82       PUSH	DPL
+0D1Bh	C0 83       PUSH	DPH
+0D1Dh	C2 AF       CLR		EA
+0D1Fh	A2 98       MOV		C,	RI_0
+0D21h	40 03       JC		03h
+0D23h	02 0D A8    LJMP	0DA8h
+0D26h	90 91 05    MOV		DPTR,	9105h
+0D29h	E0          MOVX	A,	@DPTR
+0D2Ah	F8          MOV		R0,	A
+0D2Bh	A3          INC		DPTR
+0D2Ch	E0          MOVX	A,	@DPTR
+0D2Dh	F9          MOV		R1,	A
+0D2Eh	90 91 01    MOV		DPTR,	9101h
+0D31h	E0          MOVX	A,	@DPTR
+0D32h	68          XRL		A,	R0
+0D33h	70 03       JNZ		03h
+0D35h	A3          INC		DPTR
+0D36h	E0          MOVX	A,	@DPTR
+0D37h	69          XRL		A,	R1
+0D38h	70 10       JNZ		10h
+0D3Ah	90 90 FF    MOV		DPTR,	90FFh
+0D3Dh	E0          MOVX	A,	@DPTR
+0D3Eh	F8          MOV		R0,	A
+0D3Fh	A3          INC		DPTR
+0D40h	E0          MOVX	A,	@DPTR
+0D41h	F9          MOV		R1,	A
+0D42h	90 91 05    MOV		DPTR,	9105h
+0D45h	E8          MOV		A,	R0
+0D46h	F0          MOVX	@DPTR,	A
+0D47h	A3          INC		DPTR
+0D48h	E9          MOV		A,	R1
+0D49h	F0          MOVX	@DPTR,	A
+0D4Ah	E5 99       MOV		A,	SBUF0
+0D4Ch	C0 E0       PUSH	ACC
+0D4Eh	90 91 05    MOV		DPTR,	9105h
+0D51h	E0          MOVX	A,	@DPTR
+0D52h	F8          MOV		R0,	A
+0D53h	A3          INC		DPTR
+0D54h	E0          MOVX	A,	@DPTR
+0D55h	F5 83       MOV		DPH,	A
+0D57h	88 82       MOV		DPL,	R0
+0D59h	D0 E0       POP		ACC
+0D5Bh	F0          MOVX	@DPTR,	A
+0D5Ch	90 91 05    MOV		DPTR,	9105h
+0D5Fh	E0          MOVX	A,	@DPTR
+0D60h	24 01       ADD		A,	01h
+0D62h	F8          MOV		R0,	A
+0D63h	A3          INC		DPTR
+0D64h	E0          MOVX	A,	@DPTR
+0D65h	34 00       ADDC	A,	00h
+0D67h	F9          MOV		R1,	A
+0D68h	90 91 05    MOV		DPTR,	9105h
+0D6Bh	E8          MOV		A,	R0
+0D6Ch	F0          MOVX	@DPTR,	A
+0D6Dh	A3          INC		DPTR
+0D6Eh	E9          MOV		A,	R1
+0D6Fh	F0          MOVX	@DPTR,	A
+0D70h	90 91 03    MOV		DPTR,	9103h
+0D73h	E0          MOVX	A,	@DPTR
+0D74h	FA          MOV		R2,	A
+0D75h	7B 00       MOV		R3,	00h
+0D77h	90 91 07    MOV		DPTR,	9107h
+0D7Ah	E0          MOVX	A,	@DPTR
+0D7Bh	F8          MOV		R0,	A
+0D7Ch	79 00       MOV		R1,	00h
+0D7Eh	24 FF       ADD		A,	FFh
+0D80h	F8          MOV		R0,	A
+0D81h	E9          MOV		A,	R1
+0D82h	34 FF       ADDC	A,	FFh
+0D84h	F9          MOV		R1,	A
+0D85h	C3          CLR		C
+0D86h	EA          MOV		A,	R2
+0D87h	98          SUBB	A,	R0
+0D88h	EB          MOV		A,	R3
+0D89h	99          SUBB	A,	R1
+0D8Ah	A2 D2       MOV		C,	OV
+0D8Ch	65 D0       XRL		A,	PSW
+0D8Eh	33          RLC		A
+0D8Fh	50 09       JNC		09h
+0D91h	90 91 03    MOV		DPTR,	9103h
+0D94h	E0          MOVX	A,	@DPTR
+0D95h	24 01       ADD		A,	01h
+0D97h	F0          MOVX	@DPTR,	A
+0D98h	80 0C       SJMP	0Ch
+0D9Ah	90 91 03    MOV		DPTR,	9103h
+0D9Dh	74 00       MOV		A,	00h
+0D9Fh	F0          MOVX	@DPTR,	A
+0DA0h	90 91 04    MOV		DPTR,	9104h
+0DA3h	74 01       MOV		A,	01h
+0DA5h	F0          MOVX	@DPTR,	A
+0DA6h	C2 98       CLR		RI_0
+0DA8h	D2 AF       SETB	EA
+0DAAh	D0 83       POP		DPH
+0DACh	D0 82       POP		DPL
+0DAEh	D0 E0       POP		ACC
+0DB0h	FB          MOV		R3,	A
+0DB1h	D0 E0       POP		ACC
+0DB3h	FA          MOV		R2,	A
+0DB4h	D0 E0       POP		ACC
+0DB6h	F9          MOV		R1,	A
+0DB7h	D0 E0       POP		ACC
+0DB9h	F8          MOV		R0,	A
+0DBAh	D0 D0       POP		PSW
+0DBCh	D0 E0       POP		ACC
+0DBEh	32          RETI
+
+0DBFh	74 F7       MOV		A,	F7h
+0DC1h	12 02 10    LCALL	0210h
+0DC4h	74 FC       MOV		A,	FCh
+0DC6h	12 01 B9    LCALL	01B9h
+0DC9h	EA          MOV		A,	R2
+0DCAh	FE          MOV		R6,	A
+0DCBh	EB          MOV		A,	R3
+0DCCh	FF          MOV		R7,	A
+0DCDh	74 0D       MOV		A,	0Dh
+0DCFh	12 02 04    LCALL	0204h
+0DD2h	A8 82       MOV		R0,	DPL
+0DD4h	A9 83       MOV		R1,	DPH
+0DD6h	74 02       MOV		A,	02h
+0DD8h	12 02 04    LCALL	0204h
+0DDBh	E8          MOV		A,	R0
+0DDCh	F0          MOVX	@DPTR,	A
+0DDDh	A3          INC		DPTR
+0DDEh	E9          MOV		A,	R1
+0DDFh	F0          MOVX	@DPTR,	A
+0DE0h	85 10 82    MOV		R0 #2,	DPL
+0DE3h	85 11 83    MOV		R1 #2,	DPH
+0DE6h	EE          MOV		A,	R6
+0DE7h	F0          MOVX	@DPTR,	A
+0DE8h	A3          INC		DPTR
+0DE9h	EF          MOV		A,	R7
+0DEAh	F0          MOVX	@DPTR,	A
+0DEBh	74 02       MOV		A,	02h
+0DEDh	12 02 04    LCALL	0204h
+0DF0h	85 82 08    MOV		DPL,	R0 #1
+0DF3h	85 83 09    MOV		DPH,	R1 #1
+0DF6h	78 08       MOV		R0,	08h
+0DF8h	12 02 B6    LCALL	02B6h
+0DFBh	8C 08       MOV		R0 #1,	R4
+0DFDh	8D 09       MOV		R1 #1,	R5
+0DFFh	78 08       MOV		R0,	08h
+0E01h	12 02 B6    LCALL	02B6h
+0E04h	74 04       MOV		A,	04h
+0E06h	12 02 04    LCALL	0204h
+0E09h	AC 82       MOV		R4,	DPL
+0E0Bh	AD 83       MOV		R5,	DPH
+0E0Dh	7A B1       MOV		R2,	B1h
+0E0Fh	7B 0F       MOV		R3,	0Fh
+0E11h	12 02 FA    LCALL	02FAh
+0E14h	74 04       MOV		A,	04h
+0E16h	12 01 CF    LCALL	01CFh
+0E19h	8A 08       MOV		R0 #1,	R2
+0E1Bh	85 10 82    MOV		R0 #2,	DPL
+0E1Eh	E0          MOVX	A,	@DPTR
+0E1Fh	FA          MOV		R2,	A
+0E20h	A3          INC		DPTR
+0E21h	E0          MOVX	A,	@DPTR
+0E22h	F5 83       MOV		DPH,	A
+0E24h	8A 82       MOV		DPL,	R2
+0E26h	E4          CLR		A
+0E27h	F0          MOVX	@DPTR,	A
+0E28h	C3          CLR		C
+0E29h	EB          MOV		A,	R3
+0E2Ah	94 00       SUBB	A,	00h
+0E2Ch	A2 D2       MOV		C,	OV
+0E2Eh	65 D0       XRL		A,	PSW
+0E30h	33          RLC		A
+0E31h	50 04       JNC		04h
+0E33h	AA 08       MOV		R2,	R0 #1
+0E35h	80 12       SJMP	12h
+0E37h	85 10 82    MOV		R0 #2,	DPL
+0E3Ah	85 11 83    MOV		R1 #2,	DPH
+0E3Dh	E0          MOVX	A,	@DPTR
+0E3Eh	F8          MOV		R0,	A
+0E3Fh	A3          INC		DPTR
+0E40h	E0          MOVX	A,	@DPTR
+0E41h	F9          MOV		R1,	A
+0E42h	E8          MOV		A,	R0
+0E43h	C3          CLR		C
+0E44h	9E          SUBB	A,	R6
+0E45h	FA          MOV		R2,	A
+0E46h	E9          MOV		A,	R1
+0E47h	9F          SUBB	A,	R7
+0E48h	FB          MOV		R3,	A
+0E49h	74 04       MOV		A,	04h
+0E4Bh	12 01 CF    LCALL	01CFh
+0E4Eh	7F 02       MOV		R7,	02h
+0E50h	02 02 76    LJMP	0276h
+0E53h	74 EF       MOV		A,	EFh
+0E55h	12 01 B9    LCALL	01B9h
+0E58h	74 02       MOV		A,	02h
+0E5Ah	12 02 04    LCALL	0204h
+0E5Dh	AA 82       MOV		R2,	DPL
+0E5Fh	AB 83       MOV		R3,	DPH
+0E61h	12 07 04    LCALL	0704h
+0E64h	7C 69       MOV		R4,	69h
+0E66h	7D DB       MOV		R5,	DBh
+0E68h	74 0A       MOV		A,	0Ah
+0E6Ah	12 02 04    LCALL	0204h
+0E6Dh	AA 82       MOV		R2,	DPL
+0E6Fh	AB 83       MOV		R3,	DPH
+0E71h	12 0F 3B    LCALL	0F3Bh
+0E74h	D2 AF       SETB	EA
+0E76h	D2 AC       SETB	ES0
+0E78h	79 30       MOV		R1,	30h
+0E7Ah	74 02       MOV		A,	02h
+0E7Ch	12 02 04    LCALL	0204h
+0E7Fh	AA 82       MOV		R2,	DPL
+0E81h	AB 83       MOV		R3,	DPH
+0E83h	12 07 7D    LCALL	077Dh
+0E86h	79 78       MOV		R1,	78h
+0E88h	74 02       MOV		A,	02h
+0E8Ah	12 02 04    LCALL	0204h
+0E8Dh	AA 82       MOV		R2,	DPL
+0E8Fh	AB 83       MOV		R3,	DPH
+0E91h	12 07 7D    LCALL	077Dh
+0E94h	74 0A       MOV		A,	0Ah
+0E96h	12 02 04    LCALL	0204h
+0E99h	AA 82       MOV		R2,	DPL
+0E9Bh	AB 83       MOV		R3,	DPH
+0E9Dh	12 0F 68    LCALL	0F68h
+0EA0h	85 10 82    MOV		R0 #2,	DPL
+0EA3h	85 11 83    MOV		R1 #2,	DPH
+0EA6h	EA          MOV		A,	R2
+0EA7h	F0          MOVX	@DPTR,	A
+0EA8h	A3          INC		DPTR
+0EA9h	EB          MOV		A,	R3
+0EAAh	F0          MOVX	@DPTR,	A
+0EABh	7C 01       MOV		R4,	01h
+0EADh	79 02       MOV		R1,	02h
+0EAFh	74 02       MOV		A,	02h
+0EB1h	12 02 04    LCALL	0204h
+0EB4h	AA 82       MOV		R2,	DPL
+0EB6h	AB 83       MOV		R3,	DPH
+0EB8h	12 09 10    LCALL	0910h
+0EBBh	74 01       MOV		A,	01h
+0EBDh	12 02 04    LCALL	0204h
+0EC0h	E0          MOVX	A,	@DPTR
+0EC1h	F9          MOV		R1,	A
+0EC2h	74 02       MOV		A,	02h
+0EC4h	12 02 04    LCALL	0204h
+0EC7h	AA 82       MOV		R2,	DPL
+0EC9h	AB 83       MOV		R3,	DPH
+0ECBh	12 07 AA    LCALL	07AAh
+0ECEh	85 10 82    MOV		R0 #2,	DPL
+0ED1h	85 11 83    MOV		R1 #2,	DPH
+0ED4h	E0          MOVX	A,	@DPTR
+0ED5h	F9          MOV		R1,	A
+0ED6h	74 02       MOV		A,	02h
+0ED8h	12 02 04    LCALL	0204h
+0EDBh	AA 82       MOV		R2,	DPL
+0EDDh	AB 83       MOV		R3,	DPH
+0EDFh	12 07 AA    LCALL	07AAh
+0EE2h	80 B0       SJMP	B0h
+0EE4h	C0 82       PUSH	DPL
+0EE6h	C0 83       PUSH	DPH
+0EE8h	8A 82       MOV		DPL,	R2
+0EEAh	8B 83       MOV		DPH,	R3
+0EECh	79 02       MOV		R1,	02h
+0EEEh	AA 82       MOV		R2,	DPL
+0EF0h	AB 83       MOV		R3,	DPH
+0EF2h	12 0B B5    LCALL	0BB5h
+0EF5h	AA 82       MOV		R2,	DPL
+0EF7h	AB 83       MOV		R3,	DPH
+0EF9h	D0 83       POP		DPH
+0EFBh	D0 82       POP		DPL
+0EFDh	22          RET
+
+0EFEh	74 F8       MOV		A,	F8h
+0F00h	12 02 10    LCALL	0210h
+0F03h	74 FE       MOV		A,	FEh
+0F05h	12 01 B9    LCALL	01B9h
+0F08h	75 08 02    MOV		R0 #1,	02h
+0F0Bh	78 08       MOV		R0,	08h
+0F0Dh	12 02 BA    LCALL	02BAh
+0F10h	74 01       MOV		A,	01h
+0F12h	12 02 04    LCALL	0204h
+0F15h	12 02 CD    LCALL	02CDh
+0F18h	79 68       MOV		R1,	68h
+0F1Ah	12 0B DD    LCALL	0BDDh
+0F1Dh	74 03       MOV		A,	03h
+0F1Fh	12 01 CF    LCALL	01CFh
+0F22h	85 10 82    MOV		R0 #2,	DPL
+0F25h	85 11 83    MOV		R1 #2,	DPH
+0F28h	E0          MOVX	A,	@DPTR
+0F29h	54 FF       ANL		A,	FFh
+0F2Bh	FA          MOV		R2,	A
+0F2Ch	A3          INC		DPTR
+0F2Dh	E0          MOVX	A,	@DPTR
+0F2Eh	54 0F       ANL		A,	0Fh
+0F30h	FB          MOV		R3,	A
+0F31h	74 02       MOV		A,	02h
+0F33h	12 01 CF    LCALL	01CFh
+0F36h	7F 01       MOV		R7,	01h
+0F38h	02 02 76    LJMP	0276h
+0F3Bh	74 F7       MOV		A,	F7h
+0F3Dh	12 02 10    LCALL	0210h
+0F40h	EA          MOV		A,	R2
+0F41h	FE          MOV		R6,	A
+0F42h	EB          MOV		A,	R3
+0F43h	FF          MOV		R7,	A
+0F44h	8C 08       MOV		R0 #1,	R4
+0F46h	8D 09       MOV		R1 #1,	R5
+0F48h	EE          MOV		A,	R6
+0F49h	FA          MOV		R2,	A
+0F4Ah	EF          MOV		A,	R7
+0F4Bh	FB          MOV		R3,	A
+0F4Ch	12 0E E4    LCALL	0EE4h
+0F4Fh	8E 82       MOV		DPL,	R6
+0F51h	8F 83       MOV		DPH,	R7
+0F53h	A3          INC		DPTR
+0F54h	A3          INC		DPTR
+0F55h	A3          INC		DPTR
+0F56h	A3          INC		DPTR
+0F57h	A3          INC		DPTR
+0F58h	E5 08       MOV		A,	R0 #1
+0F5Ah	F0          MOVX	@DPTR,	A
+0F5Bh	A3          INC		DPTR
+0F5Ch	E5 09       MOV		A,	R1 #1
+0F5Eh	F0          MOVX	@DPTR,	A
+0F5Fh	EE          MOV		A,	R6
+0F60h	FA          MOV		R2,	A
+0F61h	EF          MOV		A,	R7
+0F62h	FB          MOV		R3,	A
+0F63h	7F 02       MOV		R7,	02h
+0F65h	02 02 76    LJMP	0276h
+0F68h	C0 82       PUSH	DPL
+0F6Ah	C0 83       PUSH	DPH
+0F6Ch	8A 82       MOV		DPL,	R2
+0F6Eh	8B 83       MOV		DPH,	R3
+0F70h	A3          INC		DPTR
+0F71h	A3          INC		DPTR
+0F72h	A3          INC		DPTR
+0F73h	A3          INC		DPTR
+0F74h	A3          INC		DPTR
+0F75h	E0          MOVX	A,	@DPTR
+0F76h	FC          MOV		R4,	A
+0F77h	A3          INC		DPTR
+0F78h	E0          MOVX	A,	@DPTR
+0F79h	FD          MOV		R5,	A
+0F7Ah	12 0E FE    LCALL	0EFEh
+0F7Dh	D0 83       POP		DPH
+0F7Fh	D0 82       POP		DPL
+0F81h	22          RET
+
+0F82h	22          RET
+
+0F83h	02 0F A2    LJMP	0FA2h
+0F86h	EE          MOV		A,	R6
+0F87h	C0 E0       PUSH	ACC
+0F89h	E9          MOV		A,	R1
+0F8Ah	FE          MOV		R6,	A
+0F8Bh	F9          MOV		R1,	A
+0F8Ch	12 0F 93    LCALL	0F93h
+0F8Fh	D0 E0       POP		ACC
+0F91h	FE          MOV		R6,	A
+0F92h	22          RET
+
+0F93h	C0 82       PUSH	DPL
+0F95h	C0 83       PUSH	DPH
+0F97h	E9          MOV		A,	R1
+0F98h	8C 82       MOV		DPL,	R4
+0F9Ah	8D 83       MOV		DPH,	R5
+0F9Ch	F0          MOVX	@DPTR,	A
+0F9Dh	D0 83       POP		DPH
+0F9Fh	D0 82       POP		DPL
+0FA1h	22          RET
+
+0FA2h	C0 82       PUSH	DPL
+0FA4h	C0 83       PUSH	DPH
+0FA6h	8C 82       MOV		DPL,	R4
+0FA8h	8D 83       MOV		DPH,	R5
+0FAAh	E0          MOVX	A,	@DPTR
+0FABh	F9          MOV		R1,	A
+0FACh	D0 83       POP		DPH
+0FAEh	D0 82       POP		DPL
+0FB0h	22          RET
+
+0FB1h	C0 82       PUSH	DPL
+0FB3h	C0 83       PUSH	DPH
+0FB5h	8A 82       MOV		DPL,	R2
+0FB7h	8B 83       MOV		DPH,	R3
+0FB9h	E0          MOVX	A,	@DPTR
+0FBAh	F8          MOV		R0,	A
+0FBBh	A3          INC		DPTR
+0FBCh	E0          MOVX	A,	@DPTR
+0FBDh	F5 83       MOV		DPH,	A
+0FBFh	88 82       MOV		DPL,	R0
+0FC1h	E9          MOV		A,	R1
+0FC2h	F0          MOVX	@DPTR,	A
+0FC3h	8A 82       MOV		DPL,	R2
+0FC5h	8B 83       MOV		DPH,	R3
+0FC7h	E0          MOVX	A,	@DPTR
+0FC8h	24 01       ADD		A,	01h
+0FCAh	FC          MOV		R4,	A
+0FCBh	A3          INC		DPTR
+0FCCh	E0          MOVX	A,	@DPTR
+0FCDh	34 00       ADDC	A,	00h
+0FCFh	FD          MOV		R5,	A
+0FD0h	8A 82       MOV		DPL,	R2
+0FD2h	8B 83       MOV		DPH,	R3
+0FD4h	EC          MOV		A,	R4
+0FD5h	F0          MOVX	@DPTR,	A
+0FD6h	A3          INC		DPTR
+0FD7h	ED          MOV		A,	R5
+0FD8h	F0          MOVX	@DPTR,	A
+0FD9h	D0 83       POP		DPH
+0FDBh	D0 82       POP		DPL
+0FDDh	22          RET
+
+0FDEh	74 F8       MOV		A,	F8h
+0FE0h	12 02 10    LCALL	0210h
+0FE3h	74 FE       MOV		A,	FEh
+0FE5h	12 01 B9    LCALL	01B9h
+0FE8h	EA          MOV		A,	R2
+0FE9h	FE          MOV		R6,	A
+0FEAh	EB          MOV		A,	R3
+0FEBh	FF          MOV		R7,	A
+0FECh	85 10 82    MOV		R0 #2,	DPL
+0FEFh	85 11 83    MOV		R1 #2,	DPH
+0FF2h	EE          MOV		A,	R6
+0FF3h	F0          MOVX	@DPTR,	A
+0FF4h	A3          INC		DPTR
+0FF5h	EF          MOV		A,	R7
+0FF6h	F0          MOVX	@DPTR,	A
+0FF7h	85 10 82    MOV		R0 #2,	DPL
+0FFAh	85 11 83    MOV		R1 #2,	DPH
+0FFDh	AA 82       MOV		R2,	DPL
+0FFFh	AB 83       MOV		R3,	DPH
+1001h	79 01       MOV		R1,	01h
+1003h	12 10 27    LCALL	1027h
+1006h	80 E4       SJMP	E4h
+1008h	C0 82       PUSH	DPL
+100Ah	C0 83       PUSH	DPH
+100Ch	8A 82       MOV		DPL,	R2
+100Eh	8B 83       MOV		DPH,	R3
+1010h	80 01       SJMP	01h
+1012h	A3          INC		DPTR
+1013h	E0          MOVX	A,	@DPTR
+1014h	70 FC       JNZ		FCh
+1016h	E5 82       MOV		A,	DPL
+1018h	C3          CLR		C
+1019h	9A          SUBB	A,	R2
+101Ah	FA          MOV		R2,	A
+101Bh	E5 83       MOV		A,	DPH
+101Dh	9B          SUBB	A,	R3
+101Eh	FB          MOV		R3,	A
+101Fh	D0 83       POP		DPH
+1021h	D0 82       POP		DPL
+1023h	22          RET
+
+1024h	02 00 26    LJMP	0026h
+1027h	22          RET
+
+samuel@kali:~/Desktop/Disassembler$ ./disassembler /home/samuel/Desktop/Disassembler/
+atmel99r.hex              instruction_management.c  memory_management.h
+BACKUPS/                  instruction_management.h  output.txt
+conversion_management.c   instructions_8051.txt     projet.hex
+conversion_management.h   main.c                    record_management.c
+disassembler              memory_management.c       record_management.h
+samuel@kali:~/Desktop/Disassembler$ ./disassembler /home/samuel/Desktop/Disassembler/atmel99r.hex 
+0040h	0A          INC		R2
+0041h	0D          INC		R5
+0042h	41 74       AJMP	0274h
+0044h	6D          XRL		A,	R5
+0045h	65 6C       XRL		A,	#6Ch
+0047h	39          ADDC	A,	R1
+0048h	39          ADDC	A,	R1
+0049h	20 28 65    JB		28h,	65h
+004Ch	58          ANL		A,	R0
+004Dh	74 65       MOV		A,	65h
+004Fh	72 6E       ORL		C,	6Eh
+0051h	65 29       XRL		A,	#29h
+0053h	3A          ADDC	A,	R2
+0054h	20 00 0A    JB		00h,	0Ah
+0057h	0D          INC		R5
+0058h	41 74       AJMP	0274h
+005Ah	6D          XRL		A,	R5
+005Bh	65 6C       XRL		A,	#6Ch
+005Dh	39          ADDC	A,	R1
+005Eh	39          ADDC	A,	R1
+005Fh	20 28 49    JB		28h,	49h
+0062h	6E          XRL		A,	R6
+0063h	74 65       MOV		A,	65h
+0065h	72 6E       ORL		C,	6Eh
+0067h	65 29       XRL		A,	#29h
+0069h	3A          ADDC	A,	R2
+006Ah	20 00 0A    JB		00h,	0Ah
+006Dh	0D          INC		R5
+006Eh	41 74       AJMP	0274h
+0070h	6D          XRL		A,	R5
+0071h	65 6C       XRL		A,	#6Ch
+0073h	39          ADDC	A,	R1
+0074h	39          ADDC	A,	R1
+0075h	20 28 45    JB		28h,	45h
+0078h	45 50       ORL		A,	#50h
+007Ah	52 4F       ANL		#4Fh,	A
+007Ch	4D          ORL		A,	R5
+007Dh	29          ADD		A,	R1
+007Eh	3A          ADDC	A,	R2
+007Fh	20 00 0A    JB		00h,	0Ah
+0082h	0D          INC		R5
+0083h	50 72       JNC		72h
+0085h	6F          XRL		A,	R7
+0086h	67          XRL		A,	@R1
+0087h	72 61       ORL		C,	61h
+0089h	6D          XRL		A,	R5
+008Ah	6D          XRL		A,	R5
+008Bh	65 75       XRL		A,	#75h
+008Dh	72 20       ORL		C,	20h
+008Fh	4A          ORL		A,	R2
+0090h	61 63       AJMP	0363h
+0092h	71 75       ACALL	0375h
+0094h	65 73       XRL		A,	#73h
+0096h	20 4C 61    JB		4Ch,	61h
+0099h	62 72       XRL		#72h,	A
+009Bh	69          XRL		A,	R1
+009Ch	65 2C       XRL		A,	#2Ch
+009Eh	20 4D 61    JB		4Dh,	61h
+00A1h	74 68       MOV		A,	68h
+00A3h	69          XRL		A,	R1
+00A4h	65 75       XRL		A,	#75h
+00A6h	20 54 65    JB		54h,	65h
+00A9h	73          JMP		@A+DPTR
+00AAh	73          JMP		@A+DPTR
+00ABh	69          XRL		A,	R1
+00ACh	65 72       XRL		A,	#72h
+00AEh	20 65 74    JB		65h,	74h
+00B1h	20 45 72    JB		45h,	72h
+00B4h	69          XRL		A,	R1
+00B5h	63 20 4D    XRL		#20h,	4Dh
+00B8h	6F          XRL		A,	R7
+00B9h	72 69       ORL		C,	69h
+00BBh	73          JMP		@A+DPTR
+00BCh	73          JMP		@A+DPTR
+00BDh	65 74       XRL		A,	#74h
+00BFh	74 65       MOV		A,	65h
+00C1h	2E          ADD		A,	R6
+00C2h	00          NOP
+00C3h	0A          INC		R2
+00C4h	0D          INC		R5
+00C5h	44 61       ORL		A,	61h
+00C7h	6E          XRL		A,	R6
+00C8h	73          JMP		@A+DPTR
+00C9h	20 6C 65    JB		6Ch,	65h
+00CCh	20 63 61    JB		63h,	61h
+00CFh	64 72       XRL		A,	72h
+00D1h	65 20       XRL		A,	#20h
+00D3h	64 75       XRL		A,	75h
+00D5h	20 63 6F    JB		63h,	6Fh
+00D8h	75 72 73    MOV		#72h,	73h
+00DBh	20 50 72    JB		50h,	72h
+00DEh	6F          XRL		A,	R7
+00DFh	6A          XRL		A,	R2
+00E0h	65 74       XRL		A,	#74h
+00E2h	20 64 65    JB		64h,	65h
+00E5h	20 54 53    JB		54h,	53h
+00E8h	4F          ORL		A,	R7
+00E9h	20 64 75    JB		64h,	75h
+00ECh	20 43 45    JB		43h,	45h
+00EFh	47          ORL		A,	@R1
+00F0h	45 50       ORL		A,	#50h
+00F2h	20 64 65    JB		64h,	65h
+00F5h	20 4C 69    JB		4Ch,	69h
+00F8h	6D          XRL		A,	R5
+00F9h	6F          XRL		A,	R7
+00FAh	69          XRL		A,	R1
+00FBh	6C          XRL		A,	R4
+00FCh	6F          XRL		A,	R7
+00FDh	75 2E 00    MOV		#2Eh,	00h
+0100h	0A          INC		R2
+0101h	0D          INC		R5
+0102h	4D          ORL		A,	R5
+0103h	6F          XRL		A,	R7
+0104h	64 69       XRL		A,	69h
+0106h	66          XRL		A,	@R0
+0107h	69          XRL		A,	R1
+0108h	63 61 74    XRL		#61h,	74h
+010Bh	69          XRL		A,	R1
+010Ch	6F          XRL		A,	R7
+010Dh	6E          XRL		A,	R6
+010Eh	20 65 74    JB		65h,	74h
+0111h	20 73 75    JB		73h,	75h
+0114h	70 65       JNZ		65h
+0116h	72 76       ORL		C,	76h
+0118h	69          XRL		A,	R1
+0119h	73          JMP		@A+DPTR
+011Ah	69          XRL		A,	R1
+011Bh	6F          XRL		A,	R7
+011Ch	6E          XRL		A,	R6
+011Dh	20 70 61    JB		70h,	61h
+0120h	72 3A       ORL		C,	3Ah
+0122h	20 41 6C    JB		41h,	6Ch
+0125h	61 69       AJMP	0369h
+0127h	6E          XRL		A,	R6
+0128h	20 43 68    JB		43h,	68h
+012Bh	61 6D       AJMP	036Dh
+012Dh	70 61       JNZ		61h
+012Fh	67          XRL		A,	@R1
+0130h	6E          XRL		A,	R6
+0131h	65 20       XRL		A,	#20h
+0133h	65 74       XRL		A,	#74h
+0135h	20 50 69    JB		50h,	69h
+0138h	65 72       XRL		A,	#72h
+013Ah	72 65       ORL		C,	65h
+013Ch	20 43 68    JB		43h,	68h
+013Fh	6F          XRL		A,	R7
+0140h	75 69 6E    MOV		#69h,	6Eh
+0143h	61 72       AJMP	0372h
+0145h	64 2E       XRL		A,	2Eh
+0147h	00          NOP
+0148h	0A          INC		R2
+0149h	0D          INC		R5
+014Ah	44 65       ORL		A,	65h
+014Ch	62 75       XRL		#75h,	A
+014Eh	74 20       MOV		A,	20h
+0150h	48          ORL		A,	R0
+0151h	69          XRL		A,	R1
+0152h	76 65       MOV		@R0,	65h
+0154h	72 20       ORL		C,	20h
+0156h	31 39       ACALL	0139h
+0158h	39          ADDC	A,	R1
+0159h	38          ADDC	A,	R0
+015Ah	2E          ADD		A,	R6
+015Bh	20 44 65    JB		44h,	65h
+015Eh	72 6E       ORL		C,	6Eh
+0160h	69          XRL		A,	R1
+0161h	65 72       XRL		A,	#72h
+0163h	65 20       XRL		A,	#20h
+0165h	52 65       ANL		#65h,	A
+0167h	76 20       MOV		@R0,	20h
+0169h	4D          ORL		A,	R5
+016Ah	61 72       AJMP	0372h
+016Ch	73          JMP		@A+DPTR
+016Dh	20 32 30    JB		32h,	30h
+0170h	30 33 2E    JNB		33h,	2Eh
+0173h	0A          INC		R2
+0174h	0D          INC		R5
+0175h	00          NOP
+0176h	20 3D 20    JB		3Dh,	20h
+0179h	00          NOP
+017Ah	0A          INC		R2
+017Bh	0D          INC		R5
+017Ch	51 75       ACALL	0275h
+017Eh	65 6C       XRL		A,	#6Ch
+0180h	6C          XRL		A,	R4
+0181h	65 20       XRL		A,	#20h
+0183h	76 61       MOV		@R0,	61h
+0185h	6C          XRL		A,	R4
+0186h	65 75       XRL		A,	#75h
+0188h	72 3F       ORL		C,	3Fh
+018Ah	28          ADD		A,	R0
+018Bh	68          XRL		A,	R0
+018Ch	65 78       XRL		A,	#78h
+018Eh	29          ADD		A,	R1
+018Fh	3A          ADDC	A,	R2
+0190h	20 00 0A    JB		00h,	0Ah
+0193h	0D          INC		R5
+0194h	53 75 63    ANL		#75h,	63h
+0197h	63 65 73    XRL		#65h,	73h
+019Ah	2C          ADD		A,	R4
+019Bh	00          NOP
+019Ch	0A          INC		R2
+019Dh	0D          INC		R5
+019Eh	50 72       JNC		72h
+01A0h	6F          XRL		A,	R7
+01A1h	62 6C       XRL		#6Ch,	A
+01A3h	65 6D       XRL		A,	#6Dh
+01A5h	65 20       XRL		A,	#20h
+01A7h	64 65       XRL		A,	65h
+01A9h	20 52 41    JB		52h,	41h
+01ACh	4D          ORL		A,	R5
+01ADh	2C          ADD		A,	R4
+01AEh	00          NOP
+01AFh	20 56 61    JB		56h,	61h
+01B2h	6C          XRL		A,	R4
+01B3h	20 3D 20    JB		3Dh,	20h
+01B6h	00          NOP
+01B7h	0A          INC		R2
+01B8h	00          NOP
+01B9h	0A          INC		R2
+01BAh	0D          INC		R5
+01BBh	51 75       ACALL	0275h
+01BDh	65 6C       XRL		A,	#6Ch
+01BFh	6C          XRL		A,	R4
+01C0h	65 20       XRL		A,	#20h
+01C2h	61 64       AJMP	0364h
+01C4h	72 65       ORL		C,	65h
+01C6h	73          JMP		@A+DPTR
+01C7h	73          JMP		@A+DPTR
+01C8h	65 3F       XRL		A,	#3Fh
+01CAh	20 00 0A    JB		00h,	0Ah
+01CDh	0D          INC		R5
+01CEh	4E          ORL		A,	R6
+01CFh	6F          XRL		A,	R7
+01D0h	75 76 65    MOV		#76h,	65h
+01D3h	6C          XRL		A,	R4
+01D4h	20 56 61    JB		56h,	61h
+01D7h	6C          XRL		A,	R4
+01D8h	65 75       XRL		A,	#75h
+01DAh	72 20       ORL		C,	20h
+01DCh	3D          ADDC	A,	R5
+01DDh	20 00 2C    JB		00h,	2Ch
+01E0h	20 76 65    JB		76h,	65h
+01E3h	72 69       ORL		C,	69h
+01E5h	66          XRL		A,	@R0
+01E6h	69          XRL		A,	R1
+01E7h	65 72       XRL		A,	#72h
+01E9h	20 3D 20    JB		3Dh,	20h
+01ECh	00          NOP
+01EDh	0A          INC		R2
+01EEh	0D          INC		R5
+01EFh	56          ANL		A,	@R0
+01F0h	6F          XRL		A,	R7
+01F1h	75 73 20    MOV		#73h,	20h
+01F4h	72 6F       ORL		C,	6Fh
+01F6h	75 6C 65    MOV		#6Ch,	65h
+01F9h	7A 20       MOV		R2,	20h
+01FBh	65 6E       XRL		A,	#6Eh
+01FDh	20 52 41    JB		52h,	41h
+0200h	4D          ORL		A,	R5
+0201h	2E          ADD		A,	R6
+0202h	00          NOP
+0203h	0A          INC		R2
+0204h	0D          INC		R5
+0205h	00          NOP
+0206h	0A          INC		R2
+0207h	0D          INC		R5
+0208h	46          ORL		A,	@R0
+0209h	6F          XRL		A,	R7
+020Ah	6E          XRL		A,	R6
+020Bh	63 74 69    XRL		#74h,	69h
+020Eh	6F          XRL		A,	R7
+020Fh	6E          XRL		A,	R6
+0210h	20 70 6F    JB		70h,	6Fh
+0213h	75 72 20    MOV		#72h,	20h
+0216h	72 65       ORL		C,	65h
+0218h	6D          XRL		A,	R5
+0219h	70 6C       JNZ		6Ch
+021Bh	69          XRL		A,	R1
+021Ch	72 20       ORL		C,	20h
+021Eh	75 6E 65    MOV		#6Eh,	65h
+0221h	20 73 65    JB		73h,	65h
+0224h	63 74 69    XRL		#74h,	69h
+0227h	6F          XRL		A,	R7
+0228h	6E          XRL		A,	R6
+0229h	20 64 65    JB		64h,	65h
+022Ch	20 6C 61    JB		6Ch,	61h
+022Fh	20 52 41    JB		52h,	41h
+0232h	4D          ORL		A,	R5
+0233h	20 65 78    JB		65h,	78h
+0236h	74 65       MOV		A,	65h
+0238h	72 6E       ORL		C,	6Eh
+023Ah	65 2E       XRL		A,	#2Eh
+023Ch	00          NOP
+023Dh	0A          INC		R2
+023Eh	0D          INC		R5
+023Fh	44 65       ORL		A,	65h
+0241h	62 75       XRL		#75h,	A
+0243h	74 3A       MOV		A,	3Ah
+0245h	00          NOP
+0246h	0A          INC		R2
+0247h	0D          INC		R5
+0248h	46          ORL		A,	@R0
+0249h	69          XRL		A,	R1
+024Ah	6E          XRL		A,	R6
+024Bh	3A          ADDC	A,	R2
+024Ch	00          NOP
+024Dh	0A          INC		R2
+024Eh	0D          INC		R5
+024Fh	51 75       ACALL	0275h
+0251h	65 6C       XRL		A,	#6Ch
+0253h	20 56 61    JB		56h,	61h
+0256h	6C          XRL		A,	R4
+0257h	65 75       XRL		A,	#75h
+0259h	72 3F       ORL		C,	3Fh
+025Bh	28          ADD		A,	R0
+025Ch	68          XRL		A,	R0
+025Dh	65 78       XRL		A,	#78h
+025Fh	29          ADD		A,	R1
+0260h	3A          ADDC	A,	R2
+0261h	20 00 0A    JB		00h,	0Ah
+0264h	0D          INC		R5
+0265h	4F          ORL		A,	R7
+0266h	6E          XRL		A,	R6
+0267h	20 72 65    JB		72h,	65h
+026Ah	6D          XRL		A,	R5
+026Bh	70 6C       JNZ		6Ch
+026Dh	69          XRL		A,	R1
+026Eh	20 6C 61    JB		6Ch,	61h
+0271h	20 6D 65    JB		6Dh,	65h
+0274h	6D          XRL		A,	R5
+0275h	6F          XRL		A,	R7
+0276h	69          XRL		A,	R1
+0277h	72 65       ORL		C,	65h
+0279h	20 64 65    JB		64h,	65h
+027Ch	3A          ADDC	A,	R2
+027Dh	20 00 20    JB		00h,	20h
+0280h	61 20       AJMP	0320h
+0282h	00          NOP
+0283h	0A          INC		R2
+0284h	0D          INC		R5
+0285h	45 72       ORL		A,	#72h
+0287h	72 65       ORL		C,	65h
+0289h	75 72 20    MOV		#72h,	20h
+028Ch	64 27       XRL		A,	27h
+028Eh	65 63       XRL		A,	#63h
+0290h	72 69       ORL		C,	69h
+0292h	74 75       MOV		A,	75h
+0294h	72 65       ORL		C,	65h
+0296h	3F          ADDC	A,	R7
+0297h	20 00 2E    JB		00h,	2Eh
+029Ah	20 4F 6B    JB		4Fh,	6Bh
+029Dh	20 43 27    JB		43h,	27h
+02A0h	65 73       XRL		A,	#73h
+02A2h	74 20       MOV		A,	20h
+02A4h	66          XRL		A,	@R0
+02A5h	61 69       AJMP	0369h
+02A7h	74 2E       MOV		A,	2Eh
+02A9h	0A          INC		R2
+02AAh	00          NOP
+02ABh	0A          INC		R2
+02ACh	0D          INC		R5
+02ADh	51 75       ACALL	0275h
+02AFh	65 6C       XRL		A,	#6Ch
+02B1h	20 61 64    JB		61h,	64h
+02B4h	72 65       ORL		C,	65h
+02B6h	73          JMP		@A+DPTR
+02B7h	73          JMP		@A+DPTR
+02B8h	65 28       XRL		A,	#28h
+02BAh	68          XRL		A,	R0
+02BBh	65 78       XRL		A,	#78h
+02BDh	29          ADD		A,	R1
+02BEh	3F          ADDC	A,	R7
+02BFh	20 00 0A    JB		00h,	0Ah
+02C2h	0D          INC		R5
+02C3h	20 20 20    JB		20h,	20h
+02C6h	20 20 20    JB		20h,	20h
+02C9h	20 30 20    JB		30h,	20h
+02CCh	20 31 20    JB		31h,	20h
+02CFh	20 32 20    JB		32h,	20h
+02D2h	20 33 20    JB		33h,	20h
+02D5h	20 34 20    JB		34h,	20h
+02D8h	20 35 20    JB		35h,	20h
+02DBh	20 36 20    JB		36h,	20h
+02DEh	20 37 20    JB		37h,	20h
+02E1h	20 20 20    JB		20h,	20h
+02E4h	38          ADDC	A,	R0
+02E5h	20 20 39    JB		20h,	39h
+02E8h	20 20 41    JB		20h,	41h
+02EBh	20 20 42    JB		20h,	42h
+02EEh	20 20 43    JB		20h,	43h
+02F1h	20 20 44    JB		20h,	44h
+02F4h	20 20 45    JB		20h,	45h
+02F7h	20 20 46    JB		20h,	46h
+02FAh	00          NOP
+02FBh	20 3A 20    JB		3Ah,	20h
+02FEh	00          NOP
+02FFh	20 2D 20    JB		2Dh,	20h
+0302h	00          NOP
+0303h	20 00 0A    JB		00h,	0Ah
+0306h	0A          INC		R2
+0307h	0D          INC		R5
+0308h	00          NOP
+0309h	0A          INC		R2
+030Ah	0D          INC		R5
+030Bh	30 3A 50    JNB		3Ah,	50h
+030Eh	30 3D 00    JNB		3Dh,	00h
+0311h	20 20 34    JB		20h,	34h
+0314h	3A          ADDC	A,	R2
+0315h	50 53       JNC		53h
+0317h	57          ANL		A,	@R1
+0318h	3D          ADDC	A,	R5
+0319h	00          NOP
+031Ah	20 20 38    JB		20h,	38h
+031Dh	3A          ADDC	A,	R2
+031Eh	54 48       ANL		A,	48h
+0320h	30 3D 00    JNB		3Dh,	00h
+0323h	20 20 43    JB		20h,	43h
+0326h	3A          ADDC	A,	R2
+0327h	54 4D       ANL		A,	4Dh
+0329h	4F          ORL		A,	R7
+032Ah	44 3D       ORL		A,	3Dh
+032Ch	00          NOP
+032Dh	20 20 47    JB		20h,	47h
+0330h	3A          ADDC	A,	R2
+0331h	54 32       ANL		A,	32h
+0333h	4D          ORL		A,	R5
+0334h	4F          ORL		A,	R7
+0335h	44 3D       ORL		A,	3Dh
+0337h	00          NOP
+0338h	20 20 4B    JB		20h,	4Bh
+033Bh	3A          ADDC	A,	R2
+033Ch	57          ANL		A,	@R1
+033Dh	4D          ORL		A,	R5
+033Eh	43 4F 4E    ORL		#4Fh,	4Eh
+0341h	3D          ADDC	A,	R5
+0342h	00          NOP
+0343h	20 20 50    JB		20h,	50h
+0346h	3A          ADDC	A,	R2
+0347h	52 43       ANL		#43h,	A
+0349h	41 50       AJMP	0250h
+034Bh	32          RETI
+
+034Ch	48          ORL		A,	R0
+034Dh	3D          ADDC	A,	R5
+034Eh	00          NOP
+034Fh	0A          INC		R2
+0350h	0D          INC		R5
+0351h	31 3A       ACALL	013Ah
+0353h	50 31       JNC		31h
+0355h	3D          ADDC	A,	R5
+0356h	00          NOP
+0357h	20 20 35    JB		20h,	35h
+035Ah	3A          ADDC	A,	R2
+035Bh	53 50 20    ANL		#50h,	20h
+035Eh	3D          ADDC	A,	R5
+035Fh	00          NOP
+0360h	20 20 39    JB		20h,	39h
+0363h	3A          ADDC	A,	R2
+0364h	54 4C       ANL		A,	4Ch
+0366h	30 3D 00    JNB		3Dh,	00h
+0369h	20 20 44    JB		20h,	44h
+036Ch	3A          ADDC	A,	R2
+036Dh	54 43       ANL		A,	43h
+036Fh	4F          ORL		A,	R7
+0370h	4E          ORL		A,	R6
+0371h	3D          ADDC	A,	R5
+0372h	00          NOP
+0373h	20 20 48    JB		20h,	48h
+0376h	3A          ADDC	A,	R2
+0377h	54 32       ANL		A,	32h
+0379h	43 4F 4E    ORL		#4Fh,	4Eh
+037Ch	3D          ADDC	A,	R5
+037Dh	00          NOP
+037Eh	20 20 4C    JB		20h,	4Ch
+0381h	3A          ADDC	A,	R2
+0382h	53 50 44    ANL		#50h,	44h
+0385h	52 20       ANL		#20h,	A
+0387h	3D          ADDC	A,	R5
+0388h	00          NOP
+0389h	20 20 51    JB		20h,	51h
+038Ch	3A          ADDC	A,	R2
+038Dh	52 43       ANL		#43h,	A
+038Fh	41 50       AJMP	0250h
+0391h	32          RETI
+
+0392h	4C          ORL		A,	R4
+0393h	3D          ADDC	A,	R5
+0394h	00          NOP
+0395h	0A          INC		R2
+0396h	0D          INC		R5
+0397h	32          RETI
+
+0398h	3A          ADDC	A,	R2
+0399h	50 32       JNC		32h
+039Bh	3D          ADDC	A,	R5
+039Ch	00          NOP
+039Dh	20 20 36    JB		20h,	36h
+03A0h	3A          ADDC	A,	R2
+03A1h	49          ORL		A,	R1
+03A2h	50 20       JNC		20h
+03A4h	3D          ADDC	A,	R5
+03A5h	00          NOP
+03A6h	20 20 41    JB		20h,	41h
+03A9h	3A          ADDC	A,	R2
+03AAh	54 48       ANL		A,	48h
+03ACh	31 3D       ACALL	013Dh
+03AEh	00          NOP
+03AFh	20 20 45    JB		20h,	45h
+03B2h	3A          ADDC	A,	R2
+03B3h	53 43 4F    ANL		#43h,	4Fh
+03B6h	4E          ORL		A,	R6
+03B7h	3D          ADDC	A,	R5
+03B8h	00          NOP
+03B9h	20 20 49    JB		20h,	49h
+03BCh	3A          ADDC	A,	R2
+03BDh	54 48       ANL		A,	48h
+03BFh	32          RETI
+
+03C0h	20 20 3D    JB		20h,	3Dh
+03C3h	00          NOP
+03C4h	20 20 4D    JB		20h,	4Dh
+03C7h	3A          ADDC	A,	R2
+03C8h	53 50 53    ANL		#50h,	53h
+03CBh	52 20       ANL		#20h,	A
+03CDh	3D          ADDC	A,	R5
+03CEh	00          NOP
+03CFh	0A          INC		R2
+03D0h	0D          INC		R5
+03D1h	33          RLC		A
+03D2h	3A          ADDC	A,	R2
+03D3h	50 33       JNC		33h
+03D5h	3D          ADDC	A,	R5
+03D6h	00          NOP
+03D7h	20 20 37    JB		20h,	37h
+03DAh	3A          ADDC	A,	R2
+03DBh	49          ORL		A,	R1
+03DCh	45 20       ORL		A,	#20h
+03DEh	3D          ADDC	A,	R5
+03DFh	00          NOP
+03E0h	20 20 42    JB		20h,	42h
+03E3h	3A          ADDC	A,	R2
+03E4h	54 4C       ANL		A,	4Ch
+03E6h	31 3D       ACALL	013Dh
+03E8h	00          NOP
+03E9h	20 20 46    JB		20h,	46h
+03ECh	3A          ADDC	A,	R2
+03EDh	50 43       JNC		43h
+03EFh	4F          ORL		A,	R7
+03F0h	4E          ORL		A,	R6
+03F1h	3D          ADDC	A,	R5
+03F2h	00          NOP
+03F3h	20 20 4A    JB		20h,	4Ah
+03F6h	3A          ADDC	A,	R2
+03F7h	54 4C       ANL		A,	4Ch
+03F9h	32          RETI
+
+03FAh	20 20 3D    JB		20h,	3Dh
+03FDh	00          NOP
+03FEh	20 20 4E    JB		20h,	4Eh
+0401h	3A          ADDC	A,	R2
+0402h	53 50 43    ANL		#50h,	43h
+0405h	52 20       ANL		#20h,	A
+0407h	3D          ADDC	A,	R5
+0408h	00          NOP
+0409h	0A          INC		R2
+040Ah	0A          INC		R2
+040Bh	0A          INC		R2
+040Ch	0D          INC		R5
+040Dh	42 49       ORL		#49h,	A
+040Fh	45 4E       ORL		A,	#4Eh
+0411h	56          ANL		A,	@R0
+0412h	45 4E       ORL		A,	#4Eh
+0414h	55 45       ANL		A,	#45h
+0416h	20 44 41    JB		44h,	41h
+0419h	4E          ORL		A,	R6
+041Ah	53 20 41    ANL		#20h,	41h
+041Dh	54 4D       ANL		A,	4Dh
+041Fh	45 4C       ORL		A,	#4Ch
+0421h	39          ADDC	A,	R1
+0422h	39          ADDC	A,	R1
+0423h	20 76 31    JB		76h,	31h
+0426h	36          ADDC	A,	@R0
+0427h	2E          ADD		A,	R6
+0428h	33          RLC		A
+0429h	0A          INC		R2
+042Ah	0D          INC		R5
+042Bh	00          NOP
+042Ch	0A          INC		R2
+042Dh	0D          INC		R5
+042Eh	58          ANL		A,	R0
+042Fh	29          ADD		A,	R1
+0430h	20 61 63    JB		61h,	63h
+0433h	63 65 73    XRL		#65h,	73h
+0436h	20 65 58    JB		65h,	58h
+0439h	74 65       MOV		A,	65h
+043Bh	72 6E       ORL		C,	6Eh
+043Dh	65 2E       XRL		A,	#2Eh
+043Fh	20 20 20    JB		20h,	20h
+0442h	49          ORL		A,	R1
+0443h	29          ADD		A,	R1
+0444h	20 61 63    JB		61h,	63h
+0447h	63 65 73    XRL		#65h,	73h
+044Ah	20 49 6E    JB		49h,	6Eh
+044Dh	74 65       MOV		A,	65h
+044Fh	72 6E       ORL		C,	6Eh
+0451h	65 2E       XRL		A,	#2Eh
+0453h	20 20 20    JB		20h,	20h
+0456h	41 29       AJMP	0229h
+0458h	20 41 63    JB		41h,	63h
+045Bh	63 65 73    XRL		#65h,	73h
+045Eh	20 45 45    JB		45h,	45h
+0461h	50 52       JNC		52h
+0463h	4F          ORL		A,	R7
+0464h	4D          ORL		A,	R5
+0465h	2E          ADD		A,	R6
+0466h	00          NOP
+0467h	0A          INC		R2
+0468h	0D          INC		R5
+0469h	44 29       ORL		A,	29h
+046Bh	20 44 55    JB		44h,	55h
+046Eh	4D          ORL		A,	R5
+046Fh	50 20       JNC		20h
+0471h	6C          XRL		A,	R4
+0472h	61 20       AJMP	0320h
+0474h	6D          XRL		A,	R5
+0475h	65 6D       XRL		A,	#6Dh
+0477h	6F          XRL		A,	R7
+0478h	69          XRL		A,	R1
+0479h	72 65       ORL		C,	65h
+047Bh	2E          ADD		A,	R6
+047Ch	20 4C 29    JB		4Ch,	29h
+047Fh	20 4C 69    JB		4Ch,	69h
+0482h	72 65       ORL		C,	65h
+0484h	20 75 6E    JB		75h,	6Eh
+0487h	20 62 79    JB		62h,	79h
+048Ah	74 65       MOV		A,	65h
+048Ch	2E          ADD		A,	R6
+048Dh	20 20 20    JB		20h,	20h
+0490h	20 52 29    JB		52h,	29h
+0493h	20 6C 69    JB		6Ch,	69h
+0496h	72 65       ORL		C,	65h
+0498h	20 6C 65    JB		6Ch,	65h
+049Bh	73          JMP		@A+DPTR
+049Ch	20 52 65    JB		52h,	65h
+049Fh	67          XRL		A,	@R1
+04A0h	69          XRL		A,	R1
+04A1h	73          JMP		@A+DPTR
+04A2h	74 72       MOV		A,	72h
+04A4h	65 73       XRL		A,	#73h
+04A6h	2E          ADD		A,	R6
+04A7h	00          NOP
+04A8h	0A          INC		R2
+04A9h	0D          INC		R5
+04AAh	46          ORL		A,	@R0
+04ABh	29          ADD		A,	R1
+04ACh	20 46 49    JB		46h,	49h
+04AFh	4C          ORL		A,	R4
+04B0h	4C          ORL		A,	R4
+04B1h	20 6C 61    JB		6Ch,	61h
+04B4h	20 6D 65    JB		6Dh,	65h
+04B7h	6D          XRL		A,	R5
+04B8h	6F          XRL		A,	R7
+04B9h	69          XRL		A,	R1
+04BAh	72 65       ORL		C,	65h
+04BCh	2E          ADD		A,	R6
+04BDh	20 45 29    JB		45h,	29h
+04C0h	20 45 63    JB		45h,	63h
+04C3h	72 69       ORL		C,	69h
+04C5h	72 65       ORL		C,	65h
+04C7h	20 75 6E    JB		75h,	6Eh
+04CAh	20 62 79    JB		62h,	79h
+04CDh	74 65       MOV		A,	65h
+04CFh	2E          ADD		A,	R6
+04D0h	20 20 4D    JB		20h,	4Dh
+04D3h	29          ADD		A,	R1
+04D4h	20 4D 6F    JB		4Dh,	6Fh
+04D7h	64 69       XRL		A,	69h
+04D9h	66          XRL		A,	@R0
+04DAh	20 6C 65    JB		6Ch,	65h
+04DDh	73          JMP		@A+DPTR
+04DEh	20 72 65    JB		72h,	65h
+04E1h	67          XRL		A,	@R1
+04E2h	69          XRL		A,	R1
+04E3h	73          JMP		@A+DPTR
+04E4h	74 72       MOV		A,	72h
+04E6h	65 73       XRL		A,	#73h
+04E8h	2E          ADD		A,	R6
+04E9h	00          NOP
+04EAh	0A          INC		R2
+04EBh	0D          INC		R5
+04ECh	54 29       ANL		A,	29h
+04EEh	20 54 72    JB		54h,	72h
+04F1h	61 6E       AJMP	036Eh
+04F3h	73          JMP		@A+DPTR
+04F4h	66          XRL		A,	@R0
+04F5h	65 72       XRL		A,	#72h
+04F7h	20 65 6E    JB		65h,	6Eh
+04FAh	20 52 41    JB		52h,	41h
+04FDh	4D          ORL		A,	R5
+04FEh	2E          ADD		A,	R6
+04FFh	20 47 29    JB		47h,	29h
+0502h	20 47 6F    JB		47h,	6Fh
+0505h	20 65 6E    JB		65h,	6Eh
+0508h	20 52 41    JB		52h,	41h
+050Bh	4D          ORL		A,	R5
+050Ch	2E          ADD		A,	R6
+050Dh	20 20 20    JB		20h,	20h
+0510h	20 20 20    JB		20h,	20h
+0513h	20 50 29    JB		50h,	29h
+0516h	20 50 72    JB		50h,	72h
+0519h	6F          XRL		A,	R7
+051Ah	67          XRL		A,	@R1
+051Bh	72 61       ORL		C,	61h
+051Dh	6D          XRL		A,	R5
+051Eh	20 6C 61    JB		6Ch,	61h
+0521h	20 46 4C    JB		46h,	4Ch
+0524h	41 53       AJMP	0253h
+0526h	48          ORL		A,	R0
+0527h	20 65 78    JB		65h,	78h
+052Ah	74 2E       MOV		A,	2Eh
+052Ch	00          NOP
+052Dh	0A          INC		R2
+052Eh	0D          INC		R5
+052Fh	53 29 20    ANL		#29h,	20h
+0532h	74 65       MOV		A,	65h
+0534h	73          JMP		@A+DPTR
+0535h	74 73       MOV		A,	73h
+0537h	20 53 70    JB		53h,	70h
+053Ah	65 63       XRL		A,	#63h
+053Ch	69          XRL		A,	R1
+053Dh	61 75       AJMP	0375h
+053Fh	78 2E       MOV		R0,	2Eh
+0541h	20 20 48    JB		20h,	48h
+0544h	29          ADD		A,	R1
+0545h	20 41 66    JB		41h,	66h
+0548h	66          XRL		A,	@R0
+0549h	69          XRL		A,	R1
+054Ah	63 68 65    XRL		#68h,	65h
+054Dh	20 63 65    JB		63h,	65h
+0550h	20 4D 65    JB		4Dh,	65h
+0553h	6E          XRL		A,	R6
+0554h	75 2E 20    MOV		#2Eh,	20h
+0557h	4F          ORL		A,	R7
+0558h	29          ADD		A,	R1
+0559h	20 4F 70    JB		4Fh,	70h
+055Ch	74 69       MOV		A,	69h
+055Eh	6F          XRL		A,	R7
+055Fh	6E          XRL		A,	R6
+0560h	20 72 65    JB		72h,	65h
+0563h	73          JMP		@A+DPTR
+0564h	65 74       XRL		A,	#74h
+0566h	2E          ADD		A,	R6
+0567h	00          NOP
+0568h	0A          INC		R2
+0569h	0D          INC		R5
+056Ah	51 29       ACALL	0229h
+056Ch	20 51 75    JB		51h,	75h
+056Fh	69          XRL		A,	R1
+0570h	3F          ADDC	A,	R7
+0571h	0A          INC		R2
+0572h	00          NOP
+0573h	0A          INC		R2
+0574h	0A          INC		R2
+0575h	0D          INC		R5
+0576h	31 29       ACALL	0129h
+0578h	20 49 6E    JB		49h,	6Eh
+057Bh	63 72 65    XRL		#72h,	65h
+057Eh	6D          XRL		A,	R5
+057Fh	65 6E       XRL		A,	#6Eh
+0581h	74 20       MOV		A,	20h
+0583h	73          JMP		@A+DPTR
+0584h	75 72 20    MOV		#72h,	20h
+0587h	50 31       JNC		31h
+0589h	2E          ADD		A,	R6
+058Ah	20 20 32    JB		20h,	32h
+058Dh	29          ADD		A,	R1
+058Eh	20 50 33    JB		50h,	33h
+0591h	20 76 65    JB		76h,	65h
+0594h	72 73       ORL		C,	73h
+0596h	20 50 31    JB		50h,	31h
+0599h	2E          ADD		A,	R6
+059Ah	20 20 4B    JB		20h,	4Bh
+059Dh	29          ADD		A,	R1
+059Eh	20 4B 65    JB		4Bh,	65h
+05A1h	79 20       MOV		R1,	20h
+05A3h	70 61       JNZ		61h
+05A5h	64 2E       XRL		A,	2Eh
+05A7h	00          NOP
+05A8h	0A          INC		R2
+05A9h	0D          INC		R5
+05AAh	57          ANL		A,	@R1
+05ABh	29          ADD		A,	R1
+05ACh	20 57 61    JB		57h,	61h
+05AFh	74 63       MOV		A,	63h
+05B1h	68          XRL		A,	R0
+05B2h	20 44 6F    JB		44h,	6Fh
+05B5h	67          XRL		A,	@R1
+05B6h	20 54 69    JB		54h,	69h
+05B9h	6D          XRL		A,	R5
+05BAh	65 72       XRL		A,	#72h
+05BCh	2E          ADD		A,	R6
+05BDh	20 20 20    JB		20h,	20h
+05C0h	43 29 20    ORL		#29h,	20h
+05C3h	43 6F 6D    ORL		#6Fh,	6Dh
+05C6h	6D          XRL		A,	R5
+05C7h	20 73 75    JB		73h,	75h
+05CAh	72 20       ORL		C,	20h
+05CCh	50 33       JNC		33h
+05CEh	2E          ADD		A,	R6
+05CFh	32          RETI
+
+05D0h	20 76 65    JB		76h,	65h
+05D3h	72 73       ORL		C,	73h
+05D5h	20 50 49    JB		50h,	49h
+05D8h	43 2E 0A    ORL		#2Eh,	0Ah
+05DBh	00          NOP
+05DCh	0A          INC		R2
+05DDh	0D          INC		R5
+05DEh	4E          ORL		A,	R6
+05DFh	6F          XRL		A,	R7
+05E0h	74 65       MOV		A,	65h
+05E2h	3A          ADDC	A,	R2
+05E3h	50 6F       JNC		6Fh
+05E5h	75 72 20    MOV		#72h,	20h
+05E8h	75 74 69    MOV		#74h,	69h
+05EBh	6C          XRL		A,	R4
+05ECh	69          XRL		A,	R1
+05EDh	73          JMP		@A+DPTR
+05EEh	65 72       XRL		A,	#72h
+05F0h	20 6C 65    JB		6Ch,	65h
+05F3h	20 4B 65    JB		4Bh,	65h
+05F6h	79 70       MOV		R1,	70h
+05F8h	61 64       AJMP	0364h
+05FAh	20 49 4E    JB		49h,	4Eh
+05FDh	20 50 33    JB		50h,	33h
+0600h	2E          ADD		A,	R6
+0601h	33          RLC		A
+0602h	3D          ADDC	A,	R5
+0603h	30 20 73    JNB		20h,	73h
+0606h	75 72 20    MOV		#72h,	20h
+0609h	75 6E 20    MOV		#6Eh,	20h
+060Ch	52 45       ANL		#45h,	A
+060Eh	53 45 54    ANL		#45h,	54h
+0611h	2E          ADD		A,	R6
+0612h	0A          INC		R2
+0613h	00          NOP
+0614h	0A          INC		R2
+0615h	0A          INC		R2
+0616h	0D          INC		R5
+0617h	4F          ORL		A,	R7
+0618h	70 74       JNZ		74h
+061Ah	69          XRL		A,	R1
+061Bh	6F          XRL		A,	R7
+061Ch	6E          XRL		A,	R6
+061Dh	73          JMP		@A+DPTR
+061Eh	20 6C 6F    JB		6Ch,	6Fh
+0621h	72 73       ORL		C,	73h
+0623h	20 64 27    JB		64h,	27h
+0626h	75 6E 20    MOV		#6Eh,	20h
+0629h	52 45       ANL		#45h,	A
+062Bh	53 45 54    ANL		#45h,	54h
+062Eh	2E          ADD		A,	R6
+062Fh	00          NOP
+0630h	0A          INC		R2
+0631h	0D          INC		R5
+0632h	53 69 20    ANL		#69h,	20h
+0635h	6C          XRL		A,	R4
+0636h	27          ADD		A,	@R1
+0637h	61 64       AJMP	0364h
+0639h	72 65       ORL		C,	65h
+063Bh	73          JMP		@A+DPTR
+063Ch	73          JMP		@A+DPTR
+063Dh	65 20       XRL		A,	#20h
+063Fh	30 37 46    JNB		37h,	46h
+0642h	46          ORL		A,	@R0
+0643h	20 64 75    JB		64h,	75h
+0646h	20 45 45    JB		45h,	45h
+0649h	50 52       JNC		52h
+064Bh	4F          ORL		A,	R7
+064Ch	4D          ORL		A,	R5
+064Dh	20 64 61    JB		64h,	61h
+0650h	74 61       MOV		A,	61h
+0652h	20 69 6E    JB		69h,	6Eh
+0655h	74 65       MOV		A,	65h
+0657h	72 6E       ORL		C,	6Eh
+0659h	65 20       XRL		A,	#20h
+065Bh	65 73       XRL		A,	#73h
+065Dh	74 3A       MOV		A,	3Ah
+065Fh	00          NOP
+0660h	0A          INC		R2
+0661h	0D          INC		R5
+0662h	3D          ADDC	A,	R5
+0663h	20 30 78    JB		30h,	78h
+0666h	35 35       ADDC	A,	#35h
+0668h	2C          ADD		A,	R4
+0669h	20 6C 61    JB		6Ch,	61h
+066Ch	20 4C 45    JB		4Ch,	45h
+066Fh	44 20       ORL		A,	20h
+0671h	66          XRL		A,	@R0
+0672h	6C          XRL		A,	R4
+0673h	61 73       AJMP	0373h
+0675h	68          XRL		A,	R0
+0676h	20 73 75    JB		73h,	75h
+0679h	72 20       ORL		C,	20h
+067Bh	75 6E 20    MOV		#6Eh,	20h
+067Eh	50 6F       JNC		6Fh
+0680h	77 65       MOV		@R1,	65h
+0682h	72 20       ORL		C,	20h
+0684h	55 70       ANL		A,	#70h
+0686h	20 6D 61    JB		6Dh,	61h
+0689h	69          XRL		A,	R1
+068Ah	73          JMP		@A+DPTR
+068Bh	20 70 61    JB		70h,	61h
+068Eh	73          JMP		@A+DPTR
+068Fh	20 73 75    JB		73h,	75h
+0692h	72 20       ORL		C,	20h
+0694h	52 45       ANL		#45h,	A
+0696h	53 45 54    ANL		#45h,	54h
+0699h	2E          ADD		A,	R6
+069Ah	00          NOP
+069Bh	0A          INC		R2
+069Ch	0D          INC		R5
+069Dh	3D          ADDC	A,	R5
+069Eh	20 30 78    JB		30h,	78h
+06A1h	41 41       AJMP	0241h
+06A3h	2C          ADD		A,	R4
+06A4h	20 6C 61    JB		6Ch,	61h
+06A7h	20 4C 45    JB		4Ch,	45h
+06AAh	44 20       ORL		A,	20h
+06ACh	6E          XRL		A,	R6
+06ADh	65 20       XRL		A,	#20h
+06AFh	66          XRL		A,	@R0
+06B0h	6C          XRL		A,	R4
+06B1h	61 73       AJMP	0373h
+06B3h	68          XRL		A,	R0
+06B4h	20 70 6C    JB		70h,	6Ch
+06B7h	75 73 20    MOV		#73h,	20h
+06BAh	6A          XRL		A,	R2
+06BBh	61 6D       AJMP	036Dh
+06BDh	61 69       AJMP	0369h
+06BFh	73          JMP		@A+DPTR
+06C0h	2E          ADD		A,	R6
+06C1h	00          NOP
+06C2h	0A          INC		R2
+06C3h	0D          INC		R5
+06C4h	3D          ADDC	A,	R5
+06C5h	20 30 78    JB		30h,	78h
+06C8h	35 41       ADDC	A,	#41h
+06CAh	2C          ADD		A,	R4
+06CBh	20 6F 6E    JB		6Fh,	6Eh
+06CEh	20 73 6F    JB		73h,	6Fh
+06D1h	72 74       ORL		C,	74h
+06D3h	20 6C 61    JB		6Ch,	61h
+06D6h	20 76 61    JB		76h,	61h
+06D9h	6C          XRL		A,	R4
+06DAh	65 75       XRL		A,	#75h
+06DCh	72 20       ORL		C,	20h
+06DEh	64 65       XRL		A,	65h
+06E0h	20 6C 27    JB		6Ch,	27h
+06E3h	61 64       AJMP	0364h
+06E5h	72 65       ORL		C,	65h
+06E7h	73          JMP		@A+DPTR
+06E8h	73          JMP		@A+DPTR
+06E9h	65 20       XRL		A,	#20h
+06EBh	30 37 46    JNB		37h,	46h
+06EEh	45 20       ORL		A,	#20h
+06F0h	64 75       XRL		A,	75h
+06F2h	20 45 45    JB		45h,	45h
+06F5h	50 52       JNC		52h
+06F7h	4F          ORL		A,	R7
+06F8h	4D          ORL		A,	R5
+06F9h	20 73 75    JB		73h,	75h
+06FCh	72 20       ORL		C,	20h
+06FEh	70 6F       JNZ		6Fh
+0700h	72 74       ORL		C,	74h
+0702h	20 31 2E    JB		31h,	2Eh
+0705h	00          NOP
+0706h	0A          INC		R2
+0707h	0D          INC		R5
+0708h	3D          ADDC	A,	R5
+0709h	20 30 78    JB		30h,	78h
+070Ch	41 35       AJMP	0235h
+070Eh	2C          ADD		A,	R4
+070Fh	20 53 75    JB		53h,	75h
+0712h	72 20       ORL		C,	20h
+0714h	75 6E 20    MOV		#6Eh,	20h
+0717h	52 45       ANL		#45h,	A
+0719h	53 45 54    ANL		#45h,	54h
+071Ch	20 6F 6E    JB		6Fh,	6Eh
+071Fh	20 4A 75    JB		4Ah,	75h
+0722h	6D          XRL		A,	R5
+0723h	70 20       JNZ		20h
+0725h	64 69       XRL		A,	69h
+0727h	72 65       ORL		C,	65h
+0729h	63 74 65    XRL		#74h,	65h
+072Ch	6D          XRL		A,	R5
+072Dh	65 6E       XRL		A,	#6Eh
+072Fh	74 20       MOV		A,	20h
+0731h	61 20       AJMP	0320h
+0733h	30 78 38    JNB		78h,	38h
+0736h	30 30 30    JNB		30h,	30h
+0739h	2E          ADD		A,	R6
+073Ah	00          NOP
+073Bh	0A          INC		R2
+073Ch	0D          INC		R5
+073Dh	64 69       XRL		A,	69h
+073Fh	66          XRL		A,	@R0
+0740h	66          XRL		A,	@R0
+0741h	65 72       XRL		A,	#72h
+0743h	65 6E       XRL		A,	#6Eh
+0745h	74 2C       MOV		A,	2Ch
+0747h	20 6C 61    JB		6Ch,	61h
+074Ah	20 4C 45    JB		4Ch,	45h
+074Dh	44 20       ORL		A,	20h
+074Fh	66          XRL		A,	@R0
+0750h	6C          XRL		A,	R4
+0751h	61 73       AJMP	0373h
+0753h	68          XRL		A,	R0
+0754h	20 74 6F    JB		74h,	6Fh
+0757h	75 6A 6F    MOV		#6Ah,	6Fh
+075Ah	75 72 73    MOV		#72h,	73h
+075Dh	2E          ADD		A,	R6
+075Eh	00          NOP
+075Fh	0A          INC		R2
+0760h	0D          INC		R5
+0761h	53 69 20    ANL		#69h,	20h
+0764h	6C          XRL		A,	R4
+0765h	27          ADD		A,	@R1
+0766h	61 64       AJMP	0364h
+0768h	72 20       ORL		C,	20h
+076Ah	30 78 37    JNB		78h,	37h
+076Dh	46          ORL		A,	@R0
+076Eh	44 20       ORL		A,	20h
+0770h	3D          ADDC	A,	R5
+0771h	20 30 78    JB		30h,	78h
+0774h	46          ORL		A,	@R0
+0775h	44 20       ORL		A,	20h
+0777h	74 65       MOV		A,	65h
+0779h	6D          XRL		A,	R5
+077Ah	70 73       JNZ		73h
+077Ch	20 54 48    JB		54h,	48h
+077Fh	31 20       ACALL	0120h
+0781h	70 6F       JNZ		6Fh
+0783h	75 72 20    MOV		#72h,	20h
+0786h	70 6F       JNZ		6Fh
+0788h	72 74       ORL		C,	74h
+078Ah	20 73 65    JB		73h,	65h
+078Dh	72 69       ORL		C,	69h
+078Fh	65 20       XRL		A,	#20h
+0791h	61 20       AJMP	0320h
+0793h	31 39       ACALL	0139h
+0795h	32          RETI
+
+0796h	30 30 20    JNB		30h,	20h
+0799h	62 64       XRL		#64h,	A
+079Bh	73          JMP		@A+DPTR
+079Ch	2E          ADD		A,	R6
+079Dh	00          NOP
+079Eh	0A          INC		R2
+079Fh	0D          INC		R5
+07A0h	28          ADD		A,	R0
+07A1h	76 69       MOV		@R0,	69h
+07A3h	74 65       MOV		A,	65h
+07A5h	73          JMP		@A+DPTR
+07A6h	73          JMP		@A+DPTR
+07A7h	65 3A       XRL		A,	#3Ah
+07A9h	46          ORL		A,	@R0
+07AAh	41 3D       AJMP	023Dh
+07ACh	39          ADDC	A,	R1
+07ADh	36          ADDC	A,	@R0
+07AEh	30 30 2C    JNB		30h,	2Ch
+07B1h	20 46 34    JB		46h,	34h
+07B4h	3D          ADDC	A,	R5
+07B5h	34 38       ADDC	A,	38h
+07B7h	30 30 2C    JNB		30h,	2Ch
+07BAh	20 45 38    JB		45h,	38h
+07BDh	3D          ADDC	A,	R5
+07BEh	32          RETI
+
+07BFh	34 30       ADDC	A,	30h
+07C1h	30 20 65    JNB		20h,	65h
+07C4h	74 20       MOV		A,	20h
+07C6h	44 30       ORL		A,	30h
+07C8h	3D          ADDC	A,	R5
+07C9h	31 32       ACALL	0132h
+07CBh	30 30 29    JNB		30h,	29h
+07CEh	0A          INC		R2
+07CFh	0D          INC		R5
+07D0h	00          NOP
+07D1h	0A          INC		R2
+07D2h	0D          INC		R5
+07D3h	51 75       ACALL	0275h
+07D5h	65 6C       XRL		A,	#6Ch
+07D7h	20 72 65    JB		72h,	65h
+07DAh	67          XRL		A,	@R1
+07DBh	69          XRL		A,	R1
+07DCh	73          JMP		@A+DPTR
+07DDh	74 72       MOV		A,	72h
+07DFh	65 20       XRL		A,	#20h
+07E1h	76 6F       MOV		@R0,	6Fh
+07E3h	75 6C 65    MOV		#6Ch,	65h
+07E6h	7A 2D       MOV		R2,	2Dh
+07E8h	76 6F       MOV		@R0,	6Fh
+07EAh	75 73 20    MOV		#73h,	20h
+07EDh	6D          XRL		A,	R5
+07EEh	6F          XRL		A,	R7
+07EFh	64 69       XRL		A,	69h
+07F1h	66          XRL		A,	@R0
+07F2h	69          XRL		A,	R1
+07F3h	65 72       XRL		A,	#72h
+07F5h	3F          ADDC	A,	R7
+07F6h	20 00 0A    JB		00h,	0Ah
+07F9h	0D          INC		R5
+07FAh	20 20 00    JB		20h,	00h
+07FDh	0A          INC		R2
+07FEh	0D          INC		R5
+07FFh	4E          ORL		A,	R6
+0800h	6F          XRL		A,	R7
+0801h	75 76 65    MOV		#76h,	65h
+0804h	6C          XRL		A,	R4
+0805h	20 76 61    JB		76h,	61h
+0808h	6C          XRL		A,	R4
+0809h	65 75       XRL		A,	#75h
+080Bh	72 3F       ORL		C,	3Fh
+080Dh	00          NOP
+080Eh	0A          INC		R2
+080Fh	0A          INC		R2
+0810h	0D          INC		R5
+0811h	43 6F 6D    ORL		#6Fh,	6Dh
+0814h	6D          XRL		A,	R5
+0815h	75 6E 69    MOV		#6Eh,	69h
+0818h	63 61 74    XRL		#61h,	74h
+081Bh	69          XRL		A,	R1
+081Ch	6F          XRL		A,	R7
+081Dh	6E          XRL		A,	R6
+081Eh	20 73 75    JB		73h,	75h
+0821h	72 20       ORL		C,	20h
+0823h	6C          XRL		A,	R4
+0824h	69          XRL		A,	R1
+0825h	67          XRL		A,	@R1
+0826h	6E          XRL		A,	R6
+0827h	65 20       XRL		A,	#20h
+0829h	43 4F 4D    ORL		#4Fh,	4Dh
+082Ch	20 0A 0A    JB		0Ah,	0Ah
+082Fh	0D          INC		R5
+0830h	00          NOP
+0831h	0A          INC		R2
+0832h	0D          INC		R5
+0833h	54 65       ANL		A,	65h
+0835h	73          JMP		@A+DPTR
+0836h	74 20       MOV		A,	20h
+0838h	64 75       XRL		A,	75h
+083Ah	20 57 61    JB		57h,	61h
+083Dh	74 63       MOV		A,	63h
+083Fh	68          XRL		A,	R0
+0840h	20 44 6F    JB		44h,	6Fh
+0843h	67          XRL		A,	@R1
+0844h	20 54 69    JB		54h,	69h
+0847h	6D          XRL		A,	R5
+0848h	65 72       XRL		A,	#72h
+084Ah	20 00 0A    JB		00h,	0Ah
+084Dh	0D          INC		R5
+084Eh	50 72       JNC		72h
+0850h	65 73       XRL		A,	#73h
+0852h	73          JMP		@A+DPTR
+0853h	65 72       XRL		A,	#72h
+0855h	20 75 6E    JB		75h,	6Eh
+0858h	65 20       XRL		A,	#20h
+085Ah	74 6F       MOV		A,	6Fh
+085Ch	75 63 68    MOV		#63h,	68h
+085Fh	65 20       XRL		A,	#20h
+0861h	73          JMP		@A+DPTR
+0862h	69          XRL		A,	R1
+0863h	6E          XRL		A,	R6
+0864h	6F          XRL		A,	R7
+0865h	6E          XRL		A,	R6
+0866h	20 52 45    JB		52h,	45h
+0869h	53 45 54    ANL		#45h,	54h
+086Ch	20 73 65    JB		73h,	65h
+086Fh	20 70 72    JB		70h,	72h
+0872h	6F          XRL		A,	R7
+0873h	64 75       XRL		A,	75h
+0875h	69          XRL		A,	R1
+0876h	72 61       ORL		C,	61h
+0878h	20 64 61    JB		64h,	61h
+087Bh	6E          XRL		A,	R6
+087Ch	73          JMP		@A+DPTR
+087Dh	20 32 20    JB		32h,	20h
+0880h	73          JMP		@A+DPTR
+0881h	65 63       XRL		A,	#63h
+0883h	6F          XRL		A,	R7
+0884h	6E          XRL		A,	R6
+0885h	64 65       XRL		A,	65h
+0887h	73          JMP		@A+DPTR
+0888h	21 20       AJMP	0920h
+088Ah	00          NOP
+088Bh	20 20 44    JB		20h,	44h
+088Eh	65 6C       XRL		A,	#6Ch
+0890h	61 69       AJMP	0B69h
+0892h	20 4F 4B    JB		4Fh,	4Bh
+0895h	2E          ADD		A,	R6
+0896h	00          NOP
+0897h	0A          INC		R2
+0898h	0A          INC		R2
+0899h	0D          INC		R5
+089Ah	54 72       ANL		A,	72h
+089Ch	61 6E       AJMP	0B6Eh
+089Eh	73          JMP		@A+DPTR
+089Fh	66          XRL		A,	@R0
+08A0h	65 72       XRL		A,	#72h
+08A2h	20 64 75    JB		64h,	75h
+08A5h	20 66 69    JB		66h,	69h
+08A8h	63 68 69    XRL		#68h,	69h
+08ABh	65 72       XRL		A,	#72h
+08ADh	20 65 6E    JB		65h,	6Eh
+08B0h	20 52 41    JB		52h,	41h
+08B3h	4D          ORL		A,	R5
+08B4h	2E          ADD		A,	R6
+08B5h	00          NOP
+08B6h	0A          INC		R2
+08B7h	0D          INC		R5
+08B8h	28          ADD		A,	R0
+08B9h	44 61       ORL		A,	61h
+08BBh	6E          XRL		A,	R6
+08BCh	73          JMP		@A+DPTR
+08BDh	20 50 52    JB		50h,	52h
+08C0h	4F          ORL		A,	R7
+08C1h	43 4F 4D    ORL		#4Fh,	4Dh
+08C4h	4D          ORL		A,	R5
+08C5h	3A          ADDC	A,	R2
+08C6h	20 61 70    JB		61h,	70h
+08C9h	70 75       JNZ		75h
+08CBh	79 65       MOV		R1,	65h
+08CDh	7A 20       MOV		R2,	20h
+08CFh	73          JMP		@A+DPTR
+08D0h	75 72 20    MOV		#72h,	20h
+08D3h	50 67       JNC		67h
+08D5h	55 70       ANL		A,	#70h
+08D7h	20 65 74    JB		65h,	74h
+08DAh	20 63 68    JB		63h,	68h
+08DDh	6F          XRL		A,	R7
+08DEh	69          XRL		A,	R1
+08DFh	73          JMP		@A+DPTR
+08E0h	69          XRL		A,	R1
+08E1h	73          JMP		@A+DPTR
+08E2h	73          JMP		@A+DPTR
+08E3h	65 72       XRL		A,	#72h
+08E5h	20 6C 65    JB		6Ch,	65h
+08E8h	20 6D 6F    JB		6Dh,	6Fh
+08EBh	64 65       XRL		A,	65h
+08EDh	20 41 53    JB		41h,	53h
+08F0h	43 49 49    ORL		#49h,	49h
+08F3h	29          ADD		A,	R1
+08F4h	00          NOP
+08F5h	0D          INC		R5
+08F6h	0A          INC		R2
+08F7h	45 72       ORL		A,	#72h
+08F9h	72 65       ORL		C,	65h
+08FBh	75 72 20    MOV		#72h,	20h
+08FEh	64 65       XRL		A,	65h
+0900h	20 27 3A    JB		27h,	3Ah
+0903h	27          ADD		A,	@R1
+0904h	20 46 61    JB		46h,	61h
+0907h	69          XRL		A,	R1
+0908h	74 65       MOV		A,	65h
+090Ah	20 75 75    JB		75h,	75h
+090Dh	20 52 45    JB		52h,	45h
+0910h	53 45 54    ANL		#45h,	54h
+0913h	00          NOP
+0914h	0A          INC		R2
+0915h	0D          INC		R5
+0916h	54 72       ANL		A,	72h
+0918h	61 6E       AJMP	0B6Eh
+091Ah	73          JMP		@A+DPTR
+091Bh	66          XRL		A,	@R0
+091Ch	65 72       XRL		A,	#72h
+091Eh	74 20       MOV		A,	20h
+0920h	65 6E       XRL		A,	#6Eh
+0922h	20 63 6F    JB		63h,	6Fh
+0925h	75 72 73    MOV		#72h,	73h
+0928h	00          NOP
+0929h	0A          INC		R2
+092Ah	0D          INC		R5
+092Bh	0A          INC		R2
+092Ch	0D          INC		R5
+092Dh	45 72       ORL		A,	#72h
+092Fh	72 65       ORL		C,	65h
+0931h	75 72 20    MOV		#72h,	20h
+0934h	74 72       MOV		A,	72h
+0936h	61 6E       AJMP	0B6Eh
+0938h	73          JMP		@A+DPTR
+0939h	66          XRL		A,	@R0
+093Ah	65 72       XRL		A,	#72h
+093Ch	74 20       MOV		A,	20h
+093Eh	64 65       XRL		A,	65h
+0940h	20 66 69    JB		66h,	69h
+0943h	63 68 69    XRL		#68h,	69h
+0946h	65 72       XRL		A,	#72h
+0948h	2E          ADD		A,	R6
+0949h	2E          ADD		A,	R6
+094Ah	2E          ADD		A,	R6
+094Bh	00          NOP
+094Ch	0A          INC		R2
+094Dh	0D          INC		R5
+094Eh	41 75       AJMP	0A75h
+0950h	74 6F       MOV		A,	6Fh
+0952h	75 72 20    MOV		#72h,	20h
+0955h	64 65       XRL		A,	65h
+0957h	20 6C 27    JB		6Ch,	27h
+095Ah	61 64       AJMP	0B64h
+095Ch	72 65       ORL		C,	65h
+095Eh	73          JMP		@A+DPTR
+095Fh	73          JMP		@A+DPTR
+0960h	65 3A       XRL		A,	#3Ah
+0962h	20 00 2C    JB		00h,	2Ch
+0965h	20 61 20    JB		61h,	20h
+0968h	6C          XRL		A,	R4
+0969h	61 20       AJMP	0B20h
+096Bh	6C          XRL		A,	R4
+096Ch	69          XRL		A,	R1
+096Dh	67          XRL		A,	@R1
+096Eh	6E          XRL		A,	R6
+096Fh	65 3A       XRL		A,	#3Ah
+0971h	20 00 0A    JB		00h,	0Ah
+0974h	0D          INC		R5
+0975h	41 70       AJMP	0A70h
+0977h	70 75       JNZ		75h
+0979h	79 65       MOV		R1,	65h
+097Bh	7A 20       MOV		R2,	20h
+097Dh	73          JMP		@A+DPTR
+097Eh	75 72 20    MOV		#72h,	20h
+0981h	52 45       ANL		#45h,	A
+0983h	53 45 54    ANL		#45h,	54h
+0986h	2E          ADD		A,	R6
+0987h	00          NOP
+0988h	0A          INC		R2
+0989h	0D          INC		R5
+098Ah	45 72       ORL		A,	#72h
+098Ch	72 65       ORL		C,	65h
+098Eh	75 72 20    MOV		#72h,	20h
+0991h	63 68 65    XRL		#68h,	65h
+0994h	63 6B 73    XRL		#6Bh,	73h
+0997h	75 6D 2C    MOV		#6Dh,	2Ch
+099Ah	20 46 61    JB		46h,	61h
+099Dh	69          XRL		A,	R1
+099Eh	74 65       MOV		A,	65h
+09A0h	20 75 6E    JB		75h,	6Eh
+09A3h	20 52 45    JB		52h,	45h
+09A6h	53 45 54    ANL		#45h,	54h
+09A9h	00          NOP
+09AAh	0D          INC		R5
+09ABh	0A          INC		R2
+09ACh	45 72       ORL		A,	#72h
+09AEh	72 65       ORL		C,	65h
+09B0h	75 72 20    MOV		#72h,	20h
+09B3h	66          XRL		A,	@R0
+09B4h	69          XRL		A,	R1
+09B5h	6E          XRL		A,	R6
+09B6h	20 64 65    JB		64h,	65h
+09B9h	20 6C 69    JB		6Ch,	69h
+09BCh	67          XRL		A,	@R1
+09BDh	6E          XRL		A,	R6
+09BEh	65 00       XRL		A,	R0 #0
+09C0h	0A          INC		R2
+09C1h	0D          INC		R5
+09C2h	50 72       JNC		72h
+09C4h	6F          XRL		A,	R7
+09C5h	67          XRL		A,	@R1
+09C6h	72 61       ORL		C,	61h
+09C8h	6D          XRL		A,	R5
+09C9h	6D          XRL		A,	R5
+09CAh	61 74       AJMP	0B74h
+09CCh	69          XRL		A,	R1
+09CDh	6F          XRL		A,	R7
+09CEh	6E          XRL		A,	R6
+09CFh	20 74 65    JB		74h,	65h
+09D2h	72 6D       ORL		C,	6Dh
+09D4h	69          XRL		A,	R1
+09D5h	6E          XRL		A,	R6
+09D6h	65 65       XRL		A,	#65h
+09D8h	00          NOP
+09D9h	0A          INC		R2
+09DAh	0A          INC		R2
+09DBh	0D          INC		R5
+09DCh	4F          ORL		A,	R7
+09DDh	6E          XRL		A,	R6
+09DEh	20 74 72    JB		74h,	72h
+09E1h	61 6E       AJMP	0B6Eh
+09E3h	73          JMP		@A+DPTR
+09E4h	66          XRL		A,	@R0
+09E5h	65 72       XRL		A,	#72h
+09E7h	20 6C 61    JB		6Ch,	61h
+09EAh	20 52 41    JB		52h,	41h
+09EDh	4D          ORL		A,	R5
+09EEh	20 65 6E    JB		65h,	6Eh
+09F1h	20 46 6C    JB		46h,	6Ch
+09F4h	61 73       AJMP	0B73h
+09F6h	68          XRL		A,	R0
+09F7h	2E          ADD		A,	R6
+09F8h	00          NOP
+09F9h	20 43 27    JB		43h,	27h
+09FCh	65 73       XRL		A,	#73h
+09FEh	74 20       MOV		A,	20h
+0A00h	66          XRL		A,	@R0
+0A01h	61 69       AJMP	0B69h
+0A03h	74 2C       MOV		A,	2Ch
+0A05h	20 64 65    JB		64h,	65h
+0A08h	20 30 30    JB		30h,	30h
+0A0Bh	30 30 20    JNB		30h,	20h
+0A0Eh	61 20       AJMP	0B20h
+0A10h	00          NOP
+0A11h	0A          INC		R2
+0A12h	0D          INC		R5
+0A13h	46          ORL		A,	@R0
+0A14h	69          XRL		A,	R1
+0A15h	6E          XRL		A,	R6
+0A16h	2E          ADD		A,	R6
+0A17h	00          NOP
+0A18h	20 20 20    JB		20h,	20h
+0A1Bh	42 69       ORL		#69h,	A
+0A1Dh	65 6E       XRL		A,	#6Eh
+0A1Fh	76 65       MOV		@R0,	65h
+0A21h	6E          XRL		A,	R6
+0A22h	75 65 20    MOV		#65h,	20h
+0A25h	64 61       XRL		A,	61h
+0A27h	6E          XRL		A,	R6
+0A28h	73          JMP		@A+DPTR
+0A29h	20 20 20    JB		20h,	20h
+0A2Ch	20 20 41    JB		20h,	41h
+0A2Fh	74 6D       MOV		A,	6Dh
+0A31h	65 6C       XRL		A,	#6Ch
+0A33h	39          ADDC	A,	R1
+0A34h	39          ADDC	A,	R1
+0A35h	20 76 65    JB		76h,	65h
+0A38h	72 3A       ORL		C,	3Ah
+0A3Ah	31 36       ACALL	0936h
+0A3Ch	2E          ADD		A,	R6
+0A3Dh	33          RLC		A
+0A3Eh	20 20 20    JB		20h,	20h
+0A41h	20 20 20    JB		20h,	20h
+0A44h	54 53       ANL		A,	53h
+0A46h	4F          ORL		A,	R7
+0A47h	20 4C 69    JB		4Ch,	69h
+0A4Ah	6D          XRL		A,	R5
+0A4Bh	6F          XRL		A,	R7
+0A4Ch	69          XRL		A,	R1
+0A4Dh	6C          XRL		A,	R4
+0A4Eh	6F          XRL		A,	R7
+0A4Fh	75 20 20    MOV		#20h,	20h
+0A52h	20 20 20    JB		20h,	20h
+0A55h	49          ORL		A,	R1
+0A56h	41 52       AJMP	0A52h
+0A58h	20 44 2E    JB		44h,	2Eh
+0A5Bh	42 2E       ORL		#2Eh,	A
+0A5Dh	20 41 2E    JB		41h,	2Eh
+0A60h	43 2E 20    ORL		#2Eh,	20h
+0A63h	50 2E       JNC		2Eh
+0A65h	43 2E 20    ORL		#2Eh,	20h
+0A68h	61 00       AJMP	0B00h
+14EDh	75 08 FA    MOV		R0 #1,	FAh
+14F0h	75 09 00    MOV		R1 #1,	00h
+14F3h	E4          CLR		A
+14F4h	F5 45       MOV		#45h,	A
+14F6h	75 90 FF    MOV		P1,	FFh
+14F9h	78 6A       MOV		R0,	6Ah
+14FBh	F6          MOV		@R0,	A
+14FCh	78 64       MOV		R0,	64h
+14FEh	F6          MOV		@R0,	A
+14FFh	F5 46       MOV		#46h,	A
+1501h	F5 3A       MOV		#3Ah,	A
+1503h	F5 44       MOV		#44h,	A
+1505h	78 66       MOV		R0,	66h
+1507h	76 1E       MOV		@R0,	1Eh
+1509h	78 6B       MOV		R0,	6Bh
+150Bh	F6          MOV		@R0,	A
+150Ch	08          INC		R0
+150Dh	76 0A       MOV		@R0,	0Ah
+150Fh	D2 D1       SETB	F1
+1511h	78 67       MOV		R0,	67h
+1513h	F6          MOV		@R0,	A
+1514h	08          INC		R0
+1515h	76 80       MOV		@R0,	80h
+1517h	12 1D 96    LCALL	1D96h
+151Ah	12 1B 55    LCALL	1B55h
+151Dh	78 6A       MOV		R0,	6Ah
+151Fh	E6          MOV		A,	@R0
+1520h	70 0C       JNZ		0Ch
+1522h	75 90 FE    MOV		P1,	FEh
+1525h	FF          MOV		R7,	A
+1526h	7E F8       MOV		R6,	F8h
+1528h	12 18 18    LCALL	1818h
+152Bh	12 17 3F    LCALL	173Fh
+152Eh	7B FF       MOV		R3,	FFh
+1530h	7A 00       MOV		R2,	00h
+1532h	79 40       MOV		R1,	40h
+1534h	12 1A DA    LCALL	1ADAh
+1537h	20 B3 04    JB		P3_3,	04h
+153Ah	78 65       MOV		R0,	65h
+153Ch	76 01       MOV		@R0,	01h
+153Eh	E5 46       MOV		A,	#46h
+1540h	65 3A       XRL		A,	#3Ah
+1542h	60 28       JZ		28h
+1544h	12 1D 0E    LCALL	1D0Eh
+1547h	8F 49       MOV		#49h,	R7
+1549h	12 12 FC    LCALL	12FCh
+154Ch	E5 4A       MOV		A,	#4Ah
+154Eh	70 08       JNZ		08h
+1550h	7B FF       MOV		R3,	FFh
+1552h	7A 00       MOV		R2,	00h
+1554h	79 40       MOV		R1,	40h
+1556h	80 11       SJMP	11h
+1558h	E5 4A       MOV		A,	#4Ah
+155Ah	7B FF       MOV		R3,	FFh
+155Ch	B4 01 06    CJNE	A,	01h,	06h
+155Fh	7A 00       MOV		R2,	00h
+1561h	79 56       MOV		R1,	56h
+1563h	80 04       SJMP	04h
+1565h	7A 00       MOV		R2,	00h
+1567h	79 6C       MOV		R1,	6Ch
+1569h	12 1A DA    LCALL	1ADAh
+156Ch	78 65       MOV		R0,	65h
+156Eh	E6          MOV		A,	@R0
+156Fh	60 06       JZ		06h
+1571h	30 B3 03    JNB		P3_3,	03h
+1574h	12 10 9F    LCALL	109Fh
+1577h	78 6A       MOV		R0,	6Ah
+1579h	E6          MOV		A,	@R0
+157Ah	70 C2       JNZ		C2h
+157Ch	05 4D       INC		#4Dh
+157Eh	08          INC		R0
+157Fh	E6          MOV		A,	@R0
+1580h	FE          MOV		R6,	A
+1581h	08          INC		R0
+1582h	E6          MOV		A,	@R0
+1583h	FF          MOV		R7,	A
+1584h	12 1D B2    LCALL	1DB2h
+1587h	E5 4D       MOV		A,	#4Dh
+1589h	30 E7 04    JNB		E7h,	04h
+158Ch	D2 90       SETB	P1_0
+158Eh	80 AE       SJMP	AEh
+1590h	C2 90       CLR		P1_0
+1592h	E5 4D       MOV		A,	#4Dh
+1594h	54 7F       ANL		A,	7Fh
+1596h	70 A6       JNZ		A6h
+1598h	78 66       MOV		R0,	66h
+159Ah	E6          MOV		A,	@R0
+159Bh	60 03       JZ		03h
+159Dh	16          DEC		@R0
+159Eh	80 9E       SJMP	9Eh
+15A0h	78 6B       MOV		R0,	6Bh
+15A2h	76 00       MOV		@R0,	00h
+15A4h	08          INC		R0
+15A5h	76 FA       MOV		@R0,	FAh
+15A7h	80 95       SJMP	95h
+1998h	8F 5E       MOV		#5Eh,	R7
+199Ah	78 5F       MOV		R0,	5Fh
+199Ch	7C 00       MOV		R4,	00h
+199Eh	7D 00       MOV		R5,	00h
+19A0h	7B FF       MOV		R3,	FFh
+19A2h	7A 0A       MOV		R2,	0Ah
+19A4h	79 68       MOV		R1,	68h
+19A6h	7E 00       MOV		R6,	00h
+19A8h	7F 02       MOV		R7,	02h
+19AAh	12 0E 79    LCALL	0E79h
+19ADh	E5 5E       MOV		A,	#5Eh
+19AFh	C4          SWAP	A
+19B0h	54 0F       ANL		A,	0Fh
+19B2h	FF          MOV		R7,	A
+19B3h	C3          CLR		C
+19B4h	94 0A       SUBB	A,	0Ah
+19B6h	50 06       JNC		06h
+19B8h	74 30       MOV		A,	30h
+19BAh	2F          ADD		A,	R7
+19BBh	FF          MOV		R7,	A
+19BCh	80 04       SJMP	04h
+19BEh	74 37       MOV		A,	37h
+19C0h	2F          ADD		A,	R7
+19C1h	FF          MOV		R7,	A
+19C2h	8F 5F       MOV		#5Fh,	R7
+19C4h	7B 00       MOV		R3,	00h
+19C6h	7A 00       MOV		R2,	00h
+19C8h	79 5F       MOV		R1,	5Fh
+19CAh	12 1A DA    LCALL	1ADAh
+19CDh	E5 5E       MOV		A,	#5Eh
+19CFh	54 0F       ANL		A,	0Fh
+19D1h	FF          MOV		R7,	A
+19D2h	C3          CLR		C
+19D3h	94 0A       SUBB	A,	0Ah
+19D5h	50 06       JNC		06h
+19D7h	74 30       MOV		A,	30h
+19D9h	2F          ADD		A,	R7
+19DAh	FF          MOV		R7,	A
+19DBh	80 04       SJMP	04h
+19DDh	74 37       MOV		A,	37h
+19DFh	2F          ADD		A,	R7
+19E0h	FF          MOV		R7,	A
+19E1h	8F 5F       MOV		#5Fh,	R7
+19E3h	7B 00       MOV		R3,	00h
+19E5h	7A 00       MOV		R2,	00h
+19E7h	79 5F       MOV		R1,	5Fh
+19E9h	02 1A DA    LJMP	1ADAh
+1B15h	12 1D 0E    LCALL	1D0Eh
+1B18h	E4          CLR		A
+1B19h	FE          MOV		R6,	A
+1B1Ah	D3          SETB	C
+1B1Bh	EF          MOV		A,	R7
+1B1Ch	64 80       XRL		A,	80h
+1B1Eh	94 B9       SUBB	A,	B9h
+1B20h	50 06       JNC		06h
+1B22h	EF          MOV		A,	R7
+1B23h	24 D0       ADD		A,	D0h
+1B25h	FE          MOV		R6,	A
+1B26h	80 2A       SJMP	2Ah
+1B28h	C3          CLR		C
+1B29h	EF          MOV		A,	R7
+1B2Ah	64 80       XRL		A,	80h
+1B2Ch	94 C1       SUBB	A,	C1h
+1B2Eh	40 0E       JC		0Eh
+1B30h	D3          SETB	C
+1B31h	EF          MOV		A,	R7
+1B32h	64 80       XRL		A,	80h
+1B34h	94 DA       SUBB	A,	DAh
+1B36h	50 06       JNC		06h
+1B38h	EF          MOV		A,	R7
+1B39h	24 C9       ADD		A,	C9h
+1B3Bh	FE          MOV		R6,	A
+1B3Ch	80 14       SJMP	14h
+1B3Eh	C3          CLR		C
+1B3Fh	EF          MOV		A,	R7
+1B40h	64 80       XRL		A,	80h
+1B42h	94 E1       SUBB	A,	E1h
+1B44h	40 0C       JC		0Ch
+1B46h	D3          SETB	C
+1B47h	EF          MOV		A,	R7
+1B48h	64 80       XRL		A,	80h
+1B4Ah	94 FA       SUBB	A,	FAh
+1B4Ch	50 04       JNC		04h
+1B4Eh	EF          MOV		A,	R7
+1B4Fh	24 A9       ADD		A,	A9h
+1B51h	FE          MOV		R6,	A
+1B52h	AF 06       MOV		R7,	R6 #0
+1B54h	22          RET
+
+1C72h	7B FF       MOV		R3,	FFh
+1C74h	7A 00       MOV		R2,	00h
+1C76h	79 81       MOV		R1,	81h
+1C78h	12 1A DA    LCALL	1ADAh
+1C7Bh	7B FF       MOV		R3,	FFh
+1C7Dh	7A 00       MOV		R2,	00h
+1C7Fh	79 C3       MOV		R1,	C3h
+1C81h	12 1A DA    LCALL	1ADAh
+1C84h	7B FF       MOV		R3,	FFh
+1C86h	7A 01       MOV		R2,	01h
+1C88h	79 00       MOV		R1,	00h
+1C8Ah	12 1A DA    LCALL	1ADAh
+1C8Dh	7B FF       MOV		R3,	FFh
+1C8Fh	7A 01       MOV		R2,	01h
+1C91h	79 48       MOV		R1,	48h
+1C93h	02 1A DA    LJMP	1ADAh
+1D46h	12 1D 0E    LCALL	1D0Eh
+1D49h	12 1B 18    LCALL	1B18h
+1D4Ch	8F 5E       MOV		#5Eh,	R7
+1D4Eh	E5 5E       MOV		A,	#5Eh
+1D50h	C4          SWAP	A
+1D51h	54 F0       ANL		A,	F0h
+1D53h	F5 5E       MOV		#5Eh,	A
+1D55h	12 1D 0E    LCALL	1D0Eh
+1D58h	12 1B 18    LCALL	1B18h
+1D5Bh	EF          MOV		A,	R7
+1D5Ch	42 5E       ORL		#5Eh,	A
+1D5Eh	AF 5E       MOV		R7,	#5Eh
+1D60h	22          RET
+
+1DAEh	7F 06       MOV		R7,	06h
+1DB0h	7E 00       MOV		R6,	00h
+1DB2h	D3          SETB	C
+1DB3h	EF          MOV		A,	R7
+1DB4h	94 00       SUBB	A,	00h
+1DB6h	EE          MOV		A,	R6
+1DB7h	94 00       SUBB	A,	00h
+1DB9h	40 07       JC		07h
+1DBBh	EF          MOV		A,	R7
+1DBCh	1F          DEC		R7
+1DBDh	70 F3       JNZ		F3h
+1DBFh	1E          DEC		R6
+1DC0h	80 F0       SJMP	F0h
+1DC2h	22          RET
+
+1CD4h	8E 56       MOV		#56h,	R6
+1CD6h	8F 57       MOV		#57h,	R7
+1CD8h	8D 58       MOV		#58h,	R5
+1CDAh	E4          CLR		A
+1CDBh	F5 59       MOV		#59h,	A
+1CDDh	12 1D 2A    LCALL	1D2Ah
+1CE0h	AF 57       MOV		R7,	#57h
+1CE2h	AE 56       MOV		R6,	#56h
+1CE4h	12 1C BA    LCALL	1CBAh
+1CE7h	EF          MOV		A,	R7
+1CE8h	B5 58 03    CJNE	A,	#58h,	03h
+1CEBh	75 59 01    MOV		#59h,	01h
+1CEEh	AF 59       MOV		R7,	#59h
+1CF0h	22          RET
+
+15A9h	E4          CLR		A
+15AAh	F5 4E       MOV		#4Eh,	A
+15ACh	F5 4F       MOV		#4Fh,	A
+15AEh	12 1C 0F    LCALL	1C0Fh
+15B1h	7B FF       MOV		R3,	FFh
+15B3h	7A 01       MOV		R2,	01h
+15B5h	79 76       MOV		R1,	76h
+15B7h	12 1A DA    LCALL	1ADAh
+15BAh	AF 4C       MOV		R7,	#4Ch
+15BCh	AE 4B       MOV		R6,	#4Bh
+15BEh	12 1C BA    LCALL	1CBAh
+15C1h	12 19 98    LCALL	1998h
+15C4h	7B FF       MOV		R3,	FFh
+15C6h	7A 01       MOV		R2,	01h
+15C8h	79 7A       MOV		R1,	7Ah
+15CAh	12 1A DA    LCALL	1ADAh
+15CDh	E4          CLR		A
+15CEh	F5 4E       MOV		#4Eh,	A
+15D0h	F5 4F       MOV		#4Fh,	A
+15D2h	12 1D 0E    LCALL	1D0Eh
+15D5h	12 1B 18    LCALL	1B18h
+15D8h	EF          MOV		A,	R7
+15D9h	33          RLC		A
+15DAh	95 E0       SUBB	A,	ACC
+15DCh	F5 4E       MOV		#4Eh,	A
+15DEh	8F 4F       MOV		#4Fh,	R7
+15E0h	E5 4F       MOV		A,	#4Fh
+15E2h	C4          SWAP	A
+15E3h	F8          MOV		R0,	A
+15E4h	54 0F       ANL		A,	0Fh
+15E6h	C8          XCH		A,	R0
+15E7h	68          XRL		A,	R0
+15E8h	F5 4F       MOV		#4Fh,	A
+15EAh	E5 4E       MOV		A,	#4Eh
+15ECh	C4          SWAP	A
+15EDh	54 F0       ANL		A,	F0h
+15EFh	48          ORL		A,	R0
+15F0h	F5 4E       MOV		#4Eh,	A
+15F2h	12 1D 0E    LCALL	1D0Eh
+15F5h	12 1B 18    LCALL	1B18h
+15F8h	EF          MOV		A,	R7
+15F9h	33          RLC		A
+15FAh	95 E0       SUBB	A,	ACC
+15FCh	FE          MOV		R6,	A
+15FDh	EF          MOV		A,	R7
+15FEh	42 4F       ORL		#4Fh,	A
+1600h	EE          MOV		A,	R6
+1601h	42 4E       ORL		#4Eh,	A
+1603h	AD 4F       MOV		R5,	#4Fh
+1605h	AF 4C       MOV		R7,	#4Ch
+1607h	AE 4B       MOV		R6,	#4Bh
+1609h	12 1C D4    LCALL	1CD4h
+160Ch	EF          MOV		A,	R7
+160Dh	7B FF       MOV		R3,	FFh
+160Fh	60 06       JZ		06h
+1611h	7A 01       MOV		R2,	01h
+1613h	79 92       MOV		R1,	92h
+1615h	80 04       SJMP	04h
+1617h	7A 01       MOV		R2,	01h
+1619h	79 9C       MOV		R1,	9Ch
+161Bh	12 1A DA    LCALL	1ADAh
+161Eh	7B FF       MOV		R3,	FFh
+1620h	7A 01       MOV		R2,	01h
+1622h	79 AF       MOV		R1,	AFh
+1624h	12 1A DA    LCALL	1ADAh
+1627h	AF 4C       MOV		R7,	#4Ch
+1629h	AE 4B       MOV		R6,	#4Bh
+162Bh	12 1C BA    LCALL	1CBAh
+162Eh	12 19 98    LCALL	1998h
+1631h	7B FF       MOV		R3,	FFh
+1633h	7A 01       MOV		R2,	01h
+1635h	79 B7       MOV		R1,	B7h
+1637h	02 1A DA    LJMP	1ADAh
+1A8Dh	7B FF       MOV		R3,	FFh
+1A8Fh	7A 01       MOV		R2,	01h
+1A91h	79 B9       MOV		R1,	B9h
+1A93h	12 1A DA    LCALL	1ADAh
+1A96h	12 1D 46    LCALL	1D46h
+1A99h	8F 4E       MOV		#4Eh,	R7
+1A9Bh	7B FF       MOV		R3,	FFh
+1A9Dh	7A 01       MOV		R2,	01h
+1A9Fh	79 76       MOV		R1,	76h
+1AA1h	12 1A DA    LCALL	1ADAh
+1AA4h	A8 4E       MOV		R0,	#4Eh
+1AA6h	E6          MOV		A,	@R0
+1AA7h	FF          MOV		R7,	A
+1AA8h	12 19 98    LCALL	1998h
+1AABh	7B FF       MOV		R3,	FFh
+1AADh	7A 01       MOV		R2,	01h
+1AAFh	79 CC       MOV		R1,	CCh
+1AB1h	12 1A DA    LCALL	1ADAh
+1AB4h	12 1D 46    LCALL	1D46h
+1AB7h	A8 4E       MOV		R0,	#4Eh
+1AB9h	A6 07       MOV		@R0,	R7 #0
+1ABBh	7B FF       MOV		R3,	FFh
+1ABDh	7A 01       MOV		R2,	01h
+1ABFh	79 DF       MOV		R1,	DFh
+1AC1h	12 1A DA    LCALL	1ADAh
+1AC4h	A8 4E       MOV		R0,	#4Eh
+1AC6h	E6          MOV		A,	@R0
+1AC7h	FF          MOV		R7,	A
+1AC8h	12 19 98    LCALL	1998h
+1ACBh	7B FF       MOV		R3,	FFh
+1ACDh	7A 01       MOV		R2,	01h
+1ACFh	79 B7       MOV		R1,	B7h
+1AD1h	02 1A DA    LJMP	1ADAh
+18DEh	E5 4A       MOV		A,	#4Ah
+18E0h	64 0A       XRL		A,	0Ah
+18E2h	60 0C       JZ		0Ch
+18E4h	7B FF       MOV		R3,	FFh
+18E6h	7A 01       MOV		R2,	01h
+18E8h	79 ED       MOV		R1,	EDh
+18EAh	12 1A DA    LCALL	1ADAh
+18EDh	12 1A D4    LCALL	1AD4h
+18F0h	E4          CLR		A
+18F1h	F5 A8       MOV		IE,	A
+18F3h	F5 B8       MOV		IP0,	A
+18F5h	F5 F0       MOV		B,	A
+18F7h	F5 D0       MOV		PSW,	A
+18F9h	F5 83       MOV		DPH,	A
+18FBh	F5 82       MOV		DPL,	A
+18FDh	75 90 FF    MOV		P1,	FFh
+1900h	75 B0 FF    MOV		P3,	FFh
+1903h	F5 89       MOV		TMOD,	A
+1905h	F5 C9       MOV		T2MOD,	A
+1907h	F5 88       MOV		TCON,	A
+1909h	F5 C8       MOV		T2CON,	A
+190Bh	F5 8C       MOV		TH0,	A
+190Dh	F5 8A       MOV		TL0,	A
+190Fh	F5 8D       MOV		TH1,	A
+1911h	F5 8B       MOV		TL1,	A
+1913h	F5 CD       MOV		TH2,	A
+1915h	F5 CC       MOV		TL2,	A
+1917h	F5 98       MOV		SCON0,	A
+1919h	F5 CA       MOV		RCAP2L,	A
+191Bh	F5 CB       MOV		RCAP2H,	A
+191Dh	75 96 02    MOV		CKMOD,	02h
+1920h	F5 86       MOV		DPS,	A
+1922h	F5 AA       MOV		SADDR1,	A
+1924h	F5 87       MOV		PCON,	A
+1926h	75 D5 04    MOV		FCNTL,	04h
+1929h	75 81 09    MOV		SP,	09h
+192Ch	FB          MOV		R3,	A
+192Dh	FA          MOV		R2,	A
+192Eh	79 08       MOV		R1,	08h
+1930h	F5 3F       MOV		#3Fh,	A
+1932h	F5 40       MOV		#40h,	A
+1934h	89 41       MOV		#41h,	R1
+1936h	75 F0 80    MOV		B,	80h
+1939h	02 0E E5    LJMP	0EE5h
+12FCh	E5 49       MOV		A,	#49h
+12FEh	C3          CLR		C
+12FFh	94 61       SUBB	A,	61h
+1301h	40 0D       JC		0Dh
+1303h	E5 49       MOV		A,	#49h
+1305h	D3          SETB	C
+1306h	94 7A       SUBB	A,	7Ah
+1308h	50 06       JNC		06h
+130Ah	74 E0       MOV		A,	E0h
+130Ch	25 49       ADD		A,	#49h
+130Eh	F5 49       MOV		#49h,	A
+1310h	E5 49       MOV		A,	#49h
+1312h	24 CE       ADD		A,	CEh
+1314h	70 03       JNZ		03h
+1316h	02 13 ED    LJMP	13EDh
+1319h	04          INC		A
+131Ah	B4 28 00    CJNE	A,	28h,	00h
+131Dh	40 03       JC		03h
+131Fh	02 13 FC    LJMP	13FCh
+1322h	90 13 30    MOV		DPTR,	1330h
+1325h	75 F0 03    MOV		B,	03h
+1328h	A4          MUL		A,	B
+1329h	C5 83       XCH		A,	DPH
+132Bh	25 F0       ADD		A,	B
+132Dh	C5 83       XCH		A,	DPH
+132Fh	73          JMP		@A+DPTR
+1330h	02 13 EA    LJMP	13EAh
+1333h	02 13 FC    LJMP	13FCh
+1336h	02 13 FC    LJMP	13FCh
+1339h	02 13 FC    LJMP	13FCh
+133Ch	02 13 FC    LJMP	13FCh
+133Fh	02 13 FC    LJMP	13FCh
+1342h	02 13 FC    LJMP	13FCh
+1345h	02 13 FC    LJMP	13FCh
+1348h	02 13 FC    LJMP	13FCh
+134Bh	02 13 FC    LJMP	13FCh
+134Eh	02 13 FC    LJMP	13FCh
+1351h	02 13 FC    LJMP	13FCh
+1354h	02 13 FC    LJMP	13FCh
+1357h	02 13 FC    LJMP	13FCh
+135Ah	02 13 FC    LJMP	13FCh
+135Dh	02 13 FC    LJMP	13FCh
+1360h	02 13 B0    LJMP	13B0h
+1363h	02 13 FC    LJMP	13FCh
+1366h	02 13 F0    LJMP	13F0h
+1369h	02 13 B7    LJMP	13B7h
+136Ch	02 13 D3    LJMP	13D3h
+136Fh	02 13 E4    LJMP	13E4h
+1372h	02 13 E1    LJMP	13E1h
+1375h	02 13 C2    LJMP	13C2h
+1378h	02 13 AC    LJMP	13ACh
+137Bh	02 13 FC    LJMP	13FCh
+137Eh	02 13 F9    LJMP	13F9h
+1381h	02 13 B7    LJMP	13B7h
+1384h	02 13 C7    LJMP	13C7h
+1387h	02 13 FC    LJMP	13FCh
+138Ah	02 13 B4    LJMP	13B4h
+138Dh	02 13 E7    LJMP	13E7h
+1390h	02 13 F6    LJMP	13F6h
+1393h	02 13 C5    LJMP	13C5h
+1396h	02 13 D0    LJMP	13D0h
+1399h	02 13 DE    LJMP	13DEh
+139Ch	02 13 FC    LJMP	13FCh
+139Fh	02 13 FC    LJMP	13FCh
+13A2h	02 13 F3    LJMP	13F3h
+13A5h	02 13 A8    LJMP	13A8h
+13A8h	E4          CLR		A
+13A9h	F5 4A       MOV		#4Ah,	A
+13ABh	22          RET
+
+13ACh	75 4A 01    MOV		#4Ah,	01h
+13AFh	22          RET
+
+13B0h	75 4A 02    MOV		#4Ah,	02h
+13B3h	22          RET
+
+13B4h	02 19 EC    LJMP	19ECh
+13B7h	E5 4A       MOV		A,	#4Ah
+13B9h	B4 01 03    CJNE	A,	01h,	03h
+13BCh	02 19 3C    LJMP	193Ch
+13BFh	02 16 3A    LJMP	163Ah
+13C2h	02 1B 55    LJMP	1B55h
+13C5h	80 06       SJMP	06h
+13C7h	12 0F 2A    LCALL	0F2Ah
+13CAh	12 0C 0B    LCALL	0C0Bh
+13CDh	02 0F 2A    LJMP	0F2Ah
+13D0h	02 1D 61    LJMP	1D61h
+13D3h	E5 4A       MOV		A,	#4Ah
+13D5h	B4 01 03    CJNE	A,	01h,	03h
+13D8h	02 1A 8D    LJMP	1A8Dh
+13DBh	02 15 A9    LJMP	15A9h
+13DEh	02 0A 6A    LJMP	0A6Ah
+13E1h	02 18 DE    LJMP	18DEh
+13E4h	02 13 FD    LJMP	13FDh
+13E7h	02 11 E1    LJMP	11E1h
+13EAh	02 1D D7    LJMP	1DD7h
+13EDh	02 1D C3    LJMP	1DC3h
+13F0h	12 1B 94    LCALL	1B94h
+13F3h	12 1C 4A    LCALL	1C4Ah
+13F6h	02 1C 72    LJMP	1C72h
+13F9h	75 45 03    MOV		#45h,	03h
+13FCh	22          RET
+
+13FDh	E4          CLR		A
+13FEh	F5 54       MOV		#54h,	A
+1400h	F5 55       MOV		#55h,	A
+1402h	7B FF       MOV		R3,	FFh
+1404h	7A 02       MOV		R2,	02h
+1406h	79 06       MOV		R1,	06h
+1408h	12 1A DA    LCALL	1ADAh
+140Bh	7B FF       MOV		R3,	FFh
+140Dh	7A 02       MOV		R2,	02h
+140Fh	79 3D       MOV		R1,	3Dh
+1411h	12 1A DA    LCALL	1ADAh
+1414h	12 1C 0F    LCALL	1C0Fh
+1417h	85 4B 4E    MOV		#4Bh,	#4Eh
+141Ah	85 4C 4F    MOV		#4Ch,	#4Fh
+141Dh	7B FF       MOV		R3,	FFh
+141Fh	7A 02       MOV		R2,	02h
+1421h	79 46       MOV		R1,	46h
+1423h	12 1A DA    LCALL	1ADAh
+1426h	12 1C 0F    LCALL	1C0Fh
+1429h	85 4B 50    MOV		#4Bh,	#50h
+142Ch	85 4C 51    MOV		#4Ch,	#51h
+142Fh	7B FF       MOV		R3,	FFh
+1431h	7A 02       MOV		R2,	02h
+1433h	79 4D       MOV		R1,	4Dh
+1435h	12 1A DA    LCALL	1ADAh
+1438h	E4          CLR		A
+1439h	F5 54       MOV		#54h,	A
+143Bh	F5 55       MOV		#55h,	A
+143Dh	12 1D 0E    LCALL	1D0Eh
+1440h	12 1B 18    LCALL	1B18h
+1443h	EF          MOV		A,	R7
+1444h	33          RLC		A
+1445h	95 E0       SUBB	A,	ACC
+1447h	F5 54       MOV		#54h,	A
+1449h	8F 55       MOV		#55h,	R7
+144Bh	E5 55       MOV		A,	#55h
+144Dh	C4          SWAP	A
+144Eh	F8          MOV		R0,	A
+144Fh	54 0F       ANL		A,	0Fh
+1451h	C8          XCH		A,	R0
+1452h	68          XRL		A,	R0
+1453h	F5 55       MOV		#55h,	A
+1455h	E5 54       MOV		A,	#54h
+1457h	C4          SWAP	A
+1458h	54 F0       ANL		A,	F0h
+145Ah	48          ORL		A,	R0
+145Bh	F5 54       MOV		#54h,	A
+145Dh	12 1D 0E    LCALL	1D0Eh
+1460h	12 1B 18    LCALL	1B18h
+1463h	EF          MOV		A,	R7
+1464h	33          RLC		A
+1465h	95 E0       SUBB	A,	ACC
+1467h	FE          MOV		R6,	A
+1468h	EF          MOV		A,	R7
+1469h	42 55       ORL		#55h,	A
+146Bh	EE          MOV		A,	R6
+146Ch	42 54       ORL		#54h,	A
+146Eh	7B FF       MOV		R3,	FFh
+1470h	7A 02       MOV		R2,	02h
+1472h	79 63       MOV		R1,	63h
+1474h	12 1A DA    LCALL	1ADAh
+1477h	E5 4E       MOV		A,	#4Eh
+1479h	FF          MOV		R7,	A
+147Ah	12 19 98    LCALL	1998h
+147Dh	AF 4F       MOV		R7,	#4Fh
+147Fh	12 19 98    LCALL	1998h
+1482h	7B FF       MOV		R3,	FFh
+1484h	7A 02       MOV		R2,	02h
+1486h	79 7F       MOV		R1,	7Fh
+1488h	12 1A DA    LCALL	1ADAh
+148Bh	85 4E 52    MOV		#4Eh,	#52h
+148Eh	85 4F 53    MOV		#4Fh,	#53h
+1491h	D3          SETB	C
+1492h	E5 53       MOV		A,	#53h
+1494h	95 51       SUBB	A,	#51h
+1496h	E5 52       MOV		A,	#52h
+1498h	95 50       SUBB	A,	#50h
+149Ah	50 35       JNC		35h
+149Ch	C3          CLR		C
+149Dh	E5 53       MOV		A,	#53h
+149Fh	95 4F       SUBB	A,	#4Fh
+14A1h	E5 52       MOV		A,	#52h
+14A3h	95 4E       SUBB	A,	#4Eh
+14A5h	40 2A       JC		2Ah
+14A7h	AD 55       MOV		R5,	#55h
+14A9h	AF 53       MOV		R7,	#53h
+14ABh	AE 52       MOV		R6,	#52h
+14ADh	12 1C D4    LCALL	1CD4h
+14B0h	EF          MOV		A,	R7
+14B1h	70 14       JNZ		14h
+14B3h	7B FF       MOV		R3,	FFh
+14B5h	7A 02       MOV		R2,	02h
+14B7h	79 83       MOV		R1,	83h
+14B9h	12 1A DA    LCALL	1ADAh
+14BCh	E5 52       MOV		A,	#52h
+14BEh	FF          MOV		R7,	A
+14BFh	12 19 98    LCALL	1998h
+14C2h	AF 53       MOV		R7,	#53h
+14C4h	12 19 98    LCALL	1998h
+14C7h	05 53       INC		#53h
+14C9h	E5 53       MOV		A,	#53h
+14CBh	70 02       JNZ		02h
+14CDh	05 52       INC		#52h
+14CFh	80 C0       SJMP	C0h
+14D1h	E5 53       MOV		A,	#53h
+14D3h	15 53       DEC		#53h
+14D5h	70 02       JNZ		02h
+14D7h	15 52       DEC		#52h
+14D9h	E5 52       MOV		A,	#52h
+14DBh	FF          MOV		R7,	A
+14DCh	12 19 98    LCALL	1998h
+14DFh	AF 53       MOV		R7,	#53h
+14E1h	12 19 98    LCALL	1998h
+14E4h	7B FF       MOV		R3,	FFh
+14E6h	7A 02       MOV		R2,	02h
+14E8h	79 99       MOV		R1,	99h
+14EAh	02 1A DA    LJMP	1ADAh
+1D0Eh	E4          CLR		A
+1D0Fh	FF          MOV		R7,	A
+1D10h	E5 46       MOV		A,	#46h
+1D12h	65 3A       XRL		A,	#3Ah
+1D14h	60 FA       JZ		FAh
+1D16h	74 0A       MOV		A,	0Ah
+1D18h	25 3A       ADD		A,	#3Ah
+1D1Ah	F8          MOV		R0,	A
+1D1Bh	E6          MOV		A,	@R0
+1D1Ch	FF          MOV		R7,	A
+1D1Dh	05 3A       INC		#3Ah
+1D1Fh	E5 3A       MOV		A,	#3Ah
+1D21h	C3          CLR		C
+1D22h	94 30       SUBB	A,	30h
+1D24h	40 03       JC		03h
+1D26h	E4          CLR		A
+1D27h	F5 3A       MOV		#3Ah,	A
+1D29h	22          RET
+
+1D96h	75 98 50    MOV		SCON0,	50h
+1D99h	75 89 20    MOV		TMOD,	20h
+1D9Ch	43 87 80    ORL		PCON,	80h
+1D9Fh	75 8D FD    MOV		TH1,	FDh
+1DA2h	75 88 40    MOV		TCON,	40h
+1DA5h	D2 AF       SETB	EA
+1DA7h	D2 AC       SETB	ES0
+1DA9h	C2 99       CLR		TI_0
+1DABh	C2 98       CLR		RI_0
+1DADh	22          RET
+
+1CB6h	7F FF       MOV		R7,	FFh
+1CB8h	7E 07       MOV		R6,	07h
+1CBAh	8F 82       MOV		DPL,	R7
+1CBCh	8E 83       MOV		DPH,	R6
+1CBEh	E5 4A       MOV		A,	#4Ah
+1CC0h	70 04       JNZ		04h
+1CC2h	E0          MOVX	A,	@DPTR
+1CC3h	FD          MOV		R5,	A
+1CC4h	80 0B       SJMP	0Bh
+1CC6h	AF 96       MOV		R7,	CKMOD
+1CC8h	EF          MOV		A,	R7
+1CC9h	44 08       ORL		A,	08h
+1CCBh	F5 96       MOV		CKMOD,	A
+1CCDh	E0          MOVX	A,	@DPTR
+1CCEh	FD          MOV		R5,	A
+1CCFh	8F 96       MOV		CKMOD,	R7
+1CD1h	AF 05       MOV		R7,	R5 #0
+1CD3h	22          RET
+
+0023h	02 1B D3    LJMP	1BD3h
+1BD3h	C0 E0       PUSH	ACC
+1BD5h	C0 D0       PUSH	PSW
+1BD7h	75 D0 00    MOV		PSW,	00h
+1BDAh	C0 00       PUSH	R0 #0
+1BDCh	30 98 15    JNB		RI_0,	15h
+1BDFh	74 0A       MOV		A,	0Ah
+1BE1h	25 46       ADD		A,	#46h
+1BE3h	F8          MOV		R0,	A
+1BE4h	A6 99       MOV		@R0,	SBUF0
+1BE6h	05 46       INC		#46h
+1BE8h	E5 46       MOV		A,	#46h
+1BEAh	C3          CLR		C
+1BEBh	94 30       SUBB	A,	30h
+1BEDh	40 03       JC		03h
+1BEFh	75 46 00    MOV		#46h,	00h
+1BF2h	C2 98       CLR		RI_0
+1BF4h	30 99 11    JNB		TI_0,	11h
+1BF7h	78 69       MOV		R0,	69h
+1BF9h	76 00       MOV		@R0,	00h
+1BFBh	E5 44       MOV		A,	#44h
+1BFDh	60 07       JZ		07h
+1BFFh	F5 99       MOV		SBUF0,	A
+1C01h	75 44 00    MOV		#44h,	00h
+1C04h	76 01       MOV		@R0,	01h
+1C06h	C2 99       CLR		TI_0
+1C08h	D0 00       POP		R0 #0
+1C0Ah	D0 D0       POP		PSW
+1C0Ch	D0 E0       POP		ACC
+1C0Eh	32          RETI
+
+173Fh	12 1D E8    LCALL	1DE8h
+1742h	E4          CLR		A
+1743h	F5 4E       MOV		#4Eh,	A
+1745h	E5 4E       MOV		A,	#4Eh
+1747h	90 0A 18    MOV		DPTR,	0A18h
+174Ah	93          MOVC	A,	@A+DPTR
+174Bh	FF          MOV		R7,	A
+174Ch	E5 4E       MOV		A,	#4Eh
+174Eh	FB          MOV		R3,	A
+174Fh	7A 00       MOV		R2,	00h
+1751h	E4          CLR		A
+1752h	FD          MOV		R5,	A
+1753h	FC          MOV		R4,	A
+1754h	12 18 87    LCALL	1887h
+1757h	05 4E       INC		#4Eh
+1759h	E5 4E       MOV		A,	#4Eh
+175Bh	D3          SETB	C
+175Ch	94 13       SUBB	A,	13h
+175Eh	40 E5       JC		E5h
+1760h	E4          CLR		A
+1761h	F5 4E       MOV		#4Eh,	A
+1763h	E5 4E       MOV		A,	#4Eh
+1765h	90 0A 54    MOV		DPTR,	0A54h
+1768h	7D 03       MOV		R5,	03h
+176Ah	12 18 7E    LCALL	187Eh
+176Dh	05 4E       INC		#4Eh
+176Fh	E5 4E       MOV		A,	#4Eh
+1771h	D3          SETB	C
+1772h	94 13       SUBB	A,	13h
+1774h	40 ED       JC		EDh
+1776h	E4          CLR		A
+1777h	F5 4E       MOV		#4Eh,	A
+1779h	E5 4E       MOV		A,	#4Eh
+177Bh	90 0A 40    MOV		DPTR,	0A40h
+177Eh	7D 02       MOV		R5,	02h
+1780h	12 18 7E    LCALL	187Eh
+1783h	05 4E       INC		#4Eh
+1785h	E5 4E       MOV		A,	#4Eh
+1787h	D3          SETB	C
+1788h	94 13       SUBB	A,	13h
+178Ah	40 ED       JC		EDh
+178Ch	E4          CLR		A
+178Dh	F5 4E       MOV		#4Eh,	A
+178Fh	E5 4E       MOV		A,	#4Eh
+1791h	90 0A 2C    MOV		DPTR,	0A2Ch
+1794h	93          MOVC	A,	@A+DPTR
+1795h	FF          MOV		R7,	A
+1796h	E5 4E       MOV		A,	#4Eh
+1798h	FB          MOV		R3,	A
+1799h	7A 00       MOV		R2,	00h
+179Bh	7D 01       MOV		R5,	01h
+179Dh	7C 00       MOV		R4,	00h
+179Fh	12 18 87    LCALL	1887h
+17A2h	05 4E       INC		#4Eh
+17A4h	E5 4E       MOV		A,	#4Eh
+17A6h	D3          SETB	C
+17A7h	94 13       SUBB	A,	13h
+17A9h	40 E4       JC		E4h
+17ABh	22          RET
+
+1D7Ch	12 1D 88    LCALL	1D88h
+1D7Fh	85 3E 82    MOV		#3Eh,	DPL
+1D82h	85 3D 83    MOV		#3Dh,	DPH
+1D85h	74 30       MOV		A,	30h
+1D87h	F0          MOVX	@DPTR,	A
+1D88h	7F E0       MOV		R7,	E0h
+1D8Ah	7E 2E       MOV		R6,	2Eh
+1D8Ch	EF          MOV		A,	R7
+1D8Dh	1F          DEC		R7
+1D8Eh	70 01       JNZ		01h
+1D90h	1E          DEC		R6
+1D91h	EF          MOV		A,	R7
+1D92h	4E          ORL		A,	R6
+1D93h	70 F7       JNZ		F7h
+1D95h	22          RET
+
+1C96h	7F 08       MOV		R7,	08h
+1C98h	7E 07       MOV		R6,	07h
+1C9Ah	85 48 82    MOV		#48h,	DPL
+1C9Dh	85 47 83    MOV		#47h,	DPH
+1CA0h	E0          MOVX	A,	@DPTR
+1CA1h	54 80       ANL		A,	80h
+1CA3h	FD          MOV		R5,	A
+1CA4h	33          RLC		A
+1CA5h	95 E0       SUBB	A,	ACC
+1CA7h	4D          ORL		A,	R5
+1CA8h	60 0B       JZ		0Bh
+1CAAh	EF          MOV		A,	R7
+1CABh	4E          ORL		A,	R6
+1CACh	60 07       JZ		07h
+1CAEh	EF          MOV		A,	R7
+1CAFh	1F          DEC		R7
+1CB0h	70 E8       JNZ		E8h
+1CB2h	1E          DEC		R6
+1CB3h	80 E5       SJMP	E5h
+1CB5h	22          RET
+
+1818h	AD 07       MOV		R5,	R7 #0
+181Ah	AC 06       MOV		R4,	R6 #0
+181Ch	8C 3D       MOV		#3Dh,	R4
+181Eh	8D 3E       MOV		#3Eh,	R5
+1820h	ED          MOV		A,	R5
+1821h	24 01       ADD		A,	01h
+1823h	F5 48       MOV		#48h,	A
+1825h	E4          CLR		A
+1826h	3C          ADDC	A,	R4
+1827h	F5 47       MOV		#47h,	A
+1829h	ED          MOV		A,	R5
+182Ah	24 02       ADD		A,	02h
+182Ch	F5 43       MOV		#43h,	A
+182Eh	E4          CLR		A
+182Fh	3C          ADDC	A,	R4
+1830h	F5 42       MOV		#42h,	A
+1832h	12 1D 7C    LCALL	1D7Ch
+1835h	85 3E 82    MOV		#3Eh,	DPL
+1838h	85 3D 83    MOV		#3Dh,	DPH
+183Bh	74 30       MOV		A,	30h
+183Dh	F0          MOVX	@DPTR,	A
+183Eh	12 1D 7C    LCALL	1D7Ch
+1841h	12 1C 96    LCALL	1C96h
+1844h	85 3E 82    MOV		#3Eh,	DPL
+1847h	85 3D 83    MOV		#3Dh,	DPH
+184Ah	74 01       MOV		A,	01h
+184Ch	F0          MOVX	@DPTR,	A
+184Dh	12 1C 96    LCALL	1C96h
+1850h	85 3E 82    MOV		#3Eh,	DPL
+1853h	85 3D 83    MOV		#3Dh,	DPH
+1856h	74 38       MOV		A,	38h
+1858h	F0          MOVX	@DPTR,	A
+1859h	12 1C 96    LCALL	1C96h
+185Ch	85 3E 82    MOV		#3Eh,	DPL
+185Fh	85 3D 83    MOV		#3Dh,	DPH
+1862h	74 08       MOV		A,	08h
+1864h	F0          MOVX	@DPTR,	A
+1865h	12 1C 96    LCALL	1C96h
+1868h	85 3E 82    MOV		#3Eh,	DPL
+186Bh	85 3D 83    MOV		#3Dh,	DPH
+186Eh	74 0C       MOV		A,	0Ch
+1870h	F0          MOVX	@DPTR,	A
+1871h	12 1C 96    LCALL	1C96h
+1874h	85 3E 82    MOV		#3Eh,	DPL
+1877h	85 3D 83    MOV		#3Dh,	DPH
+187Ah	74 06       MOV		A,	06h
+187Ch	F0          MOVX	@DPTR,	A
+187Dh	22          RET
+
+187Eh	93          MOVC	A,	@A+DPTR
+187Fh	FF          MOV		R7,	A
+1880h	E5 4E       MOV		A,	#4Eh
+1882h	FB          MOV		R3,	A
+1883h	7A 00       MOV		R2,	00h
+1885h	7C 00       MOV		R4,	00h
+1887h	A9 07       MOV		R1,	R7 #0
+1889h	AE 04       MOV		R6,	R4 #0
+188Bh	AF 05       MOV		R7,	R5 #0
+188Dh	EC          MOV		A,	R4
+188Eh	70 2C       JNZ		2Ch
+1890h	EF          MOV		A,	R7
+1891h	14          DEC		A
+1892h	60 12       JZ		12h
+1894h	14          DEC		A
+1895h	60 17       JZ		17h
+1897h	14          DEC		A
+1898h	60 1C       JZ		1Ch
+189Ah	24 03       ADD		A,	03h
+189Ch	70 1E       JNZ		1Eh
+189Eh	75 4F 00    MOV		#4Fh,	00h
+18A1h	75 50 80    MOV		#50h,	80h
+18A4h	80 16       SJMP	16h
+18A6h	75 4F 00    MOV		#4Fh,	00h
+18A9h	75 50 C0    MOV		#50h,	C0h
+18ACh	80 0E       SJMP	0Eh
+18AEh	75 4F 00    MOV		#4Fh,	00h
+18B1h	75 50 94    MOV		#50h,	94h
+18B4h	80 06       SJMP	06h
+18B6h	75 4F 00    MOV		#4Fh,	00h
+18B9h	75 50 D4    MOV		#50h,	D4h
+18BCh	EB          MOV		A,	R3
+18BDh	25 50       ADD		A,	#50h
+18BFh	F5 50       MOV		#50h,	A
+18C1h	EA          MOV		A,	R2
+18C2h	35 4F       ADDC	A,	#4Fh
+18C4h	F5 4F       MOV		#4Fh,	A
+18C6h	12 1C 96    LCALL	1C96h
+18C9h	85 3E 82    MOV		#3Eh,	DPL
+18CCh	85 3D 83    MOV		#3Dh,	DPH
+18CFh	E5 50       MOV		A,	#50h
+18D1h	F0          MOVX	@DPTR,	A
+18D2h	12 1C 96    LCALL	1C96h
+18D5h	85 43 82    MOV		#43h,	DPL
+18D8h	85 42 83    MOV		#42h,	DPH
+18DBh	E9          MOV		A,	R1
+18DCh	F0          MOVX	@DPTR,	A
+18DDh	22          RET
+
+1DE8h	12 1C 96    LCALL	1C96h
+1DEBh	85 3E 82    MOV		#3Eh,	DPL
+1DEEh	85 3D 83    MOV		#3Dh,	DPH
+1DF1h	74 01       MOV		A,	01h
+1DF3h	F0          MOVX	@DPTR,	A
+1DF4h	22          RET
+
+1C0Fh	7B FF       MOV		R3,	FFh
+1C11h	7A 02       MOV		R2,	02h
+1C13h	79 AB       MOV		R1,	ABh
+1C15h	12 1A DA    LCALL	1ADAh
+1C18h	12 1B 15    LCALL	1B15h
+1C1Bh	EF          MOV		A,	R7
+1C1Ch	33          RLC		A
+1C1Dh	95 E0       SUBB	A,	ACC
+1C1Fh	F5 4B       MOV		#4Bh,	A
+1C21h	8F 4C       MOV		#4Ch,	R7
+1C23h	E4          CLR		A
+1C24h	FD          MOV		R5,	A
+1C25h	E5 4C       MOV		A,	#4Ch
+1C27h	C4          SWAP	A
+1C28h	F8          MOV		R0,	A
+1C29h	54 0F       ANL		A,	0Fh
+1C2Bh	C8          XCH		A,	R0
+1C2Ch	68          XRL		A,	R0
+1C2Dh	F5 4C       MOV		#4Ch,	A
+1C2Fh	E5 4B       MOV		A,	#4Bh
+1C31h	C4          SWAP	A
+1C32h	54 F0       ANL		A,	F0h
+1C34h	48          ORL		A,	R0
+1C35h	F5 4B       MOV		#4Bh,	A
+1C37h	12 1B 15    LCALL	1B15h
+1C3Ah	EF          MOV		A,	R7
+1C3Bh	33          RLC		A
+1C3Ch	95 E0       SUBB	A,	ACC
+1C3Eh	FE          MOV		R6,	A
+1C3Fh	EF          MOV		A,	R7
+1C40h	42 4C       ORL		#4Ch,	A
+1C42h	EE          MOV		A,	R6
+1C43h	42 4B       ORL		#4Bh,	A
+1C45h	0D          INC		R5
+1C46h	BD 03 DC    CJNE R5,	03h,	DCh
+1C49h	22          RET
+
+163Ah	12 1C 0F    LCALL	1C0Fh
+163Dh	E5 49       MOV		A,	#49h
+163Fh	24 B4       ADD		A,	B4h
+1641h	60 70       JZ		70h
+1643h	24 08       ADD		A,	08h
+1645h	60 03       JZ		03h
+1647h	02 16 C9    LJMP	16C9h
+164Ah	7B FF       MOV		R3,	FFh
+164Ch	7A 02       MOV		R2,	02h
+164Eh	79 C1       MOV		R1,	C1h
+1650h	12 1A DA    LCALL	1ADAh
+1653h	12 1A D4    LCALL	1AD4h
+1656h	85 4B 4F    MOV		#4Bh,	#4Fh
+1659h	85 4C 50    MOV		#4Ch,	#50h
+165Ch	E5 46       MOV		A,	#46h
+165Eh	65 3A       XRL		A,	#3Ah
+1660h	70 4B       JNZ		4Bh
+1662h	E5 4F       MOV		A,	#4Fh
+1664h	FF          MOV		R7,	A
+1665h	12 19 98    LCALL	1998h
+1668h	AF 50       MOV		R7,	#50h
+166Ah	12 19 98    LCALL	1998h
+166Dh	7B FF       MOV		R3,	FFh
+166Fh	7A 02       MOV		R2,	02h
+1671h	79 FB       MOV		R1,	FBh
+1673h	12 1A DA    LCALL	1ADAh
+1676h	E4          CLR		A
+1677h	F5 4E       MOV		#4Eh,	A
+1679h	AF 50       MOV		R7,	#50h
+167Bh	AE 4F       MOV		R6,	#4Fh
+167Dh	12 1C BA    LCALL	1CBAh
+1680h	12 19 98    LCALL	1998h
+1683h	05 50       INC		#50h
+1685h	E5 50       MOV		A,	#50h
+1687h	70 02       JNZ		02h
+1689h	05 4F       INC		#4Fh
+168Bh	E5 4E       MOV		A,	#4Eh
+168Dh	7B FF       MOV		R3,	FFh
+168Fh	B4 07 06    CJNE	A,	07h,	06h
+1692h	7A 02       MOV		R2,	02h
+1694h	79 FF       MOV		R1,	FFh
+1696h	80 04       SJMP	04h
+1698h	7A 03       MOV		R2,	03h
+169Ah	79 03       MOV		R1,	03h
+169Ch	12 1A DA    LCALL	1ADAh
+169Fh	05 4E       INC		#4Eh
+16A1h	E5 4E       MOV		A,	#4Eh
+16A3h	C3          CLR		C
+16A4h	94 10       SUBB	A,	10h
+16A6h	40 D1       JC		D1h
+16A8h	12 1A D4    LCALL	1AD4h
+16ABh	80 AF       SJMP	AFh
+16ADh	12 1D 0E    LCALL	1D0Eh
+16B0h	8F 49       MOV		#49h,	R7
+16B2h	22          RET
+
+16B3h	7B FF       MOV		R3,	FFh
+16B5h	7A 01       MOV		R2,	01h
+16B7h	79 76       MOV		R1,	76h
+16B9h	12 1A DA    LCALL	1ADAh
+16BCh	AF 4C       MOV		R7,	#4Ch
+16BEh	AE 4B       MOV		R6,	#4Bh
+16C0h	12 1C BA    LCALL	1CBAh
+16C3h	12 19 98    LCALL	1998h
+16C6h	12 1A D4    LCALL	1AD4h
+16C9h	22          RET
+
+193Ch	7B FF       MOV		R3,	FFh
+193Eh	7A 03       MOV		R2,	03h
+1940h	79 05       MOV		R1,	05h
+1942h	12 1A DA    LCALL	1ADAh
+1945h	E4          CLR		A
+1946h	F5 4F       MOV		#4Fh,	A
+1948h	F5 50       MOV		#50h,	A
+194Ah	F5 51       MOV		#51h,	A
+194Ch	C3          CLR		C
+194Dh	E5 50       MOV		A,	#50h
+194Fh	94 01       SUBB	A,	01h
+1951h	50 44       JNC		44h
+1953h	AF 4F       MOV		R7,	#4Fh
+1955h	12 19 98    LCALL	1998h
+1958h	7B FF       MOV		R3,	FFh
+195Ah	7A 02       MOV		R2,	02h
+195Ch	79 FB       MOV		R1,	FBh
+195Eh	12 1A DA    LCALL	1ADAh
+1961h	E4          CLR		A
+1962h	F5 4E       MOV		#4Eh,	A
+1964h	A8 4F       MOV		R0,	#4Fh
+1966h	E6          MOV		A,	@R0
+1967h	FF          MOV		R7,	A
+1968h	12 19 98    LCALL	1998h
+196Bh	05 51       INC		#51h
+196Dh	E5 51       MOV		A,	#51h
+196Fh	70 02       JNZ		02h
+1971h	05 50       INC		#50h
+1973h	05 4F       INC		#4Fh
+1975h	E5 4E       MOV		A,	#4Eh
+1977h	7B FF       MOV		R3,	FFh
+1979h	B4 07 06    CJNE	A,	07h,	06h
+197Ch	7A 02       MOV		R2,	02h
+197Eh	79 FF       MOV		R1,	FFh
+1980h	80 04       SJMP	04h
+1982h	7A 03       MOV		R2,	03h
+1984h	79 03       MOV		R1,	03h
+1986h	12 1A DA    LCALL	1ADAh
+1989h	05 4E       INC		#4Eh
+198Bh	E5 4E       MOV		A,	#4Eh
+198Dh	C3          CLR		C
+198Eh	94 10       SUBB	A,	10h
+1990h	40 D2       JC		D2h
+1992h	12 1A D4    LCALL	1AD4h
+1995h	80 B5       SJMP	B5h
+1997h	22          RET
+
+0F2Ah	7B FF       MOV		R3,	FFh
+0F2Ch	7A 03       MOV		R2,	03h
+0F2Eh	79 09       MOV		R1,	09h
+0F30h	12 1A DA    LCALL	1ADAh
+0F33h	AF 80       MOV		R7,	P0
+0F35h	12 19 98    LCALL	1998h
+0F38h	7B FF       MOV		R3,	FFh
+0F3Ah	7A 03       MOV		R2,	03h
+0F3Ch	79 11       MOV		R1,	11h
+0F3Eh	12 1A DA    LCALL	1ADAh
+0F41h	AF D0       MOV		R7,	PSW
+0F43h	12 19 98    LCALL	1998h
+0F46h	7B FF       MOV		R3,	FFh
+0F48h	7A 03       MOV		R2,	03h
+0F4Ah	79 1A       MOV		R1,	1Ah
+0F4Ch	12 1A DA    LCALL	1ADAh
+0F4Fh	AF 8C       MOV		R7,	TH0
+0F51h	12 19 98    LCALL	1998h
+0F54h	7B FF       MOV		R3,	FFh
+0F56h	7A 03       MOV		R2,	03h
+0F58h	79 23       MOV		R1,	23h
+0F5Ah	12 1A DA    LCALL	1ADAh
+0F5Dh	AF 89       MOV		R7,	TMOD
+0F5Fh	12 19 98    LCALL	1998h
+0F62h	7B FF       MOV		R3,	FFh
+0F64h	7A 03       MOV		R2,	03h
+0F66h	79 2D       MOV		R1,	2Dh
+0F68h	12 1A DA    LCALL	1ADAh
+0F6Bh	AF C9       MOV		R7,	T2MOD
+0F6Dh	12 19 98    LCALL	1998h
+0F70h	7B FF       MOV		R3,	FFh
+0F72h	7A 03       MOV		R2,	03h
+0F74h	79 38       MOV		R1,	38h
+0F76h	12 1A DA    LCALL	1ADAh
+0F79h	AF 96       MOV		R7,	CKMOD
+0F7Bh	12 19 98    LCALL	1998h
+0F7Eh	7B FF       MOV		R3,	FFh
+0F80h	7A 03       MOV		R2,	03h
+0F82h	79 43       MOV		R1,	43h
+0F84h	12 1A DA    LCALL	1ADAh
+0F87h	AF CB       MOV		R7,	RCAP2H
+0F89h	12 19 98    LCALL	1998h
+0F8Ch	7B FF       MOV		R3,	FFh
+0F8Eh	7A 03       MOV		R2,	03h
+0F90h	79 4F       MOV		R1,	4Fh
+0F92h	12 1A DA    LCALL	1ADAh
+0F95h	AF 90       MOV		R7,	P1
+0F97h	12 19 98    LCALL	1998h
+0F9Ah	7B FF       MOV		R3,	FFh
+0F9Ch	7A 03       MOV		R2,	03h
+0F9Eh	79 57       MOV		R1,	57h
+0FA0h	12 1A DA    LCALL	1ADAh
+0FA3h	AF 81       MOV		R7,	SP
+0FA5h	12 19 98    LCALL	1998h
+0FA8h	7B FF       MOV		R3,	FFh
+0FAAh	7A 03       MOV		R2,	03h
+0FACh	79 60       MOV		R1,	60h
+0FAEh	12 1A DA    LCALL	1ADAh
+0FB1h	AF 8A       MOV		R7,	TL0
+0FB3h	12 19 98    LCALL	1998h
+0FB6h	7B FF       MOV		R3,	FFh
+0FB8h	7A 03       MOV		R2,	03h
+0FBAh	79 69       MOV		R1,	69h
+0FBCh	12 1A DA    LCALL	1ADAh
+0FBFh	AF 88       MOV		R7,	TCON
+0FC1h	12 19 98    LCALL	1998h
+0FC4h	7B FF       MOV		R3,	FFh
+0FC6h	7A 03       MOV		R2,	03h
+0FC8h	79 73       MOV		R1,	73h
+0FCAh	12 1A DA    LCALL	1ADAh
+0FCDh	AF C8       MOV		R7,	T2CON
+0FCFh	12 19 98    LCALL	1998h
+0FD2h	7B FF       MOV		R3,	FFh
+0FD4h	7A 03       MOV		R2,	03h
+0FD6h	79 7E       MOV		R1,	7Eh
+0FD8h	12 1A DA    LCALL	1ADAh
+0FDBh	AF 86       MOV		R7,	DPS
+0FDDh	12 19 98    LCALL	1998h
+0FE0h	7B FF       MOV		R3,	FFh
+0FE2h	7A 03       MOV		R2,	03h
+0FE4h	79 89       MOV		R1,	89h
+0FE6h	12 1A DA    LCALL	1ADAh
+0FE9h	AF CA       MOV		R7,	RCAP2L
+0FEBh	12 19 98    LCALL	1998h
+0FEEh	7B FF       MOV		R3,	FFh
+0FF0h	7A 03       MOV		R2,	03h
+0FF2h	79 95       MOV		R1,	95h
+0FF4h	12 1A DA    LCALL	1ADAh
+0FF7h	AF A0       MOV		R7,	P2
+0FF9h	12 19 98    LCALL	1998h
+0FFCh	7B FF       MOV		R3,	FFh
+0FFEh	7A 03       MOV		R2,	03h
+1000h	79 9D       MOV		R1,	9Dh
+1002h	12 1A DA    LCALL	1ADAh
+1005h	AF B8       MOV		R7,	IP0
+1007h	12 19 98    LCALL	1998h
+100Ah	7B FF       MOV		R3,	FFh
+100Ch	7A 03       MOV		R2,	03h
+100Eh	79 A6       MOV		R1,	A6h
+1010h	12 1A DA    LCALL	1ADAh
+1013h	AF 8D       MOV		R7,	TH1
+1015h	12 19 98    LCALL	1998h
+1018h	7B FF       MOV		R3,	FFh
+101Ah	7A 03       MOV		R2,	03h
+101Ch	79 AF       MOV		R1,	AFh
+101Eh	12 1A DA    LCALL	1ADAh
+1021h	AF 98       MOV		R7,	SCON0
+1023h	12 19 98    LCALL	1998h
+1026h	7B FF       MOV		R3,	FFh
+1028h	7A 03       MOV		R2,	03h
+102Ah	79 B9       MOV		R1,	B9h
+102Ch	12 1A DA    LCALL	1ADAh
+102Fh	AF CD       MOV		R7,	TH2
+1031h	12 19 98    LCALL	1998h
+1034h	7B FF       MOV		R3,	FFh
+1036h	7A 03       MOV		R2,	03h
+1038h	79 C4       MOV		R1,	C4h
+103Ah	12 1A DA    LCALL	1ADAh
+103Dh	AF AA       MOV		R7,	SADDR1
+103Fh	12 19 98    LCALL	1998h
+1042h	7B FF       MOV		R3,	FFh
+1044h	7A 03       MOV		R2,	03h
+1046h	79 CF       MOV		R1,	CFh
+1048h	12 1A DA    LCALL	1ADAh
+104Bh	AF B0       MOV		R7,	P3
+104Dh	12 19 98    LCALL	1998h
+1050h	7B FF       MOV		R3,	FFh
+1052h	7A 03       MOV		R2,	03h
+1054h	79 D7       MOV		R1,	D7h
+1056h	12 1A DA    LCALL	1ADAh
+1059h	AF A8       MOV		R7,	IE
+105Bh	12 19 98    LCALL	1998h
+105Eh	7B FF       MOV		R3,	FFh
+1060h	7A 03       MOV		R2,	03h
+1062h	79 E0       MOV		R1,	E0h
+1064h	12 1A DA    LCALL	1ADAh
+1067h	AF 8B       MOV		R7,	TL1
+1069h	12 19 98    LCALL	1998h
+106Ch	7B FF       MOV		R3,	FFh
+106Eh	7A 03       MOV		R2,	03h
+1070h	79 E9       MOV		R1,	E9h
+1072h	12 1A DA    LCALL	1ADAh
+1075h	AF 87       MOV		R7,	PCON
+1077h	12 19 98    LCALL	1998h
+107Ah	7B FF       MOV		R3,	FFh
+107Ch	7A 03       MOV		R2,	03h
+107Eh	79 F3       MOV		R1,	F3h
+1080h	12 1A DA    LCALL	1ADAh
+1083h	AF CC       MOV		R7,	TL2
+1085h	12 19 98    LCALL	1998h
+1088h	7B FF       MOV		R3,	FFh
+108Ah	7A 03       MOV		R2,	03h
+108Ch	79 FE       MOV		R1,	FEh
+108Eh	12 1A DA    LCALL	1ADAh
+1091h	AF D5       MOV		R7,	FCNTL
+1093h	12 19 98    LCALL	1998h
+1096h	7B FF       MOV		R3,	FFh
+1098h	7A 02       MOV		R2,	02h
+109Ah	79 03       MOV		R1,	03h
+109Ch	02 1A DA    LJMP	1ADAh
+1B55h	7B FF       MOV		R3,	FFh
+1B57h	7A 04       MOV		R2,	04h
+1B59h	79 09       MOV		R1,	09h
+1B5Bh	12 1A DA    LCALL	1ADAh
+1B5Eh	7B FF       MOV		R3,	FFh
+1B60h	7A 04       MOV		R2,	04h
+1B62h	79 2C       MOV		R1,	2Ch
+1B64h	12 1A DA    LCALL	1ADAh
+1B67h	7B FF       MOV		R3,	FFh
+1B69h	7A 04       MOV		R2,	04h
+1B6Bh	79 67       MOV		R1,	67h
+1B6Dh	12 1A DA    LCALL	1ADAh
+1B70h	7B FF       MOV		R3,	FFh
+1B72h	7A 04       MOV		R2,	04h
+1B74h	79 A8       MOV		R1,	A8h
+1B76h	12 1A DA    LCALL	1ADAh
+1B79h	7B FF       MOV		R3,	FFh
+1B7Bh	7A 04       MOV		R2,	04h
+1B7Dh	79 EA       MOV		R1,	EAh
+1B7Fh	12 1A DA    LCALL	1ADAh
+1B82h	7B FF       MOV		R3,	FFh
+1B84h	7A 05       MOV		R2,	05h
+1B86h	79 2D       MOV		R1,	2Dh
+1B88h	12 1A DA    LCALL	1ADAh
+1B8Bh	7B FF       MOV		R3,	FFh
+1B8Dh	7A 05       MOV		R2,	05h
+1B8Fh	79 68       MOV		R1,	68h
+1B91h	02 1A DA    LJMP	1ADAh
+1D61h	7B FF       MOV		R3,	FFh
+1D63h	7A 05       MOV		R2,	05h
+1D65h	79 73       MOV		R1,	73h
+1D67h	12 1A DA    LCALL	1ADAh
+1D6Ah	7B FF       MOV		R3,	FFh
+1D6Ch	7A 05       MOV		R2,	05h
+1D6Eh	79 A8       MOV		R1,	A8h
+1D70h	12 1A DA    LCALL	1ADAh
+1D73h	7B FF       MOV		R3,	FFh
+1D75h	7A 05       MOV		R2,	05h
+1D77h	79 DC       MOV		R1,	DCh
+1D79h	02 1A DA    LJMP	1ADAh
+19ECh	7B FF       MOV		R3,	FFh
+19EEh	7A 06       MOV		R2,	06h
+19F0h	79 14       MOV		R1,	14h
+19F2h	12 1A DA    LCALL	1ADAh
+19F5h	7B FF       MOV		R3,	FFh
+19F7h	7A 06       MOV		R2,	06h
+19F9h	79 30       MOV		R1,	30h
+19FBh	12 1A DA    LCALL	1ADAh
+19FEh	7B FF       MOV		R3,	FFh
+1A00h	7A 06       MOV		R2,	06h
+1A02h	79 60       MOV		R1,	60h
+1A04h	12 1A DA    LCALL	1ADAh
+1A07h	7B FF       MOV		R3,	FFh
+1A09h	7A 06       MOV		R2,	06h
+1A0Bh	79 9B       MOV		R1,	9Bh
+1A0Dh	12 1A DA    LCALL	1ADAh
+1A10h	7B FF       MOV		R3,	FFh
+1A12h	7A 06       MOV		R2,	06h
+1A14h	79 C2       MOV		R1,	C2h
+1A16h	12 1A DA    LCALL	1ADAh
+1A19h	7B FF       MOV		R3,	FFh
+1A1Bh	7A 07       MOV		R2,	07h
+1A1Dh	79 06       MOV		R1,	06h
+1A1Fh	12 1A DA    LCALL	1ADAh
+1A22h	7B FF       MOV		R3,	FFh
+1A24h	7A 07       MOV		R2,	07h
+1A26h	79 3B       MOV		R1,	3Bh
+1A28h	12 1A DA    LCALL	1ADAh
+1A2Bh	7B FF       MOV		R3,	FFh
+1A2Dh	7A 07       MOV		R2,	07h
+1A2Fh	79 5F       MOV		R1,	5Fh
+1A31h	12 1A DA    LCALL	1ADAh
+1A34h	7B FF       MOV		R3,	FFh
+1A36h	7A 07       MOV		R2,	07h
+1A38h	79 9E       MOV		R1,	9Eh
+1A3Ah	02 1A DA    LJMP	1ADAh
+0C0Bh	7B FF       MOV		R3,	FFh
+0C0Dh	7A 07       MOV		R2,	07h
+0C0Fh	79 D1       MOV		R1,	D1h
+0C11h	12 1A DA    LCALL	1ADAh
+0C14h	12 1D 0E    LCALL	1D0Eh
+0C17h	8F 49       MOV		#49h,	R7
+0C19h	E5 49       MOV		A,	#49h
+0C1Bh	C3          CLR		C
+0C1Ch	94 61       SUBB	A,	61h
+0C1Eh	40 0D       JC		0Dh
+0C20h	E5 49       MOV		A,	#49h
+0C22h	D3          SETB	C
+0C23h	94 7A       SUBB	A,	7Ah
+0C25h	50 06       JNC		06h
+0C27h	74 E0       MOV		A,	E0h
+0C29h	25 49       ADD		A,	#49h
+0C2Bh	F5 49       MOV		#49h,	A
+0C2Dh	7F 01       MOV		R7,	01h
+0C2Fh	7E 00       MOV		R6,	00h
+0C31h	12 1D B2    LCALL	1DB2h
+0C34h	E5 49       MOV		A,	#49h
+0C36h	12 0F 04    LCALL	0F04h
+0C39h	0C          INC		R4
+0C3Ah	8B 30       MOV		#30h,	R3
+0C3Ch	0C          INC		R4
+0C3Dh	96          SUBB	A,	@R0
+0C3Eh	31 0C       ACALL	090Ch
+0C40h	A1 32       AJMP	0D32h
+0C42h	0C          INC		R4
+0C43h	AC 33       MOV		R4,	#33h
+0C45h	0C          INC		R4
+0C46h	CD          XCH		A,	R5
+0C47h	34 0D       ADDC	A,	0Dh
+0C49h	25 35       ADD		A,	#35h
+0C4Bh	0C          INC		R4
+0C4Ch	B7 36 0C    CJNE	@R1,	36h,	0Ch
+0C4Fh	C2 37       CLR		37h
+0C51h	0C          INC		R4
+0C52h	D8 38       DJNZ	R0,	38h
+0C54h	0C          INC		R4
+0C55h	E3          MOVX	A,	@R1
+0C56h	39          ADDC	A,	R1
+0C57h	0C          INC		R4
+0C58h	EE          MOV		A,	R6
+0C59h	41 0C       AJMP	0A0Ch
+0C5Bh	F9          MOV		R1,	A
+0C5Ch	42 0D       ORL		R5 #1,	A
+0C5Eh	04          INC		A
+0C5Fh	43 0D 1A    ORL		R5 #1,	1Ah
+0C62h	44 0D       ORL		A,	0Dh
+0C64h	0F          INC		R7
+0C65h	45 0D       ORL		A,	R5 #1
+0C67h	30 46 0D    JNB		46h,	0Dh
+0C6Ah	51 47       ACALL	0A47h
+0C6Ch	0D          INC		R5
+0C6Dh	5C          ANL		A,	R4
+0C6Eh	48          ORL		A,	R0
+0C6Fh	0D          INC		R5
+0C70h	3B          ADDC	A,	R3
+0C71h	49          ORL		A,	R1
+0C72h	0D          INC		R5
+0C73h	46          ORL		A,	@R0
+0C74h	4A          ORL		A,	R2
+0C75h	0D          INC		R5
+0C76h	67          XRL		A,	@R1
+0C77h	4B          ORL		A,	R3
+0C78h	0D          INC		R5
+0C79h	72 4C       ORL		C,	4Ch
+0C7Bh	0D          INC		R5
+0C7Ch	7D 4D       MOV		R5,	4Dh
+0C7Eh	0D          INC		R5
+0C7Fh	88 4E       MOV		#4Eh,	R0
+0C81h	0D          INC		R5
+0C82h	93          MOVC	A,	@A+DPTR
+0C83h	50 0D       JNC		0Dh
+0C85h	9E          SUBB	A,	R6
+0C86h	51 00       ACALL	0A00h
+0C88h	00          NOP
+0C89h	0D          INC		R5
+0C8Ah	A8 85       MOV		R0,	DPH1
+0C8Ch	80 4E       SJMP	4Eh
+0C8Eh	AF 4E       MOV		R7,	#4Eh
+0C90h	12 1C F1    LCALL	1CF1h
+0C93h	8F 80       MOV		P0,	R7
+0C95h	22          RET
+
+0C96h	85 90 4E    MOV		P1,	#4Eh
+0C99h	AF 4E       MOV		R7,	#4Eh
+0C9Bh	12 1C F1    LCALL	1CF1h
+0C9Eh	8F 90       MOV		P1,	R7
+0CA0h	22          RET
+
+0CA1h	85 A0 4E    MOV		P2,	#4Eh
+0CA4h	AF 4E       MOV		R7,	#4Eh
+0CA6h	12 1C F1    LCALL	1CF1h
+0CA9h	8F A0       MOV		P2,	R7
+0CABh	22          RET
+
+0CACh	85 B0 4E    MOV		P3,	#4Eh
+0CAFh	AF 4E       MOV		R7,	#4Eh
+0CB1h	12 1C F1    LCALL	1CF1h
+0CB4h	8F B0       MOV		P3,	R7
+0CB6h	22          RET
+
+0CB7h	85 B8 4E    MOV		IP0,	#4Eh
+0CBAh	AF 4E       MOV		R7,	#4Eh
+0CBCh	12 1C F1    LCALL	1CF1h
+0CBFh	8F B8       MOV		IP0,	R7
+0CC1h	22          RET
+
+0CC2h	85 A8 4E    MOV		IE,	#4Eh
+0CC5h	AF 4E       MOV		R7,	#4Eh
+0CC7h	12 1C F1    LCALL	1CF1h
+0CCAh	8F A8       MOV		IE,	R7
+0CCCh	22          RET
+
+0CCDh	85 D0 4E    MOV		PSW,	#4Eh
+0CD0h	AF 4E       MOV		R7,	#4Eh
+0CD2h	12 1C F1    LCALL	1CF1h
+0CD5h	8F D0       MOV		PSW,	R7
+0CD7h	22          RET
+
+0CD8h	85 8C 4E    MOV		TH0,	#4Eh
+0CDBh	AF 4E       MOV		R7,	#4Eh
+0CDDh	12 1C F1    LCALL	1CF1h
+0CE0h	8F 8C       MOV		TH0,	R7
+0CE2h	22          RET
+
+0CE3h	85 8A 4E    MOV		TL0,	#4Eh
+0CE6h	AF 4E       MOV		R7,	#4Eh
+0CE8h	12 1C F1    LCALL	1CF1h
+0CEBh	8F 8A       MOV		TL0,	R7
+0CEDh	22          RET
+
+0CEEh	85 8D 4E    MOV		TH1,	#4Eh
+0CF1h	AF 4E       MOV		R7,	#4Eh
+0CF3h	12 1C F1    LCALL	1CF1h
+0CF6h	8F 8D       MOV		TH1,	R7
+0CF8h	22          RET
+
+0CF9h	85 8B 4E    MOV		TL1,	#4Eh
+0CFCh	AF 4E       MOV		R7,	#4Eh
+0CFEh	12 1C F1    LCALL	1CF1h
+0D01h	8F 8B       MOV		TL1,	R7
+0D03h	22          RET
+
+0D04h	85 89 4E    MOV		TMOD,	#4Eh
+0D07h	AF 4E       MOV		R7,	#4Eh
+0D09h	12 1C F1    LCALL	1CF1h
+0D0Ch	8F 89       MOV		TMOD,	R7
+0D0Eh	22          RET
+
+0D0Fh	85 98 4E    MOV		SCON0,	#4Eh
+0D12h	AF 4E       MOV		R7,	#4Eh
+0D14h	12 1C F1    LCALL	1CF1h
+0D17h	8F 98       MOV		SCON0,	R7
+0D19h	22          RET
+
+0D1Ah	85 88 4E    MOV		TCON,	#4Eh
+0D1Dh	AF 4E       MOV		R7,	#4Eh
+0D1Fh	12 1C F1    LCALL	1CF1h
+0D22h	8F 88       MOV		TCON,	R7
+0D24h	22          RET
+
+0D25h	85 81 4E    MOV		SP,	#4Eh
+0D28h	AF 4E       MOV		R7,	#4Eh
+0D2Ah	12 1C F1    LCALL	1CF1h
+0D2Dh	8F 81       MOV		SP,	R7
+0D2Fh	22          RET
+
+0D30h	85 87 4E    MOV		PCON,	#4Eh
+0D33h	AF 4E       MOV		R7,	#4Eh
+0D35h	12 1C F1    LCALL	1CF1h
+0D38h	8F 87       MOV		PCON,	R7
+0D3Ah	22          RET
+
+0D3Bh	85 CD 4E    MOV		TH2,	#4Eh
+0D3Eh	AF 4E       MOV		R7,	#4Eh
+0D40h	12 1C F1    LCALL	1CF1h
+0D43h	8F CD       MOV		TH2,	R7
+0D45h	22          RET
+
+0D46h	85 CC 4E    MOV		TL2,	#4Eh
+0D49h	AF 4E       MOV		R7,	#4Eh
+0D4Bh	12 1C F1    LCALL	1CF1h
+0D4Eh	8F CC       MOV		TL2,	R7
+0D50h	22          RET
+
+0D51h	85 C9 4E    MOV		T2MOD,	#4Eh
+0D54h	AF 4E       MOV		R7,	#4Eh
+0D56h	12 1C F1    LCALL	1CF1h
+0D59h	8F C9       MOV		T2MOD,	R7
+0D5Bh	22          RET
+
+0D5Ch	85 C8 4E    MOV		T2CON,	#4Eh
+0D5Fh	AF 4E       MOV		R7,	#4Eh
+0D61h	12 1C F1    LCALL	1CF1h
+0D64h	8F C8       MOV		T2CON,	R7
+0D66h	22          RET
+
+0D67h	85 96 4E    MOV		CKMOD,	#4Eh
+0D6Ah	AF 4E       MOV		R7,	#4Eh
+0D6Ch	12 1C F1    LCALL	1CF1h
+0D6Fh	8F 96       MOV		CKMOD,	R7
+0D71h	22          RET
+
+0D72h	85 86 4E    MOV		DPS,	#4Eh
+0D75h	AF 4E       MOV		R7,	#4Eh
+0D77h	12 1C F1    LCALL	1CF1h
+0D7Ah	8F 86       MOV		DPS,	R7
+0D7Ch	22          RET
+
+0D7Dh	85 AA 4E    MOV		SADDR1,	#4Eh
+0D80h	AF 4E       MOV		R7,	#4Eh
+0D82h	12 1C F1    LCALL	1CF1h
+0D85h	8F AA       MOV		SADDR1,	R7
+0D87h	22          RET
+
+0D88h	85 D5 4E    MOV		FCNTL,	#4Eh
+0D8Bh	AF 4E       MOV		R7,	#4Eh
+0D8Dh	12 1C F1    LCALL	1CF1h
+0D90h	8F D5       MOV		FCNTL,	R7
+0D92h	22          RET
+
+0D93h	85 CB 4E    MOV		RCAP2H,	#4Eh
+0D96h	AF 4E       MOV		R7,	#4Eh
+0D98h	12 1C F1    LCALL	1CF1h
+0D9Bh	8F CB       MOV		RCAP2H,	R7
+0D9Dh	22          RET
+
+0D9Eh	85 CA 4E    MOV		RCAP2L,	#4Eh
+0DA1h	AF 4E       MOV		R7,	#4Eh
+0DA3h	12 1C F1    LCALL	1CF1h
+0DA6h	8F CA       MOV		RCAP2L,	R7
+0DA8h	22          RET
+
+1CF1h	8F 4F       MOV		#4Fh,	R7
+1CF3h	7B FF       MOV		R3,	FFh
+1CF5h	7A 07       MOV		R2,	07h
+1CF7h	79 F8       MOV		R1,	F8h
+1CF9h	12 1A DA    LCALL	1ADAh
+1CFCh	AF 4F       MOV		R7,	#4Fh
+1CFEh	12 19 98    LCALL	1998h
+1D01h	7B FF       MOV		R3,	FFh
+1D03h	7A 07       MOV		R2,	07h
+1D05h	79 FD       MOV		R1,	FDh
+1D07h	12 1A DA    LCALL	1ADAh
+1D0Ah	12 1D 46    LCALL	1D46h
+1D0Dh	22          RET
+
+1A3Dh	E4          CLR		A
+1A3Eh	78 6A       MOV		R0,	6Ah
+1A40h	F6          MOV		@R0,	A
+1A41h	75 4A 02    MOV		#4Ah,	02h
+1A44h	12 1C B6    LCALL	1CB6h
+1A47h	BF 55 0E    CJNE R7,	55h,	0Eh
+1A4Ah	E5 87       MOV		A,	PCON
+1A4Ch	30 E4 05    JNB		E4h,	05h
+1A4Fh	53 87 EF    ANL		PCON,	EFh
+1A52h	80 04       SJMP	04h
+1A54h	78 6A       MOV		R0,	6Ah
+1A56h	76 01       MOV		@R0,	01h
+1A58h	12 1C B6    LCALL	1CB6h
+1A5Bh	BF AA 04    CJNE R7,	AAh,	04h
+1A5Eh	78 6A       MOV		R0,	6Ah
+1A60h	76 01       MOV		@R0,	01h
+1A62h	12 1C B6    LCALL	1CB6h
+1A65h	BF 5A 0B    CJNE R7,	5Ah,	0Bh
+1A68h	7F FE       MOV		R7,	FEh
+1A6Ah	12 1C BA    LCALL	1CBAh
+1A6Dh	8F 90       MOV		P1,	R7
+1A6Fh	78 6A       MOV		R0,	6Ah
+1A71h	76 01       MOV		@R0,	01h
+1A73h	12 1C B6    LCALL	1CB6h
+1A76h	BF A5 10    CJNE R7,	A5h,	10h
+1A79h	E5 87       MOV		A,	PCON
+1A7Bh	30 E4 05    JNB		E4h,	05h
+1A7Eh	53 87 EF    ANL		PCON,	EFh
+1A81h	80 06       SJMP	06h
+1A83h	75 4A 0A    MOV		#4Ah,	0Ah
+1A86h	12 18 DE    LCALL	18DEh
+1A89h	E4          CLR		A
+1A8Ah	F5 4A       MOV		#4Ah,	A
+1A8Ch	22          RET
+
+1D2Ah	8F 82       MOV		DPL,	R7
+1D2Ch	8E 83       MOV		DPH,	R6
+1D2Eh	E5 4A       MOV		A,	#4Ah
+1D30h	70 03       JNZ		03h
+1D32h	ED          MOV		A,	R5
+1D33h	F0          MOVX	@DPTR,	A
+1D34h	22          RET
+
+1D35h	AF 96       MOV		R7,	CKMOD
+1D37h	EF          MOV		A,	R7
+1D38h	44 18       ORL		A,	18h
+1D3Ah	F5 96       MOV		CKMOD,	A
+1D3Ch	ED          MOV		A,	R5
+1D3Dh	F0          MOVX	@DPTR,	A
+1D3Eh	E5 96       MOV		A,	CKMOD
+1D40h	30 E1 FB    JNB		E1h,	FBh
+1D43h	8F 96       MOV		CKMOD,	R7
+1D45h	22          RET
+
+1B94h	75 90 C0    MOV		P1,	C0h
+1B97h	D2 8C       SETB	TR0
+1B99h	D2 B2       SETB	P3_2
+1B9Bh	7B FF       MOV		R3,	FFh
+1B9Dh	7A 08       MOV		R2,	08h
+1B9Fh	79 0E       MOV		R1,	0Eh
+1BA1h	12 1A DA    LCALL	1ADAh
+1BA4h	E5 46       MOV		A,	#46h
+1BA6h	65 3A       XRL		A,	#3Ah
+1BA8h	60 1C       JZ		1Ch
+1BAAh	12 1D 0E    LCALL	1D0Eh
+1BADh	8F 49       MOV		#49h,	R7
+1BAFh	E5 49       MOV		A,	#49h
+1BB1h	B4 0D 07    CJNE	A,	0Dh,	07h
+1BB4h	7F 0A       MOV		R7,	0Ah
+1BB6h	12 1D F5    LCALL	1DF5h
+1BB9h	80 0B       SJMP	0Bh
+1BBBh	AF 49       MOV		R7,	#49h
+1BBDh	12 16 CA    LCALL	16CAh
+1BC0h	E5 49       MOV		A,	#49h
+1BC2h	44 F0       ORL		A,	F0h
+1BC4h	F5 90       MOV		P1,	A
+1BC6h	20 B2 DB    JB		P3_2,	DBh
+1BC9h	12 17 AC    LCALL	17ACh
+1BCCh	8F 49       MOV		#49h,	R7
+1BCEh	12 1D F5    LCALL	1DF5h
+1BD1h	80 D1       SJMP	D1h
+17ACh	7D 01       MOV		R5,	01h
+17AEh	7F 03       MOV		R7,	03h
+17B0h	7E 00       MOV		R6,	00h
+17B2h	12 1D B2    LCALL	1DB2h
+17B5h	30 B2 01    JNB		P3_2,	01h
+17B8h	1D          DEC		R5
+17B9h	ED          MOV		A,	R5
+17BAh	64 01       XRL		A,	01h
+17BCh	70 57       JNZ		57h
+17BEh	7F 06       MOV		R7,	06h
+17C0h	FE          MOV		R6,	A
+17C1h	12 1D B2    LCALL	1DB2h
+17C4h	20 B2 02    JB		P3_2,	02h
+17C7h	E4          CLR		A
+17C8h	FD          MOV		R5,	A
+17C9h	12 1D AE    LCALL	1DAEh
+17CCh	30 B2 02    JNB		P3_2,	02h
+17CFh	0D          INC		R5
+17D0h	0D          INC		R5
+17D1h	12 1D AE    LCALL	1DAEh
+17D4h	30 B2 04    JNB		P3_2,	04h
+17D7h	74 04       MOV		A,	04h
+17D9h	2D          ADD		A,	R5
+17DAh	FD          MOV		R5,	A
+17DBh	12 1D AE    LCALL	1DAEh
+17DEh	30 B2 04    JNB		P3_2,	04h
+17E1h	74 08       MOV		A,	08h
+17E3h	2D          ADD		A,	R5
+17E4h	FD          MOV		R5,	A
+17E5h	12 1D AE    LCALL	1DAEh
+17E8h	30 B2 04    JNB		P3_2,	04h
+17EBh	74 10       MOV		A,	10h
+17EDh	2D          ADD		A,	R5
+17EEh	FD          MOV		R5,	A
+17EFh	12 1D AE    LCALL	1DAEh
+17F2h	30 B2 04    JNB		P3_2,	04h
+17F5h	74 20       MOV		A,	20h
+17F7h	2D          ADD		A,	R5
+17F8h	FD          MOV		R5,	A
+17F9h	12 1D AE    LCALL	1DAEh
+17FCh	30 B2 04    JNB		P3_2,	04h
+17FFh	74 40       MOV		A,	40h
+1801h	2D          ADD		A,	R5
+1802h	FD          MOV		R5,	A
+1803h	12 1D AE    LCALL	1DAEh
+1806h	30 B2 04    JNB		P3_2,	04h
+1809h	74 80       MOV		A,	80h
+180Bh	2D          ADD		A,	R5
+180Ch	FD          MOV		R5,	A
+180Dh	12 1D AE    LCALL	1DAEh
+1810h	20 B2 02    JB		P3_2,	02h
+1813h	E4          CLR		A
+1814h	FD          MOV		R5,	A
+1815h	AF 05       MOV		R7,	R5 #0
+1817h	22          RET
+
+16CAh	AD 07       MOV		R5,	R7 #0
+16CCh	12 1D AE    LCALL	1DAEh
+16CFh	C2 B2       CLR		P3_2
+16D1h	12 1D AE    LCALL	1DAEh
+16D4h	ED          MOV		A,	R5
+16D5h	30 E0 04    JNB		E0h,	04h
+16D8h	D2 B2       SETB	P3_2
+16DAh	80 02       SJMP	02h
+16DCh	C2 B2       CLR		P3_2
+16DEh	12 1D AE    LCALL	1DAEh
+16E1h	ED          MOV		A,	R5
+16E2h	30 E1 04    JNB		E1h,	04h
+16E5h	D2 B2       SETB	P3_2
+16E7h	80 02       SJMP	02h
+16E9h	C2 B2       CLR		P3_2
+16EBh	12 1D AE    LCALL	1DAEh
+16EEh	ED          MOV		A,	R5
+16EFh	30 E2 04    JNB		E2h,	04h
+16F2h	D2 B2       SETB	P3_2
+16F4h	80 02       SJMP	02h
+16F6h	C2 B2       CLR		P3_2
+16F8h	12 1D AE    LCALL	1DAEh
+16FBh	ED          MOV		A,	R5
+16FCh	30 E3 04    JNB		E3h,	04h
+16FFh	D2 B2       SETB	P3_2
+1701h	80 02       SJMP	02h
+1703h	C2 B2       CLR		P3_2
+1705h	12 1D AE    LCALL	1DAEh
+1708h	ED          MOV		A,	R5
+1709h	30 E4 04    JNB		E4h,	04h
+170Ch	D2 B2       SETB	P3_2
+170Eh	80 02       SJMP	02h
+1710h	C2 B2       CLR		P3_2
+1712h	12 1D AE    LCALL	1DAEh
+1715h	ED          MOV		A,	R5
+1716h	30 E5 04    JNB		E5h,	04h
+1719h	D2 B2       SETB	P3_2
+171Bh	80 02       SJMP	02h
+171Dh	C2 B2       CLR		P3_2
+171Fh	12 1D AE    LCALL	1DAEh
+1722h	ED          MOV		A,	R5
+1723h	30 E6 04    JNB		E6h,	04h
+1726h	D2 B2       SETB	P3_2
+1728h	80 02       SJMP	02h
+172Ah	C2 B2       CLR		P3_2
+172Ch	12 1D AE    LCALL	1DAEh
+172Fh	ED          MOV		A,	R5
+1730h	30 E7 04    JNB		E7h,	04h
+1733h	D2 B2       SETB	P3_2
+1735h	80 02       SJMP	02h
+1737h	C2 B2       CLR		P3_2
+1739h	12 1D AE    LCALL	1DAEh
+173Ch	D2 B2       SETB	P3_2
+173Eh	22          RET
+
+1DD7h	05 90       INC		P1
+1DD9h	E5 90       MOV		A,	P1
+1DDBh	44 C3       ORL		A,	C3h
+1DDDh	F5 B0       MOV		P3,	A
+1DDFh	7F 10       MOV		R7,	10h
+1DE1h	7E 27       MOV		R6,	27h
+1DE3h	12 1D B2    LCALL	1DB2h
+1DE6h	80 EF       SJMP	EFh
+1DC3h	E5 B0       MOV		A,	P3
+1DC5h	25 E0       ADD		A,	ACC
+1DC7h	25 E0       ADD		A,	ACC
+1DC9h	54 F0       ANL		A,	F0h
+1DCBh	FF          MOV		R7,	A
+1DCCh	E5 B0       MOV		A,	P3
+1DCEh	13          RRC		A
+1DCFh	13          RRC		A
+1DD0h	54 0F       ANL		A,	0Fh
+1DD2h	4F          ORL		A,	R7
+1DD3h	F5 90       MOV		P1,	A
+1DD5h	80 EC       SJMP	ECh
+1C4Ah	7B FF       MOV		R3,	FFh
+1C4Ch	7A 08       MOV		R2,	08h
+1C4Eh	79 31       MOV		R1,	31h
+1C50h	12 1A DA    LCALL	1ADAh
+1C53h	75 96 E3    MOV		CKMOD,	E3h
+1C56h	7B FF       MOV		R3,	FFh
+1C58h	7A 08       MOV		R2,	08h
+1C5Ah	79 4C       MOV		R1,	4Ch
+1C5Ch	12 1A DA    LCALL	1ADAh
+1C5Fh	12 1D 0E    LCALL	1D0Eh
+1C62h	8F 49       MOV		#49h,	R7
+1C64h	75 96 E3    MOV		CKMOD,	E3h
+1C67h	7B FF       MOV		R3,	FFh
+1C69h	7A 08       MOV		R2,	08h
+1C6Bh	79 8B       MOV		R1,	8Bh
+1C6Dh	12 1A DA    LCALL	1ADAh
+1C70h	80 E4       SJMP	E4h
+1DF5h	78 69       MOV		R0,	69h
+1DF7h	E6          MOV		A,	@R0
+1DF8h	64 01       XRL		A,	01h
+1DFAh	60 F9       JZ		F9h
+1DFCh	8F 44       MOV		#44h,	R7
+1DFEh	D2 99       SETB	TI_0
+1E00h	22          RET
+
+1AD4h	7B FF       MOV		R3,	FFh
+1AD6h	7A 02       MOV		R2,	02h
+1AD8h	79 03       MOV		R1,	03h
+1ADAh	8B 61       MOV		#61h,	R3
+1ADCh	8A 62       MOV		#62h,	R2
+1ADEh	89 63       MOV		#63h,	R1
+1AE0h	7F 01       MOV		R7,	01h
+1AE2h	7E 00       MOV		R6,	00h
+1AE4h	78 69       MOV		R0,	69h
+1AE6h	E6          MOV		A,	@R0
+1AE7h	64 01       XRL		A,	01h
+1AE9h	60 F9       JZ		F9h
+1AEBh	AB 61       MOV		R3,	#61h
+1AEDh	AA 62       MOV		R2,	#62h
+1AEFh	A9 63       MOV		R1,	#63h
+1AF1h	12 0E 9F    LCALL	0E9Fh
+1AF4h	F5 44       MOV		#44h,	A
+1AF6h	D2 99       SETB	TI_0
+1AF8h	AB 61       MOV		R3,	#61h
+1AFAh	AA 62       MOV		R2,	#62h
+1AFCh	A9 63       MOV		R1,	#63h
+1AFEh	8F 82       MOV		DPL,	R7
+1B00h	8E 83       MOV		DPH,	R6
+1B02h	12 0E B8    LCALL	0EB8h
+1B05h	60 0D       JZ		0Dh
+1B07h	F5 44       MOV		#44h,	A
+1B09h	E5 44       MOV		A,	#44h
+1B0Bh	70 FC       JNZ		FCh
+1B0Dh	0F          INC		R7
+1B0Eh	BF 00 01    CJNE R7,	00h,	01h
+1B11h	0E          INC		R6
+1B12h	80 E4       SJMP	E4h
+1B14h	22          RET
+
+109Fh	85 09 82    MOV		R1 #1,	DPL
+10A2h	85 08 83    MOV		R0 #1,	DPH
+10A5h	E0          MOVX	A,	@DPTR
+10A6h	54 0F       ANL		A,	0Fh
+10A8h	F5 4E       MOV		#4Eh,	A
+10AAh	B4 05 06    CJNE	A,	05h,	06h
+10ADh	E5 45       MOV		A,	#45h
+10AFh	70 02       JNZ		02h
+10B1h	05 45       INC		#45h
+10B3h	E5 4E       MOV		A,	#4Eh
+10B5h	B4 0A 07    CJNE	A,	0Ah,	07h
+10B8h	E5 45       MOV		A,	#45h
+10BAh	B4 01 02    CJNE	A,	01h,	02h
+10BDh	05 45       INC		#45h
+10BFh	E5 4E       MOV		A,	#4Eh
+10C1h	70 07       JNZ		07h
+10C3h	E5 45       MOV		A,	#45h
+10C5h	B4 02 02    CJNE	A,	02h,	02h
+10C8h	05 45       INC		#45h
+10CAh	E5 45       MOV		A,	#45h
+10CCh	64 03       XRL		A,	03h
+10CEh	70 32       JNZ		32h
+10D0h	E5 4E       MOV		A,	#4Eh
+10D2h	C4          SWAP	A
+10D3h	54 F0       ANL		A,	F0h
+10D5h	FF          MOV		R7,	A
+10D6h	E5 90       MOV		A,	P1
+10D8h	54 0F       ANL		A,	0Fh
+10DAh	4F          ORL		A,	R7
+10DBh	F5 90       MOV		P1,	A
+10DDh	E5 4E       MOV		A,	#4Eh
+10DFh	54 0F       ANL		A,	0Fh
+10E1h	24 30       ADD		A,	30h
+10E3h	FF          MOV		R7,	A
+10E4h	7B 13       MOV		R3,	13h
+10E6h	7A 00       MOV		R2,	00h
+10E8h	7D 02       MOV		R5,	02h
+10EAh	7C 00       MOV		R4,	00h
+10ECh	12 18 87    LCALL	1887h
+10EFh	E5 4E       MOV		A,	#4Eh
+10F1h	C3          CLR		C
+10F2h	94 0A       SUBB	A,	0Ah
+10F4h	E5 4E       MOV		A,	#4Eh
+10F6h	50 04       JNC		04h
+10F8h	24 30       ADD		A,	30h
+10FAh	80 02       SJMP	02h
+10FCh	24 37       ADD		A,	37h
+10FEh	FF          MOV		R7,	A
+10FFh	12 1D F5    LCALL	1DF5h
+1102h	E5 45       MOV		A,	#45h
+1104h	64 02       XRL		A,	02h
+1106h	70 2F       JNZ		2Fh
+1108h	E5 4E       MOV		A,	#4Eh
+110Ah	64 04       XRL		A,	04h
+110Ch	70 29       JNZ		29h
+110Eh	75 90 01    MOV		P1,	01h
+1111h	78 6A       MOV		R0,	6Ah
+1113h	76 01       MOV		@R0,	01h
+1115h	7D 07       MOV		R5,	07h
+1117h	7F D0       MOV		R7,	D0h
+1119h	7E 07       MOV		R6,	07h
+111Bh	12 1D B2    LCALL	1DB2h
+111Eh	E5 90       MOV		A,	P1
+1120h	25 E0       ADD		A,	ACC
+1122h	F5 90       MOV		P1,	A
+1124h	DD F1       DJNZ	R5,	F1h
+1126h	7D 07       MOV		R5,	07h
+1128h	7F D0       MOV		R7,	D0h
+112Ah	7E 07       MOV		R6,	07h
+112Ch	12 1D B2    LCALL	1DB2h
+112Fh	E5 90       MOV		A,	P1
+1131h	C3          CLR		C
+1132h	13          RRC		A
+1133h	F5 90       MOV		P1,	A
+1135h	DD F1       DJNZ	R5,	F1h
+1137h	E5 45       MOV		A,	#45h
+1139h	64 02       XRL		A,	02h
+113Bh	60 03       JZ		03h
+113Dh	02 11 E0    LJMP	11E0h
+1140h	E5 4E       MOV		A,	#4Eh
+1142h	64 08       XRL		A,	08h
+1144h	60 03       JZ		03h
+1146h	02 11 E0    LJMP	11E0h
+1149h	20 B3 FD    JB		P3_3,	FDh
+114Ch	30 B3 FD    JNB		P3_3,	FDh
+114Fh	7F 47       MOV		R7,	47h
+1151h	12 16 CA    LCALL	16CAh
+1154h	7F C8       MOV		R7,	C8h
+1156h	7E 00       MOV		R6,	00h
+1158h	12 1D B2    LCALL	1DB2h
+115Bh	7F 54       MOV		R7,	54h
+115Dh	12 16 CA    LCALL	16CAh
+1160h	7F C8       MOV		R7,	C8h
+1162h	7E 00       MOV		R6,	00h
+1164h	12 1D B2    LCALL	1DB2h
+1167h	7F 4D       MOV		R7,	4Dh
+1169h	12 16 CA    LCALL	16CAh
+116Ch	7F C8       MOV		R7,	C8h
+116Eh	7E 00       MOV		R6,	00h
+1170h	12 1D B2    LCALL	1DB2h
+1173h	7F 45       MOV		R7,	45h
+1175h	12 16 CA    LCALL	16CAh
+1178h	7F C8       MOV		R7,	C8h
+117Ah	7E 00       MOV		R6,	00h
+117Ch	12 1D B2    LCALL	1DB2h
+117Fh	7F 42       MOV		R7,	42h
+1181h	12 16 CA    LCALL	16CAh
+1184h	7F C8       MOV		R7,	C8h
+1186h	7E 00       MOV		R6,	00h
+1188h	12 1D B2    LCALL	1DB2h
+118Bh	85 09 82    MOV		R1 #1,	DPL
+118Eh	85 08 83    MOV		R0 #1,	DPH
+1191h	E0          MOVX	A,	@DPTR
+1192h	54 0F       ANL		A,	0Fh
+1194h	70 10       JNZ		10h
+1196h	7F 35       MOV		R7,	35h
+1198h	12 16 CA    LCALL	16CAh
+119Bh	7F C8       MOV		R7,	C8h
+119Dh	7E 00       MOV		R6,	00h
+119Fh	12 1D B2    LCALL	1DB2h
+11A2h	7F 35       MOV		R7,	35h
+11A4h	80 0E       SJMP	0Eh
+11A6h	7F 41       MOV		R7,	41h
+11A8h	12 16 CA    LCALL	16CAh
+11ABh	7F C8       MOV		R7,	C8h
+11ADh	7E 00       MOV		R6,	00h
+11AFh	12 1D B2    LCALL	1DB2h
+11B2h	7F 41       MOV		R7,	41h
+11B4h	12 16 CA    LCALL	16CAh
+11B7h	7F C8       MOV		R7,	C8h
+11B9h	7E 00       MOV		R6,	00h
+11BBh	12 1D B2    LCALL	1DB2h
+11BEh	7F 53       MOV		R7,	53h
+11C0h	12 16 CA    LCALL	16CAh
+11C3h	7F C8       MOV		R7,	C8h
+11C5h	7E 00       MOV		R6,	00h
+11C7h	12 1D B2    LCALL	1DB2h
+11CAh	85 09 82    MOV		R1 #1,	DPL
+11CDh	85 08 83    MOV		R0 #1,	DPH
+11D0h	E0          MOVX	A,	@DPTR
+11D1h	54 0F       ANL		A,	0Fh
+11D3h	F5 90       MOV		P1,	A
+11D5h	20 B3 FD    JB		P3_3,	FDh
+11D8h	30 B3 03    JNB		P3_3,	03h
+11DBh	02 11 4F    LJMP	114Fh
+11DEh	80 F8       SJMP	F8h
+11E0h	22          RET
+
+0A6Ah	E4          CLR		A
+0A6Bh	F5 58       MOV		#58h,	A
+0A6Dh	F5 5B       MOV		#5Bh,	A
+0A6Fh	75 5C 01    MOV		#5Ch,	01h
+0A72h	F5 5D       MOV		#5Dh,	A
+0A74h	F5 3B       MOV		#3Bh,	A
+0A76h	F5 3C       MOV		#3Ch,	A
+0A78h	F5 4A       MOV		#4Ah,	A
+0A7Ah	7B FF       MOV		R3,	FFh
+0A7Ch	7A 08       MOV		R2,	08h
+0A7Eh	79 97       MOV		R1,	97h
+0A80h	12 1A DA    LCALL	1ADAh
+0A83h	7B FF       MOV		R3,	FFh
+0A85h	7A 08       MOV		R2,	08h
+0A87h	79 B6       MOV		R1,	B6h
+0A89h	12 1A DA    LCALL	1ADAh
+0A8Ch	12 1D 0E    LCALL	1D0Eh
+0A8Fh	EF          MOV		A,	R7
+0A90h	64 3A       XRL		A,	3Ah
+0A92h	60 0B       JZ		0Bh
+0A94h	7B FF       MOV		R3,	FFh
+0A96h	7A 08       MOV		R2,	08h
+0A98h	79 F5       MOV		R1,	F5h
+0A9Ah	12 1A DA    LCALL	1ADAh
+0A9Dh	80 FE       SJMP	FEh
+0A9Fh	7B FF       MOV		R3,	FFh
+0AA1h	7A 09       MOV		R2,	09h
+0AA3h	79 14       MOV		R1,	14h
+0AA5h	12 1A DA    LCALL	1ADAh
+0AA8h	E5 58       MOV		A,	#58h
+0AAAh	60 03       JZ		03h
+0AACh	02 0C 00    LJMP	0C00h
+0AAFh	12 1D 46    LCALL	1D46h
+0AB2h	8F 56       MOV		#56h,	R7
+0AB4h	85 56 5D    MOV		#56h,	#5Dh
+0AB7h	12 1D 0E    LCALL	1D0Eh
+0ABAh	12 1B 18    LCALL	1B18h
+0ABDh	EF          MOV		A,	R7
+0ABEh	33          RLC		A
+0ABFh	95 E0       SUBB	A,	ACC
+0AC1h	F5 59       MOV		#59h,	A
+0AC3h	8F 5A       MOV		#5Ah,	R7
+0AC5h	E4          CLR		A
+0AC6h	FD          MOV		R5,	A
+0AC7h	E5 5A       MOV		A,	#5Ah
+0AC9h	C4          SWAP	A
+0ACAh	F8          MOV		R0,	A
+0ACBh	54 0F       ANL		A,	0Fh
+0ACDh	C8          XCH		A,	R0
+0ACEh	68          XRL		A,	R0
+0ACFh	F5 5A       MOV		#5Ah,	A
+0AD1h	E5 59       MOV		A,	#59h
+0AD3h	C4          SWAP	A
+0AD4h	54 F0       ANL		A,	F0h
+0AD6h	48          ORL		A,	R0
+0AD7h	F5 59       MOV		#59h,	A
+0AD9h	12 1D 0E    LCALL	1D0Eh
+0ADCh	12 1B 18    LCALL	1B18h
+0ADFh	EF          MOV		A,	R7
+0AE0h	33          RLC		A
+0AE1h	95 E0       SUBB	A,	ACC
+0AE3h	FE          MOV		R6,	A
+0AE4h	EF          MOV		A,	R7
+0AE5h	42 5A       ORL		#5Ah,	A
+0AE7h	EE          MOV		A,	R6
+0AE8h	42 59       ORL		#59h,	A
+0AEAh	0D          INC		R5
+0AEBh	BD 03 D9    CJNE R5,	03h,	D9h
+0AEEh	E5 59       MOV		A,	#59h
+0AF0h	25 5D       ADD		A,	#5Dh
+0AF2h	F5 5D       MOV		#5Dh,	A
+0AF4h	25 5A       ADD		A,	#5Ah
+0AF6h	F5 5D       MOV		#5Dh,	A
+0AF8h	78 64       MOV		R0,	64h
+0AFAh	E6          MOV		A,	@R0
+0AFBh	70 0D       JNZ		0Dh
+0AFDh	C3          CLR		C
+0AFEh	E5 5A       MOV		A,	#5Ah
+0B00h	94 40       SUBB	A,	40h
+0B02h	E5 59       MOV		A,	#59h
+0B04h	94 00       SUBB	A,	00h
+0B06h	50 0D       JNC		0Dh
+0B08h	80 00       SJMP	00h
+0B0Ah	E4          CLR		A
+0B0Bh	25 5A       ADD		A,	#5Ah
+0B0Dh	F5 5A       MOV		#5Ah,	A
+0B0Fh	74 80       MOV		A,	80h
+0B11h	35 59       ADDC	A,	#59h
+0B13h	F5 59       MOV		#59h,	A
+0B15h	12 1D 46    LCALL	1D46h
+0B18h	EF          MOV		A,	R7
+0B19h	60 03       JZ		03h
+0B1Bh	02 0B DD    LJMP	0BDDh
+0B1Eh	E5 56       MOV		A,	#56h
+0B20h	D3          SETB	C
+0B21h	94 00       SUBB	A,	00h
+0B23h	40 66       JC		66h
+0B25h	15 56       DEC		#56h
+0B27h	12 1D 46    LCALL	1D46h
+0B2Ah	AC 07       MOV		R4,	R7 #0
+0B2Ch	EC          MOV		A,	R4
+0B2Dh	25 5D       ADD		A,	#5Dh
+0B2Fh	F5 5D       MOV		#5Dh,	A
+0B31h	AD 04       MOV		R5,	R4 #0
+0B33h	AF 5A       MOV		R7,	#5Ah
+0B35h	AE 59       MOV		R6,	#59h
+0B37h	12 1D 2A    LCALL	1D2Ah
+0B3Ah	AF 5A       MOV		R7,	#5Ah
+0B3Ch	AE 59       MOV		R6,	#59h
+0B3Eh	12 1C BA    LCALL	1CBAh
+0B41h	EF          MOV		A,	R7
+0B42h	6C          XRL		A,	R4
+0B43h	60 3C       JZ		3Ch
+0B45h	7B FF       MOV		R3,	FFh
+0B47h	7A 09       MOV		R2,	09h
+0B49h	79 29       MOV		R1,	29h
+0B4Bh	12 1A DA    LCALL	1ADAh
+0B4Eh	7B FF       MOV		R3,	FFh
+0B50h	7A 09       MOV		R2,	09h
+0B52h	79 4C       MOV		R1,	4Ch
+0B54h	12 1A DA    LCALL	1ADAh
+0B57h	E5 59       MOV		A,	#59h
+0B59h	FF          MOV		R7,	A
+0B5Ah	12 19 98    LCALL	1998h
+0B5Dh	AF 5A       MOV		R7,	#5Ah
+0B5Fh	12 19 98    LCALL	1998h
+0B62h	7B FF       MOV		R3,	FFh
+0B64h	7A 09       MOV		R2,	09h
+0B66h	79 64       MOV		R1,	64h
+0B68h	12 1A DA    LCALL	1ADAh
+0B6Bh	E5 5B       MOV		A,	#5Bh
+0B6Dh	FF          MOV		R7,	A
+0B6Eh	12 19 98    LCALL	1998h
+0B71h	AF 5C       MOV		R7,	#5Ch
+0B73h	12 19 98    LCALL	1998h
+0B76h	7B FF       MOV		R3,	FFh
+0B78h	7A 09       MOV		R2,	09h
+0B7Ah	79 73       MOV		R1,	73h
+0B7Ch	12 1A DA    LCALL	1ADAh
+0B7Fh	80 FE       SJMP	FEh
+0B81h	05 5A       INC		#5Ah
+0B83h	E5 5A       MOV		A,	#5Ah
+0B85h	70 97       JNZ		97h
+0B87h	05 59       INC		#59h
+0B89h	80 93       SJMP	93h
+0B8Bh	D3          SETB	C
+0B8Ch	E5 5A       MOV		A,	#5Ah
+0B8Eh	95 3C       SUBB	A,	#3Ch
+0B90h	E5 59       MOV		A,	#59h
+0B92h	95 3B       SUBB	A,	#3Bh
+0B94h	40 06       JC		06h
+0B96h	85 59 3B    MOV		#59h,	#3Bh
+0B99h	85 5A 3C    MOV		#5Ah,	#3Ch
+0B9Ch	7F 2E       MOV		R7,	2Eh
+0B9Eh	12 1D F5    LCALL	1DF5h
+0BA1h	12 1D 46    LCALL	1D46h
+0BA4h	8F 57       MOV		#57h,	R7
+0BA6h	E5 57       MOV		A,	#57h
+0BA8h	25 5D       ADD		A,	#5Dh
+0BAAh	F5 5D       MOV		#5Dh,	A
+0BACh	60 0B       JZ		0Bh
+0BAEh	7B FF       MOV		R3,	FFh
+0BB0h	7A 09       MOV		R2,	09h
+0BB2h	79 88       MOV		R1,	88h
+0BB4h	12 1A DA    LCALL	1ADAh
+0BB7h	80 FE       SJMP	FEh
+0BB9h	12 1D 0E    LCALL	1D0Eh
+0BBCh	8F 57       MOV		#57h,	R7
+0BBEh	E5 57       MOV		A,	#57h
+0BC0h	64 0D       XRL		A,	0Dh
+0BC2h	60 09       JZ		09h
+0BC4h	7B FF       MOV		R3,	FFh
+0BC6h	7A 09       MOV		R2,	09h
+0BC8h	79 AA       MOV		R1,	AAh
+0BCAh	12 1A DA    LCALL	1ADAh
+0BCDh	12 1D 0E    LCALL	1D0Eh
+0BD0h	8F 57       MOV		#57h,	R7
+0BD2h	05 5C       INC		#5Ch
+0BD4h	E5 5C       MOV		A,	#5Ch
+0BD6h	70 02       JNZ		02h
+0BD8h	05 5B       INC		#5Bh
+0BDAh	02 0A A8    LJMP	0AA8h
+0BDDh	12 1D 46    LCALL	1D46h
+0BE0h	EF          MOV		A,	R7
+0BE1h	33          RLC		A
+0BE2h	95 E0       SUBB	A,	ACC
+0BE4h	FE          MOV		R6,	A
+0BE5h	EF          MOV		A,	R7
+0BE6h	F4          CPL		A
+0BE7h	4E          ORL		A,	R6
+0BE8h	70 10       JNZ		10h
+0BEAh	7F 20       MOV		R7,	20h
+0BECh	7E 4E       MOV		R6,	4Eh
+0BEEh	12 1D B2    LCALL	1DB2h
+0BF1h	7B FF       MOV		R3,	FFh
+0BF3h	7A 09       MOV		R2,	09h
+0BF5h	79 C0       MOV		R1,	C0h
+0BF7h	12 1A DA    LCALL	1ADAh
+0BFAh	75 58 01    MOV		#58h,	01h
+0BFDh	02 0A A8    LJMP	0AA8h
+0C00h	7F 30       MOV		R7,	30h
+0C02h	7E 75       MOV		R6,	75h
+0C04h	12 1D B2    LCALL	1DB2h
+0C07h	85 3A 46    MOV		#3Ah,	#46h
+0C0Ah	22          RET
+
+11E1h	E4          CLR		A
+11E2h	F5 4E       MOV		#4Eh,	A
+11E4h	F5 4F       MOV		#4Fh,	A
+11E6h	F5 50       MOV		#50h,	A
+11E8h	F5 51       MOV		#51h,	A
+11EAh	F5 54       MOV		#54h,	A
+11ECh	F5 55       MOV		#55h,	A
+11EEh	78 64       MOV		R0,	64h
+11F0h	76 01       MOV		@R0,	01h
+11F2h	12 0A 6A    LCALL	0A6Ah
+11F5h	7B FF       MOV		R3,	FFh
+11F7h	7A 09       MOV		R2,	09h
+11F9h	79 D9       MOV		R1,	D9h
+11FBh	12 1A DA    LCALL	1ADAh
+11FEh	E4          CLR		A
+11FFh	25 3C       ADD		A,	#3Ch
+1201h	FF          MOV		R7,	A
+1202h	E5 3B       MOV		A,	#3Bh
+1204h	34 80       ADDC	A,	80h
+1206h	FE          MOV		R6,	A
+1207h	C3          CLR		C
+1208h	E5 4F       MOV		A,	#4Fh
+120Ah	9F          SUBB	A,	R7
+120Bh	E5 4E       MOV		A,	#4Eh
+120Dh	9E          SUBB	A,	R6
+120Eh	50 74       JNC		74h
+1210h	90 55 55    MOV		DPTR,	5555h
+1213h	74 AA       MOV		A,	AAh
+1215h	F0          MOVX	@DPTR,	A
+1216h	90 2A AA    MOV		DPTR,	2AAAh
+1219h	74 55       MOV		A,	55h
+121Bh	F0          MOVX	@DPTR,	A
+121Ch	90 55 55    MOV		DPTR,	5555h
+121Fh	74 A0       MOV		A,	A0h
+1221h	F0          MOVX	@DPTR,	A
+1222h	E4          CLR		A
+1223h	F5 52       MOV		#52h,	A
+1225h	F5 53       MOV		#53h,	A
+1227h	C3          CLR		C
+1228h	E5 53       MOV		A,	#53h
+122Ah	78 68       MOV		R0,	68h
+122Ch	96          SUBB	A,	@R0
+122Dh	E5 52       MOV		A,	#52h
+122Fh	18          DEC		R0
+1230h	96          SUBB	A,	@R0
+1231h	50 2B       JNC		2Bh
+1233h	E4          CLR		A
+1234h	25 4F       ADD		A,	#4Fh
+1236h	CF          XCH		A,	R7
+1237h	E5 4E       MOV		A,	#4Eh
+1239h	34 80       ADDC	A,	80h
+123Bh	CF          XCH		A,	R7
+123Ch	25 53       ADD		A,	#53h
+123Eh	CF          XCH		A,	R7
+123Fh	35 52       ADDC	A,	#52h
+1241h	FE          MOV		R6,	A
+1242h	12 1C BA    LCALL	1CBAh
+1245h	AD 07       MOV		R5,	R7 #0
+1247h	E5 4F       MOV		A,	#4Fh
+1249h	25 53       ADD		A,	#53h
+124Bh	FF          MOV		R7,	A
+124Ch	E5 4E       MOV		A,	#4Eh
+124Eh	35 52       ADDC	A,	#52h
+1250h	FE          MOV		R6,	A
+1251h	12 1D 2A    LCALL	1D2Ah
+1254h	05 53       INC		#53h
+1256h	E5 53       MOV		A,	#53h
+1258h	70 CD       JNZ		CDh
+125Ah	05 52       INC		#52h
+125Ch	80 C9       SJMP	C9h
+125Eh	75 52 75    MOV		#52h,	75h
+1261h	75 53 30    MOV		#53h,	30h
+1264h	E5 53       MOV		A,	#53h
+1266h	15 53       DEC		#53h
+1268h	70 02       JNZ		02h
+126Ah	15 52       DEC		#52h
+126Ch	E5 53       MOV		A,	#53h
+126Eh	45 52       ORL		A,	#52h
+1270h	70 F2       JNZ		F2h
+1272h	78 67       MOV		R0,	67h
+1274h	E6          MOV		A,	@R0
+1275h	FE          MOV		R6,	A
+1276h	08          INC		R0
+1277h	E6          MOV		A,	@R0
+1278h	25 4F       ADD		A,	#4Fh
+127Ah	F5 4F       MOV		#4Fh,	A
+127Ch	EE          MOV		A,	R6
+127Dh	35 4E       ADDC	A,	#4Eh
+127Fh	F5 4E       MOV		#4Eh,	A
+1281h	02 11 FE    LJMP	11FEh
+1284h	E4          CLR		A
+1285h	F5 52       MOV		#52h,	A
+1287h	F5 53       MOV		#53h,	A
+1289h	E4          CLR		A
+128Ah	25 3C       ADD		A,	#3Ch
+128Ch	FF          MOV		R7,	A
+128Dh	E5 3B       MOV		A,	#3Bh
+128Fh	34 80       ADDC	A,	80h
+1291h	FE          MOV		R6,	A
+1292h	D3          SETB	C
+1293h	E5 53       MOV		A,	#53h
+1295h	9F          SUBB	A,	R7
+1296h	E5 52       MOV		A,	#52h
+1298h	9E          SUBB	A,	R6
+1299h	50 37       JNC		37h
+129Bh	E4          CLR		A
+129Ch	25 53       ADD		A,	#53h
+129Eh	FF          MOV		R7,	A
+129Fh	E5 52       MOV		A,	#52h
+12A1h	34 80       ADDC	A,	80h
+12A3h	FE          MOV		R6,	A
+12A4h	12 1C BA    LCALL	1CBAh
+12A7h	AC 07       MOV		R4,	R7 #0
+12A9h	AF 53       MOV		R7,	#53h
+12ABh	AE 52       MOV		R6,	#52h
+12ADh	12 1C BA    LCALL	1CBAh
+12B0h	EF          MOV		A,	R7
+12B1h	6C          XRL		A,	R4
+12B2h	60 14       JZ		14h
+12B4h	7B FF       MOV		R3,	FFh
+12B6h	7A 02       MOV		R2,	02h
+12B8h	79 83       MOV		R1,	83h
+12BAh	12 1A DA    LCALL	1ADAh
+12BDh	E5 52       MOV		A,	#52h
+12BFh	FF          MOV		R7,	A
+12C0h	12 19 98    LCALL	1998h
+12C3h	AF 53       MOV		R7,	#53h
+12C5h	12 19 98    LCALL	1998h
+12C8h	05 53       INC		#53h
+12CAh	E5 53       MOV		A,	#53h
+12CCh	70 BB       JNZ		BBh
+12CEh	05 52       INC		#52h
+12D0h	80 B7       SJMP	B7h
+12D2h	7B FF       MOV		R3,	FFh
+12D4h	7A 09       MOV		R2,	09h
+12D6h	79 F9       MOV		R1,	F9h
+12D8h	12 1A DA    LCALL	1ADAh
+12DBh	E5 53       MOV		A,	#53h
+12DDh	15 53       DEC		#53h
+12DFh	70 02       JNZ		02h
+12E1h	15 52       DEC		#52h
+12E3h	E5 52       MOV		A,	#52h
+12E5h	FF          MOV		R7,	A
+12E6h	12 19 98    LCALL	1998h
+12E9h	AF 53       MOV		R7,	#53h
+12EBh	12 19 98    LCALL	1998h
+12EEh	7B FF       MOV		R3,	FFh
+12F0h	7A 0A       MOV		R2,	0Ah
+12F2h	79 11       MOV		R1,	11h
+12F4h	12 1A DA    LCALL	1ADAh
+12F7h	E4          CLR		A
+12F8h	78 64       MOV		R0,	64h
+12FAh	F6          MOV		@R0,	A
+12FBh	22          RET
+
+0000h	02 1E 01    LJMP	1E01h
+1E01h	78 7F       MOV		R0,	7Fh
+1E03h	E4          CLR		A
+1E04h	F6          MOV		@R0,	A
+1E05h	D8 FD       DJNZ	R0,	FDh
+1E07h	75 81 6C    MOV		SP,	6Ch
+1E0Ah	02 14 ED    LJMP	14EDh
+0DA9h	E7          MOV		A,	@R1
+0DAAh	09          INC		R1
+0DABh	F6          MOV		@R0,	A
+0DACh	08          INC		R0
+0DADh	DF FA       DJNZ	R7,	FAh
+0DAFh	80 46       SJMP	46h
+0DB1h	E7          MOV		A,	@R1
+0DB2h	09          INC		R1
+0DB3h	F2          MOVX	@R0,	A
+0DB4h	08          INC		R0
+0DB5h	DF FA       DJNZ	R7,	FAh
+0DB7h	80 3E       SJMP	3Eh
+0DB9h	88 82       MOV		DPL,	R0
+0DBBh	8C 83       MOV		DPH,	R4
+0DBDh	E7          MOV		A,	@R1
+0DBEh	09          INC		R1
+0DBFh	F0          MOVX	@DPTR,	A
+0DC0h	A3          INC		DPTR
+0DC1h	DF FA       DJNZ	R7,	FAh
+0DC3h	80 32       SJMP	32h
+0DC5h	E3          MOVX	A,	@R1
+0DC6h	09          INC		R1
+0DC7h	F6          MOV		@R0,	A
+0DC8h	08          INC		R0
+0DC9h	DF FA       DJNZ	R7,	FAh
+0DCBh	80 78       SJMP	78h
+0DCDh	E3          MOVX	A,	@R1
+0DCEh	09          INC		R1
+0DCFh	F2          MOVX	@R0,	A
+0DD0h	08          INC		R0
+0DD1h	DF FA       DJNZ	R7,	FAh
+0DD3h	80 70       SJMP	70h
+0DD5h	88 82       MOV		DPL,	R0
+0DD7h	8C 83       MOV		DPH,	R4
+0DD9h	E3          MOVX	A,	@R1
+0DDAh	09          INC		R1
+0DDBh	F0          MOVX	@DPTR,	A
+0DDCh	A3          INC		DPTR
+0DDDh	DF FA       DJNZ	R7,	FAh
+0DDFh	80 64       SJMP	64h
+0DE1h	89 82       MOV		DPL,	R1
+0DE3h	8A 83       MOV		DPH,	R2
+0DE5h	E0          MOVX	A,	@DPTR
+0DE6h	A3          INC		DPTR
+0DE7h	F6          MOV		@R0,	A
+0DE8h	08          INC		R0
+0DE9h	DF FA       DJNZ	R7,	FAh
+0DEBh	80 58       SJMP	58h
+0DEDh	89 82       MOV		DPL,	R1
+0DEFh	8A 83       MOV		DPH,	R2
+0DF1h	E0          MOVX	A,	@DPTR
+0DF2h	A3          INC		DPTR
+0DF3h	F2          MOVX	@R0,	A
+0DF4h	08          INC		R0
+0DF5h	DF FA       DJNZ	R7,	FAh
+0DF7h	80 4C       SJMP	4Ch
+0DF9h	80 D2       SJMP	D2h
+0DFBh	80 FA       SJMP	FAh
+0DFDh	80 C6       SJMP	C6h
+0DFFh	80 D4       SJMP	D4h
+0E01h	80 69       SJMP	69h
+0E03h	80 F2       SJMP	F2h
+0E05h	80 33       SJMP	33h
+0E07h	80 10       SJMP	10h
+0E09h	80 A6       SJMP	A6h
+0E0Bh	80 EA       SJMP	EAh
+0E0Dh	80 9A       SJMP	9Ah
+0E0Fh	80 A8       SJMP	A8h
+0E11h	80 DA       SJMP	DAh
+0E13h	80 E2       SJMP	E2h
+0E15h	80 CA       SJMP	CAh
+0E17h	80 33       SJMP	33h
+0E19h	89 82       MOV		DPL,	R1
+0E1Bh	8A 83       MOV		DPH,	R2
+0E1Dh	EC          MOV		A,	R4
+0E1Eh	FA          MOV		R2,	A
+0E1Fh	E4          CLR		A
+0E20h	93          MOVC	A,	@A+DPTR
+0E21h	A3          INC		DPTR
+0E22h	C8          XCH		A,	R0
+0E23h	C5 82       XCH		A,	DPL
+0E25h	C8          XCH		A,	R0
+0E26h	CC          XCH		A,	R4
+0E27h	C5 83       XCH		A,	DPH
+0E29h	CC          XCH		A,	R4
+0E2Ah	F0          MOVX	@DPTR,	A
+0E2Bh	A3          INC		DPTR
+0E2Ch	C8          XCH		A,	R0
+0E2Dh	C5 82       XCH		A,	DPL
+0E2Fh	C8          XCH		A,	R0
+0E30h	CC          XCH		A,	R4
+0E31h	C5 83       XCH		A,	DPH
+0E33h	CC          XCH		A,	R4
+0E34h	DF E9       DJNZ	R7,	E9h
+0E36h	DE E7       DJNZ	R6,	E7h
+0E38h	80 0D       SJMP	0Dh
+0E3Ah	89 82       MOV		DPL,	R1
+0E3Ch	8A 83       MOV		DPH,	R2
+0E3Eh	E4          CLR		A
+0E3Fh	93          MOVC	A,	@A+DPTR
+0E40h	A3          INC		DPTR
+0E41h	F6          MOV		@R0,	A
+0E42h	08          INC		R0
+0E43h	DF F9       DJNZ	R7,	F9h
+0E45h	EC          MOV		A,	R4
+0E46h	FA          MOV		R2,	A
+0E47h	A9 F0       MOV		R1,	B
+0E49h	ED          MOV		A,	R5
+0E4Ah	FB          MOV		R3,	A
+0E4Bh	22          RET
+
+0E4Ch	89 82       MOV		DPL,	R1
+0E4Eh	8A 83       MOV		DPH,	R2
+0E50h	EC          MOV		A,	R4
+0E51h	FA          MOV		R2,	A
+0E52h	E0          MOVX	A,	@DPTR
+0E53h	A3          INC		DPTR
+0E54h	C8          XCH		A,	R0
+0E55h	C5 82       XCH		A,	DPL
+0E57h	C8          XCH		A,	R0
+0E58h	CC          XCH		A,	R4
+0E59h	C5 83       XCH		A,	DPH
+0E5Bh	CC          XCH		A,	R4
+0E5Ch	F0          MOVX	@DPTR,	A
+0E5Dh	A3          INC		DPTR
+0E5Eh	C8          XCH		A,	R0
+0E5Fh	C5 82       XCH		A,	DPL
+0E61h	C8          XCH		A,	R0
+0E62h	CC          XCH		A,	R4
+0E63h	C5 83       XCH		A,	DPH
+0E65h	CC          XCH		A,	R4
+0E66h	DF EA       DJNZ	R7,	EAh
+0E68h	DE E8       DJNZ	R6,	E8h
+0E6Ah	80 DB       SJMP	DBh
+0E6Ch	89 82       MOV		DPL,	R1
+0E6Eh	8A 83       MOV		DPH,	R2
+0E70h	E4          CLR		A
+0E71h	93          MOVC	A,	@A+DPTR
+0E72h	A3          INC		DPTR
+0E73h	F2          MOVX	@R0,	A
+0E74h	08          INC		R0
+0E75h	DF F9       DJNZ	R7,	F9h
+0E77h	80 CC       SJMP	CCh
+0E79h	88 F0       MOV		B,	R0
+0E7Bh	EF          MOV		A,	R7
+0E7Ch	60 01       JZ		01h
+0E7Eh	0E          INC		R6
+0E7Fh	4E          ORL		A,	R6
+0E80h	60 C3       JZ		C3h
+0E82h	88 F0       MOV		B,	R0
+0E84h	ED          MOV		A,	R5
+0E85h	24 02       ADD		A,	02h
+0E87h	B4 04 00    CJNE	A,	04h,	00h
+0E8Ah	50 B9       JNC		B9h
+0E8Ch	F5 82       MOV		DPL,	A
+0E8Eh	EB          MOV		A,	R3
+0E8Fh	24 02       ADD		A,	02h
+0E91h	B4 04 00    CJNE	A,	04h,	00h
+0E94h	50 AF       JNC		AFh
+0E96h	23          RL		A
+0E97h	23          RL		A
+0E98h	45 82       ORL		A,	DPL
+0E9Ah	23          RL		A
+0E9Bh	90 0D F9    MOV		DPTR,	0DF9h
+0E9Eh	73          JMP		@A+DPTR
+0E9Fh	BB 01 06    CJNE R3,	01h,	06h
+0EA2h	89 82       MOV		DPL,	R1
+0EA4h	8A 83       MOV		DPH,	R2
+0EA6h	E0          MOVX	A,	@DPTR
+0EA7h	22          RET
+
+0EA8h	50 02       JNC		02h
+0EAAh	E7          MOV		A,	@R1
+0EABh	22          RET
+
+0EACh	BB FE 02    CJNE R3,	FEh,	02h
+0EAFh	E3          MOVX	A,	@R1
+0EB0h	22          RET
+
+0EB1h	89 82       MOV		DPL,	R1
+0EB3h	8A 83       MOV		DPH,	R2
+0EB5h	E4          CLR		A
+0EB6h	93          MOVC	A,	@A+DPTR
+0EB7h	22          RET
+
+0EB8h	BB 01 0C    CJNE R3,	01h,	0Ch
+0EBBh	E5 82       MOV		A,	DPL
+0EBDh	29          ADD		A,	R1
+0EBEh	F5 82       MOV		DPL,	A
+0EC0h	E5 83       MOV		A,	DPH
+0EC2h	3A          ADDC	A,	R2
+0EC3h	F5 83       MOV		DPH,	A
+0EC5h	E0          MOVX	A,	@DPTR
+0EC6h	22          RET
+
+0EC7h	50 06       JNC		06h
+0EC9h	E9          MOV		A,	R1
+0ECAh	25 82       ADD		A,	DPL
+0ECCh	F8          MOV		R0,	A
+0ECDh	E6          MOV		A,	@R0
+0ECEh	22          RET
+
+0ECFh	BB FE 06    CJNE R3,	FEh,	06h
+0ED2h	E9          MOV		A,	R1
+0ED3h	25 82       ADD		A,	DPL
+0ED5h	F8          MOV		R0,	A
+0ED6h	E2          MOVX	A,	@R0
+0ED7h	22          RET
+
+0ED8h	E5 82       MOV		A,	DPL
+0EDAh	29          ADD		A,	R1
+0EDBh	F5 82       MOV		DPL,	A
+0EDDh	E5 83       MOV		A,	DPH
+0EDFh	3A          ADDC	A,	R2
+0EE0h	F5 83       MOV		DPH,	A
+0EE2h	E4          CLR		A
+0EE3h	93          MOVC	A,	@A+DPTR
+0EE4h	22          RET
+
+0EE5h	BB 01 0A    CJNE R3,	01h,	0Ah
+0EE8h	89 82       MOV		DPL,	R1
+0EEAh	8A 83       MOV		DPH,	R2
+0EECh	F0          MOVX	@DPTR,	A
+0EEDh	E5 F0       MOV		A,	B
+0EEFh	A3          INC		DPTR
+0EF0h	F0          MOVX	@DPTR,	A
+0EF1h	22          RET
+
+0EF2h	50 06       JNC		06h
+0EF4h	F7          MOV		@R1,	A
+0EF5h	09          INC		R1
+0EF6h	A7 F0       MOV		@R1,	B
+0EF8h	19          DEC		R1
+0EF9h	22          RET
+
+0EFAh	BB FE 06    CJNE R3,	FEh,	06h
+0EFDh	F3          MOVX	@R1,	A
+0EFEh	E5 F0       MOV		A,	B
+0F00h	09          INC		R1
+0F01h	F3          MOVX	@R1,	A
+0F02h	19          DEC		R1
+0F03h	22          RET
+
+0F04h	D0 83       POP		DPH
+0F06h	D0 82       POP		DPL
+0F08h	F8          MOV		R0,	A
+0F09h	E4          CLR		A
+0F0Ah	93          MOVC	A,	@A+DPTR
+0F0Bh	70 12       JNZ		12h
+0F0Dh	74 01       MOV		A,	01h
+0F0Fh	93          MOVC	A,	@A+DPTR
+0F10h	70 0D       JNZ		0Dh
+0F12h	A3          INC		DPTR
+0F13h	A3          INC		DPTR
+0F14h	93          MOVC	A,	@A+DPTR
+0F15h	F8          MOV		R0,	A
+0F16h	74 01       MOV		A,	01h
+0F18h	93          MOVC	A,	@A+DPTR
+0F19h	F5 82       MOV		DPL,	A
+0F1Bh	88 83       MOV		DPH,	R0
+0F1Dh	E4          CLR		A
+0F1Eh	73          JMP		@A+DPTR
+0F1Fh	74 02       MOV		A,	02h
+0F21h	93          MOVC	A,	@A+DPTR
+0F22h	68          XRL		A,	R0
+0F23h	60 EF       JZ		EFh
+0F25h	A3          INC		DPTR
+0F26h	A3          INC		DPTR
+0F27h	A3          INC		DPTR
+0F28h	80 DF       SJMP	DFh
