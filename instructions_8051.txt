@@ -1,16 +1,22 @@
 typedef enum {
-  ACALL, ADD, ADDC, AJMP, ANL,
+  NIL, ACALL, ADD, ADDC, AJMP, ANL,
   CJNE, CLR, CPL, DA, DEC, DIV,
   DJNZ, INC, JB, JBC, JC, JMP, JNB,
   JNC, JNZ, JZ, LCALL, LJMP, MOV,
   MOVC, MOVX, MUL, NOP, ORL,
   POP, PUSH, RET, RETI, RL, RLC,
   RR, RRC, SETB, SJMP, SUBB,
-  SWAP, XCH, XCHD, XRL
-} mnemonic;
+  SWAP, XCH, XCHD, XRL, A,
+  at_A_plus_PC, at_DPTR, at_R0,
+  at_R1, AB, ADDR_11, ADDR_16,
+  DIRECT, OFFSET, IMMEDIATE, R0,
+  R1, R2, R3, R4, R5, R6, R7,
+  at_A_plus_DPTR, BIT, C, not_BIT,
+  DPTR;
+} opcode;
 
-char *mnemonic_string[44] = {
-  "ACALL", "ADD", "ADDC", "AJMP",
+char *opcode_string[68] = {
+  "", "ACALL", "ADD", "ADDC", "AJMP",
   "ANL", "CJNE", "CLR", "CPL",
   "DA", "DEC", "DIV", "DJNZ",
   "INC", "JB", "JBC", "JC", "JMP",
@@ -20,30 +26,17 @@ char *mnemonic_string[44] = {
   "POP", "PUSH", "RET", "RETI",
   "RL", "RLC", "RR", "RRC", "SETB",
   "SJMP", "SUBB", "SWAP", "XCH",
-  "XCHD", "XRL";
-};
-
-typedef enum {
-  NIL, A, at_A_plus_PC, at_DPTR,
-  at_R0, at_R1, AB, ADDR_11,
-  ADDR_16, DIRECT, OFFSET,
-  IMMEDIATE, R0, R1, R2, R3, R4, R5,
-  R6, R7, at_A_plus_DPTR, BIT, C,
-  not_BIT, DPTR;
-} operand_type;
-
-char *operand_string[24] = {
-  "", "A", "@A+PC", "@DPTR", "@R0",
-  "@R1", "AB", "%4.4Xh", "%4.4Xh",
-  "%2.2Xh", "%2.2Xh", "#%2.2Xh",
-  "R0", "R1", "R2", "R3", "R4", "R5",
-  "R6", "R7", "@A+DPTR", "%2.2Xh",
-  "C", "/%2.2Xh", "DPTR";
+  "XCHD", "XRL", "A", "@A+PC",
+  "@DPTR", "@R0", "@R1", "AB",
+  "%4.4Xh", "%4.4Xh", "%2.2Xh",
+  "%2.2Xh", "#%2.2Xh", "R0", "R1",
+  "R2", "R3", "R4", "R5", "R6", "R7",
+  "@A+DPTR", "%2.2Xh", "C",
+  "/%2.2Xh", "DPTR";
 };
 
 typedef struct {
-  mnemonic mnemonic;
-  operand_type op1, op2, op3;
+  opcode mnemonic, operand_1, operand_2, operand_3;
   unsigned char bytes, cycles;
 } instruction_record;
 
