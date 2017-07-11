@@ -298,3 +298,261 @@ instruction_record opcode[256] = {
   {MOV, R6, A, NIL, 1, 1},
   {MOV, R7, A, NIL, 1, 1};
 };
+
+typedef enum {
+  P0 = 0x80, SP, DPL, DPH, DPL1,
+  DPH1, DPS, PCON, TCON, TMOD,
+  TL0, TL1, TH0, TH1, CKCON,
+  P1 = 0x90, EXIF,
+  CKMOD = 0x96,
+  SCON0 = 0x98, SBUF0,
+  ACON = 0x9D,
+  P2 = 0xA0,
+  IE = 0xA8, SADDR0, SADDR1,
+  P3 = 0xB0, IP1,
+  IP0 = 0xB8, SADEN0, SADEN1,
+  SCON1 = 0xC0, SBUF1, ROMSIZE,
+  PMR = 0xC4, STATUS,
+  TA = 0xC7, T2CON, T2MOD,
+  RCAP2L, RCAP2H, TL2, TH2,
+  PSW = 0xD0,
+  FCNTL = 0xD5, FDATA,
+  WDCON = 0xD8,
+  ACC = 0xE0,
+  EIE = 0xE8,
+  B = 0xF0, EIP1,
+  EIP0 = 0xF8
+} SFR;
+
+static char *SFR_string[51] = {
+  "P0", "SP", "DPL", "DPH", "DPL1",
+  "DPH1" "DPS", "PCON", "TCON",
+  "TMOD", "TL0", "TL1", "TH0", "TH1",
+  "CKCON", "P1", "EXIF", "CKMOD",
+  "SCON0", "SBUF0", "ACON", "P2",
+  "IE", "SADDR0", "SADDR1", "P3",
+  "IP1", "IP0", "SADEN0", "SADEN1",
+  "SCON1", "SBUF1", "ROMSIZE",
+  "PMR", "STATUS", "TA", "T2CON",
+  "T2MOD", "RCAP2L", "RCAP2H",
+  "TL2", "TH2", "PSW", "FCNTL",
+  "FDATA", "WDCON", "ACC", "EIE",
+  "B", "EIP1", "EIP0"
+};
+
+
+
+typedef enum {
+  // P0 (0x80)
+  P0_0 = 0x80, P0_1, P0_2, P0_3, P0_4, P0_5, P0_6, P0_7,
+  // TCON (0x88)
+  IT0, IE0, IT1, IE1, TR0, TF0, TR1, TF1,
+  // P1 (0x90)
+  P1_0, P1_1, P1_2, P1_3, P1_4, P1_5, P1_6, P1_7,
+  // SCON0 (0x98)
+  RI_0, TI_0, RB8_0, TB8_0, REN_0, SM2_0, SM1_0, SM0_0,
+  // P2 (0xA0)
+  P2_0, P2_1, P2_2, P2_3, P2_4, P2_5, P2_6, P2_7,
+  // IE (0xA8)
+  EX0, ET0, EX1, ET1, ES0, ET2, ES1, EA,
+  // P3 (0xB0)
+  P3_0, P3_1, P3_2, P3_3, P3_4, P3_5, P3_6, P3_7,
+  // IP0 (0xB8)
+  LPX0, LPT0, LPX1, LPT1, LPS0, LPT2, LPS1,
+  // SCON1 (0xC0)
+  RI_1 = 0xC0, TI_1, RB8_1, TB8_1, REN_1, SM2_1, SM1_1, SM0_1,
+  // T2CON (0xC8)
+  CP_RL_2, C_T_2, TR_2, EXEN_2, TCLK, RCLK, EXF_2, TF_2,
+  // PSW (0xD0)
+  PARITY, F1, OV, RS0, RS1, F0, AC, CY,
+  // WDCON (0xD8)
+  RWT, EWT, WTRF, WDIF, PFI, EPFI, POR, SMOD_1,
+  // EIE (0xE8)
+  EX2 = 0xE8, EX3, EX4, EX5, EWDI,
+  // EIP0 (0xF8)
+  LPX2 = 0xF8, LPX3, LPX4, LPX5, LPWDI
+} SBIT;
+
+static char *SBIT_string[105] = {
+  // P0 (0x80)
+  "P0_0", "P0_1", "P0_2", "P0_3", "P0_4", "P0_5", "P0_6", "P0_7",
+  // TCON (0x88)
+  "IT0", "IE0", "IT1", "IE1", "TR0", "TF0", "TR1", "TF1",
+  // P1 (0x90)
+  "P1_0", "P1_1", "P1_2", "P1_3", "P1_4", "P1_5", "P1_6", "P1_7",
+  // SCON0 (0x98)
+  "RI_0", "TI_0", "RB8_0", "TB8_0", "REN_0", "SM2_0", "SM1_0", "SM0_0",
+  // P2 (0xA0)
+  "P2_0", "P2_1", "P2_2", "P2_3", "P2_4", "P2_5", "P2_6", "P2_7",
+  // IE (0xA8)
+  "EX0", "ET0", "EX1", "ET1", "ES0", "ET2", "ES1", "EA",
+  // P3 (0xB0)
+  "P3_0", "P3_1", "P3_2", "P3_3", "P3_4", "P3_5", "P3_6", "P3_7",
+  // IP0 (0xB8)
+  "LPX0", "LPT0", "LPX1", "LPT1", "LPS0", "LPT2", "LPS1",
+  // SCON1 (0xC0)
+  "RI_1", "TI_1", "RB8_1", "TB8_1", "REN_1", "SM2_1", "SM1_1", "SM0_1",
+  // T2CON (0xC8)
+  "CP_RL_2", "C_T_2", "TR_2", "EXEN_2", "TCLK", "RCLK", "EXF_2", "TF_2",
+  // PSW (0xD0)
+  "PARITY", "F1", "OV", "RS0", "RS1", "F0", "AC", "CY",
+  // WDCON (0xD8)
+  "RWT", "EWT", "WTRF", "WDIF", "PFI", "EPFI", "POR", "SMOD_1",
+  // EIE (0xE8)
+  "EX2", "EX3", "EX4", "EX5", "EWDI",
+  // EIP0 (0xF8)
+  "LPX2", "LPX3", "LPX4", "LPX5", "LPWDI"
+};
+
+unsigned short int bytevector_to_word(unsigned char *bytevector) {
+  return ((unsigned short int)bytevector[1] << 8) + bytevector[2];
+}
+
+static inline unsigned short int addr11_to_addr16(record *record) {
+  return ((record->address + 2) & 0xF800) + ((record->bytecode[0] & 0x00E0) << 3) + record->bytecode[1];
+}
+
+static unsigned char instruction_size(unsigned char bytecode) {
+  instruction_type type = instruction_types[bytecode];
+  switch (type) {
+    case ONE_BYTE_INSTRUCTION: return 1;
+    case ADDR_11:
+    case DIRECT:
+    case IMMEDIATE:
+    case OFFSET:
+    case BIT:
+    case NOT_BIT: return 2;
+    case ADDR_16:
+    case IMMEDIATE_16:
+    case BIT_OFFSET:
+    case DIRECT_IMMEDIATE:
+    case DIRECT_DIRECT:
+    case IMMEDIATE_OFFSET:
+    case DIRECT_OFFSET: return 3;
+    default: return 0;
+  }
+}
+
+
+
+
+
+void print_operand(unsigned short int address, operand_type op, unsigned char *bytecode) {
+  switch (op) {
+    case ADDR_11:
+      printf("%4.4Xh", ((address + 2) & 0xF800) + ((bytecode[0] & 0x00E0) << 3) + bytecode[1]);
+      break;
+    case ADDR_16:
+      printf("%4.4Xh", ((unsigned short int)bytecode[0] << 8) + bytecode[1]);
+      break;
+    case DIRECT:
+      switch (bytecode[0]) {
+        case P0:
+        case SP:
+        case DPL:
+        case DPH:
+        case DPL1:
+        case DPH1:
+        case DPS:
+        case PCON:
+        case TCON:
+        case TMOD:
+        case TL0:
+        case TL1:
+        case TH0:
+        case TH1:
+        case CKCON:
+        case P1:
+        case EXIF:
+        case CKMOD:
+        case SCON0:
+        case SBUF0:
+        case ACON:
+        case P2:
+        case IE:
+        case SADDR0:
+        case SADDR1:
+        case P3:
+        case IP1:
+        case IP0:
+        case SADEN0:
+        case SADEN1:
+        case SCON1:
+        case SBUF1:
+        case ROMSIZE:
+        case PMR:
+        case STATUS:
+        case TA:
+        case T2CON:
+        case T2MOD:
+        case RCAP2L:
+        case RCAP2H:
+        case TL2:
+        case TH2:
+        case PSW:
+        case FCNTL:
+        case FDATA:
+        case WDCON:
+        case ACC:
+        case EIE:
+        case B:
+        case EIP1:
+        case EIP0:
+          printf("%s", SFR_string[bytecode[0]]);
+          break;
+        default: printf("#%2.2Xh", bytecode[0]);
+      }
+      break;
+    case OFFSET:
+      printf("%4.4Xh", (address & 0xFF00) + ((unsigned char)address + bytecode[0]));
+      break;
+    case IMMEDIATE:
+      printf("%4.4Xh", ((unsigned short int)bytecode[0] << 8) + bytecode[1];
+      break;
+    case not_BIT: printf("/");
+    case BIT:
+      if (bytecode[0] < 0x80 || bytecode[0] == 0xBF || (bytecode[0] <= 0xE0 && bytecode[0] > 0xE7) || (bytecode[0] <= 0xED && bytecode[0] > 0xF7) || bytecode[0] >= 0xFD) printf("%2.2Xh (bit)", bytecode[0]);
+      else printf("%s", sbit_string[bytecode[0]]);
+      break;
+    default:
+      printf("%s", opcode_string[bytecode[0]]);
+  }
+}
+
+void print_instruction(unsigned short int address, unsigned char *bytecode) {
+  instruction_record f = opcode[bytecode[0]];
+  printf("%s\t", opcode_string[f.mnemonic]);
+  if (f.operand_1 != NIL) {
+    print_operand(address, f.operand_1, &bytecode[1]);
+    if (f.operand_2 != NIL) {
+      printf(", ");
+      print_operand(address, f.operand_2, &bytecode[2]);
+      if (f.operand_3 != NIL) {
+        printf(", ");
+        print_operand(address, f.operand_3, &bytecode[3]);
+      }
+    }
+  } if (f.mnemonic == RET || f.mnemonic == RETI) printf("\n");
+  printf("\n");
+}
+
+void copy_bytes(unsigned char *destination, unsigned char *source, unsigned short int size) {
+  for (unsigned short int i = 0; i < size; i++) destination[i] = source[i];
+}
+
+static inline record *copy_record_from_offset(record *r1, unsigned short int size, unsigned short int offset, record *r2) {
+  unsigned char *bytecode = create_bytevector(size);
+  copy_bytes(bytecode, &r1->bytecode[offset], size);
+  return create_record(size, r1->address + offset, bytecode, r2);
+}
+
+record *extract_instruction(record *r1) {
+  record *r2 = NULL;
+  unsigned char size;
+
+  if (r1 && (r1->size != ((size = instruction_size(r1->bytecode[0]))))) {
+    r2 = copy_record_from_offset(r1, size, 0, copy_record_from_offset(r1, r1->size - size, size, r1->next));
+    r1 = destroy_record(r1);
+    r1 = r2;
+  } return r1;
+}
